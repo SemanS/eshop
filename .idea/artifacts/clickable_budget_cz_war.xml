@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="clickable-budget-cz:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="clickable-budget-cz-1.war">
+      <element id="artifact" artifact-name="clickable-budget-cz:war exploded" />
+    </root>
+  </artifact>
+</component>

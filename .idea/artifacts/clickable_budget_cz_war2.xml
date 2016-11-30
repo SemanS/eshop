@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="clickable-budget-cz:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/clickable_budget_cz_war2</output-path>
+    <root id="archive" name="clickable-budget-cz_war.war">
+      <element id="artifact" artifact-name="clickable-budget-cz:war exploded" />
+    </root>
+  </artifact>
+</component>

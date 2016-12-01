@@ -22,6 +22,9 @@
 </h:head>
 
 <h:body>
+    <h:outputScript name="js/init.js"/>
+    <h:outputScript name="js/semantic.min.js"/>
+
 
     <!--<h:outputScript name="js/jquery-3.1.1.min.js"/>
     <h:outputScript name="js/init.js"/>
@@ -47,20 +50,19 @@
                             <div class="ui inverted theme attached stackable menu">
                                 <a class="item" href="http://mixerp.org/" target="_blank">
                                     <i class="anchor icon"></i>
-                                    MixERP
-                                    1.6.0.0
+                                    Domov
                                 </a>
                                 <a class="item">
                                     <i class="database icon"></i>
-                                    demo_mixerp_org
+                                    O nás
                                 </a>
                                 <a class="item">
                                     <i class="home icon"></i>
-                                    Brooklyn Branch
+                                    Dovoz
                                 </a>
                                 <div class="ui simple dropdown item" id="NotificationMenu">
                                     <i class="mail icon"></i>
-                                    Notifications
+                                    Logistika
                                     <span></span>
                                     <i class="dropdown icon"></i>
                                     <div id="Notification" class="ui vertical stackable menu">
@@ -68,25 +70,25 @@
                                 </div>
                                 <a class="item" href="http://docs.mixerp.org/" target="_blank">
                                     <i class="book basic icon"></i>
-                                    MixERP Documentation
+                                    Obchodná spolupráca
                                 </a>
                                 <div class="right menu">
                                     <div class="ui simple dropdown item">
                                         <i class="icon smile"></i>
-                                        Hi binod!
+                                        Ahoj Miriam!
                                         <i class="dropdown icon"></i>
                                         <div class="ui menu">
                                             <a class="item" href="/Site/Account/ChangePassword.aspx">
                                                 <i class="flag icon"></i>
-                                                Change Password
+                                                Zmeniť heslo
                                             </a>
                                             <a class="item" href="/Site/Account/UserProfile.aspx">
                                                 <i class="edit icon"></i>
-                                                Manage Profile
+                                                Menežovať profil
                                             </a>
                                             <a class="item" href="/Site/Account/SignOut.aspx">
                                                 <i class="sign out icon"></i>
-                                                Sign Out
+                                                Odhlásiť
                                             </a>
                                         </div>
                                     </div>
@@ -97,26 +99,27 @@
                 </div>
             </div>
             <div class="sixteen wide column computer only" id="MainMenu">
+
                 <div id="top-menu" class="ui attached stackable menu">
                     <a class="item" onclick=" toggleSidebar(this); ">
-                        <i class="options icon"></i>
+                        <i class="options icon"></i>Akcie
                     </a>
                     <a class='initially hidden item' id="reset-menu" href="javascript:void(0);">
-                        <i class='red remove icon'></i>
+                        <i class='red remove icon'></i>Menu2
                     </a>
                 </div>
             </div>
             <div class="three wide column computer only sidebar" id="Sidebar">
-                <div id="search" style="width: 100%;">
+                <!--<div id="search" style="width: 100%;">
                     <div class="ui icon input" style="width: 100%;">
                         <input type="text" id="SearchInput" autocomplete="off"/>
                         <i class="search link icon"></i>
                     </div>
-                </div>
+                </div>-->
+
                 <h:form>
                     <p:growl autoUpdate="true"/>
-
-                    <p:panelMenu>
+                    <p:panelMenu id="menu">
                         <p:submenu label="Ajax Menuitems" expanded="true">
                             <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk"/>
                             <p:menuitem value="Update" actionListener="#{menuView.update}"
@@ -142,7 +145,9 @@
                             <p:menuitem value="Mobile" outcome="/index.xhtml" icon="ui-icon-signal"/>
                         </p:submenu>
                     </p:panelMenu>
+                    <p:sticky target="menu"/>
                 </h:form>
+
             </div>
             <div class="thirteen wide column" id="Content">
                 <div id="MainContent">
@@ -154,299 +159,258 @@
                             </div>
                         </div>
                     </div>
-                    <div id="sortable-container" class="ui stackable grid">
-                        <div class="eight wide column widget" id="SalesByOfficeWidget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">
-                                        Sales By Office (In Thousands)
+                    <div id="sortable-container" class="ui stackable grid" style="margin-top: -40px !important">
+
+                        <div class="sixteen wide column widget" id="Carousel">
+
+                            <p:carousel numVisible="1" effect="easeInStrong" headerText=""
+                                        style="margin-bottom:0; width:921px" autoPlayInterval="7000" circular="true">
+                                <p:tab title="Godfather Part I">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
+                                        <img class="" style="height: 250px; width:921px"
+                                             src="resources/images/slide1.PNG"/>
+                                        <!--<h:outputText
+                                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
+                    but given to ruthless violence whenever anything stands against the good of the family."/>-->
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Godfather Part II">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <img class="" style="height: 250px; width:921px"
+                                             src="resources/images/slide1.PNG"/>
+
+                                    </h:panelGrid>
+                                </p:tab>
+                            </p:carousel>
+
+                        </div>
+                        <h4 class="ui horizontal divider header">
+                            <!--<i class="tag icon"></i>-->
+                            Produkty
+                        </h4>
+
+                        <div class="sixteen wide column widget" id="TopSellingProductOfAllTimeWidget">
+
+                            <div class="ui icon input sixteen wide column center aligned">
+                                <input placeholder="Search..." type="text"/>
+                                <i class="inverted circular search link icon"></i>
+                            </div>
+
+                            <!--<div id="search" class="search">
+                                <p:outputLabel value="Zadejte název obce: napr. Nelahozeves"/>
+                                <br/>
+                                <p:autoComplete styleClass="ui search" id="acMinLength" effect="fade"/>
+                                <p:commandButton
+                                        value="Vyhľadať"
+                                        icon="fa fa-search">
+                                </p:commandButton>
+                            </div>-->
+
+                            <pre></pre>
+                            <h:form>
+                                <div class="ui stackable grid">
+                                    <ui:repeat value="#{itemView.getItems()}" var="item">
+                                        <div class="four wide column">
+                                            <div class="ui special cards">
+                                                <div class="card">
+                                                    <div class="blurring dimmable image">
+
+                                                        <!--<div class="ui inverted dimmer">-->
+                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
+                                                                       styleClass="ui inverted dimmer">
+                                                            <div class="content">
+
+                                                                <div class="description">
+                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </h:commandLink>
+                                                        <!--</div>-->
+                                                        <img src="resources/images/image1.jpg"/>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a class="header">Maslo</a>
+                                                        <div class="meta">
+                                                            <span class="date">Create in Sep 2014</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    <div class="four wide column">
+                                        <div class="ui special cards">
+
+                                            <div class="card">
+                                                <div class="blurring dimmable image">
+
+
+                                                    <h:commandLink styleClass="ui dimmer">
+                                                        <div class="content">
+
+                                                            <div class="description">
+                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                            </div>
+
+                                                        </div>
+                                                    </h:commandLink>
+
+                                                    <img src="resources/images/image1.jpg"/>
+
+                                                </div>
+                                                <div class="content">
+                                                    <a class="header">Maslo</a>
+                                                    <div class="meta">
+                                                        <span class="date">Create in Sep 2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="right floated column">
-                                    <i class="expand disabled icon"></i>
-                                    <i class="move icon"></i>
-                                    <i class="help icon"></i>
-                                    <i class="close icon"></i>
-                                </div>
-                            </div>
-                            <div class="ui attached segment">
-                                <div>
-                                </div>
-                                <canvas id="sales-by-month-canvas" width="500" height="180"></canvas>
-                                <div id="sales-by-month-legend"></div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                prepareChart("SalesByOfficeGridView", "sales-by-month-canvas", "sales-by-month-legend", 'bar');
-                            });
-                        </script>
-                        <div id="LinksWidget" class="four wide column widget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">MixERP Links</div>
-                                </div>
-                                <div class="ui right floated column"><i class="expand disabled icon"></i><i
-                                        class="move icon"></i><i class="help icon"></i><i class="close icon"></i></div>
-                            </div>
-                            <div class="ui attached segment">
-                                <ul>
-                                    <li><a href="http://docs.mixerp.org" target="_blank">Documentation</a></li>
-                                    <li><a href="https://github.com/mixerp/mixerp"
-                                           target="_blank">Download Source Code</a>
-                                    </li>
-                                    <li><a href="https://github.com/mixerp/mixerp/issues"
-                                           target="_blank">Submit Bugs</a>
-                                    </li>
-                                    <li><a href="http://mixerp.org/forum/" target="_blank">Support</a></li>
-                                    <li><a href="https://www.facebook.com/mixerp.official"
-                                           target="_blank">MixERP on Facebook</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="eight wide column widget" id="TopSellingProductOfAllTimeWidget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">
-                                        Top Selling Products of All Time
+
+
+                                <div class="ui stackable grid">
+                                    <ui:repeat value="#{itemView.getItems()}" var="item">
+                                        <div class="four wide column">
+                                            <div class="ui special cards">
+                                                <div class="card">
+                                                    <div class="blurring dimmable image">
+
+                                                        <!--<div class="ui inverted dimmer">-->
+                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
+                                                                       styleClass="ui inverted dimmer">
+                                                            <div class="content">
+
+                                                                <div class="description">
+                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </h:commandLink>
+                                                        <!--</div>-->
+                                                        <img src="resources/images/image1.jpg"/>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a class="header">Maslo</a>
+                                                        <div class="meta">
+                                                            <span class="date">Create in Sep 2014</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    <div class="four wide column">
+                                        <div class="ui special cards">
+
+                                            <div class="card">
+                                                <div class="blurring dimmable image">
+
+
+                                                    <h:commandLink styleClass="ui dimmer">
+                                                        <div class="content">
+
+                                                            <div class="description">
+                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                            </div>
+
+                                                        </div>
+                                                    </h:commandLink>
+
+                                                    <img src="resources/images/image1.jpg"/>
+
+                                                </div>
+                                                <div class="content">
+                                                    <a class="header">Maslo</a>
+                                                    <div class="meta">
+                                                        <span class="date">Create in Sep 2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="right floated column">
-                                    <i class="expand disabled icon"></i>
-                                    <i class="move icon"></i>
-                                    <i class="help icon"></i>
-                                    <i class="close icon"></i>
-                                </div>
-                            </div>
-                            <div class="ui attached segment">
-                                <div>
-                                </div>
-                                <canvas id="curr-office-top-selling-products-canvas" width="500" height="180"></canvas>
-                                <div id="curr-office-top-selling-products-legend"></div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                prepareChart("TopSellingProductsGridView", "curr-office-top-selling-products-canvas", "curr-office-top-selling-products-legend", 'bar');
-                            });
-                        </script>
-                        <div class="eight wide column widget" id="TopSellingProductOfAllTimeCurrentWidget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">
-                                        Top Selling Products of All Time
+
+
+                                <div class="ui stackable grid">
+                                    <ui:repeat value="#{itemView.getItems()}" var="item">
+                                        <div class="four wide column">
+                                            <div class="ui special cards">
+                                                <div class="card">
+                                                    <div class="blurring dimmable image">
+
+                                                        <!--<div class="ui inverted dimmer">-->
+                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
+                                                                       styleClass="ui inverted dimmer">
+                                                            <div class="content">
+
+                                                                <div class="description">
+                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                                </div>
+
+                                                            </div>
+                                                        </h:commandLink>
+                                                        <!--</div>-->
+                                                        <img src="resources/images/image1.jpg"/>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a class="header">Maslo</a>
+                                                        <div class="meta">
+                                                            <span class="date">Create in Sep 2014</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    <div class="four wide column">
+                                        <div class="ui special cards">
+
+                                            <div class="card">
+                                                <div class="blurring dimmable image">
+
+
+                                                    <h:commandLink styleClass="ui dimmer">
+                                                        <div class="content">
+
+                                                            <div class="description">
+                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
+                                                            </div>
+
+                                                        </div>
+                                                    </h:commandLink>
+
+                                                    <img src="resources/images/image1.jpg"/>
+
+                                                </div>
+                                                <div class="content">
+                                                    <a class="header">Maslo</a>
+                                                    <div class="meta">
+                                                        <span class="date">Create in Sep 2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="right floated column">
-                                    <i class="expand disabled icon"></i>
-                                    <i class="move icon"></i>
-                                    <i class="help icon"></i>
-                                    <i class="close icon"></i>
-                                </div>
-                            </div>
-                            <div class="ui attached segment">
-                                <div>
-                                    <table class="hidden" cellspacing="0" rules="all" border="1"
-                                           id="TopSellingProductsOfAllTimeGridView"
-                                           style="border-collapse:collapse;display:none;">
-                                        <tr>
-                                            <th scope="col">ItemName</th>
-                                            <th scope="col">TotalSales</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Macbook Pro 15&#39;&#39; Retina</td>
-                                            <td>50874.2025</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Macbook Air 13&#39;&#39;</td>
-                                            <td>21323.8100</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Macbook Air 11&#39;&#39;</td>
-                                            <td>16003.0663</td>
-                                        </tr>
-                                        <tr>
-                                            <td>iPad Air</td>
-                                            <td>13017.3800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>iPhone 6</td>
-                                            <td>12429.3750</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <canvas id="top-selling-products-canvas" width="500" height="180"></canvas>
-                                <div id="top-selling-products-legend"></div>
-                            </div>
+                            </h:form>
+
                         </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                preparePieChart('TopSellingProductsOfAllTimeGridView', 'top-selling-products-canvas', 'top-selling-products-legend', 'pie', true);
-                            });
-                        </script>
-                        <div id="WorkflowWidget" class="eight wide column widget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">Workflow</div>
-                                </div>
-                                <div class="ui right floated column"><i class="expand disabled icon"></i><i
-                                        class="move icon"></i><i class="help icon"></i><i class="close icon"></i></div>
-                            </div>
-                            <div class="ui attached segment">
-                                <ul>
-                                    <li>Flagged Transactions : 34</li>
-                                    <li>In Verification Stack : 42</li>
-                                    <li>Automatically Approved by Workflow : 0</li>
-                                    <li>Approved Transactions : 68</li>
-                                    <li>Rejected Transactions : 1</li>
-                                    <li>Closed Transactions : 0</li>
-                                    <li>Withdrawn Transactions : 0</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="OfficeInformationWidget" class="four wide column widget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">Office Information</div>
-                                </div>
-                                <div class="ui right floated column"><i class="expand disabled icon"></i><i
-                                        class="move icon"></i><i class="help icon"></i><i class="close icon"></i></div>
-                            </div>
-                            <div class="ui attached segment">
-                                <ul>
-                                    <li>Your Office : ATOZ (AtoZ Infoway)</li>
-                                    <li>Logged in to : MoF-NY-BK (Brooklyn Branch)</li>
-                                    <li>Last Login IP : 172.68.51.130</li>
-                                    <li>Last Login On : 11/30/2016 5:54:39 PM</li>
-                                    <li>Current IP : 172.68.51.69</li>
-                                    <li>Current Login On : 11/30/2016 6:29:27 PM</li>
-                                    <li>Role : ADMN (Admin)</li>
-                                    <li>Department : SAL (Sales &amp; Billing)</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                            <table class="initially hidden" cellspacing="0" id="SalesByGeographyGridView"
-                                   style="border-collapse:collapse;">
-                                <thead>
-                                <tr>
-                                    <th class="text left" scope="col">CountryCode</th>
-                                    <th class="text left" scope="col">Sales</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>CA</td>
-                                    <td>15551.0738</td>
-                                </tr>
-                                <tr>
-                                    <td>CN</td>
-                                    <td>42588.9250</td>
-                                </tr>
-                                <tr>
-                                    <td>FR</td>
-                                    <td>24761.5200</td>
-                                </tr>
-                                <tr>
-                                    <td>DE</td>
-                                    <td>30391.3125</td>
-                                </tr>
-                                <tr>
-                                    <td>GB</td>
-                                    <td>31281.2450</td>
-                                </tr>
-                                <tr>
-                                    <td>US</td>
-                                    <td>51986.9988</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="SalesByGeographyWidget" class="sixteen wide column widget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">World Sales Statistics</div>
-                                </div>
-                                <div class="right floated column"><i class="expand disabled icon"></i><i
-                                        class="move icon"></i><i class="help icon"></i><i class="close icon"></i></div>
-                            </div>
-                            <div class="ui attached segment">
-                                <div id="map-container" style="height: 400px; width: 980px;"></div>
-                            </div>
-                        </div>
-                        <script src="/Scripts/d3/d3.min.js"></script>
-                        <script src="/Scripts/Datamaps/topojson.js"></script>
-                        <script src="/Scripts/Datamaps/datamaps.all.min.js"></script>
-                        <script src="/Scripts/mixerp/utitlities/country-codes.js"></script>
-                        <script src="/Modules/Sales/Scripts/Widgets/SalesByGeographyWidget.ascx.js"></script>
-                        <div class="eight wide column widget" id="CurrentOfficeSalesByMonthWidget">
-                            <div class="ui attached segment">
-                                <div class="ui left floated column">
-                                    <div class="ui header">
-                                        Sales By Month (In Thousands)
-                                    </div>
-                                </div>
-                                <div class="right floated column">
-                                    <i class="expand disabled icon"></i>
-                                    <i class="move icon"></i>
-                                    <i class="help icon"></i>
-                                    <i class="close icon"></i>
-                                </div>
-                            </div>
-                            <div class="ui attached segment">
-                                <div>
-                                    <table class="hidden" cellspacing="0" rules="all" border="1"
-                                           id="SalesByMonthGridView"
-                                           style="border-collapse:collapse;display:none;">
-                                        <tr>
-                                            <th scope="col">OfficeCode</th>
-                                            <th scope="col">Jan</th>
-                                            <th scope="col">Feb</th>
-                                            <th scope="col">Mar</th>
-                                            <th scope="col">Apr</th>
-                                            <th scope="col">May</th>
-                                            <th scope="col">Jun</th>
-                                            <th scope="col">Jul</th>
-                                            <th scope="col">Aug</th>
-                                            <th scope="col">Sep</th>
-                                            <th scope="col">Oct</th>
-                                            <th scope="col">Nov</th>
-                                            <th scope="col">Dec</th>
-                                        </tr>
-                                        <tr>
-                                            <td>MoF-NY-BK</td>
-                                            <td>38.5927063000000000</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>7.7883800000000000</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>25.2304075000000000</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <canvas id="curr-office-sales-by-month-canvas" width="500" height="180"></canvas>
-                                <div id="curr-office-sales-by-month-legend"></div>
-                            </div>
-                        </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                prepareChart("SalesByMonthGridView", "curr-office-sales-by-month-canvas", "curr-office-sales-by-month-legend", 'line', false);
-                            });
-                        </script>
+
+
                     </div>
-                    <div style="clear: both;"></div>
-                    <br/>
-                    <a class="ui purple button" href="/Modules/WidgetManager.aspx">Widget Manager</a>
-                    <script src="/Scripts/mixerp/utitlities/localizable.js"></script>
-                    <script src="/Scripts/mixerp/utitlities/validator.js"></script>
+
                 </div>
             </div>
+
             <div class="sixteen wide theme column" id="Footer">
                 <div class="ui stackable page grid">
                     <div class="four wide column">
@@ -456,39 +420,14 @@
                     </div>
                     <div class="twelve wide column">
                         <div class="footer-text">
-                            <p>Copyright © 2013-2015. MixERP is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License.</p>
-                            <p class="footer-links"><a href="http://mixerp.org/forum/" target="_blank">Support</a><a
-                                    href="http://mixerp.org/contact-us/" target="_blank">Contact Us</a></p>
+                            <p>Copyright © 2016. Eurofood.</p>
+                            <p><a href="http://mixerp.org/contact-us/" target="_blank">Kontaktujte nás</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ui small modal" id="EODModal">
-            <i class="close icon"></i>
-            <div class="ui icon header">
-                <i class="loading spinner icon"></i>
-                End of Day Processing Has Begun
-            </div>
-            <div class="content">
-                <p>
-                    Please close this window and save your existing work before you will be signed off automatically.
-                </p>
-                <div style="margin-left: 300px;">
-                    <div class="ui circular segment" style="width: 120px; height: 120px;">
-                        <h2 class="ui large header" style="font-size: 36px;"></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="actions">
-                <div class="ui button">
-                    Cancel
-                </div>
-                <div class="ui button">
-                    OK
-                </div>
-            </div>
-        </div>
+
     </div>
 
 </h:body>

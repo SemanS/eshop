@@ -32,6 +32,8 @@ out/artifacts/clickable_budget_cz_war2/clickable-budget-cz_war.war
 # IntelliJ
 /out/
 
+/kategorie/
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 

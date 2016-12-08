@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by Slavo on 11/27/2016.
  */
 @Entity
-@Table(name = "user", schema = "zuzka")
+@Table(name = "users", schema = "public")
 @Data
 @NoArgsConstructor
 public class User implements Serializable {
@@ -22,13 +22,13 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "username")
+    private String username;
 
-    @Column(name = "salt")
-    private String salt;
+    @Column(name = "password")
+    private String password;
 
-    @Column(name = "hash")
-    private Date hash;
+    @Column(name = "enabled")
+    private boolean enabled;
 
 }

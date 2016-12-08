@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <!--<div id="sortable-container" class="ui stackable grid" style="margin-top: -40px !important">-->
+
+    <p:carousel numVisible="1" effect="easeInStrong" headerText=""
+                style="margin-bottom:0; width:921px" autoPlayInterval="7000" circular="true">
+        <p:tab title="Godfather Part I">
+            <h:panelGrid columns="2" cellpadding="10">
+                <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
+                <img class="" style="height: 250px; width:921px"
+                     src="resources/images/slide1.PNG"/>
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part II">
+            <h:panelGrid columns="2" cellpadding="10">
+                <img class="" style="height: 250px; width:921px"
+                     src="resources/images/slide1.PNG"/>
+
+            </h:panelGrid>
+        </p:tab>
+    </p:carousel>
+
+
+    <h4 class="ui horizontal divider header">
+        <!--<i class="tag icon"></i>-->
+        Produkty
+    </h4>
+
+    <!--<div class="ui icon input sixteen wide column center aligned">
+        <input placeholder="Search..." type="text"/>
+        <i class="inverted circular search link icon"></i>
+    </div>-->
+
+    <!--<div id="search" class="search">
+        <p:outputLabel value="Zadejte název obce: napr. Nelahozeves"/>
+        <br/>
+        <p:autoComplete styleClass="ui search" id="acMinLength" effect="fade"/>
+        <p:commandButton
+                value="Vyhľadať"
+                icon="fa fa-search">
+        </p:commandButton>
+    </div>-->
+
+    <pre></pre>
+
+
+    <h:form>
+        <div class="thirteen wide column widget" id="MainContent">
+            <div class="ui four cards">
+
+                <ui:repeat value="#{itemView.getItems()}" var="item">
+
+                    <div class="card">
+                        <div class="blurring dimmable image">
+
+                            <!--<div class="ui inverted dimmer">-->
+                            <h:commandLink id="ajax3" action="#{itemView.onItemDetail(item)}"
+                                           actionListener="#{shoppingCart.testovaciaMetoda}"
+                                           styleClass="ui inverted dimmer">
+                                <div class="content">
+
+                                    <div class="description">
+                                        <h3>Elliot Fu is a film-maker from New York.</h3>
+                                    </div>
+
+                                </div>
+                            </h:commandLink>
+                            <!--</div>-->
+                            <img src="resources/images/image1.jpg"/>
+                        </div>
+                        <div class="content">
+                            <a class="header">Maslo</a>
+                            <div class="meta">
+                                <span class="date">Create in Sep 2014</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </ui:repeat>
+            </div>
+            <!--<div class="four wide column">
+                <div class="ui special cards">
+
+                    <div class="card">
+                        <div class="blurring dimmable image">
+
+
+                            <h:commandLink styleClass="ui dimmer"
+                                           actionListener="#{shoppingCart.testovaciaMetoda}">
+                                <div class="content">
+
+                                    <div class="description">
+                                        <h3>Elliot Fu is a film-maker from New York.</h3>
+                                    </div>
+
+                                </div>
+                            </h:commandLink>
+
+                            <img src="resources/images/image1.jpg"/>
+
+                        </div>
+                        <div class="content">
+                            <a class="header">Maslo</a>
+                            <div class="meta">
+                                <span class="date">Create in Sep 2014</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>-->
+        </div>
+    </h:form>
+
+    <!-- </div>-->
+
+</h:body>
+
+</html>

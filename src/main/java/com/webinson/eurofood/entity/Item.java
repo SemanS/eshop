@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Slavo on 10/16/2016.
  */
 
 @Entity
-@Table(name = "item", schema = "zuzka")
+@Table(name = "item", schema = "eshop")
 @Data
 @NoArgsConstructor
 public class Item implements Serializable {
@@ -61,8 +62,7 @@ public class Item implements Serializable {
     @Column(name = "carton_in_palette")
     private int cartonInPalette;
 
-    @OneToMany
-    @JoinColumn(name = "language_id")
-    private Language language;
+    @Column(name = "pieces_in_palette")
+    private int piecesInPalette;
 
 }

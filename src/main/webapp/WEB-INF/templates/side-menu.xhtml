@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <h:form>
+
+        <p:growl id="messages" showDetail="true"/>
+
+        <p:tree id="docs" value="#{menuBean.rootNode}" var="doc" animate="true" selectionMode="single"
+                dynamic="true">
+            <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                <h:outputText value="#{doc.name}"/>
+            </p:treeNode>
+        </p:tree>
+
+    </h:form>
+
+</h:body>
+
+</html>

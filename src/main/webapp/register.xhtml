@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!-- Site Properties -->
+    <title>Zuzka</title>
+
+    <h:outputStylesheet name="css/font-awesome.css"/>
+    <h:outputStylesheet name="css/styles.css"/>
+    <h:outputStylesheet name="css/semantic.min.css"/>
+
+</h:head>
+
+<h:body>
+    <h:outputScript name="js/init.js"/>
+    <h:outputScript name="js/semantic.min.js"/>
+
+
+    <!--<h:outputScript name="js/jquery-3.1.1.min.js"/>
+    <h:outputScript name="js/init.js"/>
+    <h:outputScript name="js/semantic.min.js"/>-->
+
+
+    <!-- Page Contents -->
+    <div class="ui relaxed grid container">
+
+        <ui:insert name="date">
+            <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
+        </ui:insert>
+
+
+        <div class="ui stackable grid">
+
+            <ui:insert name="attachedMenu">
+                <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
+            </ui:insert>
+
+
+            <div class="thirteen wide column" id="Content">
+
+                <div id="MainContent">
+
+                    <div class="ui mobile only grid">
+                        <div id="PhoneMenu" style="max-width: 500px; padding-bottom: 24px;">
+                            <div class="ui grid">
+                                <div class="ui four column doubling row" id="menu-cols">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h:form styleClass="ui form">
+                        <h4 class="ui dividing header">Shipping Information</h4>
+                        <div class="field">
+                            <label>Name</label>
+                            <div class="two fields">
+                                <div class="field">
+                                    <h:inputText value="#{userBean.username}" name="shipping[first-name]"
+                                                 placeholder="username" type="text"/>
+                                </div>
+                                <div class="field">
+                                    <h:inputText value="#{userBean.password}" placeholder="password" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Billing Address</label>
+                            <div class="fields">
+                                <div class="twelve wide field">
+                                    <input name="shipping[address]" placeholder="Street Address" type="text"/>
+                                </div>
+                                <div class="four wide field">
+                                    <input name="shipping[address-2]" placeholder="Apt #" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                        <p:commandLink value="Send" action="#{userBean.updateData()}"
+                                       styleClass="ui button" validateClient="true">
+                        </p:commandLink>
+                    </h:form>
+
+
+                </div>
+            </div>
+
+            <div class="sixteen wide theme column" id="Footer">
+                <div class="ui stackable page grid">
+                    <div class="four wide column">
+                        <a href="http://mixerp.org" target="_blank">
+                            <img src="/Static/images/powered-by.png"/>
+                        </a>
+                    </div>
+                    <div class="twelve wide column">
+                        <div class="footer-text">
+                            <p>Copyright © 2016. Eurofood.</p>
+                            <p><a href="http://mixerp.org/contact-us/" target="_blank">Kontaktujte nás</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</h:body>
+
+</html>

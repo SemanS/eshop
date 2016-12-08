@@ -25,410 +25,44 @@
     <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
 
-
-    <!--<h:outputScript name="js/jquery-3.1.1.min.js"/>
-    <h:outputScript name="js/init.js"/>
-    <h:outputScript name="js/semantic.min.js"/>-->
-
-    <!--<ui:insert name="date">
-        <ui:include src="WEB-INF/templates/menu.xhtml"/>
-    </ui:insert>-->
-
     <!-- Page Contents -->
     <div class="ui relaxed grid container">
 
+        <ui:insert name="date">
+            <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
+        </ui:insert>
+
+
         <div class="ui stackable grid">
-            <div class="sixteen wide brand column" id="Top">
-                <div class="ui stackable grid">
-                    <div class="four wide column">
-                        <a href="/" id="Logo">
-                            <img src="/Handlers/LogoHandler.ashx"/>
-                        </a>
-                    </div>
-                    <div class="twelve wide column">
-                        <div id="RightMenu">
-                            <div class="ui inverted theme attached stackable menu">
-                                <a class="item" href="http://mixerp.org/" target="_blank">
-                                    <i class="anchor icon"></i>
-                                    Domov
-                                </a>
-                                <a class="item">
-                                    <i class="database icon"></i>
-                                    O nás
-                                </a>
-                                <a class="item">
-                                    <i class="home icon"></i>
-                                    Dovoz
-                                </a>
-                                <div class="ui simple dropdown item" id="NotificationMenu">
-                                    <i class="mail icon"></i>
-                                    Logistika
-                                    <span></span>
-                                    <i class="dropdown icon"></i>
-                                    <div id="Notification" class="ui vertical stackable menu">
-                                    </div>
-                                </div>
-                                <a class="item" href="http://docs.mixerp.org/" target="_blank">
-                                    <i class="book basic icon"></i>
-                                    Obchodná spolupráca
-                                </a>
-                                <div class="right menu">
-                                    <div class="ui simple dropdown item">
-                                        <i class="icon smile"></i>
-                                        Ahoj Miriam!
-                                        <i class="dropdown icon"></i>
-                                        <div class="ui menu">
-                                            <a class="item" href="/Site/Account/ChangePassword.aspx">
-                                                <i class="flag icon"></i>
-                                                Zmeniť heslo
-                                            </a>
-                                            <a class="item" href="/Site/Account/UserProfile.aspx">
-                                                <i class="edit icon"></i>
-                                                Menežovať profil
-                                            </a>
-                                            <a class="item" href="/Site/Account/SignOut.aspx">
-                                                <i class="sign out icon"></i>
-                                                Odhlásiť
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sixteen wide column computer only" id="MainMenu">
 
-                <div id="top-menu" class="ui attached stackable menu">
-                    <a class="item" onclick=" toggleSidebar(this); ">
-                        <i class="options icon"></i>Akcie
-                    </a>
-                    <a class='initially hidden item' id="reset-menu" href="javascript:void(0);">
-                        <i class='red remove icon'></i>Menu2
-                    </a>
-                </div>
-            </div>
+            <ui:insert name="attachedMenu">
+                <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
+            </ui:insert>
+
             <div class="three wide column computer only sidebar" id="Sidebar">
-                <!--<div id="search" style="width: 100%;">
-                    <div class="ui icon input" style="width: 100%;">
-                        <input type="text" id="SearchInput" autocomplete="off"/>
-                        <i class="search link icon"></i>
-                    </div>
-                </div>-->
-
-                <h:form>
-                    <p:growl autoUpdate="true"/>
-                    <p:panelMenu id="menu">
-                        <p:submenu label="Ajax Menuitems" expanded="true">
-                            <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk"/>
-                            <p:menuitem value="Update" actionListener="#{menuView.update}"
-                                        icon="ui-icon-arrowrefresh-1-w"/>
-                        </p:submenu>
-                        <p:submenu label="Non-Ajax Menuitem">
-                            <p:menuitem value="Delete" actionListener="#{menuView.delete}" ajax="false"
-                                        icon="ui-icon-close"/>
-                        </p:submenu>
-                        <p:separator/>
-                        <p:submenu label="Navigations">
-                            <p:submenu label="Links" icon="ui-icon-extlink">
-                                <p:submenu label="PrimeFaces" icon="ui-icon-heart">
-                                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home"/>
-                                    <p:menuitem value="Docs" url="http://www.primefaces.org/documentation"
-                                                icon="ui-icon-document"/>
-                                    <p:menuitem value="Download" url="http://www.primefaces.org/downloads"
-                                                icon="ui-icon-arrowthick-1-s"/>
-                                    <p:menuitem value="Support" url="http://www.primefaces.org/support"
-                                                icon="ui-icon-wrench"/>
-                                </p:submenu>
-                            </p:submenu>
-                            <p:menuitem value="Mobile" outcome="/index.xhtml" icon="ui-icon-signal"/>
-                        </p:submenu>
-                    </p:panelMenu>
-                    <p:sticky target="menu"/>
-                </h:form>
-
-            </div>
-            <div class="thirteen wide column" id="Content">
-                <div id="MainContent">
-                    <div class="ui mobile only grid">
-                        <div id="PhoneMenu" style="max-width: 500px; padding-bottom: 24px;">
-                            <div class="ui grid">
-                                <div class="ui four column doubling row" id="menu-cols">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sortable-container" class="ui stackable grid" style="margin-top: -40px !important">
-
-                        <div class="sixteen wide column widget" id="Carousel">
-
-                            <p:carousel numVisible="1" effect="easeInStrong" headerText=""
-                                        style="margin-bottom:0; width:921px" autoPlayInterval="7000" circular="true">
-                                <p:tab title="Godfather Part I">
-                                    <h:panelGrid columns="2" cellpadding="10">
-                                        <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
-                                        <img class="" style="height: 250px; width:921px"
-                                             src="resources/images/slide1.PNG"/>
-                                        <!--<h:outputText
-                                                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                    His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                    Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
-                    but given to ruthless violence whenever anything stands against the good of the family."/>-->
-                                    </h:panelGrid>
-                                </p:tab>
-                                <p:tab title="Godfather Part II">
-                                    <h:panelGrid columns="2" cellpadding="10">
-                                        <img class="" style="height: 250px; width:921px"
-                                             src="resources/images/slide1.PNG"/>
-
-                                    </h:panelGrid>
-                                </p:tab>
-                            </p:carousel>
-
-                        </div>
-                        <h4 class="ui horizontal divider header">
-                            <!--<i class="tag icon"></i>-->
-                            Produkty
-                        </h4>
-
-                        <div class="sixteen wide column widget" id="TopSellingProductOfAllTimeWidget">
-
-                            <div class="ui icon input sixteen wide column center aligned">
-                                <input placeholder="Search..." type="text"/>
-                                <i class="inverted circular search link icon"></i>
-                            </div>
-
-                            <!--<div id="search" class="search">
-                                <p:outputLabel value="Zadejte název obce: napr. Nelahozeves"/>
-                                <br/>
-                                <p:autoComplete styleClass="ui search" id="acMinLength" effect="fade"/>
-                                <p:commandButton
-                                        value="Vyhľadať"
-                                        icon="fa fa-search">
-                                </p:commandButton>
-                            </div>-->
-
-                            <pre></pre>
-                            <h:form>
-                                <div class="ui stackable grid">
-                                    <ui:repeat value="#{itemView.getItems()}" var="item">
-                                        <div class="four wide column">
-                                            <div class="ui special cards">
-                                                <div class="card">
-                                                    <div class="blurring dimmable image">
-
-                                                        <!--<div class="ui inverted dimmer">-->
-                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
-                                                                       styleClass="ui inverted dimmer">
-                                                            <div class="content">
-
-                                                                <div class="description">
-                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                                </div>
-
-                                                            </div>
-                                                        </h:commandLink>
-                                                        <!--</div>-->
-                                                        <img src="resources/images/image1.jpg"/>
-                                                    </div>
-                                                    <div class="content">
-                                                        <a class="header">Maslo</a>
-                                                        <div class="meta">
-                                                            <span class="date">Create in Sep 2014</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ui:repeat>
-                                    <div class="four wide column">
-                                        <div class="ui special cards">
-
-                                            <div class="card">
-                                                <div class="blurring dimmable image">
-
-
-                                                    <h:commandLink styleClass="ui dimmer">
-                                                        <div class="content">
-
-                                                            <div class="description">
-                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                            </div>
-
-                                                        </div>
-                                                    </h:commandLink>
-
-                                                    <img src="resources/images/image1.jpg"/>
-
-                                                </div>
-                                                <div class="content">
-                                                    <a class="header">Maslo</a>
-                                                    <div class="meta">
-                                                        <span class="date">Create in Sep 2014</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="ui stackable grid">
-                                    <ui:repeat value="#{itemView.getItems()}" var="item">
-                                        <div class="four wide column">
-                                            <div class="ui special cards">
-                                                <div class="card">
-                                                    <div class="blurring dimmable image">
-
-                                                        <!--<div class="ui inverted dimmer">-->
-                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
-                                                                       styleClass="ui inverted dimmer">
-                                                            <div class="content">
-
-                                                                <div class="description">
-                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                                </div>
-
-                                                            </div>
-                                                        </h:commandLink>
-                                                        <!--</div>-->
-                                                        <img src="resources/images/image1.jpg"/>
-                                                    </div>
-                                                    <div class="content">
-                                                        <a class="header">Maslo</a>
-                                                        <div class="meta">
-                                                            <span class="date">Create in Sep 2014</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ui:repeat>
-                                    <div class="four wide column">
-                                        <div class="ui special cards">
-
-                                            <div class="card">
-                                                <div class="blurring dimmable image">
-
-
-                                                    <h:commandLink styleClass="ui dimmer">
-                                                        <div class="content">
-
-                                                            <div class="description">
-                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                            </div>
-
-                                                        </div>
-                                                    </h:commandLink>
-
-                                                    <img src="resources/images/image1.jpg"/>
-
-                                                </div>
-                                                <div class="content">
-                                                    <a class="header">Maslo</a>
-                                                    <div class="meta">
-                                                        <span class="date">Create in Sep 2014</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="ui stackable grid">
-                                    <ui:repeat value="#{itemView.getItems()}" var="item">
-                                        <div class="four wide column">
-                                            <div class="ui special cards">
-                                                <div class="card">
-                                                    <div class="blurring dimmable image">
-
-                                                        <!--<div class="ui inverted dimmer">-->
-                                                        <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
-                                                                       styleClass="ui inverted dimmer">
-                                                            <div class="content">
-
-                                                                <div class="description">
-                                                                    <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                                </div>
-
-                                                            </div>
-                                                        </h:commandLink>
-                                                        <!--</div>-->
-                                                        <img src="resources/images/image1.jpg"/>
-                                                    </div>
-                                                    <div class="content">
-                                                        <a class="header">Maslo</a>
-                                                        <div class="meta">
-                                                            <span class="date">Create in Sep 2014</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ui:repeat>
-                                    <div class="four wide column">
-                                        <div class="ui special cards">
-
-                                            <div class="card">
-                                                <div class="blurring dimmable image">
-
-
-                                                    <h:commandLink styleClass="ui dimmer">
-                                                        <div class="content">
-
-                                                            <div class="description">
-                                                                <h3>Elliot Fu is a film-maker from New York.</h3>
-                                                            </div>
-
-                                                        </div>
-                                                    </h:commandLink>
-
-                                                    <img src="resources/images/image1.jpg"/>
-
-                                                </div>
-                                                <div class="content">
-                                                    <a class="header">Maslo</a>
-                                                    <div class="meta">
-                                                        <span class="date">Create in Sep 2014</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </h:form>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
+                <ui:insert name="sideMenu">
+                    <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+                </ui:insert>
             </div>
 
+            <div class="thirteen wide column" id="">
+                <ui:insert name="mainPage">
+                    <ui:include src="WEB-INF/templates/main-page.xhtml"/>
+                </ui:insert>
+            </div>
             <div class="sixteen wide theme column" id="Footer">
-                <div class="ui stackable page grid">
-                    <div class="four wide column">
-                        <a href="http://mixerp.org" target="_blank">
-                            <img src="/Static/images/powered-by.png"/>
-                        </a>
-                    </div>
-                    <div class="twelve wide column">
-                        <div class="footer-text">
-                            <p>Copyright © 2016. Eurofood.</p>
-                            <p><a href="http://mixerp.org/contact-us/" target="_blank">Kontaktujte nás</a></p>
-                        </div>
-                    </div>
-                </div>
+                <ui:insert name="footer">
+                    <ui:include src="WEB-INF/templates/footer.xhtml"/>
+                </ui:insert>
             </div>
+            <!--<h:form>
+                <h:outputText value="#{shoppingCart.counter}"/>
+            </h:form>-->
+
         </div>
 
     </div>
+
 
 </h:body>
 

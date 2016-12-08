@@ -21,17 +21,33 @@ public class ItemAssembler {
         dto.setDate(model.getDate());
         dto.setUrl(model.getUrl());
         dto.setCategory(model.getCategory());
+        dto.setInternalNumber(model.getInternalNumber());
+        dto.setPriceNetto(model.getPriceNetto());
+        dto.setPriceBrutto(model.getPriceBrutto());
+        dto.setEanNumber(model.getEanNumber());
+        dto.setProducer(model.getProducer());
+        dto.setPiecesInCarton(model.getPiecesInCarton());
+        dto.setCartonInPalette(model.getCartonInPalette());
+        dto.setPiecesInPalette(model.getPiecesInPalette());
         return dto;
     }
 
     public ItemDto toDto(Item model) {
-        ItemDto itemDto = new ItemDto();
-        itemDto.setHeader(model.getHeader());
-        itemDto.setText(model.getText());
-        itemDto.setDate(model.getDate());
-        itemDto.setUrl(model.getUrl());
-        itemDto.setCategory(model.getCategory());
-        return itemDto;
+        ItemDto dto = new ItemDto();
+        dto.setHeader(model.getHeader());
+        dto.setText(model.getText());
+        dto.setDate(model.getDate());
+        dto.setUrl(model.getUrl());
+        dto.setCategory(model.getCategory());
+        dto.setInternalNumber(model.getInternalNumber());
+        dto.setPriceNetto(model.getPriceNetto());
+        dto.setPriceBrutto(model.getPriceBrutto());
+        dto.setEanNumber(model.getEanNumber());
+        dto.setProducer(model.getProducer());
+        dto.setPiecesInCarton(model.getPiecesInCarton());
+        dto.setCartonInPalette(model.getCartonInPalette());
+        dto.setPiecesInPalette(model.getPiecesInPalette());
+        return dto;
     }
 
 

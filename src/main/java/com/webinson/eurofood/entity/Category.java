@@ -5,12 +5,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Slavo on 11/23/2016.
  */
 @Entity
-@Table(name = "category", schema = "zuzka")
+@Table(name = "category", schema = "eshop")
 @Data
 @NoArgsConstructor
 public class Category implements Serializable {
@@ -23,5 +25,10 @@ public class Category implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+
 
 }

@@ -32,7 +32,7 @@ import java.util.List;
         @URLMapping(
                 id = "login",
                 pattern = "/login",
-                viewId = "/login.xhtml"),
+                viewId = "/login2.xhtml"),
         @URLMapping(
                 id = "category",
                 pattern = "/category/#{ selectedCategory: itemView.selectedCategory}/#{ selectedItem : itemView.selectedItem}",

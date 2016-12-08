@@ -1,0 +1,50 @@
+package com.webinson.eurofood.assembler;
+
+import com.webinson.eurofood.dto.CategoryDto;
+import com.webinson.eurofood.entity.Category;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * Created by Slavo on 12/3/2016.
+ */
+@Component
+public class CategoryAssembler {
+
+
+    public CategoryDto convertToDto(Category model, CategoryDto dto) {
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        return dto;
+    }
+
+    public CategoryDto toDto(Category model) {
+        CategoryDto dto = new CategoryDto();
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        return dto;
+    }
+
+    public List<CategoryDto> toDtos(final Collection<Category> models) {
+        final List<CategoryDto> dtos = new ArrayList<>();
+        if (isNotEmpty(models)) {
+            for (final Category category : models) {
+                dtos.add(convertToDto(category, new CategoryDto()));
+            }
+        }
+        return dtos;
+    }
+
+    public boolean isNotEmpty(final Collection<?> col) {
+        return !isEmpty(col);
+    }
+
+    public boolean isEmpty(final Collection<?> col) {
+        return col == null || col.isEmpty();
+    }
+
+
+}

@@ -6,8 +6,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.service.ItemService;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +20,7 @@ import java.util.List;
 /**
  * Created by Slavo on 10/4/2016.
  */
+@Data
 @Component
 @ViewScoped
 @URLBeanName("itemView")
@@ -32,7 +32,7 @@ import java.util.List;
         @URLMapping(
                 id = "login",
                 pattern = "/login",
-                viewId = "/login2.xhtml"),
+                viewId = "/admin-user-login.xhtml"),
         @URLMapping(
                 id = "category",
                 pattern = "/category/#{ selectedCategory: itemView.selectedCategory}/#{ selectedItem : itemView.selectedItem}",

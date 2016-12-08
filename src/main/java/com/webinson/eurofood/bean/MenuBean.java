@@ -39,51 +39,6 @@ public class MenuBean {
     }
 
 
-    /*@Getter
-    @Setter
-    private MenuModel model = new DefaultMenuModel();
 
-    public MenuBean() {
-        DefaultSubMenu file = new DefaultSubMenu("File");
-        // Create submenu
-        DefaultSubMenu help = new DefaultSubMenu("Help");
-        // Create menuitem
-
-        DefaultMenuItem open = new DefaultMenuItem("Open");
-        // Create menuitem
-        DefaultMenuItem edit = new DefaultMenuItem("Edit");
-        // Create menuitem
-        DefaultMenuItem exit = new DefaultMenuItem("Exit");
-
-        // Create menuitem
-        DefaultMenuItem about = new DefaultMenuItem("About Primefaces");
-        // Create menuitem
-        DefaultMenuItem contact = new DefaultMenuItem("Contact Us");
-        // Create menuitem
-        DefaultMenuItem helpMenuItem = new DefaultMenuItem("Help");
-
-        // Determine menuitem action
-        open.setCommand("#{menuBean.openAction}");
-
-        // Associate menuitem with submenu
-        file.addElement(open);
-        file.addElement(edit);
-        file.addElement(new DefaultSeparator());
-        file.addElement(exit);
-
-        help.addElement(about);
-        help.addElement(contact);
-        help.addElement(new DefaultSeparator());
-        help.addElement(helpMenuItem);
-
-        // Associate submenu with menu
-        model.addElement(file);
-        model.addElement(help);
-    }
-
-    public String openAction() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Open action has activiated asynchrounsly !"));
-        return "";
-    }*/
 
 }

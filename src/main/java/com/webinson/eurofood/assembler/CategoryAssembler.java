@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 public class CategoryAssembler {
 
-
     public CategoryDto convertToDto(Category model, CategoryDto dto) {
         dto.setId(model.getId());
         dto.setName(model.getName());

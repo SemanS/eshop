@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .userDetailsService(userDetailsService())
                 .formLogin()
-                .loginPage("/login2.xhtml")
+                .loginPage("/admin-user-login.xhtml")
                 .loginProcessingUrl("/appLogin")
                 .usernameParameter("app_username")
                 .passwordParameter("app_password")

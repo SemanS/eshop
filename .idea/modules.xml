@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/clickable-budget-cz.iml" filepath="$PROJECT_DIR$/clickable-budget-cz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurofood.iml" filepath="$PROJECT_DIR$/eurofood.iml" />
     </modules>
   </component>
 </project>

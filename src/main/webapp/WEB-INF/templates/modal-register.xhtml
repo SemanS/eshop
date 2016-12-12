@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:body>
     <h:form styleClass="ui form small modal" id="modaldiv">
@@ -28,7 +29,7 @@
             </div>
             <pre></pre>
             <div class="field right">
-                <h:outputLink value="register.xhtml"><label>Nová registrácia</label></h:outputLink>
+                <p:link value="Nová registrácia" outcome="register.xhtml"></p:link>
                 <label>Zabudnuté heslo</label>
             </div>
         </div>

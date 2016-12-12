@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+    <h:form styleClass="ui form">
+
+        <p:growl id="growl" sticky="true" showDetail="true"/>
+
+        <p:wizard flowListener="#{userWizard.onFlowProcess}">
+            <div id="top-menu" class="ui attached stackable menu">
+                <p:tab titleStyleClass="item" id="personal" title="Personal">
+                    <pre></pre>
+                    <h4 class="ui dividing header">Shipping Information</h4>
+                    <p:messages/>
+                    <!--<h:panelGrid columns="2" columnClasses="label, value">
+                        <h:outputText value="Firstname: *"/>
+                        <p:inputText value="#{userWizard.userDto.firstName}" required="true" label="Firstname"/>
+
+                        <h:outputText value="Lastname: *"/>
+                        <p:inputText value="#{userWizard.userDto.lastName}" required="true" label="Lastname"/>
+
+                        <h:outputText value="Skip to last: "/>
+                        <h:selectBooleanCheckbox value="#{userWizard.skip}"/>
+                    </h:panelGrid>-->
+                    <div class="field">
+                        <label>Name</label>
+                        <div class="two fields">
+                            <div class="field">
+                                <h:inputText value="#{userWizard.userDto.name}" name="shipping[first-name]"
+                                             placeholder="name" type="text"/>
+                            </div>
+                            <div class="field">
+                                <h:inputText value="#{userWizard.userDto.password}" placeholder="password" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </p:tab>
+                <p:tab id="address" title="Address">
+                    <p:panel header="Address Details">
+                        <p:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Street: "/>
+                            <p:inputText value="#{userWizard.userDto.street}"/>
+
+                            <h:outputText value="Postal Code: "/>
+                            <p:inputText value="#{userWizard.userDto.postalCode}"/>
+
+                            <h:outputText value="City: "/>
+                            <p:inputText value="#{userWizard.userDto.city}"/>
+
+                            <h:outputText value="Skip to last: "/>
+                            <h:selectBooleanCheckbox value="#{userWizard.skip}"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="contact" title="Contact">
+                    <p:panel header="Contact Information">
+                        <p:messages/>
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Email: *"/>
+                            <p:inputText value="#{userWizard.userDto.email}" required="true" label="Email"/>
+
+                            <h:outputText value="Phone: "/>
+                            <p:inputText value="#{userWizard.userDto.phone}"/>
+
+                            <h:outputText value="Additional Info: "/>
+                            <p:inputText value="#{userWizard.userDto.info}"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmation">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Firstname: "/>
+                                <h:outputText value="#{userWizard.userDto.firstName}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Lastname: "/>
+                                <h:outputText value="#{userWizard.userDto.lastName}" styleClass="outputLabel"/>
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: "/>
+                                <h:outputText value="#{userWizard.userDto.street}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Postal: "/>
+                                <h:outputText value="#{userWizard.userDto.postalCode}" styleClass="outputLabel"/>
+
+                                <h:outputText value="City: "/>
+                                <h:outputText value="#{userWizard.userDto.city}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: "/>
+                                <h:outputText value="#{userWizard.userDto.email}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Phone "/>
+                                <h:outputText value="#{userWizard.userDto.phone}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Info: "/>
+                                <h:outputText value="#{userWizard.userDto.info}" styleClass="outputLabel"/>
+
+                                <h:outputText/>
+                                <h:outputText/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{userWizard.save}" update="growl"
+                                         styleClass="ui button" process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </div>
+        </p:wizard>
+
+    </h:form>
+</h:body>
+
+</html>

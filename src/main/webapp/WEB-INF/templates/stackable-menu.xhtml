@@ -1,9 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
+    <script>
+        $(document).ready(function () {
+            $('#logIn').click(function () {
+                $('#modaldiv').modal('show');
+            });
+        });
+    </script>
 
     <div class="sixteen wide brand column" id="Top">
         <div class="ui stackable grid">
@@ -40,9 +48,9 @@
                             Obchodná spolupráca
                         </a>
                         <div class="right menu">
-                            <a class="item" href="http://docs.mixerp.org/" target="_blank">
+                            <a class="item" id="logIn" target="_blank">
                                 <i class="book basic icon"></i>
-                                Prihlásiť
+                                Prihlásenie
                             </a>
                         </div>
                     </div>
@@ -51,6 +59,9 @@
         </div>
     </div>
 
+    <ui:insert name="sa">
+        <ui:include src="modal-register.xhtml"/>
+    </ui:insert>
 
 </h:body>
 

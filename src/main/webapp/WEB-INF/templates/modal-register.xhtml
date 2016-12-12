@@ -1,32 +1,50 @@
-<script>
-    $('.ui.modal')
-        .modal('show')
-    ;
-</script>
-<div class="ui modal">
-<i class="close icon"></i>
-<div class="header">
-    Profile Picture
-</div>
-<div class="image content">
-    <div class="ui medium image">
-        <img src="/images/avatar/large/chris.jpg">
-    </div>
-    <div class="description">
-        <div class="ui header">We've auto-chosen a profile image for you.</div>
-        <p>We've grabbed the following image from the <a href="https://www.gravatar.com"
-                                                         target="_blank">gravatar</a> image associated with your registered e-mail address.
-        </p>
-        <p>Is it okay to use this photo?</p>
-    </div>
-</div>
-<div class="actions">
-    <div class="ui black deny button">
-        Nope
-    </div>
-    <div class="ui positive right labeled icon button">
-        Yep, that's me
-        <i class="checkmark icon"></i>
-    </div>
-</div>
-</div>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+    <h:form styleClass="ui form small modal" id="modaldiv">
+        <i class="close icon"></i>
+        <div class="header">
+            Prihlásenie
+        </div>
+
+        <div class="content">
+            <div class="field">
+                <label>Email:</label>
+                <input name="first-name" placeholder="First Name" type="text"/>
+            </div>
+            <div class="field">
+                <label>Heslo:</label>
+                <input name="last-name" placeholder="Last Name" type="text"/>
+            </div>
+            <pre></pre>
+            <div class="field">
+                <div class="ui positive right labeled icon button">
+                    Prihlásiť sa
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+            <pre></pre>
+            <div class="field right">
+                <h:outputLink value="register.xhtml"><label>Nová registrácia</label></h:outputLink>
+                <label>Zabudnuté heslo</label>
+            </div>
+        </div>
+
+        <!--<div class="actions">
+            <div class="ui black button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>-->
+
+    </h:form>
+
+</h:body>
+
+</html>

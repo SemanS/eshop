@@ -8,10 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="clickable-budget-cz" />
+        <module name="eurofood" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="clickable-budget-cz" target="1.8" />
+      <module name="eurofood" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

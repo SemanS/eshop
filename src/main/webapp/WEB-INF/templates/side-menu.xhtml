@@ -2,20 +2,93 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
 
 <h:body>
 
     <h:form>
 
-        <p:growl id="messages" showDetail="true"/>
+        <!--<p:growl id="messages" showDetail="true"/>-->
 
-        <p:tree id="docs" value="#{menuBean.rootNode}" var="doc" animate="true" selectionMode="single"
+        <!--<p:tree id="docs" value="#{menuBean.rootNode}" var="doc" animate="true" selectionMode="single"
                 dynamic="true">
-            <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+            <p:ajax event="select" process="@this" listener="#{menuBean.onNodeExpand}" />
+            <p:treeNode expandedIcon="ui-icon-folder-open"
+                        collapsedIcon="ui-icon-folder-collapsed">
                 <h:outputText value="#{doc.name}"/>
             </p:treeNode>
-        </p:tree>
+        </p:tree>-->
+
+        <!--<ul id="mainnavi" class="flexnav" data-breakpoint="640">
+            <o:tree value="#{menuBean.treeModel}" var="item">
+                <o:treeNode level="0">
+                    <o:treeNodeItem>
+                        <li class="item">
+                            <a href="asd" title="asd">#{item.name}</a>
+                            <o:treeInsertChildren/>
+                        </li>
+                    </o:treeNodeItem>
+                </o:treeNode>
+                <o:treeNode>
+                    <ul>
+                        <o:treeNodeItem>
+                            <li>
+                                <a href="asd" title="asd">#{item.name}</a>
+                                <o:treeInsertChildren/>
+                            </li>
+                        </o:treeNodeItem>
+                    </ul>
+                </o:treeNode>
+            </o:tree>
+        </ul>-->
+
+
+        <div class="ui fluid accordion">
+
+            <o:tree value="#{menuBean.treeModel}" var="item">
+                <o:treeNode level="0">
+
+                    <o:treeNodeItem>
+                        <div class="title">
+                            <h:graphicImage library="images" name="mliecne_bg.png"/>
+                            <!--<i class="dropdown icon"></i>-->
+
+                            <!--<h:outputText value="#{item.name}"/>-->
+
+                        </div>
+                        <!--<a href="asd" title="asd">#{item.name}</a>-->
+                        <o:treeInsertChildren/>
+
+                    </o:treeNodeItem>
+                </o:treeNode>
+
+
+                <o:treeNode>
+                    <div class="content">
+
+                        <o:treeNodeItem level="1">
+
+
+                            <div class="transition hidden">
+                                <h:commandLink>
+                                    <h:graphicImage library="images" name="mliecne_bg.png"/>
+                                </h:commandLink>
+                                <!--#{item.name}-->
+                            </div>
+
+                            <!--<a href="asd" title="asd">#{item.name}</a>-->
+                            <o:treeInsertChildren/>
+
+                        </o:treeNodeItem>
+                    </div>
+                </o:treeNode>
+
+
+            </o:tree>
+
+        </div>
+
 
     </h:form>
 

@@ -6,10 +6,13 @@ import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
+import org.omnifaces.model.tree.ListTreeModel;
+import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     List<CategoryDto> allCategories = new ArrayList<CategoryDto>();
 
-    public TreeNode createRoot() {
+    /*public TreeNode createRoot() {
         for (Category cat : categoryDao.findAll()) {
             if (cat.getParent() == null) {
                 allCategories.add(categoryAssembler.toDto(cat));
@@ -54,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
             createNodeCategory(cat, subNode);
         }
         return;
-    }
+    }*/
 
     public List<CategoryDto> createSubNodes(CategoryDto categoryDto) {
         List<CategoryDto> categoryNodeList = new ArrayList<CategoryDto>();
@@ -65,6 +68,29 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         return categoryNodeList;
+    }
+
+    public TreeModel<CategoryDto> createModel() {
+        TreeModel<CategoryDto> treeModel = new ListTreeModel<>();
+
+
+        for (Category cat : categoryDao.findAll()) {
+            if (cat.getParent() == null) {
+                allCategories.add(categoryAssembler.toDto(cat));
+
+            }
+        }
+        buildTreeModel(treeModel, allCategories);
+
+
+        return treeModel;
+
+    }
+
+    private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
+        for (CategoryDto item : items) {
+            buildTreeModel(treeModel.addChild(item), createSubNodes(item));
+        }
     }
 
     /*@Autowired

@@ -5,7 +5,7 @@
 
     <packaging>war</packaging>
     <groupId>org.joinfaces</groupId>
-    <artifactId>clickable-budget-cz</artifactId>
+    <artifactId>ROOT</artifactId>
     <version>1</version>
     <name>Clickable budget</name>
     <description>Clickable budget for Czech republic</description>

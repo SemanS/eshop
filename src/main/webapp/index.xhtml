@@ -22,8 +22,9 @@
 </h:head>
 
 <h:body>
-    <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
+    <h:outputScript name="js/init.js"/>
+
 
     <!-- Page Contents -->
     <div class="ui relaxed grid container">
@@ -39,13 +40,13 @@
                 <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
             </ui:insert>
 
-            <div class="three wide column" id="Sidebar">
+            <div class="four wide column" id="Sidebar">
                 <ui:insert name="sideMenu">
                     <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
                 </ui:insert>
             </div>
 
-            <div class="thirteen wide column" id="">
+            <div class="twelve wide column" id="">
                 <ui:insert name="mainPage">
                     <ui:include src="WEB-INF/templates/main-page.xhtml"/>
                 </ui:insert>

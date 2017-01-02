@@ -16,91 +16,162 @@
     <!-- Site Properties -->
     <title>Zuzka</title>
 
-    <h:outputStylesheet name="css/font-awesome.css"/>
-    <h:outputStylesheet name="css/styles.css"/>
     <h:outputStylesheet name="css/semantic.min.css"/>
-
-    <style type="text/css">
-
-        .landpage-image {
-            height: 100% !important;
-        }
-
-        .landpage-image {
-            background-image: url('resources/images/bg.jpg') !important;
-            background-repeat: no-repeat !important;
-            background-size: cover !important;
-        }
-
-    </style>
 
 </h:head>
 
 <h:body>
+    <f:metadata>
+        <f:viewParam name="url" value="#{editorController.itemDto.url}"/>
+    </f:metadata>
 
     <h:outputScript name="js/jquery-3.1.1.min.js"/>
     <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
 
-    <ui:insert name="date">
-        <ui:include src="WEB-INF/templates/menu.xhtml"/>
-    </ui:insert>
 
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
+    <div class="ui container">
 
-    <div class="ui relaxed grid container">
-        <h:form enctype="multipart/form-data">
+        <ui:insert name="attachedMenu">
+            <ui:include src="WEB-INF/templates/attached-menu-dashboard.xhtml"/>
+        </ui:insert>
 
-            <div class="item-panel grey lighten-5 z-depth-1">
-                <div class="row">
-                    <div class="col s6">
 
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <h:inputFile id="upload"
-                                             value="#{editorController.file}"
-                                             label="Insert image"
-                                             update="editor">
-                                </h:inputFile>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <p:inputText id="first_name" value="#{getInTouchView.name}"
-                                             type="text">
-                                </p:inputText>
-                                <label for="first_name">Name of image:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <h:commandButton value="Upload"
-                                                 action="#{editorController.uploadListener}"/>
-                            </div>
+        <h:form id="forma" styleClass="ui form" enctype="multipart/form-data">
+            <div class="ui grid">
+
+                <div class="eight wide column" id="sad">
+                    <div class="ui segment">
+                        <div class="field">
+                            <label>Vložiť titulný obrázok</label>
+
+                            <h:inputFile id="upload2"
+                                         value="#{editorController.imgFile}"
+                                         label="Insert image">
+                            </h:inputFile>
+
                         </div>
 
-                        <div class="row">
-                            <div class="input-field col s8">
-                                <pe:ckEditor id="editor"
-                                             widgetVar="editWidget"
-                                             value="#{editorController.text}"/>
-                                <h:commandButton value="Upload"
-                                                 action="#{cardView.saveText}"/>
+                        <div class="field">
+                            <h:commandButton value="Upload"
+                                             action="#{editorController.uploadImageListener}"/>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eight wide column" id="dsa">
+                    <div class="ui segment">
+                        <div class="field">
+                            <label>Vložiť obrázok do textu</label>
+
+                            <h:inputFile id="upload"
+                                         value="#{editorController.file}"
+                                         label="Insert image"
+                                         update="editor forma">
+                            </h:inputFile>
+
+                        </div>
+
+                        <div class="field">
+                            <h:commandButton value="Upload" update="editor forma"
+                                             action="#{editorController.uploadListener}"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="sixteen wide column" id="asd">
+
+                    <div class="ui segment">
+                        <div class="two fields" id="matchGrid">
+                            <div class="field">
+                                <label>Header:</label>
+                                <div class="field">
+                                    <p:inputText placeholder="Zadajte text nádpisu" id="header"
+                                                 value="#{editorController.itemDto.header}"
+                                                 type="text">
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>SEO link:</label>
+                                <div class="field">
+                                    <p:inputText placeholder="Zadajte text URL" id="seo"
+                                                 value="#{editorController.itemDto.url}"
+                                                 type="text">
+                                    </p:inputText>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="three fields" id="secondGrid">
+                            <div class="field">
+                                <label>Minutáž:</label>
+                                <div class="field">
+                                    <p:inputText placeholder="Zadajte minutáž" id="duration"
+                                                 value="#{editorController.itemDto.duration}"
+                                                 type="text">
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Item Description:</label>
+                                <div class="field">
+                                    <p:inputText placeholder="Zadajte text itemu" id="itemDescription"
+                                                 value="#{editorController.itemDto.itemDescription}"
+                                                 type="text">
+                                    </p:inputText>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Zvoľte kategóriu videa:</label>
+                                <div class="field">
+
+                                    <h:selectOneMenu value="#{editorController.selectedCategory}">
+                                        <!--<f:converter binding="#{utils.entityConverter}"/>-->
+                                        <!--value="#{editorController.categories.get(editorController.itemDto.category.id -1)}">-->
+                                        <!--<f:selectItem
+                                                itemLabel="#{editorController.categories.get(editorController.itemDto.category.id -1).name}"
+                                        />-->
+                                        <f:selectItems value="#{editorController.categories}" var="c"
+                                                       itemValue="#{c.name}" itemLabel="#{c.name}"/>
+                                    </h:selectOneMenu>
+
+                                    <!--<div class="ui dropdown selection">
+                                        <input name="gender" type="hidden"/>
+                                        <div class="default text">Select Gender</div>
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            <div class="item">Male</div>
+                                            <div class="item">Female</div>
+                                        </div>
+                                    </div>-->
+                                </div>
                             </div>
                         </div>
 
 
                     </div>
                 </div>
-                <!--</form>-->
-            </div>
 
+                <div class="sixteen wide column" id="">
+                    <div class="ui segment">
+                        <div class="field">
+                            <pe:ckEditor id="editor" width="100%"
+                                         widgetVar="editWidget"
+                                         value="#{editorController.itemDto.text}"/>
+                        </div>
+                        <div class="field">
+                            <h:commandButton value="Upload"
+                                             action="#{editorController.saveItem}"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </h:form>
+
     </div>
 
 </h:body>

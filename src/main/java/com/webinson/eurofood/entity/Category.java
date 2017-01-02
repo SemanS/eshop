@@ -28,5 +28,8 @@ public class Category implements Serializable {
     @JoinColumn(name = "parent_id")
     private Category parent;
 
+    @Column(name="img")
+    private byte[] image;
+
 
 }

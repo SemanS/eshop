@@ -2,9 +2,12 @@ package com.webinson.eurofood.assembler;
 
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
+import org.primefaces.model.DefaultStreamedContent;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class CategoryAssembler {
     public CategoryDto convertToDto(Category model, CategoryDto dto) {
         dto.setId(model.getId());
         dto.setName(model.getName());
+        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        dto.setBase(model.isBase());
         return dto;
     }
 
@@ -24,6 +29,8 @@ public class CategoryAssembler {
         CategoryDto dto = new CategoryDto();
         dto.setId(model.getId());
         dto.setName(model.getName());
+        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        dto.setBase(model.isBase());
         return dto;
     }
 

@@ -5,6 +5,7 @@ import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
+import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.service.CategoryService;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;
@@ -31,6 +32,15 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryAssembler categoryAssembler;
 
     List<CategoryDto> allCategories = new ArrayList<CategoryDto>();
+
+    @Override
+    public void saveNewCategory(Category category) {
+        categoryDao.save(category);
+    }
+
+    public void saveItemByUrl(String url, String text) {
+
+    }
 
     /*public TreeNode createRoot() {
         for (Category cat : categoryDao.findAll()) {
@@ -86,6 +96,7 @@ public class CategoryServiceImpl implements CategoryService {
         return treeModel;
 
     }
+
 
     private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
         for (CategoryDto item : items) {

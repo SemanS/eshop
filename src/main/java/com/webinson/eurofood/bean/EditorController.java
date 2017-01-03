@@ -3,10 +3,12 @@ package com.webinson.eurofood.bean;
 import com.ocpsoft.pretty.PrettyContext;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
+import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.IOUtils;
 import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.List;
@@ -82,11 +85,14 @@ public class EditorController implements Serializable {
     @PostConstruct
     public void init() {
 
-        text = showText();
-        itemDto = showItemDto();
+        /*text = showText();
+        itemDto = showItemDto();*/
         /*categories = categoryService.getAllCategories();*/
-        selectedCategory = itemDto.getCategory().getName();
+        /*selectedCategory = itemDto.getCategory().getName();*/
     }
+
+
+
 
     public ItemDto showItemDto() {
         String path = PrettyContext.getCurrentInstance().getRequestURL().toURL();
@@ -97,13 +103,22 @@ public class EditorController implements Serializable {
 
     }
 
-    public String saveItem() {
-        String path = PrettyContext.getCurrentInstance().getRequestURL().toURL();
-        String segments[] = path.split("/");
-        String resultUrl = segments[segments.length - 1];
+    public void saveItem() throws IOException {
 
-        /*itemService.saveItemByUrl(resultUrl, selectedCategory, itemDto);*/
-        return "pretty:dashboard";
+        InputStream input = file.getInputStream();
+        byte[] bytes = IOUtils.toByteArray(input);
+
+        //File file = new File("img/JBDFav300.png");
+        //byte[] picInBytes = new byte[(int) file.length()];
+        //FileInputStream fileInputStream = new FileInputStream(file);
+
+        /*fileInputStream.read(bytes);
+        fileInputStream.close();*/
+        Category category = new Category();
+        category.setImage(bytes);
+        category.setName("asd");
+        categoryService.saveNewCategory(category);
+        //.setProfilePic(picInBytes);
     }
 
     public String showText() {

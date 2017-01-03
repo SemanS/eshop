@@ -22,97 +22,107 @@
 
 <h:body>
 
-    <h:outputScript name="js/jquery-3.1.1.min.js"/>
     <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
 
     <div class="ui container">
 
         <ui:insert name="attachedMenu">
-            <ui:include src="WEB-INF/templates/attached-menu-dashboard.xhtml"/>
+            <ui:include src="WEB-INF/templates-dashboard/attached-menu-dashboard.xhtml"/>
         </ui:insert>
         <pre></pre>
         <pre></pre>
-        <ui:repeat value="#{itemView.getCategories()}" var="category">
-            <div class="ui container text">
-                <h4 class="ui horizontal divider header">
-                    <!--<i class="tag icon"></i>-->
-                    #{category.name}
-                </h4>
-            </div>
-            <pre></pre>
-            <pre></pre>
-            <div class="ui container">
-                <h:form>
-                    <div id="simpleList" class="ui grid four column centered stackable">
-                        <ui:repeat value="#{itemView.allItemsByCategory(category)}" var="item">
-                            <div class="column">
-                                <div class="ui special cards">
-                                    <div class="card ui primary button">
-                                        <div class="blurring dimmable image">
 
-                                            <!--<div class="ui inverted dimmer">-->
-                                            <h:commandLink id="fas" action="#{itemView.onDashboardItemDetail(item)}"
-                                                           styleClass="ui inverted dimmer">
-                                                <div class="content">
-                                                    <div class="center">
+        <h:form enctype="multipart/form-data">
+            <h:inputFile id="upload2"
+                         value="#{editorController.file}"
+                         label="Insert image">
+            </h:inputFile>
+            <h:commandButton value="Upload"
+                             action="#{editorController.saveItem()}"/>
+        </h:form>
 
-                                                    </div>
-                                                    <div class="description">
-                                                        <h3 style="color: black">#{itemView.trimHeader(item.header)}</h3>
-                                                    </div>
 
-                                                </div>
-                                            </h:commandLink>
+        <!-- <ui:repeat value="#{itemView.getCategories()}" var="category">
+             <div class="ui container text">
+                 <h4 class="ui horizontal divider header">
+                     &lt;!&ndash;<i class="tag icon"></i>&ndash;&gt;
+                     #{category.name}
+                 </h4>
+             </div>
+             <pre></pre>
+             <pre></pre>
+             <div class="ui container">
+                 <h:form>
+                     <div id="simpleList" class="ui grid four column centered stackable">
+                         <ui:repeat value="#{itemView.allItemsByCategory(category)}" var="item">
+                             <div class="column">
+                                 <div class="ui special cards">
+                                     <div class="card ui primary button">
+                                         <div class="blurring dimmable image">
 
-                                            <!--</div>-->
-                                            <img src="#{item.img}"/>
+                                             &lt;!&ndash;<div class="ui inverted dimmer">&ndash;&gt;
+                                             <h:commandLink id="fas" action="#{itemView.onDashboardItemDetail(item)}"
+                                                            styleClass="ui inverted dimmer">
+                                                 <div class="content">
+                                                     <div class="center">
 
-                                        </div>
-                                        <div class="ui two bottom attached buttons">
-                                            <h:commandButton styleClass="ui blue button" id="deleteItem"
-                                                             value="Editovať item"
-                                                             action="#{itemView.onDashboardItemDetail(item)}"
-                                            />
-                                            <h:commandButton styleClass="ui button" id="editItem"
-                                                             value="Vymazať item"
-                                                             action="#{itemView.deleteItem(item)}"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                     </div>
+                                                     <div class="description">
+                                                         <h3 style="color: black">#{itemView.trimHeader(item.header)}</h3>
+                                                     </div>
 
-                        </ui:repeat>
+                                                 </div>
+                                             </h:commandLink>
 
-                    </div>
-                    <!--<div class="column">
-                        <div class="ui special cards">
-                            <div class="card ui primary button">
-                                <div class="blurring dimmable image">
+                                             &lt;!&ndash;</div>&ndash;&gt;
+                                             <img src="#{item.img}"/>
 
-                                    &lt;!&ndash;<div class="ui inverted dimmer">&ndash;&gt;
-                                    <h:commandLink id="ajax" action="#{itemView.newDashboardItem()}"
-                                                   styleClass="ui inverted dimmer">
-                                        <div class="content">
+                                         </div>
+                                         <div class="ui two bottom attached buttons">
+                                             <h:commandButton styleClass="ui blue button" id="deleteItem"
+                                                              value="Editovať item"
+                                                              action="#{itemView.onDashboardItemDetail(item)}"
+                                             />
+                                             <h:commandButton styleClass="ui button" id="editItem"
+                                                              value="Vymazať item"
+                                                              action="#{itemView.deleteItem(item)}"
+                                             />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
 
-                                            &lt;!&ndash; <div class="description">
-                                                 <h3>Elliot Fu is a film-maker from New York.</h3>
-                                             </div>&ndash;&gt;
+                         </ui:repeat>
 
-                                        </div>
-                                    </h:commandLink>
-                                    &lt;!&ndash;</div>&ndash;&gt;
-                                    <img src="resources/images/novy_item.jpg"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-                </h:form>
-            </div>
-            <pre></pre>
-            <pre></pre>
-        </ui:repeat>
+                     </div>
+                     &lt;!&ndash;<div class="column">
+                         <div class="ui special cards">
+                             <div class="card ui primary button">
+                                 <div class="blurring dimmable image">
+
+                                     &lt;!&ndash;<div class="ui inverted dimmer">&ndash;&gt;
+                                     <h:commandLink id="ajax" action="#{itemView.newDashboardItem()}"
+                                                    styleClass="ui inverted dimmer">
+                                         <div class="content">
+
+                                             &lt;!&ndash; <div class="description">
+                                                  <h3>Elliot Fu is a film-maker from New York.</h3>
+                                              </div>&ndash;&gt;
+
+                                         </div>
+                                     </h:commandLink>
+                                     &lt;!&ndash;</div>&ndash;&gt;
+                                     <img src="resources/images/novy_item.jpg"/>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>&ndash;&gt;
+                 </h:form>
+             </div>
+             <pre></pre>
+             <pre></pre>
+         </ui:repeat>-->
 
     </div>
 

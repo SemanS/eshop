@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:body>
     <script>
@@ -12,54 +13,69 @@
             });
         });
     </script>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
 
-    <div class="sixteen wide brand column" id="Top">
-        <div class="ui stackable grid">
-            <div class="four wide column">
-                <a href="/" id="Logo">
-                    <img src="/Handlers/LogoHandler.ashx"/>
-                </a>
-            </div>
-            <div class="twelve wide column">
-                <div id="RightMenu">
-                    <div class="ui inverted theme attached stackable menu">
-                        <a class="item" href="http://mixerp.org/" target="_blank">
-                            <i class="anchor icon"></i>
-                            Domov
-                        </a>
-                        <a class="item">
-                            <i class="database icon"></i>
-                            O nás
-                        </a>
-                        <a class="item">
-                            <i class="home icon"></i>
-                            Dovoz
-                        </a>
-                        <div class="ui simple dropdown item" id="NotificationMenu">
-                            <i class="mail icon"></i>
-                            Logistika
-                            <span></span>
-                            <i class="dropdown icon"></i>
-                            <div id="Notification" class="ui vertical stackable menu">
-                            </div>
+
+    <div class="sixteen wide column" id="Top">
+        <!--<div class="header item">
+            <img src="../../resources/images/background1.jpg" class="logo"/>
+        </div>
+    -->
+        <div class="ui grid"
+             style="background-image: url('../../resources/images/header.png') !important; background-repeat:no-repeat;">
+            <div class="three wide column"></div>
+            <div class="ten wide column">
+                <div class="ui secondary stackable container menu euromenu">
+
+                    <a class="active item ui button" style="border-radius: 0px !important;">
+                        O spoločnosti
+                    </a>
+                    <a class="item">
+                        Pre dodávateľa
+                    </a>
+                    <a class="item">
+                        E - Shop
+                    </a>
+                    <a class="item">
+                        Naše akcie
+                    </a>
+                    <a class="item">
+                        Kontakt
+                    </a>
+
+                    <!--<div class="item" style="border-radius: 0px !important;">
+                        <div class="ui icon input">
+                            <input placeholder="Search..." type="text"/>
+                            <i class="search link icon"></i>
                         </div>
-                        <a class="item" href="http://docs.mixerp.org/" target="_blank">
-                            <i class="book basic icon"></i>
-                            Obchodná spolupráca
-                        </a>
-                        <div class="right menu">
-                            <a class="item" id="logIn" target="_blank">
-                                <i class="book basic icon"></i>
-                                Prihlásenie
-                            </a>
-                            <h:outputLink class="item right"
-                                          value="${pageContext.request.contextPath}/logout"><i
-                                    class="user icon"></i>Log out</h:outputLink>
-                        </div>
-                    </div>
+                    </div>-->
+                    <a class="ui item" style="border-radius: 0px !important;">
+                        Logout
+                    </a>
+
                 </div>
             </div>
+            <div class="three wide column"></div>
+            <div class="three wide column"></div>
+            <div class="ten wide column" style="text-align: center">
+
+                <p:autoComplete id="acMinLength" placeholder="Hľadať:" minQueryLength="2"
+                                value="#{mapView.selectedCitySubmit}"
+                                style="margin-right:10px; line-height: 200% !important;" size="40"
+                                styleClass="ui search"
+                                completeMethod="#{mapView.completeText}" effect="fade"/>
+                <h:commandButton style="border-radius: 0px !important;" styleClass="ui button item"
+                                 actionListener="#{mapView.onSubmit}" value="Hledat"
+                                 icon="fa fa-search">
+                </h:commandButton>
+
+            </div>
+            <div class="three wide column"></div>
+
+
         </div>
+
     </div>
 
     <ui:insert name="sa">

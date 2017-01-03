@@ -44,7 +44,7 @@ import java.util.List;
         @URLMapping(
                 id = "item-detail",
                 pattern = "/items/#{ itemUrl : itemView.itemUrl }",
-                viewId = "/itemDetail.xhtml"),
+                viewId = "/item-detail.xhtml"),
         @URLMapping(
                 id = "dashboard",
                 pattern = "/dashboard",

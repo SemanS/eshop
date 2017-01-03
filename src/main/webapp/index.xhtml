@@ -13,32 +13,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/icon.min.css"/>
     <!-- Site Properties -->
-    <title>Zuzka</title>
-
-    <!--<h:outputStylesheet name="css/font-awesome.css"/>-->
+    <title>Eurofood</title>
     <h:outputStylesheet name="css/styles.css"/>
     <h:outputStylesheet name="css/semantic.min.css"/>
-    <!--<h:outputStylesheet name="css/icon.min.css"/>-->
 </h:head>
 
 <h:body>
     <h:outputScript name="js/semantic.min.js"/>
     <h:outputScript name="js/init.js"/>
 
-
     <!-- Page Contents -->
     <div class="ui relaxed grid container">
 
-        <ui:insert name="date">
-            <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
+        <ui:insert name="date" >
+            <ui:include src="WEB-INF/templates/stackable-menu.xhtml" />
         </ui:insert>
 
+        <pre></pre>
 
         <div class="ui stackable grid">
 
-            <ui:insert name="attachedMenu">
+            <!--<ui:insert name="attachedMenu">
                 <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
-            </ui:insert>
+            </ui:insert>-->
 
             <div class="four wide column" id="Sidebar">
                 <ui:insert name="sideMenu">

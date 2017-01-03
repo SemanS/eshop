@@ -8,65 +8,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
-
     <h:form>
-
-        <!--<p:growl id="messages" showDetail="true"/>-->
-
-        <!--<p:tree id="docs" value="#{menuBean.rootNode}" var="doc" animate="true" selectionMode="single"
-                dynamic="true">
-            <p:ajax event="select" process="@this" listener="#{menuBean.onNodeExpand}" />
-            <p:treeNode expandedIcon="ui-icon-folder-open"
-                        collapsedIcon="ui-icon-folder-collapsed">
-                <h:outputText value="#{doc.name}"/>
-            </p:treeNode>
-        </p:tree>-->
-
-        <!--<ul id="mainnavi" class="flexnav" data-breakpoint="640">
-            <o:tree value="#{menuBean.treeModel}" var="item">
-                <o:treeNode level="0">
-                    <o:treeNodeItem>
-                        <li class="item">
-                            <a href="asd" title="asd">#{item.name}</a>
-                            <o:treeInsertChildren/>
-                        </li>
-                    </o:treeNodeItem>
-                </o:treeNode>
-                <o:treeNode>
-                    <ul>
-                        <o:treeNodeItem>
-                            <li>
-                                <a href="asd" title="asd">#{item.name}</a>
-                                <o:treeInsertChildren/>
-                            </li>
-                        </o:treeNodeItem>
-                    </ul>
-                </o:treeNode>
-            </o:tree>
-        </ul>-->
-
-
         <div class="ui fluid accordion">
-
             <o:tree value="#{menuBean.treeModel}" var="item">
                 <o:treeNode level="0">
 
                     <o:treeNodeItem>
                         <ui:fragment rendered="#{item.base == false}">
                             <div class="title">
-
                                 <img src="data:image/png;base64,#{item.image}"/>
-
-
-                                <!--<h:graphicImage value="data:image/png;#{item.image}"/>-->
-                                <!--<h:commandLink>
-                                    <p:graphicImage value="#{node.index}"/>
-                                </h:commandLink>-->
-                                <!--<o:value="#{menuBean.getBytes(someBean.imageId)}" />-->
-                                <!--<i class="dropdown icon"></i>-->
-
-                                <!--<h:outputText value="#{item.name}"/>-->
-
                             </div>
                         </ui:fragment>
                         <ui:fragment rendered="#{item.base == true}">
@@ -76,33 +26,23 @@
                                 </div>
                             </h:commandLink>
                         </ui:fragment>
-                        <!--<a href="asd" title="asd">#{item.name}</a>-->
                         <o:treeInsertChildren/>
 
                     </o:treeNodeItem>
                 </o:treeNode>
 
-
                 <o:treeNode>
-
 
                     <div class="content">
 
                         <o:treeNodeItem>
 
                             <div class="transition hidden">
-                                <!--<h:commandLink>
-                                    <p:graphicImage value="#{item.image}"/>
-                                    &lt;!&ndash;<h:graphicImage library="images" name="mliecne_bg.png"/>&ndash;&gt;
-                                </h:commandLink>-->
                                 <h:commandLink>
-                                    #{item.name}
                                     <img src="data:image/png;base64,#{item.image}"/>
                                 </h:commandLink>
-                                <!--#{item.name}-->
                             </div>
 
-                            <!--<a href="asd" title="asd">#{item.name}</a>-->
                             <o:treeInsertChildren/>
 
                         </o:treeNodeItem>

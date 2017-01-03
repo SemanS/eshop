@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
@@ -10,51 +11,58 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-
+    <link rel="stylesheet" type="text/css" href="css/icon.min.css"/>
     <!-- Site Properties -->
-    <title>Zuzka</title>
-
-    <h:outputStylesheet name="css/font-awesome.css"/>
+    <title>Eurofood</title>
     <h:outputStylesheet name="css/styles.css"/>
     <h:outputStylesheet name="css/semantic.min.css"/>
-
-    <style type="text/css">
-
-        .landpage-image {
-            height: 100% !important;
-        }
-
-        .landpage-image {
-            background-image: url('resources/images/bg.jpg') !important;
-            background-repeat: no-repeat !important;
-            background-size: cover !important;
-        }
-
-    </style>
-
 </h:head>
 
 <h:body>
-
-    <h:outputScript name="js/jquery-3.1.1.min.js"/>
-    <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
-
-    <ui:insert name="date">
-        <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
-    </ui:insert>
-
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
-    <pre></pre>
+    <h:outputScript name="js/init.js"/>
 
     <!-- Page Contents -->
-    <div class="ui text container">
-        <h1 class="ui dividing header"><h:outputText value="#{itemView.selectedItem.header}"/></h1>
-        <h:outputText value="#{itemView.selectedItem.text}" escape="false"/>
+    <div class="ui relaxed grid container">
+
+        <ui:insert name="date">
+            <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
+        </ui:insert>
+
+
+        <div class="ui stackable grid">
+
+            <ui:insert name="attachedMenu">
+                <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
+            </ui:insert>
+
+            <div class="four wide column" id="Sidebar">
+                <ui:insert name="sideMenu">
+                    <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+                </ui:insert>
+            </div>
+
+            <div class="twelve wide column" id="">
+                <ui:insert name="mainPage">
+                    <ui:include src="WEB-INF/templates/item-detail.xhtml"/>
+                </ui:insert>
+            </div>
+
+            <!--<ui:insert name="s">
+                <ui:include src="WEB-INF/templates/modal-register.xhtml"/>
+            </ui:insert>-->
+
+            <div class="sixteen wide theme column" id="Footer">
+                <ui:insert name="footer">
+                    <ui:include src="WEB-INF/templates/footer.xhtml"/>
+                </ui:insert>
+            </div>
+            <!--<h:form>
+                <h:outputText value="#{shoppingCart.counter}"/>
+            </h:form>-->
+
+        </div>
+
     </div>
 
 

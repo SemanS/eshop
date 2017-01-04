@@ -150,10 +150,10 @@
 }
 
 .euromenu {
-    margin-top: 252px !important;
+    margin-top: -98px !important;
 }
 
-.item {
+.itemSideMenu {
     background-color: #b3b3b3 !important;
     border-radius: 0px !important;
     border-style: solid !important;
@@ -162,7 +162,7 @@
 }
 
 .ui-inputfield {
-    padding: 10px;
+    padding: 10px !important;
 }
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {

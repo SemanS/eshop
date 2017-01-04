@@ -7,32 +7,10 @@
 
 <h:body>
 
-    <h4 class="ui horizontal divider header">
-        <!--<i class="tag icon"></i>-->
-        Produkty
-    </h4>
+    <ui:insert name="itemDetail">
+        <ui:include src="calculator.xhtml"/>
+    </ui:insert>
 
-    <div class="item">
-        <div class="image">
-            <img src="/images/wireframe/image.png"/>
-        </div>
-        <div class="content">
-            <a class="header">My Neighbor Totoro</a>
-            <div class="meta">
-                <span class="cinema">IFC Cinema</span>
-            </div>
-            <div class="description">
-                <p></p>
-            </div>
-            <div class="extra">
-                <div class="ui right floated primary button">
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                </div>
-                <div class="ui label">Limited</div>
-            </div>
-        </div>
-    </div>
 
 </h:body>
 

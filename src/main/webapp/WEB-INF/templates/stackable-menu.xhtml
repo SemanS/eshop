@@ -16,66 +16,43 @@
     <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
 
-
-    <div class="sixteen wide column" id="Top">
-        <!--<div class="header item">
-            <img src="../../resources/images/background1.jpg" class="logo"/>
-        </div>
-    -->
-        <div class="ui grid"
-             style="background-image: url('../../resources/images/header.png') !important; background-repeat:no-repeat;">
-            <div class="three wide column"></div>
-            <div class="ten wide column">
-                <div class="ui secondary stackable container menu euromenu">
-
-                    <a class="active item ui button" style="border-radius: 0px !important;">
-                        O spoločnosti
-                    </a>
-                    <a class="item">
-                        Pre dodávateľa
-                    </a>
-                    <a class="item">
-                        E - Shop
-                    </a>
-                    <a class="item">
-                        Naše akcie
-                    </a>
-                    <a class="item">
-                        Kontakt
-                    </a>
-
-                    <!--<div class="item" style="border-radius: 0px !important;">
-                        <div class="ui icon input">
-                            <input placeholder="Search..." type="text"/>
-                            <i class="search link icon"></i>
-                        </div>
-                    </div>-->
-                    <a class="ui item" style="border-radius: 0px !important;">
-                        Logout
-                    </a>
-
-                </div>
+    <img class="ui fluid image" src="../../resources/images/header.png"/>
+    <div class="ui grid euromenu">
+        <div class="three wide column"></div>
+        <div class="thirteen wide column">
+            <div class="ui secondary stackable menu">
+                <a class="active item ui button itemSideMenu" style="border-radius: 0px !important;">
+                    O spoločnosti
+                </a>
+                <a class="item itemSideMenu">
+                    Pre dodávateľa
+                </a>
+                <a class="item itemSideMenu">
+                    E - Shop
+                </a>
+                <a class="item itemSideMenu">
+                    Naše akcie
+                </a>
+                <a class="item itemSideMenu">
+                    Kontakt
+                </a>
+                <a class="ui item itemSideMenu" style="border-radius: 0px !important;">
+                    Logout
+                </a>
             </div>
-            <div class="three wide column"></div>
-            <div class="three wide column"></div>
-            <div class="ten wide column" style="text-align: center">
-
-                <p:autoComplete id="acMinLength" placeholder="Hľadať:" minQueryLength="2"
+            <div class="ten wide column" style="text-align: left; margin-top: -10px;">
+                <p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
                                 value="#{mapView.selectedCitySubmit}"
                                 style="margin-right:10px; line-height: 200% !important;" size="40"
                                 styleClass="ui search"
                                 completeMethod="#{mapView.completeText}" effect="fade"/>
-                <h:commandButton style="border-radius: 0px !important;" styleClass="ui button item"
-                                 actionListener="#{mapView.onSubmit}" value="Hledat"
+                <h:commandButton style="border-radius: 0px !important;" styleClass="ui button blue item "
+                                 actionListener="#{mapView.onSubmit}" value="Hľadať"
                                  icon="fa fa-search">
                 </h:commandButton>
 
             </div>
-            <div class="three wide column"></div>
-
-
         </div>
-
     </div>
 
     <ui:insert name="sa">

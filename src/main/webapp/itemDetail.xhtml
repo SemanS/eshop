@@ -23,48 +23,41 @@
     <h:outputScript name="js/init.js"/>
 
     <!-- Page Contents -->
-    <div class="ui relaxed grid container">
+    <div class="ui stackable grid container">
 
-        <ui:insert name="date">
-            <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
-        </ui:insert>
-
-
-        <div class="ui stackable grid">
-
-            <ui:insert name="attachedMenu">
-                <ui:include src="WEB-INF/templates/attached-menu.xhtml"/>
+        <div class="sixteen wide column" id="Top">
+            <ui:insert name="date">
+                <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
             </ui:insert>
-
-            <div class="four wide column" id="Sidebar">
-                <ui:insert name="sideMenu">
-                    <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
-                </ui:insert>
-            </div>
-
-            <div class="twelve wide column" id="">
-                <ui:insert name="mainPage">
-                    <ui:include src="WEB-INF/templates/item-detail.xhtml"/>
-                </ui:insert>
-            </div>
-
-            <!--<ui:insert name="s">
-                <ui:include src="WEB-INF/templates/modal-register.xhtml"/>
-            </ui:insert>-->
-
-            <div class="sixteen wide theme column" id="Footer">
-                <ui:insert name="footer">
-                    <ui:include src="WEB-INF/templates/footer.xhtml"/>
-                </ui:insert>
-            </div>
-            <!--<h:form>
-                <h:outputText value="#{shoppingCart.counter}"/>
-            </h:form>-->
-
         </div>
 
-    </div>
+        <div class="three wide column" id="sidebar">
+            <ui:insert name="sideMenu">
+                <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+            </ui:insert>
+        </div>
 
+        <div class="thirteen wide column" id="itemDetail">
+            <ui:insert name="itemDetail">
+                <ui:include src="WEB-INF/templates/item-detail.xhtml"/>
+            </ui:insert>
+        </div>
+
+
+        <!--<ui:insert name="s">
+            <ui:include src="WEB-INF/templates/modal-register.xhtml"/>
+        </ui:insert>-->
+
+        <div class="sixteen wide theme column" id="Footer">
+            <ui:insert name="footer">
+                <ui:include src="WEB-INF/templates/footer.xhtml"/>
+            </ui:insert>
+        </div>
+        <!--<h:form>
+            <h:outputText value="#{shoppingCart.counter}"/>
+        </h:form>-->
+
+    </div>
 
 </h:body>
 

@@ -171,3 +171,12 @@
     -webkit-border-top-left-radius: 0px;
     -webkit-border-top-right-radius: 0px;
 }
+
+.headerDivider {
+    border-left: 1px solid #38546d;
+}
+
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important
+}

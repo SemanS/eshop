@@ -15,45 +15,50 @@
         </div>
         <div class="headerDivider" style="margin-left: 30px"></div>
         <div class="content" style="margin-left: 30px">
+            <h:form>
+                <div class="description">
+                    <p:panelGrid columns="2">
 
-            <div class="description">
-                <p:panelGrid columns="2">
+                        <h:outputText value="číslo produktu:"/>
+                        <h:outputText value="#{itemView.selectedItem.internalNumber}"/>
 
-                    <h:outputText value="číslo produktu:"/>
-                    <h:outputText value="1005"/>
+                        <h:outputText value="názov produktu:"/>
+                        <h:outputText value="NESCAFÉ 3in1 CLASSIC CREMA 10x17,5g"/>
 
-                    <h:outputText value="názov produktu:"/>
-                    <h:outputText value="NESCAFÉ 3in1 CLASSIC CREMA 10x17,5g"/>
+                        <h:outputText value="EÁN:"/>
+                        <h:outputText value="7613035010017"/>
 
-                    <h:outputText value="EÁN:"/>
-                    <h:outputText value="7613035010017"/>
+                        <h:outputText value="počet kusov v kartóne:"/>
+                        <h:outputText value="18"/>
 
-                    <h:outputText value="počet kusov v kartóne:"/>
-                    <h:outputText value="18"/>
+                        <h:outputText value="počet kartónov na palete:"/>
+                        <h:outputText value="40"/>
 
-                    <h:outputText value="počet kartónov na palete:"/>
-                    <h:outputText value="40"/>
+                        <h:outputText value="počet kusov na palete:"/>
+                        <h:outputText value="40"/>
+                    </p:panelGrid>
+                </div>
 
-                    <h:outputText value="počet kusov na palete:"/>
-                    <h:outputText value="40"/>
-                </p:panelGrid>
-            </div>
+                <div class="extra">
+                    <p:outputPanel>
+                        <p:spinner id="ajaxSpinner">
+                        <!--<p:spinner id="ajaxSpinner" value="">-->
+                            <p:ajax update="ajaxSpinnerValue" process="@this"/>
+                        </p:spinner>
+                        <h:outputText id="ajaxSpinnerValue" value="" style="padding-left: 10px"/>
 
-            <div class="extra">
-                <p:outputPanel>
-                    <p:spinner id="ajaxSpinner" value="#{spinnerView.number5}">
-                        <p:ajax update="ajaxSpinnerValue" process="@this"/>
-                    </p:spinner>
-                    <h:outputText id="ajaxSpinnerValue" value="#{spinnerView.number5}" style="padding-left: 10px"/>
-                    <div class="ui primary button">
-                        Vložiť do košíka
-                        <i class="right chevron icon"></i>
-                    </div>
-                </p:outputPanel>
+                        <h:commandLink class="ui primary button" action="#{shoppingCart.addItemToCart(item)}"
+                                       value="Vložiť do košíka">
+                            <i class="right chevron icon"></i>
+                        </h:commandLink>
 
-                <!--<div class="ui label">IMAX</div>
-                <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
-            </div>
+
+                    </p:outputPanel>
+
+                    <!--<div class="ui label">IMAX</div>
+                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
+                </div>
+            </h:form>
         </div>
     </div>
 </div>

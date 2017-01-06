@@ -12,4 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ItemDao extends JpaRepository<Item, Long>, QueryDslPredicateExecutor<Item> {
 
     Item findByUrl(String url);
+
+    Item findById(Long id);
 }

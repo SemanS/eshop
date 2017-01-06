@@ -42,36 +42,16 @@ public class MenuBean {
     @Autowired
     CategoryDao categoryDao;
 
-    /*@Setter
-    private DefaultStreamedContent image;*/
-
     @PostConstruct
     public void init() {
-
         treeModel = categoryService.createModel();
-        //rootNode = categoryService.createRoot();
     }
 
+    /*public DefaultStreamedContent getImage() throws IOException {
 
-    public DefaultStreamedContent getImage() throws IOException {
-
-        /*File imageFile = new File("");
-
-        InputStream stream1 = this.getClass().getClassLoader().getResourceAsStream("/images/mliecne_bg.png");  //or something else
-        image = new DefaultStreamedContent(stream1, "image/png");
-
-        return image;
-        FacesContext context = FacesContext.getCurrentInstance();*/
-
-        /*if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
-            return new DefaultStreamedContent();
-        } else {*/
-        // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
-        //String studentId = context.getExternalContext().getRequestParameterMap().get("studentId");
         Category category = categoryDao.findById(Long.valueOf(4));
         return new DefaultStreamedContent(new ByteArrayInputStream(category.getImage()));
-        /*}*/
-    }
+
+    }*/
 
 }

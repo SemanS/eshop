@@ -15,4 +15,5 @@ public class CategoryDto {
     private CategoryDto parent;
     private String image;
     private boolean base;
+    private String url;
 }

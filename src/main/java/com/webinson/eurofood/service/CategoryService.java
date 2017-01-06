@@ -1,5 +1,6 @@
 package com.webinson.eurofood.service;
 
+import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.TreeNode;
@@ -14,4 +15,6 @@ public interface CategoryService {
     public TreeModel createModel();
 
     public void saveNewCategory(Category category);
+
+    public CategoryDto getCategoryByUrl(String url);
 }

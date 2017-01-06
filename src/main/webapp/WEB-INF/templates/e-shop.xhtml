@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<div class="ui container text">
+    <h4 class="ui horizontal divider header">
+        <!--<i class="tag icon"></i>-->
+        <!--#{category.name}-->
+    </h4>
+</div>
+<pre></pre>
+<pre></pre>
+<div class="ui container">
+    <h:form>
+        <div class="ui grid four column stackable centered">
+            <ui:repeat value="#{itemView.allItemsByCategory()}" var="item">
+                <div class="column">
+                    <!--<div class="ui link cards">-->
+                    <div class="ui fluid card">
+                        <!--<h:commandLink id="oukej" action="#{itemView.onItemDetail(item)}"
+                                       styleClass="image">
+                            <img src="#{item.img}"/>
+                        </h:commandLink>-->
+                        <!--<div class="ui inverted dimmer">-->
+                        <!-- <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
+                                        styleClass="ui inverted dimmer">-->
+                        <div class="content">
+                            <!--<div class="header">
+                                <h:commandLink id="ajax"
+                                               action="#{itemView.onItemDetail(item)}"
+                                               value="#{item.header}"></h:commandLink>
+                            </div>-->
+                            <div class="meta">#{item.text}</div>
+                            <div class="description">
+                                <h:commandLink action="#{itemView.onItem(item)}">
+asd
+                                </h:commandLink>
+                            </div>
+                        </div>
+
+                        <!--</h:commandLink>-->
+                        <!--</div>-->
+
+
+                        <!-- <h:outputText value="#{item.header}"/>-->
+                    </div>
+
+                    <!-- </div>-->
+                </div>
+            </ui:repeat>
+        </div>
+    </h:form>
+</div>
+
+</html>

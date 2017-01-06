@@ -1,5 +1,6 @@
 package com.webinson.eurofood.service;
 
+import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface ItemService {
 
     public void saveItemByUrl(String url, String text);
 
+    public List<ItemDto> getItemsByCategory(CategoryDto categoryDto);
 }

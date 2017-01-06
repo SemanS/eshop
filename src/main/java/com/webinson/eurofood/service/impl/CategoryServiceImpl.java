@@ -38,6 +38,13 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDao.save(category);
     }
 
+    @Override
+    public CategoryDto getCategoryByUrl(String url) {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto = categoryAssembler.toDto(categoryDao.findByUrl(url));
+        return categoryDto;
+    }
+
     public void saveItemByUrl(String url, String text) {
 
     }

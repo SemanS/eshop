@@ -22,6 +22,7 @@ public class CategoryAssembler {
         dto.setName(model.getName());
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         dto.setBase(model.isBase());
+        dto.setUrl(model.getUrl());
         return dto;
     }
 
@@ -31,6 +32,7 @@ public class CategoryAssembler {
         dto.setName(model.getName());
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         dto.setBase(model.isBase());
+        dto.setUrl(model.getUrl());
         return dto;
     }
 

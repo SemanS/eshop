@@ -4,48 +4,45 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:o="http://omnifaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:body>
-    <h4>Kategórie:</h4>
-    <h:form>
-        <div class="ui fluid accordion">
-            <o:tree value="#{menuBean.treeModel}" var="item">
-                <o:treeNode level="0">
-                    <o:treeNodeItem>
-                        <ui:fragment rendered="#{item.base == false}">
-                            <div class="title">
-                                <img class="ui  image" src="data:image/png;base64,#{item.image}"/>
+<h4>Kategórie:</h4>
+<h:form>
+    <div class="ui fluid accordion">
+        <o:tree value="#{menuBean.treeModel}" var="category">
+            <o:treeNode level="0">
+                <o:treeNodeItem>
+                    <ui:fragment rendered="#{category.base == false}">
+                        <div class="title">
+                            <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                        </div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{category.base == true}">
+                        <h:commandLink>
+                            <div class="content">
+                                <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                             </div>
-                        </ui:fragment>
-                        <ui:fragment rendered="#{item.base == true}">
-                            <h:commandLink>
-                                <div class="content">
-                                    <img class="ui  image" src="data:image/png;base64,#{item.image}"/>
-                                </div>
+                        </h:commandLink>
+                    </ui:fragment>
+                    <o:treeInsertChildren/>
+                </o:treeNodeItem>
+            </o:treeNode>
+
+            <o:treeNode>
+                <div class="content">
+                    <o:treeNodeItem>
+                        <div class="transition hidden">
+                            <h:commandLink action="#{itemView.onCategory(category)}">
+                                <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
+                                <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                             </h:commandLink>
-                        </ui:fragment>
+                        </div>
                         <o:treeInsertChildren/>
                     </o:treeNodeItem>
-                </o:treeNode>
-
-                <o:treeNode>
-                    <div class="content">
-                        <o:treeNodeItem>
-                            <div class="transition hidden">
-                                <h:commandLink>
-                                    <img class="ui  image" src="data:image/png;base64,#{item.image}"/>
-                                </h:commandLink>
-                            </div>
-                            <o:treeInsertChildren/>
-                        </o:treeNodeItem>
-                    </div>
-                </o:treeNode>
-            </o:tree>
-        </div>
-    </h:form>
-
-</h:body>
-
+                </div>
+            </o:treeNode>
+        </o:tree>
+    </div>
+</h:form>
 </html>

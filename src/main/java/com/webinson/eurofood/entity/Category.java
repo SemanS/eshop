@@ -34,4 +34,6 @@ public class Category implements Serializable {
     @Column(name = "root")
     private boolean base;
 
+    @Column(name = "url")
+    private String url;
 }

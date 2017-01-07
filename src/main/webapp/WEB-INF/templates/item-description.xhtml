@@ -16,6 +16,7 @@
         <div class="headerDivider" style="margin-left: 30px"></div>
         <div class="content" style="margin-left: 30px">
             <h:form>
+
                 <div class="description">
                     <p:panelGrid columns="2">
 
@@ -42,13 +43,19 @@
                 <div class="extra">
                     <p:outputPanel>
                         <p:spinner id="ajaxSpinner">
-                        <!--<p:spinner id="ajaxSpinner" value="">-->
+                            <!--<p:spinner id="ajaxSpinner" value="">-->
                             <p:ajax update="ajaxSpinnerValue" process="@this"/>
                         </p:spinner>
                         <h:outputText id="ajaxSpinnerValue" value="" style="padding-left: 10px"/>
 
-                        <h:commandLink class="ui primary button" action="#{shoppingCart.addItemToCart(item)}"
+                        <h:commandLink class="ui primary button"
+                                       action="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
                                        value="Vložiť do košíka">
+                            <i class="right chevron icon"></i>
+                        </h:commandLink>
+
+                        <h:commandLink class="ui primary button" action="#{shoppingCartView.checkout()}"
+                                       value="Checkout">
                             <i class="right chevron icon"></i>
                         </h:commandLink>
 
@@ -58,6 +65,7 @@
                     <!--<div class="ui label">IMAX</div>
                     <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
                 </div>
+
             </h:form>
         </div>
     </div>

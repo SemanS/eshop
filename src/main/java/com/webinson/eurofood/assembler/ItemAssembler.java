@@ -50,6 +50,24 @@ public class ItemAssembler {
         return dto;
     }
 
+    public Item toModel(ItemDto dto) {
+        Item model = new Item();
+        model.setHeader(dto.getHeader());
+        model.setText(dto.getText());
+        model.setDate(dto.getDate());
+        model.setUrl(dto.getUrl());
+        model.setCategory(dto.getCategory());
+        model.setInternalNumber(dto.getInternalNumber());
+        model.setPriceNetto(dto.getPriceNetto());
+        model.setPriceBrutto(dto.getPriceBrutto());
+        model.setEanNumber(dto.getEanNumber());
+        model.setProducer(dto.getProducer());
+        model.setPiecesInCarton(dto.getPiecesInCarton());
+        model.setCartonInPalette(dto.getCartonInPalette());
+        model.setPiecesInPalette(dto.getPiecesInPalette());
+        return model;
+    }
+
 
     public List<ItemDto> toDtos(final Collection<Item> models) {
         final List<ItemDto> dtos = new ArrayList<>();

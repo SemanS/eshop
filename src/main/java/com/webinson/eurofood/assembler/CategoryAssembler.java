@@ -54,5 +54,4 @@ public class CategoryAssembler {
         return col == null || col.isEmpty();
     }
 
-
 }

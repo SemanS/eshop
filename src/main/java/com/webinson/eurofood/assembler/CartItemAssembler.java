@@ -20,13 +20,13 @@ public class CartItemAssembler {
 
     public CartItemDto convertToDto(CartItem model, CartItemDto dto) {
         dto.setId(model.getId());
-        dto.setItemId(model.getItemId());
+        dto.setItemDto(itemAssembler.toDto(model.getItem()));
         dto.setQuantity(model.getQuantity());
         return dto;
     }
 
     public CartItem convertToModel(CartItemDto dto, CartItem model) {
-        model.setItemId(dto.getItemId());
+        model.setItem(itemAssembler.toModel(dto.getItemDto()));
         model.setQuantity(dto.getQuantity());
         return model;
     }
@@ -34,7 +34,7 @@ public class CartItemAssembler {
     public CartItemDto toDto(CartItem model) {
         CartItemDto dto = new CartItemDto();
         dto.setId(model.getId());
-        dto.setItemId(model.getItemId());
+        dto.setItemDto(itemAssembler.toDto(model.getItem()));
         dto.setQuantity(model.getQuantity());
         return dto;
     }

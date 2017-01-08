@@ -22,7 +22,6 @@ import java.util.Set;
 /**
  * Created by Slavo on 1/6/2017.
  */
-/*@Scope(proxyMode= ScopedProxyMode.TARGET_CLASS, value="session")*/
 @Scope("session")
 @Component
 public class ShoppingCartView {
@@ -75,7 +74,7 @@ public class ShoppingCartView {
             System.out.println(cartItemDtos.size());
         } else {
             for (CartItemDto cartItemDto : cartItemDtos) {
-                if (cartItemDto.getItemDto().getHeader() == itemDto.getHeader()) {
+                if (cartItemDto.getItemDto() == itemDto) {
                     cartItemDto.setQuantity(cartItemDto.getQuantity() + 0);
                 } else {
                     this.cartItemDto.setItemDto(itemDto);

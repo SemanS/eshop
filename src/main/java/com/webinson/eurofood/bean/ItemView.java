@@ -14,6 +14,7 @@ import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 @Data
 @Component
-@SessionScoped
+@Scope("session")
 @URLBeanName("itemView")
 @URLMappings(mappings = {
         @URLMapping(

@@ -27,7 +27,7 @@
 
     <script>
         $(document).ready(function () {
-            $('#logIn').click(function () {
+            $('#privacyId').click(function () {
                 $('#privacydiv').modal('show');
             });
         });
@@ -163,8 +163,24 @@
                         </div>
 
                         <pre></pre>
+                        <h4 class="ui dividing header">NOVINKY</h4>
+                        <div class="field">
+                            <label>Prihlásiť sa k odberu:</label>
+                            <div class="field">
+                                <h:panelGrid columns="2" style="margin-bottom:10px"  cellspacing="5" cellpadding="20">
+                                    <p:selectOneRadio id="city" value="#{userBean.subscribed}" layout="grid"
+                                                      columns="1">
+                                        <f:selectItem itemLabel="&#160;&#160;Áno" itemValue="Yes"/>
+                                        <f:selectItem itemLabel="&#160;&#160;Nie" itemValue="No"/>
+                                    </p:selectOneRadio>
+                                </h:panelGrid>
+                            </div>
+                        </div>
+
+                        <pre></pre>
+
                         <p:selectBooleanCheckbox id="checked" value="#{userBean.checkedCondition}"/>
-                        <label>Prečítal(a) som si a súhlasím s Ochrana osobných údajov</label>
+                        <label>Prečítal(a) som si a súhlasím s <a id="privacyId">Ochrana osobných údajov</a></label>
                         <p:message for="checked"/>
                         <pre></pre>
                         <div class="field">
@@ -194,6 +210,9 @@
             </div>
         </div>
     </div>
+    <ui:insert name="sa">
+        <ui:include src="WEB-INF/templates/modal-privacy.xhtml"/>
+    </ui:insert>
     <script type="text/javascript">
         /**
          * Faces Validator

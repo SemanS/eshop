@@ -74,6 +74,10 @@ public class UserBean {
     @AssertTrue(message = "Musíte súhlasiť s podmienkami ochrany osobných údajov")
     private boolean checkedCondition;
 
+    @Getter
+    @Setter
+    private String subscribed = "No";
+
     @Autowired
     private UserService userService;
 

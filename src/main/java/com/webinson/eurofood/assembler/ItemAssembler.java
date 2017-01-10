@@ -16,6 +16,7 @@ public class ItemAssembler {
 
 
     public ItemDto convertToDto(Item model, ItemDto dto) {
+        dto.setId(model.getId());
         dto.setHeader(model.getHeader());
         dto.setText(model.getText());
         dto.setDate(model.getDate());
@@ -34,6 +35,7 @@ public class ItemAssembler {
 
     public ItemDto toDto(Item model) {
         ItemDto dto = new ItemDto();
+        dto.setId(model.getId());
         dto.setHeader(model.getHeader());
         dto.setText(model.getText());
         dto.setDate(model.getDate());

@@ -24,8 +24,8 @@ public class RewriteConfigApp extends HttpConfigurationProvider {
     public Configuration getConfiguration(final ServletContext context) {
         return ConfigurationBuilder.begin()
                 .addRule(Join.path("/dashboard").to("/dashboard.xhtml"))
-                .addRule(Join.path("/items").to("/items.xhtml"))
-                .addRule(Join.path("/").to("/index.xhtml"));
+                .addRule(Join.path("/").to("/index.xhtml"))
+                .addRule(Join.path("/registration").to("/register.xhtml"));
                 /*.addRule()
                 .when(Direction.isInbound().and(Path.matches("/index.xhtml")))
                 .perform(Forward.to("/Nelahozeves"));*/

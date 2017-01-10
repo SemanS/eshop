@@ -7,13 +7,16 @@ import lombok.Data;
  */
 @Data
 public class UserDto {
-    private String name;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneNumber;
     private String street;
-    private String postalCode;
+    private int postalCode;
     private String city;
+    private String company;
+    private int ico;
+    private String dic;
 
 }

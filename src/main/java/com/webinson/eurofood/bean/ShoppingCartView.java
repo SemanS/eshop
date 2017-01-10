@@ -1,9 +1,12 @@
 package com.webinson.eurofood.bean;
 
+import com.webinson.eurofood.assembler.CartItemAssembler;
 import com.webinson.eurofood.assembler.ShoppingCartAssembler;
 import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
+import com.webinson.eurofood.entity.CartItem;
+import com.webinson.eurofood.service.CartItemService;
 import com.webinson.eurofood.service.ShoppingCartService;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,9 +37,9 @@ public class ShoppingCartView {
     @Setter
     private List<ItemDto> items = new ArrayList<ItemDto>();*/
 
-    @Getter
+    /*@Getter
     @Setter
-    private CartItemDto cartItemDto;
+    private CartItemDto cartItemDto = new CartItemDto();*/
 
     @Getter
     @Setter
@@ -56,11 +59,17 @@ public class ShoppingCartView {
     @Autowired
     ShoppingCartAssembler shoppingCartAssembler;
 
+    @Autowired
+    CartItemAssembler cartItemAssembler;
+
+    @Autowired
+    CartItemService cartItemService;
+
     @PostConstruct
     public void init() {
-        cartItemDtos = new HashSet<>();
+        /*cartItemDto = new CartItemDto();*/
         shoppingCartDto = new ShoppingCartDto();
-        cartItemDto = new CartItemDto();
+        cartItemDtos = new HashSet<>();
     }
 
     public void addItemToCart(ItemDto itemDto) {
@@ -68,18 +77,21 @@ public class ShoppingCartView {
         /*this.items.add(itemDto);
         System.out.println(items.size());*/
 
+        CartItemDto cartItemDto = new CartItemDto();
+
         if (cartItemDtos.size() == 0) {
-            this.cartItemDto.setItemDto(itemDto);
+            cartItemDto.setItemId(itemDto.getId());
             this.cartItemDtos.add(cartItemDto);
-            System.out.println(cartItemDtos.size());
+            //this.shoppingCartDto.setCartItemDtos(cartItemDtos);
+            /*this.shoppingCartDto.addCartItem(cartItemDto);*/
         } else {
-            for (CartItemDto cartItemDto : cartItemDtos) {
-                if (cartItemDto.getItemDto() == itemDto) {
+            for (CartItemDto cartI : cartItemDtos) {
+                if (cartItemDto.getItemId() == itemDto.getId()) {
                     cartItemDto.setQuantity(cartItemDto.getQuantity() + 0);
                 } else {
-                    this.cartItemDto.setItemDto(itemDto);
-                    this.cartItemDto.setQuantity(0);
-                    this.cartItemDtos.add(cartItemDto);
+                    cartItemDto.setItemId(itemDto.getId());
+                    cartItemDto.setQuantity(0);
+                    cartItemDtos.add(cartItemDto);
                     System.out.println(cartItemDtos.size());
                 }
             }
@@ -87,8 +99,13 @@ public class ShoppingCartView {
     }
 
     public void checkout() {
-        this.shoppingCartDto.setCartItemDtos(cartItemDtos);
-        shoppingCartService.saveShoppingCart(shoppingCartAssembler.toModel(this.shoppingCartDto));
+        /*this.shoppingCartDto.setCartItemDtos(this.cartItemDtos);*/
+
+        /*for (CartItemDto cartItemDto : this.cartItemDtos) {
+            cartItemService.saveCartItem(cartItemAssembler.toModel(cartItemDto));
+        }*/
+
+        shoppingCartService.saveShoppingCart(this.shoppingCartDto, this.cartItemDtos);
     }
 
     public void testovaciaMetoda(ItemDto itemDto) {

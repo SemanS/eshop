@@ -22,14 +22,10 @@ public class CartItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE )
-    @JoinColumn(name = "item_id")*/
     @Column(name = "item_id")
-    /*@ManyToOne*/
-    /*@JoinColumn(name = "item_id")*/
-    private Item item;
+    private Long itemId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shoppingcart_id")
     private ShoppingCart shoppingCart;
 

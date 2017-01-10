@@ -37,6 +37,15 @@
             <dispatcher>ERROR</dispatcher>
         </filter-mapping>-->
 
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+
     <context-param>
         <param-name>primefaces.UPLOADER</param-name>
         <param-value>commons</param-value>
@@ -174,6 +183,5 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>-->
-
 
 </web-app>

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,14 +24,14 @@ public class ShoppingCart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /*@OneToOne
-    public Buyer buyer;*/
-
-    /*@OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST)*/
-    /*@JoinColumn(name = "cartitem_id")*/
-    /*@OneToMany(cascade = {CascadeType.ALL})*/
-    /*@JoinColumn(name = "cartitem_id")*/
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<CartItem> cartItems;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public void addCartItem(CartItem cartItem) {
+        cartItems.add(cartItem);
+    }
 }

@@ -26,7 +26,7 @@ import java.io.IOException;
  */
 @Component
 @ApplicationScope
-public class MenuBean {
+public class SideMenuBean {
 
     @Getter
     @Setter

@@ -75,35 +75,27 @@ public class ApplicationConfig extends SpringBootServletInitializer {
         return application.sources(ApplicationConfig.class);
     }
 
-    @Bean
+
+/*@Bean
     public FacesServlet facesServlet() {
         return new FacesServlet();
-    }
-
-    @Bean
+    }*/
+    /*@Bean
     public FilterRegistrationBean facesUploadFilterRegistration() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean(new FileUploadFilter(), facesServletRegistration());
         registrationBean.setName("PrimeFaces FileUpload Filter");
         registrationBean.addUrlPatterns("");
         registrationBean.setDispatcherTypes(DispatcherType.FORWARD, DispatcherType.REQUEST);
         return registrationBean;
-    }
+    }*/
 
     /*@Bean
-    public FilterRegistrationBean FileUploadFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new org.primefaces.webapp.filter.FileUploadFilter());
-        registration.setName("PrimeFaces FileUpload Filter");
-        return registration;
-    }
-*/
-    @Bean
     public ServletRegistrationBean facesServletRegistration() {
         ServletRegistrationBean registration = new ServletRegistrationBean(facesServlet(), "*.xhtml");
         registration.setName("FacesServlet");
         registration.setLoadOnStartup(1);
         return registration;
-    }
+    }*/
 
     @Bean
     public ServletContextInitializer initializer() {
@@ -121,7 +113,6 @@ public class ApplicationConfig extends SpringBootServletInitializer {
 
     }
 
-
     @Bean
     public Converter getHandler() {
         Converter handler = new Converter();
@@ -129,14 +120,6 @@ public class ApplicationConfig extends SpringBootServletInitializer {
         handler.setUnmarshaller(getCastorMarshaller());
         return handler;
     }
-
-    /*@Bean
-    public CastorMarshaller getCastorMarshaller() {
-        CastorMarshaller castorMarshaller = new CastorMarshaller();
-        Resource resource = new ClassPathResource("mapping.xml");
-        castorMarshaller.setMappingLocation(resource);
-        return castorMarshaller;
-    }*/
 
     @Bean
     public Jaxb2Marshaller getCastorMarshaller() {
@@ -159,21 +142,5 @@ public class ApplicationConfig extends SpringBootServletInitializer {
 
         return ds;
     }
-
-    /*@Bean
-    public FilterRegistrationBean prettyFilter() {
-        FilterRegistrationBean rewriteFilter = new FilterRegistrationBean(new PrettyFilter());
-
-        // Filter Forward, Request, Asyc, and Error-related requests.
-        rewriteFilter.setDispatcherTypes(DispatcherType.FORWARD,
-                DispatcherType.REQUEST,
-                DispatcherType.ASYNC,
-                DispatcherType.ERROR);
-
-        // Attach the filter to the rootIncomes URL for the website. e.g.) http://www.example.com
-        rewriteFilter.addUrlPatterns("");
-
-        return rewriteFilter;
-    }*/
 
 }

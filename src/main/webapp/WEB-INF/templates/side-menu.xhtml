@@ -10,15 +10,15 @@
 <h4>Kategórie:</h4>
 <h:form>
     <div class="ui fluid accordion">
-        <o:tree value="#{menuBean.treeModel}" var="category">
+        <o:tree value="#{sideMenuBean.treeModel}" var="category">
             <o:treeNode level="0">
                 <o:treeNodeItem>
-                    <ui:fragment rendered="#{category.base == false}">
+                    <ui:fragment rendered="#{category.base == true}">
                         <div class="title">
                             <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                         </div>
                     </ui:fragment>
-                    <ui:fragment rendered="#{category.base == true}">
+                    <ui:fragment rendered="#{category.base == false}">
                         <h:commandLink>
                             <div class="content">
                                 <img class="ui image" src="data:image/png;base64,#{category.image}"/>

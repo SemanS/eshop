@@ -20,13 +20,13 @@ public class CartItemAssembler {
 
     public CartItemDto convertToDto(CartItem model, CartItemDto dto) {
         dto.setId(model.getId());
-        dto.setItemDto(itemAssembler.toDto(model.getItem()));
+        dto.setItemId(model.getItemId());
         dto.setQuantity(model.getQuantity());
         return dto;
     }
 
     public CartItem convertToModel(CartItemDto dto, CartItem model) {
-        model.setItem(itemAssembler.toModel(dto.getItemDto()));
+        model.setItemId(dto.getItemId());
         model.setQuantity(dto.getQuantity());
         return model;
     }
@@ -34,13 +34,20 @@ public class CartItemAssembler {
     public CartItemDto toDto(CartItem model) {
         CartItemDto dto = new CartItemDto();
         dto.setId(model.getId());
-        dto.setItemDto(itemAssembler.toDto(model.getItem()));
+        dto.setItemId(model.getItemId());
         dto.setQuantity(model.getQuantity());
         return dto;
     }
 
-    public Set<CartItemDto> toDtos(final Collection<CartItem> models) {
-        final Set<CartItemDto> dtos = new HashSet<>();
+    public CartItem toModel(CartItemDto dto) {
+        CartItem model = new CartItem();
+        model.setItemId(dto.getItemId());
+        model.setQuantity(dto.getQuantity());
+        return model;
+    }
+
+    public List<CartItemDto> toDtos(final Collection<CartItem> models) {
+        final List<CartItemDto> dtos = new ArrayList<>();
         if (isNotEmpty(models)) {
             for (final CartItem cartItem : models) {
                 dtos.add(convertToDto(cartItem, new CartItemDto()));
@@ -49,8 +56,8 @@ public class CartItemAssembler {
         return dtos;
     }
 
-    public Set<CartItem> toModels(final Collection<CartItemDto> dtos) {
-        final Set<CartItem> models = new HashSet<>();
+    public List<CartItem> toModels(final ArrayList<CartItemDto> dtos) {
+        final List<CartItem> models = new ArrayList<CartItem>();
         if (isNotEmpty(dtos)) {
             for (final CartItemDto cartItemDto : dtos) {
                 models.add(convertToModel(cartItemDto, new CartItem()));

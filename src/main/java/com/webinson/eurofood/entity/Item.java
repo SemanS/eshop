@@ -65,4 +65,7 @@ public class Item implements Serializable {
     @Column(name = "pieces_in_palette")
     private int piecesInPalette;
 
+    @Column(name = "is_discount")
+    private boolean isDiscount;
+
 }

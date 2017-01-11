@@ -30,10 +30,6 @@ public class SideMenuBean {
 
     @Getter
     @Setter
-    private TreeNode rootNode;
-
-    @Getter
-    @Setter
     private TreeModel<CategoryDto> treeModel;
 
     @Autowired
@@ -46,12 +42,5 @@ public class SideMenuBean {
     public void init() {
         treeModel = categoryService.createModel();
     }
-
-    /*public DefaultStreamedContent getImage() throws IOException {
-
-        Category category = categoryDao.findById(Long.valueOf(4));
-        return new DefaultStreamedContent(new ByteArrayInputStream(category.getImage()));
-
-    }*/
 
 }

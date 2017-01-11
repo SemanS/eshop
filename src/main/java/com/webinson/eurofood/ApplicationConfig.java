@@ -76,26 +76,26 @@ public class ApplicationConfig extends SpringBootServletInitializer {
     }
 
 
-/*@Bean
+@Bean
     public FacesServlet facesServlet() {
         return new FacesServlet();
-    }*/
-    /*@Bean
+    }
+    @Bean
     public FilterRegistrationBean facesUploadFilterRegistration() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean(new FileUploadFilter(), facesServletRegistration());
         registrationBean.setName("PrimeFaces FileUpload Filter");
         registrationBean.addUrlPatterns("");
         registrationBean.setDispatcherTypes(DispatcherType.FORWARD, DispatcherType.REQUEST);
         return registrationBean;
-    }*/
+    }
 
-    /*@Bean
+    @Bean
     public ServletRegistrationBean facesServletRegistration() {
         ServletRegistrationBean registration = new ServletRegistrationBean(facesServlet(), "*.xhtml");
         registration.setName("FacesServlet");
         registration.setLoadOnStartup(1);
         return registration;
-    }*/
+    }
 
     @Bean
     public ServletContextInitializer initializer() {

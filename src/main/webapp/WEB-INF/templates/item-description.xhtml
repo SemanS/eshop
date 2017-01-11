@@ -24,25 +24,25 @@
                         <h:outputText value="#{itemView.selectedItem.internalNumber}"/>
 
                         <h:outputText value="názov produktu:"/>
-                        <h:outputText value="NESCAFÉ 3in1 CLASSIC CREMA 10x17,5g"/>
+                        <h:outputText value="#{itemView.selectedItem.header}"/>
 
                         <h:outputText value="EÁN:"/>
-                        <h:outputText value="7613035010017"/>
+                        <h:outputText value="#{itemView.selectedItem.eanNumber}"/>
 
                         <h:outputText value="počet kusov v kartóne:"/>
-                        <h:outputText value="18"/>
+                        <h:outputText value="#{itemView.selectedItem.piecesInCarton}"/>
 
                         <h:outputText value="počet kartónov na palete:"/>
-                        <h:outputText value="40"/>
+                        <h:outputText value="#{itemView.selectedItem.cartonInPalette}"/>
 
                         <h:outputText value="počet kusov na palete:"/>
-                        <h:outputText value="40"/>
+                        <h:outputText value="#{itemView.selectedItem.piecesInPalette}"/>
                     </p:panelGrid>
                 </div>
 
                 <div class="extra">
                     <p:outputPanel>
-                        <p:spinner id="ajaxSpinner">
+                        <p:spinner id="ajaxSpinner" min="1" value="#{itemView.selectedItem.quantity}">
                             <!--<p:spinner id="ajaxSpinner" value="">-->
                             <p:ajax update="ajaxSpinnerValue" process="@this"/>
                         </p:spinner>

@@ -102,6 +102,10 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedUser;
 
+    @Getter
+    @Setter
+    private String selectedCategoryImage;
+
 
     @URLAction
     public String loadCategory() throws IOException {
@@ -133,6 +137,11 @@ public class ItemView implements Serializable {
         //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
     }
 
+    public String onImageDescriptionChange() {
+        selectedCategoryImage = categoryAssembler.toDto(categoryDao.findById(this.selectedCategory.getId())).getImageDescription();
+        return selectedCategoryImage;
+    }
+
     public List<ItemDto> allItemsByCategory() {
         return itemService.getItemsByCategory(this.selectedCategory);
     }
@@ -151,7 +160,9 @@ public class ItemView implements Serializable {
     }
 
     public void onItem(ItemDto itemDto) throws IOException {
+        itemDto.setQuantity(1);
         selectedItem = itemDto;
+        /*selectedItem.setQuantity(1);*/
         FacesContext.getCurrentInstance().getExternalContext().redirect("/store/" + itemDto.getUrl());
     }
 

@@ -19,7 +19,7 @@
                         </div>
                     </ui:fragment>
                     <ui:fragment rendered="#{category.base == false}">
-                        <h:commandLink>
+                        <h:commandLink actionListener="#{sideMenuBean.onImageDescriptionChange(category)}">
                             <div class="content">
                                 <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                             </div>

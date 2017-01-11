@@ -30,6 +30,7 @@ public class ItemAssembler {
         dto.setPiecesInCarton(model.getPiecesInCarton());
         dto.setCartonInPalette(model.getCartonInPalette());
         dto.setPiecesInPalette(model.getPiecesInPalette());
+        dto.setDiscount(model.isDiscount());
         return dto;
     }
 
@@ -49,6 +50,7 @@ public class ItemAssembler {
         dto.setPiecesInCarton(model.getPiecesInCarton());
         dto.setCartonInPalette(model.getCartonInPalette());
         dto.setPiecesInPalette(model.getPiecesInPalette());
+        dto.setDiscount(model.isDiscount());
         return dto;
     }
 
@@ -67,6 +69,7 @@ public class ItemAssembler {
         model.setPiecesInCarton(dto.getPiecesInCarton());
         model.setCartonInPalette(dto.getCartonInPalette());
         model.setPiecesInPalette(dto.getPiecesInPalette());
+        model.setDiscount(dto.isDiscount());
         return model;
     }
 

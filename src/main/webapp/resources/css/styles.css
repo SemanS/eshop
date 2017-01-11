@@ -162,7 +162,8 @@
 }
 
 .ui-inputfield {
-    padding: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
@@ -176,7 +177,91 @@
     border-left: 1px solid #38546d;
 }
 
-.ui-panelgrid td, .ui-panelgrid tr
-{
+.ui-panelgrid td, .ui-panelgrid tr {
     border-style: none !important
+}
+
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.image1 {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.image2 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/*@font-face {
+    !*font-family: 'digital-7';
+    !*src: url('fonts/');*!
+    src: url('#{resource["fonts/digital-7.ttf"]}');
+    !*font-weight: normal;
+    font-style: normal;*!*!
+    font-family: 'Calculator Script MT Regular' !important;
+    src: url('http://www.fontsaddict.com/fontface/calculator-script-mt-regular.ttf') format("truetype") !important;
+}*/
+
+@font-face {
+    font-family: "Calculator Digits";
+    src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot");
+    src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.svg#Calculator Digits") format("svg");
+}
+
+.customfont {
+    font-family: "Calculator Digits" !important;
+    font-size: large;
+}
+
+.calculator {
+    height: 105px;
+    width: 430px;
+    background-image: url(../../resources/images/calculator.jpg) !important;
+    background-repeat: no-repeat !important;
+}
+
+div.inline {
+    float: left;
+}
+
+/*
+body {
+    font-family: 'Calculator Script MT Regular' !important;
+}*/
+
+.centeredColumn {
+    /*margin: 50px auto;*/
+    /*text-align: center;*/
+    position: absolute;
+    right: 210px !important;
+    bottom: 72px !important;
+    float: right;
+
+}
+
+.leftColumn {
+    /*float: left;*/
+    position: relative;
+    bottom: 72px !important;
+    right: 380px !important;
+    float: right;
+}
+
+.rightColumn {
+    /*float: left;*/
+    position: absolute;
+    bottom: 72px !important;
+    right: 42px !important;
+    float: right;
 }

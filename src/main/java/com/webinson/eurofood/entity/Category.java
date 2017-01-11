@@ -37,4 +37,7 @@ public class Category implements Serializable {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "img_description")
+    private byte[] imageDescription;
 }

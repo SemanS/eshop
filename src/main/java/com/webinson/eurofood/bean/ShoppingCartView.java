@@ -39,7 +39,7 @@ public class ShoppingCartView {
 
     @Getter
     @Setter
-    private int shoppingCartQuantity;
+    private int shoppingCartQuantity = 1;
 
     /*@Getter
     @Setter
@@ -86,51 +86,55 @@ public class ShoppingCartView {
 
     public void addItemToCart(ItemDto itemDto) {
 
-        CartItemDto cartItemDto = new CartItemDto();
-        boolean isInCart = false;
-        boolean isInSecondCart = false;
-        int counterOfProduct = 0;
+        if (shoppingCartQuantity >= 1) {
 
-        if (cartItemDtos.size() == 0) {
-            cartItemDto.setItemId(itemDto.getId());
-            cartItemDto.setQuantity(itemDto.getQuantity());
-            counter = counter + itemDto.getQuantity();
-            this.cartItemDtos.add(cartItemDto);
-        } else {
-            for (CartItemDto cartI : cartItemDtos) {
-                if (cartI.getItemId() == itemDto.getId()) {
-                    isInCart = true;
-                }
-            }
-        }
-        if (isInCart == true) {
-            for (CartItemDto cartI : cartItemDtos) {
-                if (cartI.getItemId() == itemDto.getId()) {
-                    counterOfProduct = cartI.getQuantity() + itemDto.getQuantity();
-                    cartI.setQuantity(counterOfProduct);
-                }
-            }
-            counter = counter + itemDto.getQuantity();
+            CartItemDto cartItemDto = new CartItemDto();
+            boolean isInCart = false;
+            boolean isInSecondCart = false;
+            int counterOfProduct = 0;
 
-        } else if (cartItemDtos.size() != 1) {
-            counter = counter + itemDto.getQuantity();
-            cartItemDto.setItemId(itemDto.getId());
-            cartItemDto.setQuantity(0);
-            this.cartItemDtos.add(cartItemDto);
-        }
-
-        if (isInCart == false && cartItemDtos.size() != 0) {
-            for (CartItemDto cartI : cartItemDtos) {
-                if (cartI.getItemId() != itemDto.getId()) {
-                    isInSecondCart = true;
-                }
-            }
-            if (isInSecondCart == true) {
+            if (cartItemDtos.size() == 0) {
                 cartItemDto.setItemId(itemDto.getId());
-                cartItemDto.setQuantity(itemDto.getQuantity());
+                cartItemDto.setQuantity(shoppingCartQuantity);
+                counter = counter + shoppingCartQuantity;
                 this.cartItemDtos.add(cartItemDto);
-                counter = counter + itemDto.getQuantity();
+            } else {
+                for (CartItemDto cartI : cartItemDtos) {
+                    if (cartI.getItemId() == itemDto.getId()) {
+                        isInCart = true;
+                    }
+                }
             }
+            if (isInCart == true) {
+                for (CartItemDto cartI : cartItemDtos) {
+                    if (cartI.getItemId() == itemDto.getId()) {
+                        counterOfProduct = cartI.getQuantity() + shoppingCartQuantity;
+                        cartI.setQuantity(counterOfProduct);
+                    }
+                }
+                counter = counter + shoppingCartQuantity;
+
+            } else if (cartItemDtos.size() != 1) {
+                counter = counter + shoppingCartQuantity;
+                cartItemDto.setItemId(itemDto.getId());
+                cartItemDto.setQuantity(0);
+                this.cartItemDtos.add(cartItemDto);
+            }
+
+            if (isInCart == false && cartItemDtos.size() != 0) {
+                for (CartItemDto cartI : cartItemDtos) {
+                    if (cartI.getItemId() != itemDto.getId()) {
+                        isInSecondCart = true;
+                    }
+                }
+                if (isInSecondCart == true) {
+                    cartItemDto.setItemId(itemDto.getId());
+                    cartItemDto.setQuantity(shoppingCartQuantity);
+                    this.cartItemDtos.add(cartItemDto);
+                    counter = counter + shoppingCartQuantity;
+                }
+            }
+            shoppingCartQuantity = 1;
         }
     }
 

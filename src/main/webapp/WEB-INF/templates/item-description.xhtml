@@ -43,18 +43,15 @@
 
                 <div class="extra">
                     <p:outputPanel>
-                        <p:spinner id="ajaxSpinner" min="1" value="#{itemView.selectedItem.quantity}">
-                            <!--<p:spinner id="ajaxSpinner" value="">-->
+                        <p:spinner id="ajaxSpinner" min="1" value="#{shoppingCartView.shoppingCartQuantity}">
                             <p:ajax update="calculatorId" process="@form"/>
                         </p:spinner>
 
-                        <!--<h:outputText id="ajaxSpinnerValue" style="padding-left: 10px"/>-->
-
-                        <h:commandButton class="ui primary button"
+                        <h:commandButton class="ui primary button" style="margin-left: 10px"
                                          actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
                                          value="Vložiť do košíka" action="#{shoppingCartView.reload}">
                             <f:ajax onevent="handleDisableButton"/>
-                            <i class="right chevron icon"></i>
+                            <!--<i class="right chevron icon"></i>-->
                         </h:commandButton>
 
                         <h:commandLink class="ui primary button" action="#{shoppingCartView.checkout()}"

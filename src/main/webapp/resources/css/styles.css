@@ -281,5 +281,20 @@ body {
 }
 
 .nonBorder {
-    border-radius: 0!important;
+    border-radius: 0 !important;
+}
+
+.ui-panelgrid .ui-panelgrid-cell {
+    padding: 0 !important;
+    margin: 2px !important;
+}
+
+.menuImage {
+    height: 225px;
+    background-image: url(../../resources/images/header.jpg) !important;
+    background-repeat: no-repeat !important;
+}
+
+.logoEurofood {
+    background-image: url(../../resources/images/logo_eurofood.jpg) !important;
 }

@@ -9,40 +9,42 @@
 
 <h4>Kategórie:</h4>
 <h:form>
-    <div class="ui fluid accordion">
-        <o:tree value="#{sideMenuBean.treeModel}" var="category">
-            <o:treeNode level="0">
-                <o:treeNodeItem>
-                    <ui:fragment rendered="#{category.base == true}">
-                        <div class="title">
-                            <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                        </div>
-                    </ui:fragment>
-                    <ui:fragment rendered="#{category.base == false}">
-                        <h:commandLink actionListener="#{sideMenuBean.onImageDescriptionChange(category)}">
-                            <div class="content">
+    <div class="ui grid stackable">
+        <div class="ui fluid accordion">
+            <o:tree value="#{sideMenuBean.treeModel}" var="category">
+                <o:treeNode level="0">
+                    <o:treeNodeItem>
+                        <ui:fragment rendered="#{category.base == true}">
+                            <div class="title">
                                 <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                             </div>
-                        </h:commandLink>
-                    </ui:fragment>
-                    <o:treeInsertChildren/>
-                </o:treeNodeItem>
-            </o:treeNode>
-
-            <o:treeNode>
-                <div class="content">
-                    <o:treeNodeItem>
-                        <div class="transition hidden">
-                            <h:commandLink action="#{itemView.onCategory(category)}">
-                                <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
-                                <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{category.base == false}">
+                            <h:commandLink actionListener="#{sideMenuBean.onImageDescriptionChange(category)}">
+                                <div class="content">
+                                    <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                                </div>
                             </h:commandLink>
-                        </div>
+                        </ui:fragment>
                         <o:treeInsertChildren/>
                     </o:treeNodeItem>
-                </div>
-            </o:treeNode>
-        </o:tree>
+                </o:treeNode>
+
+                <o:treeNode>
+                    <div class="content">
+                        <o:treeNodeItem>
+                            <div class="transition hidden">
+                                <h:commandLink action="#{itemView.onCategory(category)}">
+                                    <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
+                                    <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                                </h:commandLink>
+                            </div>
+                            <o:treeInsertChildren/>
+                        </o:treeNodeItem>
+                    </div>
+                </o:treeNode>
+            </o:tree>
+        </div>
     </div>
 </h:form>
 </html>

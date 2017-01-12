@@ -11,12 +11,13 @@ import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.security.Principal;
 
 /**
  * Created by Slavo on 12/7/2016.
  */
 @Component
-public class UserBean {
+public class RegisterBean {
 
     @com.webinson.eurofood.utils.Email(message = "Prosím, zadajte emailovú adresu v správnom tvare!")
     @Getter
@@ -83,8 +84,14 @@ public class UserBean {
 
     public String updateData() {
         UserDto userDto = new UserDto();
+        userDto.setEmail(email);
         userDto.setPassword(password);
         userService.registerNewUserAccount(userDto);
         return "confirmation?faces-redirect=true";
+    }
+
+    public String currentUserName(Principal principal) {
+        System.out.println(principal.getName());
+        return principal.getName();
     }
 }

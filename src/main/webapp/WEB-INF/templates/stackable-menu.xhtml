@@ -36,38 +36,48 @@
     <!--<div class="sixteen wide column"><img class="ui fluid image" src="../../resources/images/header.jpg"/>
     </div>-->
 
-    <p:panelGrid columns="7" layout="grid">
-        <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
-            O spoločnosti
-        </h:outputLink>
-        <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
-            Pre dodávateľa
-        </h:outputLink>
-        <h:outputLink class="ui button itemSideMenu" style="color:red !important;border-radius: 0px !important;">
-            E-Shop
-        </h:outputLink>
-        <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
-            Naše akcie
-        </h:outputLink>
-        <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
-            Kontakt
-        </h:outputLink>
-        <h:outputLink class="ui button itemSideMenu" value="registration">
-            Registrácia
-        </h:outputLink>
-        <a class="ui button itemSideMenu" id="logIn" style="border-radius: 0px !important;">
-            Prihlásenie
-        </a>
-        <p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
-                        value="#{mapView.selectedCitySubmit}"
-                        style="margin-right:10px; line-height: 200% !important;" size="40"
-                        styleClass="ui search"
-                        completeMethod="#{mapView.completeText}" effect="fade"/>
-        <h:commandButton style="border-radius: 0px !important;" styleClass="ui button blue item "
-                         actionListener="#{mapView.onSubmit}" value="Hľadať"
-                         icon="fa fa-search">
-        </h:commandButton>
-    </p:panelGrid>
+    <!--<p:panelGrid columns="7" layout="grid">-->
+    <div class="ui stackable grid">
+        <div class="ui three wide column">
+            <img class="ui fluid image" src="#{resource['images/logo_eurofood.jpg']}"/>
+        </div>
+        <div class="ui thirteen wide column">
+            <img class="ui fluid image" style=" z-index: -1;" src="#{resource['images/header.jpg']}"/>
+            <div style="margin-top: -80px">
+                <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
+                    O spoločnosti
+                </h:outputLink>
+                <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
+                    Pre dodávateľa
+                </h:outputLink>
+                <h:outputLink class="ui button itemSideMenu"
+                              style="color:red !important;border-radius: 0px !important;">
+                    E-Shop
+                </h:outputLink>
+                <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
+                    Naše akcie
+                </h:outputLink>
+                <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
+                    Kontakt
+                </h:outputLink>
+                <h:outputLink class="ui button itemSideMenu" value="registration">
+                    Registrácia
+                </h:outputLink>
+                <a class="ui button itemSideMenu" id="logIn" style="border-radius: 0px !important;">
+                    Prihlásenie
+                </a>
+                <p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
+                                value="#{mapView.selectedCitySubmit}"
+                                style="margin-right:10px; line-height: 200% !important;" size="40"
+                                styleClass="ui search"
+                                completeMethod="#{mapView.completeText}" effect="fade"/>
+                <h:commandButton style="border-radius: 0px !important;" styleClass="ui button blue item "
+                                 actionListener="#{mapView.onSubmit}" value="Hľadať"
+                                 icon="fa fa-search">
+                </h:commandButton>
+            </div>
+        </div>
+    </div>
 
     <ui:insert name="sa">
         <ui:include src="modal-register.xhtml"/>

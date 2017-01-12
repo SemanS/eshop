@@ -268,9 +268,18 @@ body {
 
 .transparentButton {
     background-color: Transparent;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
-    outline:none;
+    outline: none;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+    border-width: 0px !important;
+    border-style: none !important;
+}
+
+.nonBorder {
+    border-radius: 0!important;
 }

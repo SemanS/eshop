@@ -77,12 +77,14 @@
                             <label>Osobné údaje:</label>
                             <div class="two fields">
                                 <div class="field">
-                                    <p:inputText id="firstNameId" value="#{userBean.firstname}" placeholder="Meno"
+                                    <p:inputText id="firstNameId" styleClass="nonBorder" value="#{userBean.firstname}"
+                                                 placeholder="Meno"
                                                  type="text"/>
                                     <p:message for="firstNameId"/>
                                 </div>
                                 <div class="field">
-                                    <p:inputText id="lastNameId" value="#{userBean.lastname}" placeholder="Priezvisko"
+                                    <p:inputText id="lastNameId" styleClass="nonBorder" value="#{userBean.lastname}"
+                                                 placeholder="Priezvisko"
                                                  type="text"/>
                                     <p:message for="lastNameId"/>
                                 </div>
@@ -92,14 +94,16 @@
                         <div class="field">
                             <label>Email:</label>
                             <div class="field">
-                                <p:inputText id="emailId" value="#{userBean.email}" placeholder="Emailová adresa"
+                                <p:inputText id="emailId" styleClass="nonBorder" value="#{userBean.email}"
+                                             placeholder="Emailová adresa"
                                              type="text"/>
                             </div>
                         </div>
                         <div class="field">
                             <label>Telefón:</label>
                             <div class="field">
-                                <p:inputText id="phoneNumberId" value="#{userBean.phoneNumber}" placeholder="Telefón"
+                                <p:inputText id="phoneNumberId" styleClass="nonBorder" value="#{userBean.phoneNumber}"
+                                             placeholder="Telefón"
                                              type="text"/>
                                 <p:message for="phoneNumberId"/>
                             </div>
@@ -108,37 +112,43 @@
                         <div class="field">
                             <label>Spoločnosť:</label>
                             <div class="field">
-                                <p:inputText id="companyId" value="#{userBean.company}" placeholder="Názov spoločnost"
+                                <p:inputText id="companyId" styleClass="nonBorder" value="#{userBean.company}"
+                                             placeholder="Názov spoločnost"
                                              type="text"/>
                             </div>
                         </div>
                         <div class="field">
                             <label>IČO:</label>
                             <div class="field">
-                                <p:inputText id="icoId" value="#{userBean.ico}" placeholder="IČO" type="text"/>
+                                <p:inputText id="icoId" styleClass="nonBorder" value="#{userBean.ico}" placeholder="IČO"
+                                             type="text"/>
                             </div>
                         </div>
                         <div class="field">
                             <label>DIČ/IČ DPH:</label>
                             <div class="field">
-                                <p:inputText id="dicId" value="#{userBean.dic}" placeholder="DIČ/IČ DPH" type="text"/>
+                                <p:inputText id="dicId" styleClass="nonBorder" value="#{userBean.dic}"
+                                             placeholder="DIČ/IČ DPH" type="text"/>
                             </div>
                         </div>
                         <div class="field">
                             <label>Adresa:</label>
                             <div class="fields">
                                 <div class="six wide field">
-                                    <p:inputText id="streetId" value="#{userBean.street}" placeholder="Ulica"
+                                    <p:inputText id="streetId" value="#{userBean.street}" styleClass="nonBorder"
+                                                 placeholder="Ulica"
                                                  type="text"/>
                                     <p:message for="streetId"/>
                                 </div>
                                 <div class="four wide field">
-                                    <p:inputText id="pscId" value="#{userBean.postalCode}" placeholder="PSČ"
+                                    <p:inputText id="pscId" value="#{userBean.postalCode}" styleClass="nonBorder"
+                                                 placeholder="PSČ"
                                                  type="text"/>
                                 </div>
                                 <div class="six wide field">
                                     <p:message for="cityId"/>
-                                    <p:inputText id="cityId" value="#{userBean.city}" placeholder="Mesto"
+                                    <p:inputText id="cityId" value="#{userBean.city}" styleClass="nonBorder"
+                                                 placeholder="Mesto"
                                                  type="text"/>
                                 </div>
                             </div>
@@ -148,13 +158,14 @@
                             <div class="two fields" id="matchGrid">
                                 <div class="field">
                                     <h:outputLabel for="pwd1" value="Heslo: *"/>
-                                    <p:password id="pwd1" match="pwd2"
+                                    <p:password id="pwd1" match="pwd2" styleClass="nonBorder"
                                                 value="#{userBean.password}" label="Password 1" required="true"/>
                                     <p:message for="pwd1"/>
                                 </div>
                                 <div class="field">
                                     <h:outputLabel for="pwd2" value="Potvrdiť heslo: *"/>
                                     <p:password id="pwd2" label="Password 2" value="#{userBean.password}"
+                                                styleClass="nonBorder"
                                                 requiredMessage="Heslo a potvrdenie hesla musia byť v rovnakom tvare"
                                                 required="true"/>
                                     <p:message for="pwd2"/>
@@ -167,7 +178,7 @@
                         <div class="field">
                             <label>Prihlásiť sa k odberu:</label>
                             <div class="field">
-                                <h:panelGrid columns="2" style="margin-bottom:10px"  cellspacing="5" cellpadding="20">
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5" cellpadding="20">
                                     <p:selectOneRadio id="city" value="#{userBean.subscribed}" layout="grid"
                                                       columns="1">
                                         <f:selectItem itemLabel="&#160;&#160;Áno" itemValue="Yes"/>

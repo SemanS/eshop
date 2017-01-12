@@ -10,6 +10,7 @@ public class CartItemDto {
 
     private Long id;
     private Long itemId;
+    private ItemDto itemDto;
     private int quantity;
     private Long shoppingCartId;
 

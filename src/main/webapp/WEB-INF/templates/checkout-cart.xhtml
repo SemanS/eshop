@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:form>
+    <p:dataTable var="cart" value="#{shoppingCartView.cartItemDtos}" dir="rtl">
+
+        <p:column headerText="VYMAZAŤ">
+            <h:outputText value="44"/>
+        </p:column>
+
+        <p:column headerText="CELKOM S DPH">
+            <h:outputText value="#{car.color}"/>
+        </p:column>
+
+        <p:column headerText="JEDNOTKOVÁ CENA">
+            <h:outputText value="#{car.color}"/>
+        </p:column>
+
+        <p:column headerText="MNOŽSTVO">
+            <p:spinner id="ajaxSpinner" min="1" size="3" value="#{cart.quantity}">
+                <p:ajax process="@form"/>
+            </p:spinner>
+            <!--<h:outputText value="#{cart.quantity}"/>-->
+        </p:column>
+
+        <p:column headerText="VÝROBCA">
+            <h:outputText value="#{cart.itemDto.producer.name}"/>
+        </p:column>
+
+        <p:column headerText="NÁZOV PRODUKTU">
+            <h:outputText value="#{cart.itemDto.text}"/>
+        </p:column>
+
+        <p:column headerText="OBRÁZOK">
+
+        </p:column>
+    </p:dataTable>
+</h:form>
+
+</html>

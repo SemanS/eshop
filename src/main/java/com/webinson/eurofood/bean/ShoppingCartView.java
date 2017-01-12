@@ -96,6 +96,7 @@ public class ShoppingCartView {
             if (cartItemDtos.size() == 0) {
                 cartItemDto.setItemId(itemDto.getId());
                 cartItemDto.setQuantity(shoppingCartQuantity);
+                cartItemDto.setItemDto(itemDto);
                 counter = counter + shoppingCartQuantity;
                 this.cartItemDtos.add(cartItemDto);
             } else {
@@ -117,6 +118,7 @@ public class ShoppingCartView {
             } else if (cartItemDtos.size() != 1) {
                 counter = counter + shoppingCartQuantity;
                 cartItemDto.setItemId(itemDto.getId());
+                cartItemDto.setItemDto(itemDto);
                 cartItemDto.setQuantity(0);
                 this.cartItemDtos.add(cartItemDto);
             }
@@ -129,6 +131,7 @@ public class ShoppingCartView {
                 }
                 if (isInSecondCart == true) {
                     cartItemDto.setItemId(itemDto.getId());
+                    cartItemDto.setItemDto(itemDto);
                     cartItemDto.setQuantity(shoppingCartQuantity);
                     this.cartItemDtos.add(cartItemDto);
                     counter = counter + shoppingCartQuantity;

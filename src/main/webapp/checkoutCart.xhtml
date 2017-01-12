@@ -31,9 +31,15 @@
             </ui:insert>
         </div>
 
-        <div class="sixteen wide column" id="itemDetail">
+        <div class="three wide column" id="sidebar">
+            <ui:insert name="sideMenu">
+                <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="thirteen wide column" id="itemDetail">
             <ui:insert name="itemDetail">
-                <ui:include src="WEB-INF/templates/wizard.xhtml"/>
+                <ui:include src="WEB-INF/templates/checkout-cart.xhtml"/>
             </ui:insert>
         </div>
 

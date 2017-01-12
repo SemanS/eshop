@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 <div class="ui divided items">
     <div class="item">
         <div>
@@ -44,15 +45,17 @@
                     <p:outputPanel>
                         <p:spinner id="ajaxSpinner" min="1" value="#{itemView.selectedItem.quantity}">
                             <!--<p:spinner id="ajaxSpinner" value="">-->
-                            <p:ajax update="ajaxSpinnerValue" process="@this"/>
+                            <p:ajax update="calculatorId" process="@form"/>
                         </p:spinner>
-                        <h:outputText id="ajaxSpinnerValue" value="" style="padding-left: 10px"/>
 
-                        <h:commandLink class="ui primary button"
-                                       action="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
-                                       value="Vložiť do košíka">
+                        <!--<h:outputText id="ajaxSpinnerValue" style="padding-left: 10px"/>-->
+
+                        <h:commandButton class="ui primary button"
+                                         actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
+                                         value="Vložiť do košíka" action="#{shoppingCartView.reload}">
+                            <f:ajax onevent="handleDisableButton"/>
                             <i class="right chevron icon"></i>
-                        </h:commandLink>
+                        </h:commandButton>
 
                         <h:commandLink class="ui primary button" action="#{shoppingCartView.checkout()}"
                                        value="Checkout">

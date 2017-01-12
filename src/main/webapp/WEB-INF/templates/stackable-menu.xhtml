@@ -13,6 +13,23 @@
             });
         });
     </script>
+    <script>
+        function handleDisableButton(data) {
+            if (data.source.type != "submit") {
+                return;
+            }
+
+            switch (data.status) {
+                case "begin":
+                    data.source.disabled = true;
+                    break;
+                case "complete":
+                    data.source.disabled = false;
+                    break;
+            }
+        }
+        jsf.ajax.addOnEvent(handleDisableButton);
+    </script>
     <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
 

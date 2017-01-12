@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<h:form>
+<h:form id="calculatorId">
     <div class="ui grid">
         <div class="two wide column ui fluid image">
             <div class="parent">
@@ -18,7 +18,7 @@
 
             <div style="direction: rtl;" class="customfont calculator">
 
-                <h:inputText value="1234" disabled="true"
+                <h:inputText value="12" disabled="true"
                              style="margin-top:25px!important; margin-right:10px!important; width:155px!important;
                              background-color:#7dbede;border: none!important;"/>
 
@@ -26,9 +26,11 @@
                              style="margin-top:25px!important; margin-right:10px!important; width:155px!important;
                              background-color:#7dbede;border: none!important;"/>
 
-                <h:inputText value="1234" disabled="true"
+                <h:inputText id="shoppingCartCounterId" value="#{shoppingCartView.counter}" disabled="true"
                              style="margin-top:25px!important; margin-right:10px!important; width:75px!important;
                              background-color:#7dbede;border: none!important;"/>
+                <h:commandButton action="#{shoppingCartView.onRestartCounter()}" styleClass="transparentButton"
+                                 style="margin-top:25px!important; margin-right:50px!important;"/>
 
 
                 <!--<div class="rightColumn">

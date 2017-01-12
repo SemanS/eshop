@@ -17,6 +17,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +35,11 @@ public class ShoppingCartView {
 
     @Getter
     @Setter
-    private int counter;
+    private int counter = 0;
+
+    @Getter
+    @Setter
+    private int shoppingCartQuantity;
 
     /*@Getter
     @Setter
@@ -67,35 +75,68 @@ public class ShoppingCartView {
 
     @PostConstruct
     public void init() {
-        /*cartItemDto = new CartItemDto();*/
         shoppingCartDto = new ShoppingCartDto();
         cartItemDtos = new HashSet<>();
     }
 
+    public void onRestartCounter() {
+        this.counter = 0;
+        this.cartItemDtos = new HashSet<>();
+    }
+
     public void addItemToCart(ItemDto itemDto) {
 
-        /*this.items.add(itemDto);
-        System.out.println(items.size());*/
-
         CartItemDto cartItemDto = new CartItemDto();
+        boolean isInCart = false;
+        boolean isInSecondCart = false;
+        int counterOfProduct = 0;
 
         if (cartItemDtos.size() == 0) {
             cartItemDto.setItemId(itemDto.getId());
+            cartItemDto.setQuantity(itemDto.getQuantity());
+            counter = counter + itemDto.getQuantity();
             this.cartItemDtos.add(cartItemDto);
-            //this.shoppingCartDto.setCartItemDtos(cartItemDtos);
-            /*this.shoppingCartDto.addCartItem(cartItemDto);*/
         } else {
             for (CartItemDto cartI : cartItemDtos) {
-                if (cartItemDto.getItemId() == itemDto.getId()) {
-                    cartItemDto.setQuantity(cartItemDto.getQuantity() + 0);
-                } else {
-                    cartItemDto.setItemId(itemDto.getId());
-                    cartItemDto.setQuantity(0);
-                    cartItemDtos.add(cartItemDto);
-                    System.out.println(cartItemDtos.size());
+                if (cartI.getItemId() == itemDto.getId()) {
+                    isInCart = true;
                 }
             }
         }
+        if (isInCart == true) {
+            for (CartItemDto cartI : cartItemDtos) {
+                if (cartI.getItemId() == itemDto.getId()) {
+                    counterOfProduct = cartI.getQuantity() + itemDto.getQuantity();
+                    cartI.setQuantity(counterOfProduct);
+                }
+            }
+            counter = counter + itemDto.getQuantity();
+
+        } else if (cartItemDtos.size() != 1) {
+            counter = counter + itemDto.getQuantity();
+            cartItemDto.setItemId(itemDto.getId());
+            cartItemDto.setQuantity(0);
+            this.cartItemDtos.add(cartItemDto);
+        }
+
+        if (isInCart == false && cartItemDtos.size() != 0) {
+            for (CartItemDto cartI : cartItemDtos) {
+                if (cartI.getItemId() != itemDto.getId()) {
+                    isInSecondCart = true;
+                }
+            }
+            if (isInSecondCart == true) {
+                cartItemDto.setItemId(itemDto.getId());
+                cartItemDto.setQuantity(itemDto.getQuantity());
+                this.cartItemDtos.add(cartItemDto);
+                counter = counter + itemDto.getQuantity();
+            }
+        }
+    }
+
+    public void reload() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
     }
 
     public void checkout() {

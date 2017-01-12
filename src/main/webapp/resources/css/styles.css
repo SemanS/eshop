@@ -265,3 +265,12 @@ body {
     right: 42px !important;
     float: right;
 }
+
+.transparentButton {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}

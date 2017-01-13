@@ -31,4 +31,10 @@ public class User implements Serializable {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Address> addresses;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Company> companies;
+
 }

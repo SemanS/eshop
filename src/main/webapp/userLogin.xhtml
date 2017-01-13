@@ -31,9 +31,15 @@
             </ui:insert>
         </div>
 
-        <div class="sixteen wide column" id="itemDetail">
-            <ui:insert name="itemDetail">
-                <ui:include src="WEB-INF/templates/wizard.xhtml"/>
+        <div class="three wide column" style="" id="Sidebar">
+            <ui:insert name="sideMenu">
+                <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="thirteen wide column" id="">
+            <ui:insert name="mainPage">
+                <ui:include src="WEB-INF/templates/user-login.xhtml"/>
             </ui:insert>
         </div>
 
@@ -42,11 +48,9 @@
                 <ui:include src="WEB-INF/templates/footer.xhtml"/>
             </ui:insert>
         </div>
-        <!--<h:form>
-            <h:outputText value="#{shoppingCart.counter}"/>
-        </h:form>-->
-
     </div>
+
+    <h:outputText value="#{registerBean.currentUserName()}"/>
 
 </h:body>
 

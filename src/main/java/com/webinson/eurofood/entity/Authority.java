@@ -10,12 +10,16 @@ import java.io.Serializable;
  * Created by Slavo on 1/12/2017.
  */
 @Entity
-@Table(name = "authority", schema = "public")
+@Table(name = "authorities", schema = "public")
 @Data
 @NoArgsConstructor
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "username")
     private String username;

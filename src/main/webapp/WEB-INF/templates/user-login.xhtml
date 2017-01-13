@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <form action="${request.contextPath}/appLogin" method="POST" class="ui large form">
+        <h4 class="ui horizontal divider header">
+            <!--<i class="tag icon"></i>-->
+            Prihlásenie zákazníka
+        </h4>
+        <pre></pre>
+        <div class="ui grid">
+            <div class="four wide column widget"></div>
+            <div class="eight wide column widget">
+                <div class="content">
+                    <div class="field">
+                        <label>Email:</label>
+                        <input type="text" name="app_username"
+                               placeholder="Zadajte Vašu emailovú adresu:"/>
+                    </div>
+                    <div class="field">
+                        <label>Heslo:</label>
+                        <input type="password" name="app_password" placeholder="Zadajte vaše heslo:"/>
+                    </div>
+
+                    <div class="field" style="text-align: center">
+                        <input value="Prihlásiť sa" type="submit"
+                               class="ui positive button">
+
+                            <!--<i class="checkmark icon"></i>-->
+                        </input>
+                    </div>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </div>
+            <div class="four wide column widget"></div>
+        </div>
+    </form>
+
+</h:body>
+
+</html>

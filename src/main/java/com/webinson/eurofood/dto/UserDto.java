@@ -18,5 +18,6 @@ public class UserDto {
     private String company;
     private int ico;
     private String dic;
+    private String icDph;
 
 }

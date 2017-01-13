@@ -1,9 +1,12 @@
 package com.webinson.eurofood.service.impl;
 
+import com.webinson.eurofood.dao.AddressDao;
 import com.webinson.eurofood.dao.AuthorityDao;
+import com.webinson.eurofood.dao.CompanyDao;
 import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.entity.Authority;
+import com.webinson.eurofood.entity.User;
 import com.webinson.eurofood.entity.User;
 import com.webinson.eurofood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuthorityDao authorityDao;
+
+    @Autowired
+    private AddressDao addressDao;
+
+    @Autowired
+    private CompanyDao companyDao;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

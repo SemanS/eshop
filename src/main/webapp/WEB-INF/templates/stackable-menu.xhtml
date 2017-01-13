@@ -60,12 +60,29 @@
                 <h:outputLink class="ui button itemSideMenu" style="border-radius: 0px !important;">
                     Kontakt
                 </h:outputLink>
-                <h:outputLink class="ui button itemSideMenu" value="registration">
-                    Registrácia
-                </h:outputLink>
-                <a class="ui button itemSideMenu" id="logIn" style="border-radius: 0px !important;">
-                    Prihlásenie
-                </a>
+
+                <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
+                    <h:outputLink value="#{request.contextPath}/registration" class="ui button itemSideMenu"
+                                  style="border-radius: 0px !important;">
+                        Registrácia
+                    </h:outputLink>
+                    <h:outputLink value="#{request.contextPath}/user-login" class="ui button itemSideMenu"
+                                  style="border-radius: 0px !important;">
+                        Prihlásenie
+                    </h:outputLink>
+                    <!--
+                                        <a class="ui button itemSideMenu" id="logIn" style="border-radius: 0px !important;">
+                                            Prihlásenie
+                                        </a>-->
+                </ui:fragment>
+
+                <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
+                    <h:outputLink class="ui button itemSideMenu"
+                                  value="${pageContext.request.contextPath}/logout">Odhlásiť:
+                        <h:outputText value="#{registerBean.currentUserName()}"/>
+                    </h:outputLink>
+                </ui:fragment>
+
                 <p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
                                 value="#{mapView.selectedCitySubmit}"
                                 style="margin-right:10px; line-height: 200% !important;" size="40"
@@ -80,7 +97,7 @@
     </div>
 
     <ui:insert name="sa">
-        <ui:include src="modal-register.xhtml"/>
+        <ui:include src="modal-login.xhtml"/>
     </ui:insert>
 
 </h:body>

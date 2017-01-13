@@ -166,12 +166,12 @@
     padding-bottom: 10px !important;
 }
 
-.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+/*.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
     -webkit-border-bottom-right-radius: 0px;
     -webkit-border-bottom-left-radius: 0px;
     -webkit-border-top-left-radius: 0px;
     -webkit-border-top-right-radius: 0px;
-}
+}*/
 
 .headerDivider {
     border-left: 1px solid #38546d;

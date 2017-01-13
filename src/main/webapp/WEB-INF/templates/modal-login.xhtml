@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+    <h:outputText id="modadiv">
+        <form action="${request.contextPath}/appLogin" method="POST" class="ui form small modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Prihlásenie
+            </div>
+
+
+            <div class="content">
+                <div class="field">
+                    <label>Email:</label>
+                    <input type="text" name="app_username"
+                           placeholder="Zadajte Vašu emailovú adresu:"/>
+                </div>
+                <div class="field">
+                    <label>Heslo:</label>
+                    <input type="password" name="app_password" placeholder="Zadajte Vaše heslo:"/>
+                </div>
+                <pre></pre>
+                <div class="field">
+                    <div class="ui positive right labeled icon button">
+                        Prihlásiť sa
+                        <i class="checkmark icon"></i>
+                    </div>
+                </div>
+                <input class="ui fluid large teal submit button" type="submit"
+                       value="Prihlásiť sa"/>
+                <pre></pre>
+                <div class="field right">
+                    <!--<p:link value="Nová registrácia" outcome="register.xhtml"></p:link>-->
+
+                    <label>Zabudnuté heslo</label>
+                </div>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <!--<div class="actions">
+            <div class="ui black button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>-->
+
+    </h:outputText>
+</h:body>
+
+</html>

@@ -5,12 +5,12 @@ import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.annotation.PostConstruct;
+import javax.validation.constraints.*;
 import java.security.Principal;
 
 /**
@@ -64,7 +64,7 @@ public class RegisterBean {
 
     @Getter
     @Setter
-    private int ico;
+    private String ico;
 
     @Getter
     @Setter
@@ -90,8 +90,8 @@ public class RegisterBean {
         return "confirmation?faces-redirect=true";
     }
 
-    public String currentUserName(Principal principal) {
-        System.out.println(principal.getName());
-        return principal.getName();
+    public String currentUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }

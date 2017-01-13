@@ -23,16 +23,13 @@ public class Company implements Serializable{
     private long id;
 
     @Column(name = "name")
-    private String street;
-
-    @Column(name = "ico")
-    private int postalCode;
+    private String name;
 
     @Column(name = "dic")
-    private int city;
+    private String dic;
 
-    @Column(name = "ic_dph")
-    private int icDph;
+    @Column(name = "ico")
+    private String ico;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

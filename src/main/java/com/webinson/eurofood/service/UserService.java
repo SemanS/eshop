@@ -12,8 +12,11 @@ import java.util.List;
  */
 public interface UserService {
 
-    List<UserDto> getAllUsers();
+    List<String> getAllUsers();
 
-    User registerNewUserAccount(UserDto userDto);
+    void registerNewUserAccount(UserDto userDto);
+
+    void addressCompanySave();
+
 }
 

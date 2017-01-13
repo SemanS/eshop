@@ -13,11 +13,10 @@ public class UserDto {
     private String email;
     private String phoneNumber;
     private String street;
-    private int postalCode;
+    private String postalCode;
     private String city;
     private String company;
-    private int ico;
+    private String ico;
     private String dic;
-    private String icDph;
 
 }

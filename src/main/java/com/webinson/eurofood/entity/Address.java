@@ -30,7 +30,13 @@ public class Address implements Serializable {
     @Column(name = "city")
     private String city;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 }

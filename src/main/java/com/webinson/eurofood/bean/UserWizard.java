@@ -1,16 +1,22 @@
 package com.webinson.eurofood.bean;
 
+import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.UserDto;
+import com.webinson.eurofood.entity.Address;
+import com.webinson.eurofood.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FlowEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 /**
@@ -26,11 +32,23 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
+    private Address address;
+
+    @Getter
+    @Setter
     private boolean skip;
 
     @Getter
     @Setter
     private String userContinue;
+
+    @Autowired
+    private UserDao userDao;
+
+    @PostConstruct
+    public void init() {
+
+    }
 
     public void save() {
         FacesMessage msg = new FacesMessage("Successful", "Welcome :" + userDto.getFirstName());
@@ -40,6 +58,12 @@ public class UserWizard implements Serializable {
     public String currentUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
+    }
+
+    public String currentUserAddress() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(userDao.findByUsername(authentication.getName()).getAddresses());
+        return "";
     }
 
     public String onContinue() {

@@ -8,13 +8,17 @@
 
 <div class="ui grid segment">
 
-    <div class="ui two wide column"></div>
-    <div class="ui four wide column">
 
-        <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
-            asd
-        </ui:fragment>
-        <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
+    <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
+        <div class="ui two wide column"></div>
+        <div class="ui four wide column"></div>
+        <div class="four wide column"></div>
+    </ui:fragment>
+    <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
+
+        <div class="ui two wide column"></div>
+        <div class="ui four wide column">
+
             <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5" cellpadding="20">
                 <p:selectOneRadio id="city" value="#{registerBean.subscribed}" layout="grid"
                                   columns="1">
@@ -22,14 +26,17 @@
                     <f:selectItem itemLabel="&#160;&#160;Chcem použiť novú adresu" itemValue="No"/>
                 </p:selectOneRadio>
             </h:panelGrid>
-        </ui:fragment>
 
-    </div>
+        </div>
 
-    <div class="four wide column">
-        <h:inputText value="12" disabled="true"/>
-    </div>
-    <div class="ui two wide column"></div>
+        <div class="four wide column">
+            <!--<h:inputText value="#{userWizard.currentUserAddress()}" disabled="true"/>-->
+        </div>
+        <div class="ui two wide column"></div>
+
+    </ui:fragment>
+
+
 </div>
 
 </html>

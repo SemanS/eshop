@@ -5,14 +5,14 @@ import com.webinson.eurofood.dao.AuthorityDao;
 import com.webinson.eurofood.dao.CompanyDao;
 import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.UserDto;
-import com.webinson.eurofood.entity.Authority;
-import com.webinson.eurofood.entity.User;
+import com.webinson.eurofood.entity.*;
 import com.webinson.eurofood.entity.User;
 import com.webinson.eurofood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,26 +38,54 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return null;
+    public List<String> getAllUsers() {
+        List<String> users = new ArrayList<String>();
+        for(User user : userDao.findAll()) {
+            users.add(user.getUsername());
+        }
+        return users;
     }
 
     @Override
-    public User registerNewUserAccount(UserDto userDto) {
+    public void registerNewUserAccount(UserDto userDto) {
 
         /*if (emailExist(userDto.getEmail())) {
 
         }*/
         User user = new User();
         Authority authority = new Authority();
+        Company company = new Company();
+        Address address = new Address();
+
         user.setUsername(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPhoneNumber(userDto.getPhoneNumber());
+
         authority.setUsername(userDto.getEmail());
         authority.setAuthority("ROLE_USER");
-        authorityDao.save(authority);
-        /*user.setRole(new Role(Integer.valueOf(1), user));*/
 
-        return userDao.save(user);
+        address.setCity(userDto.getCity());
+        address.setPostalCode(userDto.getPostalCode());
+        address.setStreet(userDto.getStreet());
+        address.setUser(user);
+        address.setFirstName(userDto.getFirstName());
+        address.setLastName(userDto.getLastName());
+
+        company.setDic(userDto.getDic());
+        company.setIco(userDto.getIco());
+        company.setName(userDto.getCompany());
+        company.setUser(user);
+
+        userDao.save(user);
+        authorityDao.save(authority);
+        companyDao.save(company);
+        addressDao.save(address);
 
     }
+
+    @Override
+    public void addressCompanySave() {
+
+    }
+
 }

@@ -86,6 +86,16 @@ public class RegisterBean {
         UserDto userDto = new UserDto();
         userDto.setEmail(email);
         userDto.setPassword(password);
+        userDto.setPostalCode(postalCode);
+        userDto.setIco(ico);
+        userDto.setStreet(street);
+        userDto.setCity(city);
+        userDto.setDic(dic);
+        userDto.setFirstName(firstname);
+        userDto.setLastName(lastname);
+        userDto.setCompany(company);
+        userDto.setPhoneNumber(phoneNumber);
+
         userService.registerNewUserAccount(userDto);
         return "confirmation?faces-redirect=true";
     }

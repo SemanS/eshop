@@ -5,6 +5,7 @@ import com.webinson.eurofood.entity.Item;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class ItemAssembler {
         dto.setCartonInPalette(model.getCartonInPalette());
         dto.setPiecesInPalette(model.getPiecesInPalette());
         dto.setDiscount(model.isDiscount());
+        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         return dto;
     }
 
@@ -51,6 +53,7 @@ public class ItemAssembler {
         dto.setCartonInPalette(model.getCartonInPalette());
         dto.setPiecesInPalette(model.getPiecesInPalette());
         dto.setDiscount(model.isDiscount());
+        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         return dto;
     }
 
@@ -70,6 +73,7 @@ public class ItemAssembler {
         model.setCartonInPalette(dto.getCartonInPalette());
         model.setPiecesInPalette(dto.getPiecesInPalette());
         model.setDiscount(dto.isDiscount());
+        model.setImage(Base64.getDecoder().decode(dto.getImage()));
         return model;
     }
 

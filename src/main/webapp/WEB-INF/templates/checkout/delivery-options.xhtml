@@ -20,7 +20,7 @@
             <div class="ui four wide column">
 
                 <h:outputFormat style="margin-bottom:10px" cellspacing="5" cellpadding="20">
-                    <h:selectOneRadio id="city" value="#{userWizard.radioValueFacturation}" layout="grid"
+                    <h:selectOneRadio id="city" value="#{userWizard.radioValueDelivery}" layout="grid"
                                       columns="1">
                         <!--<p:ajax update="out2 " process="@form" event="blur" listener="#{userWizard.selectRadioItem}"/>-->
                         <f:selectItem itemLabel="&#160;&#160;Chcem použiť existujúcu adresu" itemValue="Yes"/>
@@ -36,9 +36,10 @@
             <div class="ui sixteen wide column">
                 <h:panelGroup id="uawGroup" layout="block">
                     <div class="eight wide column">
-                        <h:inputText value="#{userWizard.currentUserAddress()}" rendered="#{userWizard.radioValueFacturation == 'Yes'}" disabled="true"/>
+                        <h:inputText value="#{userWizard.currentUserAddress()}"
+                                     rendered="#{userWizard.radioValueDelivery == 'Yes'}" disabled="true"/>
                     </div>
-                    <h:outputFormat rendered="#{userWizard.radioValueFacturation == 'No'}">
+                    <h:outputFormat rendered="#{userWizard.radioValueDelivery == 'No'}">
                         <ui:insert name="userRegisterId">
                             <ui:include src="/WEB-INF/templates/user-register.xhtml"/>
                         </ui:insert>

@@ -30,5 +30,6 @@ public class ItemDto {
     private int piecesInPalette;
     private boolean isDiscount;
     private int quantity;
+    private String image;
 
 }

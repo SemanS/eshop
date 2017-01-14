@@ -55,7 +55,7 @@ public class AddressAssembler {
     }
 
     public List<AddressDto> toDtos(final Collection<Address> models) {
-        final List<AddressDto> dtos = new ArrayList<>();
+        final List<AddressDto> dtos = new ArrayList<AddressDto>();
         if (isNotEmpty(models)) {
             for (final Address address : models) {
                 dtos.add(convertToDto(address, new AddressDto()));
@@ -64,7 +64,7 @@ public class AddressAssembler {
         return dtos;
     }
 
-    public List<Address> toModels(final ArrayList<AddressDto> dtos) {
+    public List<Address> toModels(final Collection<AddressDto> dtos) {
         final List<Address> models = new ArrayList<Address>();
         if (isNotEmpty(dtos)) {
             for (final AddressDto addressDto : dtos) {

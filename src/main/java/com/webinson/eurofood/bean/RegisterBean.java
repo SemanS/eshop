@@ -1,5 +1,6 @@
 package com.webinson.eurofood.bean;
 
+import com.webinson.eurofood.dto.AddressDto;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.*;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Slavo on 12/7/2016.
@@ -84,17 +87,23 @@ public class RegisterBean {
 
     public String updateData() {
         UserDto userDto = new UserDto();
+        AddressDto addressDto = new AddressDto();
+        List<AddressDto> addressDtos = new ArrayList<AddressDto>();
+
+        addressDto.setFirstName(firstname);
+        addressDto.setLastName(lastname);
+        addressDto.setStreet(street);
+        addressDto.setCity(city);
+        addressDto.setPostalCode(postalCode);
+        addressDtos.add(addressDto);
+
         userDto.setEmail(email);
         userDto.setPassword(password);
-        userDto.setPostalCode(postalCode);
         userDto.setIco(ico);
-        userDto.setStreet(street);
-        userDto.setCity(city);
         userDto.setDic(dic);
-        userDto.setFirstName(firstname);
-        userDto.setLastName(lastname);
         userDto.setCompany(company);
         userDto.setPhoneNumber(phoneNumber);
+        userDto.setAddressDtos(addressDtos);
 
         userService.registerNewUserAccount(userDto);
         return "confirmation?faces-redirect=true";

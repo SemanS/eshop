@@ -1,9 +1,11 @@
 package com.webinson.eurofood.bean;
 
 import com.webinson.eurofood.dao.UserDao;
+import com.webinson.eurofood.dto.AddressDto;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.entity.Address;
 import com.webinson.eurofood.entity.User;
+import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FlowEvent;
@@ -42,16 +44,30 @@ public class UserWizard implements Serializable {
     @Setter
     private String userContinue;
 
+    @Getter
+    @Setter
+    private String radioValueFacturation = "Yes";
+
+    @Getter
+    @Setter
+    private String radioValueDelivery = "Yes";
+
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @PostConstruct
     public void init() {
-
+        radioValueFacturation = "Yes";
+        radioValueDelivery = "Yes";
     }
 
+    /*public void selectRadioItem() {
+        String selectedItem = this.radioValue;
+        System.out.println(selectedItem);
+    }*/
+
     public void save() {
-        FacesMessage msg = new FacesMessage("Successful", "Welcome :" + userDto.getFirstName());
+        FacesMessage msg = new FacesMessage("Successful", "Welcome :" + userDto.getEmail());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -62,8 +78,9 @@ public class UserWizard implements Serializable {
 
     public String currentUserAddress() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(userDao.findByUsername(authentication.getName()).getAddresses());
-        return "";
+        AddressDto addressDto = new AddressDto();
+        addressDto = userService.getAddressByUsername(authentication.getName());
+        return addressDto.getFirstName() + " " + addressDto.getLastName() + ", " + addressDto.getStreet() + ", " + addressDto.getCity() + ", " + addressDto.getPostalCode();
     }
 
     public String onContinue() {

@@ -37,9 +37,12 @@
     </div>-->
 
     <!--<p:panelGrid columns="7" layout="grid">-->
+
     <div class="ui stackable grid">
         <div class="ui three wide column">
-            <img class="ui fluid image" src="#{resource['images/logo_eurofood.jpg']}"/>
+            <h:outputLink class="" value="#{request.contextPath}/" style="border-radius: 0px !important;">
+                <img class="ui fluid image" src="#{resource['images/logo_eurofood.jpg']}"/>
+            </h:outputLink>
         </div>
         <div class="ui thirteen wide column">
             <img class="ui fluid image" style=" z-index: -1;" src="#{resource['images/header.jpg']}"/>

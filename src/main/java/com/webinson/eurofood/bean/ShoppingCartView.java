@@ -39,15 +39,16 @@ public class ShoppingCartView {
 
     @Getter
     @Setter
+    private double counterNetto = 0.00;
+
+    @Getter
+    @Setter
+    private double counterBrutto = 0.00;
+
+
+    @Getter
+    @Setter
     private int shoppingCartQuantity = 1;
-
-    /*@Getter
-    @Setter
-    private List<ItemDto> items = new ArrayList<ItemDto>();*/
-
-    /*@Getter
-    @Setter
-    private CartItemDto cartItemDto = new CartItemDto();*/
 
     @Getter
     @Setter
@@ -82,6 +83,8 @@ public class ShoppingCartView {
     public void onRestartCounter() {
         this.counter = 0;
         this.cartItemDtos = new HashSet<>();
+        this.counterNetto = 0;
+        this.counterBrutto = 0;
     }
 
     public void addItemToCart(ItemDto itemDto) {
@@ -98,6 +101,8 @@ public class ShoppingCartView {
                 cartItemDto.setQuantity(shoppingCartQuantity);
                 cartItemDto.setItemDto(itemDto);
                 counter = counter + shoppingCartQuantity;
+                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
                 this.cartItemDtos.add(cartItemDto);
             } else {
                 for (CartItemDto cartI : cartItemDtos) {
@@ -113,10 +118,15 @@ public class ShoppingCartView {
                         cartI.setQuantity(counterOfProduct);
                     }
                 }
+                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
                 counter = counter + shoppingCartQuantity;
+
 
             } else if (cartItemDtos.size() != 1) {
                 counter = counter + shoppingCartQuantity;
+                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
                 cartItemDto.setItemId(itemDto.getId());
                 cartItemDto.setItemDto(itemDto);
                 cartItemDto.setQuantity(0);
@@ -133,6 +143,8 @@ public class ShoppingCartView {
                     cartItemDto.setItemId(itemDto.getId());
                     cartItemDto.setItemDto(itemDto);
                     cartItemDto.setQuantity(shoppingCartQuantity);
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
                     this.cartItemDtos.add(cartItemDto);
                     counter = counter + shoppingCartQuantity;
                 }

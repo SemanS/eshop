@@ -68,4 +68,7 @@ public class Item implements Serializable {
     @Column(name = "is_discount")
     private boolean isDiscount;
 
+    @Column(name = "image")
+    private byte[] image;
+
 }

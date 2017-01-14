@@ -14,15 +14,15 @@
                 <img class="image2" src="../../resources/images/eurofood_logo.png"/>
             </div>
         </div>
-        <div class="eight wide column ui fluid image ">
+        <div class="ten wide column ui fluid image ">
 
             <div style="direction: rtl;" class="customfont calculator">
 
-                <h:inputText value="12" disabled="true"
+                <h:inputText value="#{shoppingCartView.counterBrutto}" disabled="true"
                              style="margin-top:25px!important; margin-right:10px!important; width:155px!important;
                              background-color:#7dbede;border: none!important;"/>
 
-                <h:inputText value="1234" disabled="true"
+                <h:inputText value="#{shoppingCartView.counterNetto}" disabled="true"
                              style="margin-top:25px!important; margin-right:10px!important; width:155px!important;
                              background-color:#7dbede;border: none!important;"/>
 
@@ -46,9 +46,9 @@
             </div>
             <!--<img src="../../resources/images/calculator.png"/>-->
         </div>
-        <div class="two wide column ui fluid image">
+        <!--<div class="two wide column ui fluid image">
             <img src="../../resources/images/kosik.png"/>
-        </div>
+        </div>-->
     </div>
 
 </h:form>

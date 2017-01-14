@@ -38,6 +38,9 @@
                         </p:tab>
 
                         <p:tab id="contact" title="Podrobnosti o dodaní">
+                            <ui:insert name="checkoutOptions">
+                                <ui:include src="checkout/delivery-options.xhtml"/>
+                            </ui:insert>
                             <!--<p:panel header="Contact Information">
                                 <p:messages/>
                                 <h:panelGrid columns="2" columnClasses="label, value">

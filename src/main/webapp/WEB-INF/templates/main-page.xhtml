@@ -7,25 +7,26 @@
 
 <h:body>
 
-    <p:carousel numVisible="1" effect="easeInStrong" headerText=""
-                style="margin-bottom:0; width:921px" autoPlayInterval="7000" circular="true">
-        <p:tab title="Godfather Part I">
-            <h:panelGrid columns="2" cellpadding="10">
-                <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
-                <img class="" style="height: 250px; width:921px"
-                     src="resources/images/slide1.PNG"/>
-            </h:panelGrid>
-        </p:tab>
-        <p:tab title="Godfather Part II">
-            <h:panelGrid columns="2" cellpadding="10">
-                <img class="" style="height: 250px; width:921px"
-                     src="resources/images/slide1.PNG"/>
-
-            </h:panelGrid>
-        </p:tab>
-    </p:carousel>
-
-
+    <div class="ui grid">
+        <div class="sixteen wide column">
+            <p:carousel numVisible="1" effect="easeInStrong" responsive="true"
+                        autoPlayInterval="7000" circular="true">
+                <p:tab title="Godfather Part I">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
+                        <img class="ui fluid image"
+                             src="resources/images/slide1.PNG"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Godfather Part II">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <img class="ui fluid image"
+                             src="resources/images/slide1.PNG"/>
+                    </h:panelGrid>
+                </p:tab>
+            </p:carousel>
+        </div>
+    </div>
     <h4 class="ui horizontal divider header">
         <!--<i class="tag icon"></i>-->
         Produkty

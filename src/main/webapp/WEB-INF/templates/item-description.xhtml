@@ -7,18 +7,19 @@
       xmlns:f="http://java.sun.com/jsf/core">
 <div class="ui divided items">
 
-    <div class="item">
-        <div>
-            <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17,5g</h5>
-            <div class="meta">
-                <span class="cinema">Kávy</span>
+        <div class="item">
+            <div>
+                <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17,5g</h5>
+                <div class="meta">
+                    <span class="cinema">Kávy</span>
+                </div>
+                <img class="ui centered tiny image" src="data:image/png;base64,#{itemView.selectedItem.image}"/>
+                <!--<img class="ui centered tiny image" src="../../resources/images/nescafe.png"/>-->
             </div>
-            <img class="ui centered tiny image" src="../../resources/images/nescafe.png"/>
-        </div>
-        <div class="headerDivider" style="margin-left: 30px"></div>
-        <div class="content" style="margin-left: 30px">
-            <h:form>
+            <div class="headerDivider" style="margin-left: 30px"></div>
+            <div class="content" style="margin-left: 30px">
 
+                <h:form>
                 <div class="description">
                     <p:panelGrid columns="2">
 
@@ -66,9 +67,10 @@
                     <!--<div class="ui label">IMAX</div>
                     <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
                 </div>
+                </h:form>
 
-            </h:form>
+            </div>
         </div>
-    </div>
+
 </div>
 </html>

@@ -37,24 +37,20 @@
             </ui:insert>
         </div>
 
-        <div class="thirteen wide column" id="itemDetail">
-            <ui:insert name="itemDetail">
-                <ui:include src="WEB-INF/templates/checkout-cart.xhtml"/>
-            </ui:insert>
-        </div>
+        <ui:fragment rendered="#{shoppingCartView.cartItemDtos.size() != 0}">
+            <div class="thirteen wide column" id="itemDetail">
+                <ui:insert name="itemDetail">
+                    <ui:include src="WEB-INF/templates/checkout-cart.xhtml"/>
+                </ui:insert>
+            </div>
+        </ui:fragment>
 
-        <!--<ui:insert name="s">
-            <ui:include src="WEB-INF/templates/modal-register.xhtml"/>
-        </ui:insert>-->
 
         <div class="sixteen wide theme column" id="Footer">
             <ui:insert name="footer">
                 <ui:include src="WEB-INF/templates/footer.xhtml"/>
             </ui:insert>
         </div>
-        <!--<h:form>
-            <h:outputText value="#{shoppingCart.counter}"/>
-        </h:form>-->
 
     </div>
 

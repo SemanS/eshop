@@ -7,155 +7,157 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 
-    <div id="MainContent">
+<div id="MainContent">
 
-        <div class="ui mobile only grid">
-            <div id="PhoneMenu" style="max-width: 500px; padding-bottom: 24px;">
-                <div class="ui grid">
-                    <div class="ui four column doubling row" id="menu-cols">
-                    </div>
+    <div class="ui mobile only grid">
+        <div id="PhoneMenu" style="max-width: 500px; padding-bottom: 24px;">
+            <div class="ui grid">
+                <div class="ui four column doubling row" id="menu-cols">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h:form styleClass="ui form">
+        <!--<p:growl autoUpdate="true" showDetail="true"/>-->
+        <p:messages autoUpdate="true"/>
+        <h4 class="ui dividing header">VAŠE OSOBNÉ INFORMÁCIE</h4>
+        <div class="field">
+            <label>Osobné údaje:</label>
+            <div class="two fields">
+                <div class="field">
+                    <p:inputText id="firstNameId" styleClass="nonBorder"
+                                 value="#{registerBean.firstname}"
+                                 placeholder="Meno"
+                                 type="text"/>
+                    <p:message for="firstNameId"/>
+                </div>
+                <div class="field">
+                    <p:inputText id="lastNameId" styleClass="nonBorder" value="#{registerBean.lastname}"
+                                 placeholder="Priezvisko"
+                                 type="text"/>
+                    <p:message for="lastNameId"/>
+                </div>
+            </div>
+
+        </div>
+        <div class="field">
+            <label>Email:</label>
+            <div class="field">
+                <p:inputText id="emailId" styleClass="nonBorder" value="#{registerBean.email}"
+                             placeholder="Emailová adresa"
+                             type="text"/>
+            </div>
+        </div>
+        <div class="field">
+            <label>Telefón:</label>
+            <div class="field">
+                <p:inputText id="phoneNumberId" styleClass="nonBorder"
+                             value="#{registerBean.phoneNumber}"
+                             placeholder="Telefón"
+                             type="text"/>
+                <p:message for="phoneNumberId"/>
+            </div>
+        </div>
+        <h4 class="ui dividing header">VAŠA ADRESA</h4>
+        <div class="field">
+            <label>Spoločnosť:</label>
+            <div class="field">
+                <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
+                             placeholder="Názov spoločnost"
+                             type="text"/>
+            </div>
+        </div>
+        <div class="field">
+            <label>IČO:</label>
+            <div class="field">
+                <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
+                             placeholder="IČO"
+                             type="text"/>
+            </div>
+        </div>
+        <div class="field">
+            <label>DIČ/IČ DPH:</label>
+            <div class="field">
+                <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
+                             placeholder="DIČ/IČ DPH" type="text"/>
+            </div>
+        </div>
+        <div class="field">
+            <label>Adresa:</label>
+            <div class="fields">
+                <div class="six wide field">
+                    <p:inputText id="streetId" value="#{registerBean.street}" styleClass="nonBorder"
+                                 placeholder="Ulica"
+                                 type="text"/>
+                    <p:message for="streetId"/>
+                </div>
+                <div class="four wide field">
+                    <p:inputText id="pscId" value="#{registerBean.postalCode}" styleClass="nonBorder"
+                                 placeholder="PSČ"
+                                 type="text"/>
+                </div>
+                <div class="six wide field">
+                    <p:message for="cityId"/>
+                    <p:inputText id="cityId" value="#{registerBean.city}" styleClass="nonBorder"
+                                 placeholder="Mesto"
+                                 type="text"/>
+                </div>
+            </div>
+        </div>
+        <h4 class="ui dividing header">VAŠE HESLO</h4>
+        <div class="field">
+            <div class="two fields" id="matchGrid">
+                <div class="field">
+                    <h:outputLabel for="pwd1" value="Heslo: *"/>
+                    <p:password id="pwd1" match="pwd2" styleClass="nonBorder"
+                                value="#{registerBean.password}" label="Password 1" required="true"/>
+                    <p:message for="pwd1"/>
+                </div>
+                <div class="field">
+                    <h:outputLabel for="pwd2" value="Potvrdiť heslo: *"/>
+                    <p:password id="pwd2" label="Password 2" value="#{registerBean.password}"
+                                styleClass="nonBorder"
+                                requiredMessage="Heslo a potvrdenie hesla musia byť v rovnakom tvare"
+                                required="true"/>
+                    <p:message for="pwd2"/>
                 </div>
             </div>
         </div>
 
+        <pre></pre>
+        <h4 class="ui dividing header">NOVINKY</h4>
+        <div class="field">
+            <label>Prihlásiť sa k odberu:</label>
+            <div class="field">
+                <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5" cellpadding="20">
+                    <p:selectOneRadio id="city" value="#{registerBean.subscribed}" layout="grid"
+                                      columns="1">
+                        <f:selectItem itemLabel="&#160;&#160;Áno" itemValue="Yes"/>
+                        <f:selectItem itemLabel="&#160;&#160;Nie" itemValue="No"/>
+                    </p:selectOneRadio>
+                </h:panelGrid>
+            </div>
+        </div>
 
-        <h:form styleClass="ui form">
-            <!--<p:growl autoUpdate="true" showDetail="true"/>-->
-            <p:messages autoUpdate="true"/>
-            <h4 class="ui dividing header">VAŠE OSOBNÉ INFORMÁCIE</h4>
-            <div class="field">
-                <label>Osobné údaje:</label>
-                <div class="two fields">
-                    <div class="field">
-                        <p:inputText id="firstNameId" styleClass="nonBorder"
-                                     value="#{registerBean.firstname}"
-                                     placeholder="Meno"
-                                     type="text"/>
-                        <p:message for="firstNameId"/>
-                    </div>
-                    <div class="field">
-                        <p:inputText id="lastNameId" styleClass="nonBorder" value="#{registerBean.lastname}"
-                                     placeholder="Priezvisko"
-                                     type="text"/>
-                        <p:message for="lastNameId"/>
-                    </div>
-                </div>
+        <pre></pre>
 
-            </div>
-            <div class="field">
-                <label>Email:</label>
-                <div class="field">
-                    <p:inputText id="emailId" styleClass="nonBorder" value="#{registerBean.email}"
-                                 placeholder="Emailová adresa"
-                                 type="text"/>
-                </div>
-            </div>
-            <div class="field">
-                <label>Telefón:</label>
-                <div class="field">
-                    <p:inputText id="phoneNumberId" styleClass="nonBorder"
-                                 value="#{registerBean.phoneNumber}"
-                                 placeholder="Telefón"
-                                 type="text"/>
-                    <p:message for="phoneNumberId"/>
-                </div>
-            </div>
-            <h4 class="ui dividing header">VAŠA ADRESA</h4>
-            <div class="field">
-                <label>Spoločnosť:</label>
-                <div class="field">
-                    <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
-                                 placeholder="Názov spoločnost"
-                                 type="text"/>
-                </div>
-            </div>
-            <div class="field">
-                <label>IČO:</label>
-                <div class="field">
-                    <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
-                                 placeholder="IČO"
-                                 type="text"/>
-                </div>
-            </div>
-            <div class="field">
-                <label>DIČ/IČ DPH:</label>
-                <div class="field">
-                    <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
-                                 placeholder="DIČ/IČ DPH" type="text"/>
-                </div>
-            </div>
-            <div class="field">
-                <label>Adresa:</label>
-                <div class="fields">
-                    <div class="six wide field">
-                        <p:inputText id="streetId" value="#{registerBean.street}" styleClass="nonBorder"
-                                     placeholder="Ulica"
-                                     type="text"/>
-                        <p:message for="streetId"/>
-                    </div>
-                    <div class="four wide field">
-                        <p:inputText id="pscId" value="#{registerBean.postalCode}" styleClass="nonBorder"
-                                     placeholder="PSČ"
-                                     type="text"/>
-                    </div>
-                    <div class="six wide field">
-                        <p:message for="cityId"/>
-                        <p:inputText id="cityId" value="#{registerBean.city}" styleClass="nonBorder"
-                                     placeholder="Mesto"
-                                     type="text"/>
-                    </div>
-                </div>
-            </div>
-            <h4 class="ui dividing header">VAŠE HESLO</h4>
-            <div class="field">
-                <div class="two fields" id="matchGrid">
-                    <div class="field">
-                        <h:outputLabel for="pwd1" value="Heslo: *"/>
-                        <p:password id="pwd1" match="pwd2" styleClass="nonBorder"
-                                    value="#{registerBean.password}" label="Password 1" required="true"/>
-                        <p:message for="pwd1"/>
-                    </div>
-                    <div class="field">
-                        <h:outputLabel for="pwd2" value="Potvrdiť heslo: *"/>
-                        <p:password id="pwd2" label="Password 2" value="#{registerBean.password}"
-                                    styleClass="nonBorder"
-                                    requiredMessage="Heslo a potvrdenie hesla musia byť v rovnakom tvare"
-                                    required="true"/>
-                        <p:message for="pwd2"/>
-                    </div>
-                </div>
-            </div>
+        <p:selectBooleanCheckbox id="checked" value="#{registerBean.checkedCondition}"/>
+        <label>Prečítal(a) som si a súhlasím s <a id="privacyId">Ochrana osobných údajov</a></label>
+        <p:message for="checked"/>
+        <pre></pre>
+        <div class="field">
+            <p:commandLink value="Send" action="#{registerBean.updateData()}"
+                           styleClass="ui button" validateClient="true">
+            </p:commandLink>
+        </div>
+    </h:form>
 
-            <pre></pre>
-            <h4 class="ui dividing header">NOVINKY</h4>
-            <div class="field">
-                <label>Prihlásiť sa k odberu:</label>
-                <div class="field">
-                    <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5" cellpadding="20">
-                        <p:selectOneRadio id="city" value="#{registerBean.subscribed}" layout="grid"
-                                          columns="1">
-                            <f:selectItem itemLabel="&#160;&#160;Áno" itemValue="Yes"/>
-                            <f:selectItem itemLabel="&#160;&#160;Nie" itemValue="No"/>
-                        </p:selectOneRadio>
-                    </h:panelGrid>
-                </div>
-            </div>
-
-            <pre></pre>
-
-            <p:selectBooleanCheckbox id="checked" value="#{registerBean.checkedCondition}"/>
-            <label>Prečítal(a) som si a súhlasím s <a id="privacyId">Ochrana osobných údajov</a></label>
-            <p:message for="checked"/>
-            <pre></pre>
-            <div class="field">
-                <p:commandLink value="Send" action="#{registerBean.updateData()}"
-                               styleClass="ui button" validateClient="true">
-                </p:commandLink>
-            </div>
-        </h:form>
-
-    </div>
-
+</div>
+<ui:insert name="sa">
+    <ui:include src="modal-privacy.xhtml"/>
+</ui:insert>
 
 
 </html>

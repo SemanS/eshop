@@ -164,6 +164,7 @@ public class ItemView implements Serializable {
         selectedItem = itemDto;
         /*selectedItem.setQuantity(1);*/
         FacesContext.getCurrentInstance().getExternalContext().redirect("/store/" + itemDto.getUrl());
+        System.out.println("daco");
     }
 
 }

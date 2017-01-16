@@ -5,63 +5,56 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-<pre></pre>
-<div class="ui grid segment">
-    <div class="ui eight wide column">
-        <h4 class="ui horizontal divider header">
-            <!--<i class="tag icon"></i>-->
-            Nový zákazník
-        </h4>
-        <div class="content">
-            <div class="field">
-                <label>Možnosti pokladne:</label>
-                <h:panelGrid columns="2" style="margin-bottom:10px" cellspacing="5"
-                             cellpadding="20">
-                    <p:selectOneRadio id="userContinueId" value="#{userWizard.userContinue}"
-                                      layout="grid"
-                                      columns="1">
-                        <f:selectItem itemLabel="&#160;&#160;Registrácia účtu"
-                                      itemValue="Yes"/>
-                        <f:selectItem itemLabel="&#160;&#160;Nákup bez registrácie"
-                                      itemValue="No"/>
-                    </p:selectOneRadio>
-                </h:panelGrid>
-            </div>
-            <div class="field">
-                Založením účtu budete môcť nakupovať rýchlejšie, môžete byť informovaný(á) o stave objednávky a uložiť si predchádzajúce sledovanie zásielok.
-            </div>
 
-            <div class="field" style="text-align: center">
-                <h:commandButton class="ui positive button" value="Pokračovať" action="#{userWizard.onContinue()}">
-                    <!--<i class="checkmark icon"></i>-->
-                </h:commandButton>
-            </div>
-        </div>
-    </div>
-    <div class="ui eight wide column">
-        <h4 class="ui horizontal divider header">
-            <!--<i class="tag icon"></i>-->
-            Prihlásenie zákazníka
-        </h4>
-        <div class="content">
-            <div class="field">
-                <label>Email:</label>
-                <input name="first-name" placeholder="First Name" type="text"/>
-            </div>
-            <div class="field">
-                <label>Heslo:</label>
-                <input name="last-name" placeholder="Last Name" type="text"/>
-            </div>
+<h:body>
 
-            <div class="field" style="text-align: center">
-                <div class="ui positive right labeled icon button centered">
-                    Prihlásiť sa
-                    <i class="checkmark icon"></i>
+    <pre></pre>
+    <div class="ui grid segment">
+        <div class="ui eight wide column">
+            <h4 class="ui horizontal divider header">
+                <!--<i class="tag icon"></i>-->
+                Nový zákazník
+            </h4>
+            <div class="content">
+                <div class="field">
+                    <label>Možnosti pokladne:</label>
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellspacing="5"
+                                 cellpadding="20">
+                        <h:selectOneRadio id="userContinueId" value="#{userWizard.userContinue}"
+                                          layout="grid"
+                                          columns="1">
+                            <f:selectItem itemLabel="&#160;&#160;Registrácia účtu&#160;&#160;"
+                                          itemValue="Yes"/>
+                            <f:selectItem itemLabel="&#160;&#160;Nákup bez registrácie"
+                                          itemValue="No"/>
+                        </h:selectOneRadio>
+                    </h:panelGrid>
+                </div>
+                <div class="field">
+                    Založením účtu budete môcť nakupovať rýchlejšie, môžete byť informovaný(á) o stave objednávky a uložiť si predchádzajúce sledovanie zásielok.
+                </div>
+
+                <div class="field" style="text-align: center">
+                    <h:form>
+                        <h:commandButton oncomplete="PF('wiz').loadStep('facturationId',false)"
+                                         class="ui positive button"
+                                         value="Pokračovať" action="#{userWizard.onContinue()}">
+                            <!--<i class="checkmark icon"></i>-->
+                        </h:commandButton>
+                    </h:form>
                 </div>
             </div>
         </div>
+        <div class="ui eight wide column">
+
+            <ui:insert name="userLogin">
+                <ui:include src="../user-login.xhtml"/>
+            </ui:insert>
+
+        </div>
+        <pre></pre>
     </div>
-    <pre></pre>
-</div>
+
+</h:body>
 
 </html>

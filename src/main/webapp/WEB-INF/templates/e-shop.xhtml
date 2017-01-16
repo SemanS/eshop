@@ -18,40 +18,36 @@
         <div class="ui grid four column stackable centered">
             <ui:repeat value="#{itemView.allItemsByCategory()}" var="item">
                 <div class="column">
-                    <!--<div class="ui link cards">-->
+
                     <div class="ui fluid card">
+
                         <div class="blurring dimmable image">
                             <img class="ui image" src="data:image/png;base64,#{item.image}"/>
                         </div>
-                        <!--<h:commandLink id="oukej" action="#{itemView.onItemDetail(item)}"
-                                       styleClass="image">
-                            <img src="#{item.img}"/>
-                        </h:commandLink>-->
-                        <!--<div class="ui inverted dimmer">-->
-                        <!-- <h:commandLink id="ajax" action="#{itemView.onItemDetail(item)}"
-                                        styleClass="ui inverted dimmer">-->
+
                         <div class="content">
-                            <!--<div class="header">
-                                <h:commandLink id="ajax"
-                                               action="#{itemView.onItemDetail(item)}"
-                                               value="#{item.header}"></h:commandLink>
-                            </div>-->
-                            <div class="meta">#{item.text}</div>
-                            <div class="description">
-                                <h:commandLink action="#{itemView.onItem(item)}">
-                                    asd
+                            <div class="description ui green">
+
+                                <a class="ui blue ribbon label">#{item.priceNetto} EUR</a>
+                                <!--    <h4 class="centered">#{item.priceNetto} EUR</h4>-->
+                                <span class="meta" style="text-align: right">Skladom</span>
+
+                            </div>
+
+                            <div class="description" style="margin-top: 10px; text-align: center">
+                                <h:commandLink style="color:black; " action="#{itemView.onItem(item)}">
+                                    #{item.text}
                                 </h:commandLink>
                             </div>
+
+                        </div>
+                        <div class="ui bottom attached button">
+                            <i class="add icon"></i>
+                            Pridať do košíka
                         </div>
 
-                        <!--</h:commandLink>-->
-                        <!--</div>-->
-
-
-                        <!-- <h:outputText value="#{item.header}"/>-->
                     </div>
 
-                    <!-- </div>-->
                 </div>
             </ui:repeat>
         </div>

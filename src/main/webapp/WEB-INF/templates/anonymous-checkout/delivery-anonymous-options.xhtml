@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<div class="ui grid segment">
+
+    <h:form>
+        <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
+            <div class="ui two wide column"></div>
+            <div class="ui four wide column"></div>
+            <div class="four wide column"></div>
+        </ui:fragment>
+        <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
+
+            <div class="ui six wide column"></div>
+            <div class="ui four wide column">
+
+                <h:outputFormat style="margin-bottom:10px" cellspacing="5" cellpadding="20">
+                    <h:selectOneRadio id="city" value="#{userWizard.radioValueDelivery}" layout="grid"
+                                      columns="1">
+                        <!--<p:ajax update="out2 " process="@form" event="blur" listener="#{userWizard.selectRadioItem}"/>-->
+                        <f:selectItem itemLabel="&#160;&#160;Chcem použiť existujúcu adresu" itemValue="Yes"/>
+                        <f:selectItem itemLabel="&#160;&#160;Chcem použiť novú adresu" itemValue="No"/>
+                        <f:ajax render="uawGroup"/>
+
+                    </h:selectOneRadio>
+                </h:outputFormat>
+
+            </div>
+
+
+            <div class="ui sixteen wide column">
+                <h:panelGroup id="uawGroup" layout="block">
+                    <div class="eight wide column">
+                        <h:inputText value="#{userWizard.currentUserAddress()}"
+                                     rendered="#{userWizard.radioValueDelivery == 'Yes'}" disabled="true"/>
+                    </div>
+                    <h:outputFormat rendered="#{userWizard.radioValueDelivery == 'No'}">
+                        <ui:insert name="userRegisterId">
+                            <ui:include src="/WEB-INF/templates/user-register.xhtml"/>
+                        </ui:insert>
+                    </h:outputFormat>
+                </h:panelGroup>
+
+                <!--<h:outputText id="out2" value="#{userWizard.radioValue}"/>
+                <p:message for="city" id="panelGeral"/>-->
+                <!--<p:outputPanel id="panelGeral">
+                    <p:panel id="panel" rendered="#{userWizard.radioValue}"/>
+                </p:outputPanel>-->
+
+
+            </div>
+        </ui:fragment>
+        <!--<p:panel id="panel" rendered="#{userWizard.radioValue}"/>
+        <h:outputText id="asds" rendered="#{userWizard.radioValue == 'No'}" value="#{userWizard.radioValue}"></h:outputText>-->
+        <!--<ui:fragment id="asd" rendered="#{userWizard.radioValue == 'No'}">
+            <p:outputLabel id="ajaxValueId" value="Ta dobre"/>
+            <h:outputText value="super"/>
+        </ui:fragment>-->
+        <!--<div class="ui two wide column"></div>-->
+
+    </h:form>
+</div>
+
+</html>

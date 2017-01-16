@@ -42,7 +42,7 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
-    private String userContinue;
+    private String userContinue = "Yes";
 
     @Getter
     @Setter
@@ -54,6 +54,9 @@ public class UserWizard implements Serializable {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RegisterBean registerBean;
 
     @PostConstruct
     public void init() {
@@ -87,7 +90,7 @@ public class UserWizard implements Serializable {
         if (userContinue.equals("Yes")) {
             return "register?faces-redirect=true";
         } else {
-            return "confirmation?faces-redirect=true";
+            return "anonymousCheckout?faces-redirect=true";
         }
     }
 

@@ -298,3 +298,7 @@ body {
 .logoEurofood {
     background-image: url(../../resources/images/logo_eurofood.jpg) !important;
 }
+
+.column1centered, .column2centered {
+    text-align: center !important;
+}

@@ -36,7 +36,7 @@ public class Address implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }

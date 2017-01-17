@@ -6,9 +6,7 @@ import com.webinson.eurofood.entity.Address;
 import com.webinson.eurofood.entity.CartItem;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Slavo on 1/13/2017.
@@ -54,8 +52,8 @@ public class AddressAssembler {
         return model;
     }
 
-    public List<AddressDto> toDtos(final Collection<Address> models) {
-        final List<AddressDto> dtos = new ArrayList<AddressDto>();
+    public Set<AddressDto> toDtos(final Collection<Address> models) {
+        final Set<AddressDto> dtos = new HashSet<>();
         if (isNotEmpty(models)) {
             for (final Address address : models) {
                 dtos.add(convertToDto(address, new AddressDto()));
@@ -64,8 +62,8 @@ public class AddressAssembler {
         return dtos;
     }
 
-    public List<Address> toModels(final Collection<AddressDto> dtos) {
-        final List<Address> models = new ArrayList<Address>();
+    public Set<Address> toModels(final Collection<AddressDto> dtos) {
+        final Set<Address> models = new HashSet<>();
         if (isNotEmpty(dtos)) {
             for (final AddressDto addressDto : dtos) {
                 models.add(convertToModel(addressDto, new Address()));

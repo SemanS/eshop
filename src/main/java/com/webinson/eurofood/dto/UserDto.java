@@ -3,6 +3,7 @@ package com.webinson.eurofood.dto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Slavo on 12/6/2016.
@@ -22,5 +23,5 @@ public class UserDto {
     private String postalCode;
     private String city;*/
 
-    private List<AddressDto> addressDtos;
+    private Set<AddressDto> addressDtos;
 }

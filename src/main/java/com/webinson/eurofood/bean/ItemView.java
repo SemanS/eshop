@@ -139,7 +139,6 @@ public class ItemView implements Serializable {
 
         items = itemService.getAllItems();
         //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
-        lazyModel = new LazyCarDataModel(service.createCars(200));
     }
 
     public String onImageDescriptionChange() {

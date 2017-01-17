@@ -71,27 +71,4 @@ public class ItemServiceImpl implements ItemService {
 
     }
 
-    @Override
-    public List<ItemDto> getItems(int size) {
-        List<ItemDto> list = new ArrayList<ItemDto>();
-        for (int i = 0; i < size; i++) {
-            list.add(new Car(getRandomId(), getRandomBrand(), getRandomYear(), getRandomColor(), getRandomPrice(), getRandomSoldState()));
-        }
-
-        return list;
-    }
-
-    public List<ItemDto> getItems(int startingAt, int maxPerPage) {
-
-        // regular query that will search for players in the db
-        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
-        QItem item = QItem.item;
-        List<Item> items = query.from(item).select(item).where(item.category.id.eq(categoryDto.getId())).fetch();
-        Query query = entityManager.createQuery("select i from Player p");
-        query.setFirstResult(startingAt);
-        query.setMaxResults(maxPerPage);
-
-        return query.getResultList();
-    }
-
 }

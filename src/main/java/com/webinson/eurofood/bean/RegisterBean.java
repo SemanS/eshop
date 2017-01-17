@@ -14,7 +14,9 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.*;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Slavo on 12/7/2016.
@@ -88,7 +90,7 @@ public class RegisterBean {
     public String updateData() {
         UserDto userDto = new UserDto();
         AddressDto addressDto = new AddressDto();
-        List<AddressDto> addressDtos = new ArrayList<AddressDto>();
+        Set<AddressDto> addressDtos = new HashSet<AddressDto>();
 
         addressDto.setFirstName(firstname);
         addressDto.setLastName(lastname);

@@ -31,11 +31,29 @@
             </ui:insert>
         </div>
 
-        <div class="sixteen wide column" id="itemDetail">
-            <ui:insert name="itemDetail">
-                <ui:include src="WEB-INF/templates/anonymous-checkout.xhtml"/>
-            </ui:insert>
-        </div>
+        <h:outputFormat rendered="#{shoppingCartView.counter == 0}" titleStyleClass="item"
+                        id="asfasd" title="Možnosti pokladne">
+            <div class="three wide column" style="" id="Sidebar">
+                <ui:insert name="sideMenu">
+                    <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+                </ui:insert>
+            </div>
+
+            <div class="thirteen wide column" id="">
+                <ui:insert name="mainPage">
+                    <ui:include src="WEB-INF/templates/empty-shoppingCart.xhtml"/>
+                </ui:insert>
+            </div>
+        </h:outputFormat>
+
+        <h:outputFormat rendered="#{shoppingCartView.counter != 0}" titleStyleClass="item"
+                        id="checkoutOptionsId" title="Možnosti pokladne">
+            <div class="sixteen wide column" id="itemDetail">
+                <ui:insert name="itemDetail">
+                    <ui:include src="WEB-INF/templates/anonymous-checkout.xhtml"/>
+                </ui:insert>
+            </div>
+        </h:outputFormat>
 
         <div class="sixteen wide theme column" id="Footer">
             <ui:insert name="footer">

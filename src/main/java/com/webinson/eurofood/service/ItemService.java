@@ -19,4 +19,6 @@ public interface ItemService {
     public void saveItemByUrl(String url, String text);
 
     public List<ItemDto> getItemsByCategory(CategoryDto categoryDto);
+
+    public List<ItemDto> getItems(int size);
 }

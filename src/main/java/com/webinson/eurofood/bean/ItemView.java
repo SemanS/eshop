@@ -13,6 +13,7 @@ import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.*;
+import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -106,6 +107,9 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedCategoryImage;
 
+    @Getter
+    @Setter
+    private LazyDataModel<ItemDto> lazyModel;
 
     @URLAction
     public String loadCategory() throws IOException {
@@ -135,6 +139,7 @@ public class ItemView implements Serializable {
 
         items = itemService.getAllItems();
         //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
+        lazyModel = new LazyCarDataModel(service.createCars(200));
     }
 
     public String onImageDescriptionChange() {

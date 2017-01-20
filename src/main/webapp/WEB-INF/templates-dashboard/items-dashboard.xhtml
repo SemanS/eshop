@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:form id="itemsFormId">
+    <pre></pre>
+    <div class="ui stackable grid ">
+
+        <div class="one wide column"></div>
+
+        <div class="eight wide column ">
+            <p:dataTable var="item" value="#{itemDashboardBean.items}"
+                         paginator="true" rows="10" sortMode="multiple"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15" selectionMode="single" id="itemTable" lazy="true"
+                         reflow="true" selection="#{itemDashboardBean.selectedItem}" rowKey="#{item.id}">
+                <f:facet name="header">
+                    Zoznam produktov
+                </f:facet>
+                <p:ajax event="rowSelect" listener="#{itemDashboardBean.onRowSelect}"
+                        update=":itemsFormId:itemTabbedViewId"/>
+                <p:column headerText="Id" sortBy="#{item.id}" filterBy="#{item.id}">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column headerText="Header" sortBy="#{item.header}" filterBy="#{item.header}">
+                    <h:outputText value="#{item.header}"/>
+                </p:column>
+                <p:column headerText="Text" sortBy="#{item.text}" filterBy="#{item.text}">
+                    <h:outputText value="#{item.text}"/>
+                </p:column>
+                <p:column headerText="Cena netto" sortBy="#{item.priceBrutto}" filterBy="#{item.priceBrutto}">
+                    <h:outputText value="#{item.priceBrutto}"/>
+                </p:column>
+                <p:column headerText="Cena brutto" sortBy="#{item.priceNetto}" filterBy="#{item.priceNetto}">
+                    <h:outputText value="#{item.priceNetto}"/>
+                </p:column>
+
+                <!--<p:column>
+                    <h:selectOneMenu value="#{user}">
+                        <f:selectItems value="#{user.addresses}" var="a"
+                                       itemValue="#{a.street}" itemLabel="#{a.street}"/>
+                    </h:selectOneMenu>
+                </p:column>-->
+
+            </p:dataTable>
+        </div>
+
+        <div class="headerDivider" style="margin-left: 20px; margin-top: 10px"></div>
+        <p:tabView id="itemTabbedViewId">
+            <!--<p:ajax event="tabChange" listener="#{tabbedView.onTabChange}" update=":itemsFormId"/>
+            <p:ajax event="tabClose" listener="#{tabbedView.onTabClose}" update=":itemsFormId"/>-->
+
+            <p:tab title="Godfather Part I">
+
+                <h:form id="productDetailId" styleClass="ui form">
+                    <h:commandButton class="medium ui button right floated" icon="ui-icon-star"
+                                     style="border-radius: 0px !important; margin-top: 10px; color: red"
+                                     actionListener="#{itemDashboardBean.onNewItem()}"
+                                     value="Pridať nový produkt&#160;&#160;">
+                        <f:ajax onevent="handleDisableButton"/>
+                        <i class="left shop icon"></i>
+                    </h:commandButton>
+                    <div class="field">
+
+                        <label>Názov:</label>
+                        <div class="field">
+                            <p:inputText id="nameId" styleClass="nonBorder"
+                                         value="#{itemDashboardBean.selectedItem.header}"
+                                         placeholder="Meno"
+                                         type="text"/>
+                        </div>
+                        <label>Popis:</label>
+                        <div class="field">
+                            <p:inputText id="textId" styleClass="nonBorder"
+                                         value="#{itemDashboardBean.selectedItem.text}"
+                                         placeholder="Zadajte popis produktu"
+                                         type="text"/>
+                        </div>
+                        <label>EAN:</label>
+                        <div class="field">
+                            <p:inputText id="firstNameId" styleClass="nonBorder"
+                                         value="#{itemDashboardBean.selectedItem.priceBrutto}"
+                                         placeholder="Zadajte cenu brutto"
+                                         type="text"/>
+                        </div>
+                        <label>Cena brutto - netto:</label>
+                        <div class="two fields">
+                            <div class="field">
+                                <p:inputText id="asds" styleClass="nonBorder"
+                                             value="#{itemDashboardBean.selectedItem.priceBrutto}"
+                                             placeholder="Zadajte cenu brutto"
+                                             type="text"/>
+                                <p:message for="firstNameId"/>
+                            </div>
+                            <div class="field">
+                                <p:inputText id="asdsas" styleClass="nonBorder"
+                                             value="#{itemDashboardBean.selectedItem.priceNetto}"
+                                             placeholder="Zadajte cenu netto"
+                                             type="text"/>
+                            </div>
+                        </div>
+                        <p:commandButton class="medium ui button right floated" icon="ui-icon-star" ajax="false"
+                                         style="border-radius: 0px !important; margin-top: 10px; color: red"
+                                         actionListener="#{itemDashboardBean.onSaveItem(itemDashboardBean.selectedItem)}"
+                                         value="Pridať nový produkt&#160;&#160;" update="productDetailId">
+                            <!--<f:ajax onevent="handleDisableButton"/>-->
+                            <i class="left shop icon"></i>
+                        </p:commandButton>
+                    </div>
+                </h:form>
+            </p:tab>
+            <p:tab title="Godfather Part II">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage name="demo/images/godfather/godfather2.jpg"/>
+                    <h:outputText value="Francis Ford Coppola's legendary..."/>
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="Godfather Part III">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <p:graphicImage name="demo/images/godfather/godfather3.jpg"/>
+                    <h:outputText value="After a break of more than 15 years..."/>
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+
+    </div>
+</h:form>
+</html>

@@ -108,6 +108,7 @@ public class ApplicationConfig extends SpringBootServletInitializer {
                 servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
                 servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
                 servletContext.setInitParameter("primefaces.UPLOADER", "commons");
+                servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "server");
             }
         };
 

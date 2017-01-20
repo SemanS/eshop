@@ -2,6 +2,7 @@ package com.webinson.eurofood.service;
 
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
+import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,8 @@ public interface ItemService {
 
     public List<ItemDto> getItemsByCategory(CategoryDto categoryDto);
 
-    Page<User> findByFilter(Map<String, String> filters, Pageable pageable);
+    Page<Item> findByFilter(Map<String, String> filters, Pageable pageable);
+
+    public ItemDto getItemById(Long id);
 
 }

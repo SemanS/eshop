@@ -24,17 +24,18 @@
     <h:outputScript name="js/init.js"/>
     <h:outputScript name="js/semantic.min.js"/>
 
-    <div class="ui container">
 
-        <ui:insert name="attachedMenu">
-            <ui:include src="WEB-INF/templates-dashboard/attached-menu-dashboard.xhtml"/>
-        </ui:insert>
+    <ui:insert name="attachedMenu">
+        <ui:include src="WEB-INF/templates-dashboard/attached-menu-dashboard.xhtml"/>
+    </ui:insert>
 
-        <ui:insert name="attachedMenu">
-            <ui:include src="WEB-INF/templates-dashboard/products-dashboard.xhtml"/>
-        </ui:insert>
+    <!--<ui:insert name="attachedMenu">
+        <ui:include src="WEB-INF/templates-dashboard/users-dashboard.xhtml"/>
+    </ui:insert>-->
 
-    </div>
+    <ui:insert name="attachedMenu">
+        <ui:include src="WEB-INF/templates-dashboard/items-dashboard.xhtml"/>
+    </ui:insert>
 
 
 </h:body>

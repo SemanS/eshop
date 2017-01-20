@@ -302,3 +302,7 @@ body {
 .column1centered, .column2centered {
     text-align: center !important;
 }
+
+.columnDashboardItemDetail {
+    margin-right: 10px !important;
+}

@@ -18,7 +18,11 @@ import java.util.List;
  */
 @Repository
 public interface UserDao extends JpaRepository<User, Long>, QueryDslPredicateExecutor<User>, PagingAndSortingRepository<User, Long>, JpaSpecificationExecutor<User> {
+
     User findByUsername(String name);
+
     List<User> findAll();
+
     public Page<User> findByUsername(String username, Pageable pageable);
+
 }

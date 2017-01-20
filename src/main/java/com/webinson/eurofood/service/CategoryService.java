@@ -5,6 +5,8 @@ import com.webinson.eurofood.entity.Category;
 import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.TreeNode;
 
+import java.util.List;
+
 /**
  * Created by Slavo on 12/2/2016.
  */
@@ -12,9 +14,11 @@ public interface CategoryService {
 
     /*public TreeNode createRoot();*/
 
-    public TreeModel createModel();
+    TreeModel createModel();
 
-    public void saveNewCategory(Category category);
+    void saveNewCategory(Category category);
 
-    public CategoryDto getCategoryByUrl(String url);
+    CategoryDto getCategoryByUrl(String url);
+
+    List<Category> getNonRootCategories();
 }

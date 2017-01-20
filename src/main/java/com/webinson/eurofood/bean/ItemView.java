@@ -107,9 +107,9 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedCategoryImage;
 
-    @Getter
+   /* @Getter
     @Setter
-    private LazyDataModel<ItemDto> lazyModel;
+    private LazyDataModel<ItemDto> lazyModel;*/
 
     @URLAction
     public String loadCategory() throws IOException {

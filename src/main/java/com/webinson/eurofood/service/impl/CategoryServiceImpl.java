@@ -45,36 +45,14 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDto;
     }
 
+    @Override
+    public List<Category> getNonRootCategories() {
+        categoryDao.findAll()
+    }
+
     public void saveItemByUrl(String url, String text) {
 
     }
-
-    /*public TreeNode createRoot() {
-        for (Category cat : categoryDao.findAll()) {
-            if (cat.getParent() == null) {
-                allCategories.add(categoryAssembler.toDto(cat));
-            }
-        }
-        TreeNode rootNode = new DefaultTreeNode(new CategoryDto(), null);
-
-        for (CategoryDto category : allCategories) {
-            TreeNode node = new DefaultTreeNode(category, rootNode);
-            createNodeCategory(category, node);
-        }
-
-        return rootNode;
-    }
-
-    public void createNodeCategory(CategoryDto categoryDto, TreeNode node) {
-
-        List<CategoryDto> categoryList = createSubNodes(categoryDto);
-
-        for (CategoryDto cat : categoryList) {
-            TreeNode subNode = new DefaultTreeNode(cat, node);
-            createNodeCategory(cat, subNode);
-        }
-        return;
-    }*/
 
     public List<CategoryDto> createSubNodes(CategoryDto categoryDto) {
         List<CategoryDto> categoryNodeList = new ArrayList<CategoryDto>();
@@ -110,54 +88,5 @@ public class CategoryServiceImpl implements CategoryService {
             buildTreeModel(treeModel.addChild(item), createSubNodes(item));
         }
     }
-
-    /*@Autowired
-    CategoryDao categoryDao;
-
-    public TreeNode createIncomes(String selectedMonth, String selectedCity, String selectedYear) {
-
-        TreeNode rootNode = new DefaultTreeNode(new VykazRadekDto("name", 1.0, 2.0, 3.0), null);
-
-        List<VykazRadekDto> vykazRadekRootNodeList = getIncomeVykazRadekRoot(selectedYear, selectedMonth, selectedCity);
-
-        for (VykazRadekDto vykRad : vykazRadekRootNodeList) {
-            TreeNode node = new DefaultTreeNode(vykRad, rootNode);
-            createSubIncomes(vykRad, node);
-        }
-        return rootNode;
-    }
-
-    private List<VykazRadekDto> createSubIncomes(VykazRadekDto vykaz, TreeNode node) {
-        List<VykazRadekDto> vykazList = createSubCategoryNodes(vykaz);
-        try {
-            for (VykazRadekDto vyk : vykazList) {
-                TreeNode subNode = new DefaultTreeNode(vyk, node);
-                createSubIncomes(vyk, subNode);
-            }
-            return vykazList;
-        } finally {
-            return vykazList;
-        }
-    }
-
-    private List<CategoryDto> createSubCategoryNodes(CategoryDto categoryDto) {
-
-        List<CategoryDto> subCategoryNodeList = new ArrayList<>();
-
-        if (categoryDto.getChildren() != null) {
-            for (CategoryDto cat : categoryDto.getChildren()) {
-                subCategoryNodeList.add(cat);
-            }
-        }
-        return subCategoryNodeList;
-    }
-
-
-    private List<CategoryDto> getCategoryRoot() {
-
-        List<CategoryDto> categories = categoryDao.findAll();
-        return null;
-    }*/
-
 
 }

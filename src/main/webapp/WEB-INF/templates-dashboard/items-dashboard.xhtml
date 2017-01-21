@@ -48,21 +48,17 @@
         </p:dataTable>
     </h:form>
 
-    <div class="headerDivider" style="margin-left: 20px; margin-top: 10px"></div>
+    <!--<div class="headerDivider" style=" margin-top: 10px"></div>-->
 
     <h:form id="productDetailId" styleClass="ui form six wide column">
-
         <p:tabView>
-
             <p:tab title="Detail produktu">
-
                 <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
                                style="border-radius: 0px !important; margin-top: -50px; margin-bottom: 30px; color: blue"
                                action="#{itemDashboardBean.onNewItem()}" update=":productDetailId"
                                value="Pridať nový produkt&#160;&#160;">
                 </p:commandLink>
                 <div class="field">
-
                     <label>Názov:</label>
                     <div class="field">
                         <p:inputText id="nameId" styleClass="nonBorder"

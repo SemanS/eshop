@@ -31,15 +31,11 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
-    private List<Category> categories;
-
-    @Getter
-    @Setter
     private List<Category> rootCategories;
 
     @Getter
     @Setter
-    private List<String> categoriesString;
+    private List<Category> categories;
 
     @Getter
     @Setter
@@ -69,20 +65,25 @@ public class CategoryDashboardBean {
     @Setter
     private Category inputSubCategory;
 
+    @Getter
+    @Setter
+    private Category inputSelectedRootCategory;
+
     @PostConstruct
     private void init() {
-        categories = categoryService.getNonRootCategories();
         rootCategories = categoryService.getRootCategories();
-        categoriesString = categoryService.getStringCategories();
+        categories = categoryService.getNonRootCategories();
         inputRootCategory = new Category();
         inputSubCategory = new Category();
+        initRootCategory();
     }
 
-    public void onRowSelect(SelectEvent event) {
-
-        /*selectedItem = itemDao.findById(((Item) event.getObject()).getId());
-        selectedCategory = selectedItem.getCategory().getName();*/
-
+    public Category initRootCategory() {
+        if (rootCategories == null) {
+            return inputSelectedRootCategory = new Category();
+        } else {
+            return inputSelectedRootCategory = rootCategories.get(0);
+        }
     }
 
     public String onSaveRootCategory() {
@@ -104,24 +105,22 @@ public class CategoryDashboardBean {
         return "pretty:dashboard";
     }
 
-    public String onSaveItem() {
+    public String onCategoryAssign() {
 
-        /*selectedItem.setCategory(categoryDao.findByName(selectedCategory));
-        itemDao.save(selectedItem);
-        return "pretty:dashboard";*/
+        Category category = categoryDao.findByName(selectedCategory);
+        category.setParent(categoryDao.findByName(selectedRootCategory));
+        categoryDao.save(category);
+
         return "pretty:dashboard";
     }
 
-    public String onDeleteItem() {
-
-        /*itemDao.delete(selectedItem);
-        return "pretty:dashboard";*/
-        return "pretty:dashboard";
+    public String renderCategory() {
+        return categoryDao.findByName(selectedCategory).getParent().getName();
     }
 
-    public void onNewItem() {
-
-        /*this.selectedItem = new Item();*/
+    public String onChangeSelectedRootCategory(String name) {
+        inputSelectedRootCategory = categoryDao.findByName(name);
+        return inputSelectedRootCategory.getName();
     }
 
 

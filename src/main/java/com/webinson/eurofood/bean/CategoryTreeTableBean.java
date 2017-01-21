@@ -20,14 +20,14 @@ public class CategoryTreeTableBean {
 
     @Getter
     @Setter
-    private TreeNode rooCategories;
+    private TreeNode rootCategories;
 
     @Autowired
     CategoryService categoryService;
 
     @PostConstruct
     public void init() {
-        rooCategories = categoryService.buildCategories();
+        rootCategories = categoryService.buildCategories();
     }
 
 }

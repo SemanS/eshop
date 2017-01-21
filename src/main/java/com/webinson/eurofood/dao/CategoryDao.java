@@ -20,4 +20,6 @@ public interface CategoryDao extends JpaRepository<Category, Long>, QueryDslPred
     List<Category> findByParentId(Long id);
 
     Category findByUrl(String url);
+
+    Category findByName(String name);
 }

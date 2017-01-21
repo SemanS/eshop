@@ -37,7 +37,7 @@ public class Item implements Serializable {
     @Column(name = "url")
     private String url;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id")
     private Category category;
 

@@ -1,11 +1,14 @@
 package com.webinson.eurofood.service.impl;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.Item;
+import com.webinson.eurofood.entity.QCategory;
+import com.webinson.eurofood.entity.QItem;
 import com.webinson.eurofood.service.CategoryService;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     CategoryAssembler categoryAssembler;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     List<CategoryDto> allCategories = new ArrayList<CategoryDto>();
 
@@ -47,7 +55,44 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getNonRootCategories() {
-        categoryDao.findAll()
+        /*Category category = new Category();*/
+
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        return query.from(category).where(category.parent.isNotNull()).fetch();
+    }
+
+    @Override
+    public List<Category> getRootCategories() {
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        return query.from(category).where(category.parent.isNull()).fetch();
+    }
+
+    @Override
+    public List<String> getStringRootCategories() {
+
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        List<Category> categories = query.from(category).where(category.parent.isNull()).fetch();
+        List<String> stringCategories = new ArrayList<String>();
+        for (Category cat : categories) {
+            stringCategories.add(cat.getName());
+        }
+        return stringCategories;
+
+    }
+
+    @Override
+    public List<String> getStringCategories() {
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        List<Category> categories = query.from(category).where(category.parent.isNotNull()).fetch();
+        List<String> stringCategories = new ArrayList<String>();
+        for (Category cat : categories) {
+            stringCategories.add(cat.getName());
+        }
+        return stringCategories;
     }
 
     public void saveItemByUrl(String url, String text) {

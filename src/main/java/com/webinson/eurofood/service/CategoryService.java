@@ -21,4 +21,10 @@ public interface CategoryService {
     CategoryDto getCategoryByUrl(String url);
 
     List<Category> getNonRootCategories();
+
+    List<String> getStringCategories();
+
+    List<Category> getRootCategories();
+
+    List<String> getStringRootCategories();
 }

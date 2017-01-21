@@ -306,3 +306,7 @@ body {
 .columnDashboardItemDetail {
     margin-right: 10px !important;
 }
+
+.ui-datatable th.ui-state-active {
+    color: #0f0f10; !important;
+}

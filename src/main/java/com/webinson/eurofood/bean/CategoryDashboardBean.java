@@ -1,22 +1,16 @@
 package com.webinson.eurofood.bean;
 
-import com.webinson.eurofood.assembler.ItemAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
-import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
-import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -27,13 +21,7 @@ import java.util.List;
  */
 @Component
 @ViewScoped
-public class ItemDashboardBean {
-
-    @Autowired
-    private ItemService itemService;
-
-    @Autowired
-    private ItemDao itemDao;
+public class CategoryDashboardBean {
 
     @Autowired
     private CategoryDao categoryDao;
@@ -57,10 +45,6 @@ public class ItemDashboardBean {
 
     @Getter
     @Setter
-    private Item selectedItem;
-
-    @Getter
-    @Setter
     private String selectedCategory;
 
     @Getter
@@ -77,8 +61,6 @@ public class ItemDashboardBean {
         rootCategories = categoryService.getRootCategories();
         rootCategoriesString =
         categoriesString = categoryService.getStringCategories();
-        this.items = new ItemLazyDataModel(itemService);
-        selectedItem = new Item();
     }
 
     public ItemLazyDataModel getItems() {
@@ -87,28 +69,29 @@ public class ItemDashboardBean {
 
     public void onRowSelect(SelectEvent event) {
 
-        selectedItem = itemDao.findById(((Item) event.getObject()).getId());
-        selectedCategory = selectedItem.getCategory().getName();
+        /*selectedItem = itemDao.findById(((Item) event.getObject()).getId());
+        selectedCategory = selectedItem.getCategory().getName();*/
 
     }
 
     public String onSaveItem() {
 
-        selectedItem.setCategory(categoryDao.findByName(selectedCategory));
+        /*selectedItem.setCategory(categoryDao.findByName(selectedCategory));
         itemDao.save(selectedItem);
+        return "pretty:dashboard";*/
         return "pretty:dashboard";
-
     }
 
     public String onDeleteItem() {
 
-        itemDao.delete(selectedItem);
+        /*itemDao.delete(selectedItem);
+        return "pretty:dashboard";*/
         return "pretty:dashboard";
-
     }
 
     public void onNewItem() {
-        this.selectedItem = new Item();
+
+        /*this.selectedItem = new Item();*/
     }
 
 

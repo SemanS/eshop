@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
 
@@ -9,11 +9,13 @@
             <h:form>
                 <div id="top-menu" class="ui attached stackable menu">
                     <h:link class="item" outcome="/dashboard"><i class="options icon"></i>DashBoard</h:link>
-                    <h:commandLink class="item" action="#{itemView.newDashboardItem()}"><i
-                            class="play icon"></i>Pridať video</h:commandLink>
+                    <h:link class="item" outcome="/dashboard-products"><i class="shop icon"></i>Produkty</h:link>
+                    <h:link class="item" outcome="/dashboard-categories"><i class="sitemap icon"></i>Kategórie</h:link>
+                    <h:link class="item" outcome="/dashboard"><i class="users icon"></i>Používatelia</h:link>
                     <h:outputLink class="item right"
                                   value="${pageContext.request.contextPath}/logout"><i
                             class="user icon"></i>Log out</h:outputLink>
+
                     <!--<a class='initially hidden item' id="reset-menu" href="javascript:void(0);">
                         <i class='red remove icon'></i>Menu2
                     </a>-->

@@ -54,43 +54,45 @@
                     </div>
                     <div class="field">
                         <p:inputText styleClass="nonBorder"
-                                     value="#{categoryDashboardBean.inputRootCategory.url}"
+                                     value="#{categoryDashboardBean.inputSelectedRootCategory.url}"
                                      placeholder="Zadajte url hlavnej kategórie"
                                      type="text"/>
                     </div>
                 </div>
                 <p:commandLink class="medium ui button" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
-                               action="#{categoryDashboardBean.onSaveRootCategory()}"
-                               value="Pridať hlavnú kategóriu">
+                               action="#{categoryDashboardBean.onChangeRootCategory()}"
+                               value="Zmeniť hlavnú kategóriu">
                 </p:commandLink>
 
                 <pre></pre>
                 <h4 class="ui horizontal divider header" style="margin-top: 40px">
-                    <!--<i class="tag icon"></i>-->
                     Vedľajšie kategórie
                 </h4>
 
-
                 <div class="field">
-                    <h:selectOneMenu value="#{categoryDashboardBean.selectedCategory}">
+                    <h:selectOneMenu value="#{categoryDashboardBean.selectedSubCategory}">
                         <!--<f:selectItem itemLabel="#{itemDashboardBean.selectedItem.category.name}"/>-->
                         <f:selectItems value="#{categoryDashboardBean.categories}" var="c"
                                        itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                        <!--<f:ajax event="change" update="@this"/>-->
+                        <f:ajax event="change" render=":categoryDetailId"
+                                listener="#{categoryDashboardBean.onChangeSelectedSubCategory(categoryDashboardBean.selectedSubCategory)}"/>
+
+                        <f:ajax event="change" render=":categoryDetailId"
+                                listener="#{categoryDashboardBean.onChangeAssignedCategory(categoryDashboardBean.selectedSubCategory)}"/>
                     </h:selectOneMenu>
                 </div>
 
                 <div class="two fields">
                     <div class="field">
                         <p:inputText styleClass="nonBorder"
-                                     value="#{categoryDashboardBean.inputSubCategory.name}"
+                                     value="#{categoryDashboardBean.inputSelectedSubCategory.name}"
                                      placeholder="Zadajte názov vedľajšej kategórie"
                                      type="text"/>
                     </div>
                     <div class="field">
                         <p:inputText styleClass="nonBorder"
-                                     value="#{categoryDashboardBean.inputSubCategory.url}"
+                                     value="#{categoryDashboardBean.inputSelectedSubCategory.url}"
                                      placeholder="Zadajte url vedľajšej kategórie"
                                      type="text"/>
                     </div>
@@ -98,38 +100,34 @@
 
                 <p:commandLink class="medium ui button" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
-                               action="#{categoryDashboardBean.onSaveSubCategory()}"
-                               value="Pridať vedľajšiu kategóriu">
+                               action="#{categoryDashboardBean.onChangeSubCategory()}"
+                               value="Zemniť vedľajšiu kategóriu">
                 </p:commandLink>
                 <pre></pre>
                 <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
                 <div class="two fields">
                     <div class="field">
-                        <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategory}">
-                            <!--<f:selectItem itemLabel="#{itemDashboardBean.selectedItem.category.name}"/>-->
+                        <h:selectOneMenu id="selectedRootCategoryAssignId"
+                                         value="#{categoryDashboardBean.selectedRootCategoryAssign}">
                             <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
                                            itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                            <!--<f:ajax event="change" update="@this"/>-->
                         </h:selectOneMenu>
                     </div>
                     <div class="field">
                         <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
                                        style="border-radius: 0px !important; color: blue"
-                                       action="#{categoryDashboardBean.onCategoryAssign()}"
+                                       action="#{categoryDashboardBean.onSubCategoryAssign()}"
                                        value="Priradiť ku hlavnej kategórii">
                         </p:commandLink>
                     </div>
                 </div>
-
             </p:tab>
 
             <p:tab title="Pridať kategóriu">
-
                 <h4 class="ui horizontal divider header" style="margin-top: 20px">
                     <!--<i class="tag icon"></i>-->
                     Hlavné kategórie
                 </h4>
-
                 <div class="two fields">
                     <div class="field">
                         <p:inputText styleClass="nonBorder"
@@ -171,30 +169,22 @@
                     </div>
                 </div>
 
-                <p:commandLink class="medium ui button" icon="ui-icon-star"
-                               style="border-radius: 0px !important; color: blue"
-                               action="#{categoryDashboardBean.onSaveSubCategory()}"
-                               value="Pridať vedľajšiu kategóriu">
-                </p:commandLink>
                 <pre></pre>
                 <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
-                <div class="two fields">
-                    <div class="field">
-                        <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategory}">
-                            <!--<f:selectItem itemLabel="#{itemDashboardBean.selectedItem.category.name}"/>-->
-                            <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
-                                           itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                            <!--<f:ajax event="change" update="@this"/>-->
-                        </h:selectOneMenu>
-                    </div>
-                    <div class="field">
-                        <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                                       style="border-radius: 0px !important; color: blue"
-                                       action="#{categoryDashboardBean.onCategoryAssign()}"
-                                       value="Priradiť ku hlavnej kategórii">
-                        </p:commandLink>
-                    </div>
+
+                <div class="field">
+                    <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategoryAdd}">
+                        <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
+                                       itemValue="#{c.name}" itemLabel="#{c.name}"/>
+                    </h:selectOneMenu>
                 </div>
+
+                <p:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                               style="border-radius: 0px !important; color: blue"
+                               action="#{categoryDashboardBean.onSubCategoryAdd()}"
+                               value="Priradiť ku hlavnej kategórii">
+                </p:commandLink>
+
             </p:tab>
 
         </p:tabView>

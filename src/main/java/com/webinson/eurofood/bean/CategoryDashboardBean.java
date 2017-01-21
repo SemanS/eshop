@@ -39,15 +39,11 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
-    private Category selectedLazyCategory;
+    private String selectedRootCategory;
 
     @Getter
     @Setter
     private String selectedCategory;
-
-    @Getter
-    @Setter
-    private String selectedRootCategory;
 
     @Getter
     @Setter
@@ -69,6 +65,18 @@ public class CategoryDashboardBean {
     @Setter
     private Category inputSelectedRootCategory;
 
+    @Getter
+    @Setter
+    private Category inputSelectedSubCategory;
+
+    @Getter
+    @Setter
+    private String selectedRootCategoryAssign;
+
+    @Getter
+    @Setter
+    private String selectedRootCategoryAdd;
+
     @PostConstruct
     private void init() {
         rootCategories = categoryService.getRootCategories();
@@ -76,6 +84,7 @@ public class CategoryDashboardBean {
         inputRootCategory = new Category();
         inputSubCategory = new Category();
         initRootCategory();
+        initSubCategory();
     }
 
     public Category initRootCategory() {
@@ -84,6 +93,32 @@ public class CategoryDashboardBean {
         } else {
             return inputSelectedRootCategory = rootCategories.get(0);
         }
+    }
+
+    public Category initSubCategory() {
+        if (categories == null) {
+            return inputSelectedSubCategory = new Category();
+        } else {
+            return inputSelectedSubCategory = categories.get(0);
+        }
+    }
+
+    public String onChangeRootCategory() {
+        Category category;
+        category = categoryDao.findByName(selectedRootCategory);
+        category.setName(inputSelectedRootCategory.getName());
+        category.setUrl(inputSelectedRootCategory.getUrl());
+        categoryDao.save(category);
+        return "pretty:dashboard";
+    }
+
+    public String onChangeSubCategory() {
+        Category category;
+        category = categoryDao.findByName(selectedSubCategory);
+        category.setName(inputSelectedSubCategory.getName());
+        category.setUrl(inputSelectedSubCategory.getUrl());
+        categoryDao.save(category);
+        return "pretty:dashboard";
     }
 
     public String onSaveRootCategory() {
@@ -105,17 +140,20 @@ public class CategoryDashboardBean {
         return "pretty:dashboard";
     }
 
-    public String onCategoryAssign() {
-
-        Category category = categoryDao.findByName(selectedCategory);
-        category.setParent(categoryDao.findByName(selectedRootCategory));
+    public String onSubCategoryAssign() {
+        Category category = categoryDao.findByName(selectedSubCategory);
+        category.setParent(categoryDao.findByName(selectedRootCategoryAssign));
         categoryDao.save(category);
-
         return "pretty:dashboard";
     }
 
-    public String renderCategory() {
-        return categoryDao.findByName(selectedCategory).getParent().getName();
+    public String onSubCategoryAdd() {
+        Category category = new Category();
+        category.setName(inputSubCategory.getName());
+        category.setUrl(inputSubCategory.getUrl());
+        category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
+        categoryDao.save(category);
+        return "pretty:dashboard";
     }
 
     public String onChangeSelectedRootCategory(String name) {
@@ -123,5 +161,15 @@ public class CategoryDashboardBean {
         return inputSelectedRootCategory.getName();
     }
 
+    public String onChangeSelectedSubCategory(String name) {
+        inputSelectedSubCategory = categoryDao.findByName(name);
+        return inputSelectedSubCategory.getName();
+    }
+
+    public String onChangeAssignedCategory(String name) {
+        Category category = categoryDao.findByName(name);
+        selectedRootCategoryAssign = category.getParent().getName();
+        return selectedRootCategoryAssign;
+    }
 
 }

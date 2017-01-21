@@ -63,10 +63,6 @@ public class ItemDashboardBean {
     @Setter
     private String selectedCategory;
 
-    /*@Getter
-    @Setter
-    private String selectedRootCategory;*/
-
     @Getter
     @Setter
     private List<String> rootCategoriesString;
@@ -74,7 +70,6 @@ public class ItemDashboardBean {
     @PostConstruct
     private void init() {
         categories = categoryService.getNonRootCategories();
-        /*rootCategories = categoryService.getRootCategories();*/
         categoriesString = categoryService.getStringCategories();
         this.items = new ItemLazyDataModel(itemService);
         selectedItem = new Item();
@@ -85,25 +80,19 @@ public class ItemDashboardBean {
     }
 
     public void onRowSelect(SelectEvent event) {
-
         selectedItem = itemDao.findById(((Item) event.getObject()).getId());
         selectedCategory = selectedItem.getCategory().getName();
-
     }
 
     public String onSaveItem() {
-
         selectedItem.setCategory(categoryDao.findByName(selectedCategory));
         itemDao.save(selectedItem);
         return "pretty:dashboard";
-
     }
 
     public String onDeleteItem() {
-
         itemDao.delete(selectedItem);
         return "pretty:dashboard";
-
     }
 
     public void onNewItem() {

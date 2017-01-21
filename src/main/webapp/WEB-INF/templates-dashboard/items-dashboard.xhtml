@@ -15,6 +15,7 @@
                      paginator="true" rows="10" sortMode="multiple" widgetVar="itemsTable"
                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                      rowsPerPageTemplate="5,10,15" selectionMode="single" id="itemTable" lazy="true"
+                     styleClass="borderless"
                      reflow="true" selection="#{itemDashboardBean.selectedItem}" rowKey="#{item.id}">
             <f:facet name="header">
                 Zoznam produktov
@@ -56,7 +57,7 @@
             <p:tab title="Detail produktu">
 
                 <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                               style="border-radius: 0px !important; margin-top: 10px; color: blue"
+                               style="border-radius: 0px !important; margin-top: -50px; margin-bottom: 30px; color: blue"
                                action="#{itemDashboardBean.onNewItem()}" update=":productDetailId"
                                value="Pridať nový produkt&#160;&#160;">
                 </p:commandLink>

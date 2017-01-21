@@ -41,7 +41,9 @@ public class CategoryDashboardBean {
     @Setter
     private List<String> categoriesString;
 
-    private ItemLazyDataModel items;
+    @Getter
+    @Setter
+    private Category selectedLazyCategory;
 
     @Getter
     @Setter
@@ -53,18 +55,27 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
+    private String selectedSubCategory;
+
+    @Getter
+    @Setter
     private List<String> rootCategoriesString;
+
+    @Getter
+    @Setter
+    private Category inputRootCategory;
+
+    @Getter
+    @Setter
+    private Category inputSubCategory;
 
     @PostConstruct
     private void init() {
         categories = categoryService.getNonRootCategories();
         rootCategories = categoryService.getRootCategories();
-        rootCategoriesString =
         categoriesString = categoryService.getStringCategories();
-    }
-
-    public ItemLazyDataModel getItems() {
-        return items;
+        inputRootCategory = new Category();
+        inputSubCategory = new Category();
     }
 
     public void onRowSelect(SelectEvent event) {
@@ -72,6 +83,25 @@ public class CategoryDashboardBean {
         /*selectedItem = itemDao.findById(((Item) event.getObject()).getId());
         selectedCategory = selectedItem.getCategory().getName();*/
 
+    }
+
+    public String onSaveRootCategory() {
+        Category category = new Category();
+        category.setName(inputRootCategory.getName());
+        category.setUrl(inputRootCategory.getUrl());
+        category.setBase(true);
+        categoryService.saveRootCategory(category);
+        return "pretty:dashboard";
+    }
+
+    public String onSaveSubCategory() {
+        Category category = new Category();
+        category.setName(inputSubCategory.getName());
+        category.setUrl(inputSubCategory.getUrl());
+        category.setParent(categoryService.getCategoryByName(selectedRootCategory));
+        category.setBase(false);
+        categoryService.saveRootCategory(category);
+        return "pretty:dashboard";
     }
 
     public String onSaveItem() {

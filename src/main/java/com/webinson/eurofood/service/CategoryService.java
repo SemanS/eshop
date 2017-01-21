@@ -2,17 +2,19 @@ package com.webinson.eurofood.service;
 
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
+import com.webinson.eurofood.entity.Item;
 import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.TreeNode;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Slavo on 12/2/2016.
  */
 public interface CategoryService {
-
-    /*public TreeNode createRoot();*/
 
     TreeModel createModel();
 
@@ -27,4 +29,10 @@ public interface CategoryService {
     List<Category> getRootCategories();
 
     List<String> getStringRootCategories();
+
+    TreeNode buildCategories();
+
+    void saveRootCategory(Category category);
+
+    Category getCategoryByName(String name);
 }

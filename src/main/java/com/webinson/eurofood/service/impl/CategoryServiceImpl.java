@@ -3,12 +3,9 @@ package com.webinson.eurofood.service.impl;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
-import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
-import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.entity.QCategory;
-import com.webinson.eurofood.entity.QItem;
 import com.webinson.eurofood.service.CategoryService;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;
@@ -16,7 +13,6 @@ import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,7 +24,6 @@ import java.util.List;
  */
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
 
     @Autowired
     CategoryDao categoryDao;
@@ -112,8 +107,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     public TreeModel<CategoryDto> createModel() {
         TreeModel<CategoryDto> treeModel = new ListTreeModel<>();
-
-
         for (Category cat : categoryDao.findAll()) {
             if (cat.getParent() == null) {
                 allCategories.add(categoryAssembler.toDto(cat));
@@ -121,12 +114,8 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         buildTreeModel(treeModel, allCategories);
-
-
         return treeModel;
-
     }
-
 
     private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
         for (CategoryDto item : items) {
@@ -134,4 +123,60 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    @Override
+    public TreeNode buildCategories() {
+        TreeNode rootNode = new DefaultTreeNode(new Category(), null);
+        List<Category> categoryRootNodeList = getCategoryRootNodeList();
+
+        for (Category cat : categoryRootNodeList) {
+            TreeNode node = new DefaultTreeNode(cat, rootNode);
+            createSubCategories(cat, node);
+        }
+        return rootNode;
+    }
+
+    public List<Category> getCategoryRootNodeList() {
+        List<Category> rootCategories = new ArrayList<Category>();
+        for (Category cat : categoryDao.findAll()) {
+            if (cat.getParent() == null) {
+                rootCategories.add(cat);
+            }
+        }
+        return rootCategories;
+    }
+
+    private List<Category> createSubCategories(Category category, TreeNode node) {
+        List<Category> categoriesList = getSubCategories(category);
+        try {
+            for (Category cat : categoriesList) {
+                TreeNode subNode = new DefaultTreeNode(cat, node);
+                /*createSubCategories(cat, subNode);*/
+            }
+            return categoriesList;
+        } finally {
+            return categoriesList;
+        }
+    }
+
+    private List<Category> getSubCategories(Category category) {
+        List<Category> subCategoriesNodeList = new ArrayList<>();
+        if (category.getChildren() != null) {
+            for (Category cat : category.getChildren()) {
+                subCategoriesNodeList.add(cat);
+            }
+        }
+        return subCategoriesNodeList;
+    }
+
+    @Override
+    public void saveRootCategory(Category category) {
+        categoryDao.save(category);
+    }
+
+    @Override
+    public Category getCategoryByName(String name) {
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        return query.from(category).where(category.name.eq(name)).fetchOne();
+    }
 }

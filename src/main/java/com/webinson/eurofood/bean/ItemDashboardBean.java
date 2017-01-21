@@ -63,9 +63,9 @@ public class ItemDashboardBean {
     @Setter
     private String selectedCategory;
 
-    @Getter
+    /*@Getter
     @Setter
-    private String selectedRootCategory;
+    private String selectedRootCategory;*/
 
     @Getter
     @Setter
@@ -74,8 +74,7 @@ public class ItemDashboardBean {
     @PostConstruct
     private void init() {
         categories = categoryService.getNonRootCategories();
-        rootCategories = categoryService.getRootCategories();
-        rootCategoriesString =
+        /*rootCategories = categoryService.getRootCategories();*/
         categoriesString = categoryService.getStringCategories();
         this.items = new ItemLazyDataModel(itemService);
         selectedItem = new Item();

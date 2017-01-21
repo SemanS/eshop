@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Slavo on 11/23/2016.
@@ -18,9 +19,10 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_id_seq")
-    @SequenceGenerator(name = "category_id_seq", sequenceName = "category_id_seq")
-    private long id;
+    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_id_seq")
+    @SequenceGenerator(name = "category_id_seq", sequenceName = "category_id_seq")*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -28,6 +30,9 @@ public class Category implements Serializable {
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Category> children;
 
     @Column(name = "img")
     private byte[] image;

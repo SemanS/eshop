@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -93,6 +94,15 @@ public class ItemDashboardBean {
     public String onDeleteItem() {
         itemDao.delete(selectedItem);
         return "pretty:dashboard";
+    }
+
+    public String getBaseImage(Item item) {
+        if(item.getImage() == null) {
+            return "";
+        }
+        String newImage = "";
+        newImage = Base64.getEncoder().encodeToString(item.getImage());
+        return newImage;
     }
 
     public void onNewItem() {

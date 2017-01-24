@@ -25,7 +25,7 @@ public class CartItem implements Serializable {
     @Column(name = "item_id")
     private Long itemId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "shoppingcart_id")
     private ShoppingCart shoppingCart;
 

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<pre></pre>
+<div class="ui stackable grid">
+
+    <div class="one wide column"></div>
+    <h:form id="shoppingCartId" styleClass="eight wide column">
+        <p:dataTable var="shoppingCart" value="#{shoppingCartDashboardBean.shoppingCarts}"
+                     paginator="true" rows="10" sortMode="multiple"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15" selectionMode="single" id="userTable" lazy="true">
+            <p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
+                <h:outputText value="#{shoppingCart.id}"/>
+            </p:column>
+            <p:column headerText="Používateľ" sortBy="#{shoppingCart.user.username}" filterBy="#{shoppingCart.user.username}">
+                <h:outputText value="#{shoppingCart.user.username}"/>
+            </p:column>
+
+            <!--<p:column headerText="Login" sortBy="#{shoppingCart.user.username}" filterBy="#{shoppingCart.user.username}">
+                <h:outputText value="#{shoppingCart.user.username}"/>
+            </p:column>-->
+
+            <!--<p:column headerText="Lastname" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
+                <h:outputText value="#{user.lastName}"/>
+            </p:column>
+            <p:column headerText="DayOfBirth" sortBy="#{user.dayOfBirth}" filterBy="#{user.dayOfBirth}">
+                <h:outputText value="#{user.dayOfBirth}"/>
+            </p:column>
+            <p:column headerText="Manager" sortBy="#{user.manager.lastName}" filterBy="#{user.manager.lastName}">
+                <h:outputText value="#{user.manager.lastName}"/>
+            </p:column>-->
+        </p:dataTable>
+    </h:form>
+
+    <h:form id="userDetailId" styleClass="ui form six wide column">
+        <p:tabView>
+            <p:tab title="Detail používateľa">
+
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</div>
+
+</html>

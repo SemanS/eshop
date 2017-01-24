@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.Part;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -76,6 +78,10 @@ public class CategoryDashboardBean {
     @Getter
     @Setter
     private String selectedRootCategoryAdd;
+
+    @Getter
+    @Setter
+    private Part file;
 
     @PostConstruct
     private void init() {
@@ -172,4 +178,13 @@ public class CategoryDashboardBean {
         return selectedRootCategoryAssign;
     }
 
+
+    public String getBaseImage(Category category) {
+        if(category.getImage() == null) {
+            return "";
+        }
+        String newImage = "";
+        newImage = Base64.getEncoder().encodeToString(category.getImage());
+        return newImage;
+    }
 }

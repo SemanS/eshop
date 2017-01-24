@@ -22,6 +22,11 @@
             </f:facet>
             <p:ajax event="rowSelect" listener="#{itemDashboardBean.onRowSelect}"
                     update=":productDetailId"/>
+
+            <p:column headerText="Obr." width="8%" style="text-align: center">
+                <img class="ui image avatar" src="data:image/png;base64,#{itemDashboardBean.getBaseImage(item)}"/>
+            </p:column>
+
             <p:column headerText="Header" sortBy="#{item.header}" filterBy="#{item.header}">
                 <h:outputText value="#{item.header}"/>
             </p:column>

@@ -2,7 +2,9 @@ package com.webinson.eurofood.entity;
 
 import com.webinson.eurofood.dto.ItemDto;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +14,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "cartitem", schema = "eshop")
-@Data
 @NoArgsConstructor
 public class CartItem implements Serializable {
 
@@ -20,16 +21,24 @@ public class CartItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
     @Column(name = "item_id")
+    @Getter
+    @Setter
     private Long itemId;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "shoppingcart_id")
+    @Getter
+    @Setter
     private ShoppingCart shoppingCart;
 
     @Column(name = "quantity")
+    @Getter
+    @Setter
     private int quantity;
 
 }

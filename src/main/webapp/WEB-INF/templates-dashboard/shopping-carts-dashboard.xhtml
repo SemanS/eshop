@@ -12,36 +12,71 @@
     <div class="one wide column"></div>
     <h:form id="shoppingCartId" styleClass="eight wide column">
         <p:dataTable var="shoppingCart" value="#{shoppingCartDashboardBean.shoppingCarts}"
+                     emptyMessage="No records found."
                      paginator="true" rows="10" sortMode="multiple"
                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                     rowsPerPageTemplate="5,10,15" selectionMode="single" id="userTable" lazy="true">
-            <p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
+                     rowsPerPageTemplate="5,10,15" selectionMode="single" id="userTable" lazy="true"
+                     reflow="true" selection="#{shoppingCartDashboardBean.selectedShoppingCart}">
+            <p:ajax event="rowSelect" listener="#{shoppingCartDashboardBean.onRowSelect}"
+                    update=":orderDetailId"/>
+            <!--<p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
                 <h:outputText value="#{shoppingCart.id}"/>
-            </p:column>
-            <p:column headerText="Používateľ" sortBy="#{shoppingCart.user.username}" filterBy="#{shoppingCart.user.username}">
+            </p:column>-->
+            <p:column headerText="Používateľ" sortBy="#{shoppingCart.user.username}"
+                      filterBy="#{shoppingCart.user.username}">
                 <h:outputText value="#{shoppingCart.user.username}"/>
             </p:column>
-
-            <!--<p:column headerText="Login" sortBy="#{shoppingCart.user.username}" filterBy="#{shoppingCart.user.username}">
-                <h:outputText value="#{shoppingCart.user.username}"/>
-            </p:column>-->
-
-            <!--<p:column headerText="Lastname" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
-                <h:outputText value="#{user.lastName}"/>
+            <p:column headerText="Počet položiek">
+                <h:outputText value="#{shoppingCart.cartItems.size()}"/>
             </p:column>
-            <p:column headerText="DayOfBirth" sortBy="#{user.dayOfBirth}" filterBy="#{user.dayOfBirth}">
-                <h:outputText value="#{user.dayOfBirth}"/>
+            <p:column headerText="Vyexpedované" style="text-align: center">
+                <ui:fragment rendered="#{shoppingCart.processed}">
+                    <i class="check green circle icon"></i>
+                </ui:fragment>
+                <ui:fragment rendered="#{not shoppingCart.processed}">
+                    <i class="remove red circle icon"></i>
+                </ui:fragment>
             </p:column>
-            <p:column headerText="Manager" sortBy="#{user.manager.lastName}" filterBy="#{user.manager.lastName}">
-                <h:outputText value="#{user.manager.lastName}"/>
-            </p:column>-->
         </p:dataTable>
     </h:form>
 
-    <h:form id="userDetailId" styleClass="ui form six wide column">
+    <h:form id="orderDetailId" styleClass="ui form six wide column">
         <p:tabView>
-            <p:tab title="Detail používateľa">
+            <p:tab title="Detail objednávky">
+                <h4 class="ui horizontal divider header" style="margin-top: 20px">
+                    Detail objednávky
+                </h4>
+                <div class="field">
+                    <label>Zoznam produktov:</label>
+                    <p:dataTable var="cartItem" value="#{shoppingCartDashboardBean.itemList}"
+                                 emptyMessage="Vyberte záznam"
+                                 paginator="true" rows="10" sortMode="multiple"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 id="table" reflow="true">
+                        <p:column headerText="Názov">
+                            <h:outputText value="#{cartItem.header}"/>
+                        </p:column>
+                        <p:column headerText="Množstvo">
+                            <h:outputText value="#{cartItem.quantity}"/>
+                        </p:column>
 
+                    </p:dataTable>
+                </div>
+
+                <div class="field">
+                    <ui:fragment rendered="#{shoppingCartDashboardBean.selectedShoppingCart.processed}">
+                        <h:outputText style="" value="Vyexpedované"/>
+                    </ui:fragment>
+                    <ui:fragment
+                            rendered="#{not shoppingCartDashboardBean.selectedShoppingCart.processed and shoppingCartDashboardBean.selectedShoppingCart != null}">
+                        <p:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: red"
+                                       action="#{shoppingCartDashboardBean.onExpedite()}"
+                                       update=":shoppingCartId :orderDetailId"
+                                       value="Expedovať&#160;&#160;">
+                        </p:commandLink>
+                    </ui:fragment>
+                </div>
             </p:tab>
         </p:tabView>
     </h:form>

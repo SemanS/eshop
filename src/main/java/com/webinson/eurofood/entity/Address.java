@@ -1,7 +1,9 @@
 package com.webinson.eurofood.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +13,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "address", schema = "public")
-@Data
 @NoArgsConstructor
 public class Address implements Serializable {
 
@@ -19,24 +20,38 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id;
 
     @Column(name = "street")
+    @Getter
+    @Setter
     private String street;
 
     @Column(name = "postal_code")
+    @Getter
+    @Setter
     private String postalCode;
 
     @Column(name = "city")
+    @Getter
+    @Setter
     private String city;
 
     @Column(name = "first_name")
+    @Getter
+    @Setter
     private String firstName;
 
     @Column(name = "last_name")
+    @Getter
+    @Setter
     private String lastName;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @Getter
+    @Setter
     private User user;
 }

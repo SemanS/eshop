@@ -1,7 +1,9 @@
 package com.webinson.eurofood.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +13,6 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "authorities", schema = "public")
-@Data
 @NoArgsConstructor
 public class Authority implements Serializable {
 
@@ -19,11 +20,17 @@ public class Authority implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private long id;
 
     @Column(name = "username")
+    @Getter
+    @Setter
     private String username;
 
     @Column(name = "authority")
+    @Getter
+    @Setter
     private String authority;
 }

@@ -20,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -48,6 +49,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void saveShoppingCart(ShoppingCartDto shoppingCartDto, Set<CartItemDto> cartItemDtos) {
 
         ShoppingCart shoppingCart = shoppingCartAssembler.toModel(shoppingCartDto);
+
+        shoppingCart.setTimeStamp(Calendar.getInstance());
 
         for (CartItemDto cartItemDto : cartItemDtos) {
             CartItem cartItem = new CartItem();

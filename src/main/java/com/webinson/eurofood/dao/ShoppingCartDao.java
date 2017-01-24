@@ -17,4 +17,6 @@ import java.util.List;
 @Repository
 public interface ShoppingCartDao extends JpaRepository<ShoppingCart, Long>, QueryDslPredicateExecutor<ShoppingCart>, PagingAndSortingRepository<ShoppingCart, Long>, JpaSpecificationExecutor<ShoppingCart> {
 
+    ShoppingCart findById(Long id);
+
 }

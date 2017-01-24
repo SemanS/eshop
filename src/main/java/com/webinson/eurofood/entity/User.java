@@ -1,7 +1,9 @@
 package com.webinson.eurofood.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -15,7 +17,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "users", schema = "public")
-@Data
 @NoArgsConstructor
 public class User implements Serializable {
 
@@ -23,24 +24,38 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Long id;
 
     @Column(name = "username")
+    @Getter
+    @Setter
     private String username;
 
     @Column(name = "phone_number")
+    @Getter
+    @Setter
     private String phoneNumber;
 
     @Column(name = "password")
+    @Getter
+    @Setter
     private String password;
 
     @Column(name = "enabled")
+    @Getter
+    @Setter
     private boolean enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private Set<Address> addresses;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Getter
+    @Setter
     private Set<Company> companies;
 
 }

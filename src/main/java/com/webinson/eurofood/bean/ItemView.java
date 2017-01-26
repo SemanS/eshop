@@ -29,19 +29,14 @@ import java.util.List;
 /**
  * Created by Slavo on 10/4/2016.
  */
-/*@Data*/
 @Component
 @Scope("session")
 @URLBeanName("itemView")
 @URLMappings(mappings = {
         @URLMapping(
-                id = "home",
+                id = "index",
                 pattern = "/",
                 viewId = "/index.xhtml"),
-        @URLMapping(
-                id = "login",
-                pattern = "/login",
-                viewId = "/admin-user-login.xhtml"),
         @URLMapping(
                 id = "itemDetail",
                 pattern = "/store/#{ itemUrl : itemView.itemUrl}",
@@ -50,14 +45,6 @@ import java.util.List;
                 id = "category",
                 pattern = "/category/#{ categoryUrl: itemView.categoryUrl}",
                 viewId = "/eshop.xhtml"),
-        @URLMapping(
-                id = "dashboard",
-                pattern = "/dashboard",
-                viewId = "/dashboard.xhtml"),
-        @URLMapping(
-                id = "dashboard-detail",
-                pattern = "/dashboard/#{ itemUrl : itemView.itemUrl}",
-                viewId = "/dashboarditemdetail.xhtml")
 })
 public class ItemView implements Serializable {
 
@@ -107,10 +94,6 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedCategoryImage;
 
-   /* @Getter
-    @Setter
-    private LazyDataModel<ItemDto> lazyModel;*/
-
     @URLAction
     public String loadCategory() throws IOException {
 
@@ -149,14 +132,6 @@ public class ItemView implements Serializable {
     public List<ItemDto> allItemsByCategory() {
         return itemService.getItemsByCategory(this.selectedCategory);
     }
-
-    /*public ItemDto itemDescription() {
-        return itemService.getItemByUrl(this.selectedItem.getUrl());
-    }*/
-
-    /*public void onDashboardItemDetail(ItemDto itemDto) throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard/" + itemDto.getUrl());
-    }*/
 
     public void onCategory(CategoryDto categoryDto) throws IOException {
         selectedCategory = categoryAssembler.toDto(categoryDao.findById(categoryDto.getId()));

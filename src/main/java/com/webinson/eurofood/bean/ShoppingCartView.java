@@ -36,28 +36,21 @@ public class ShoppingCartView {
     @Getter
     @Setter
     private int counter = 0;
-
     @Getter
     @Setter
     private double counterNetto = 0.00;
-
     @Getter
     @Setter
     private double counterBrutto = 0.00;
-
-
     @Getter
     @Setter
     private int shoppingCartQuantity = 1;
-
     @Getter
     @Setter
     private Set<CartItemDto> cartItemDtos;
-
     @Getter
     @Setter
     private ShoppingCartDto shoppingCartDto;
-
     @Getter
     @Setter
     private float total;
@@ -80,14 +73,15 @@ public class ShoppingCartView {
         cartItemDtos = new HashSet<>();
     }
 
-    public void onRestartCounter() {
+    public String onRestartCounter() {
         this.counter = 0;
         this.cartItemDtos = new HashSet<>();
         this.counterNetto = 0;
         this.counterBrutto = 0;
+        return "pretty:";
     }
 
-    public void addItemToCart(ItemDto itemDto) {
+    public String addItemToCart(ItemDto itemDto) {
 
         if (shoppingCartQuantity >= 1) {
 
@@ -151,25 +145,11 @@ public class ShoppingCartView {
             }
             shoppingCartQuantity = 1;
         }
-    }
-
-    public void reload() throws IOException {
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        return "pretty:";
     }
 
     public void checkout() {
-        /*this.shoppingCartDto.setCartItemDtos(this.cartItemDtos);*/
-
-        /*for (CartItemDto cartItemDto : this.cartItemDtos) {
-            cartItemService.saveCartItem(cartItemAssembler.toModel(cartItemDto));
-        }*/
-
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, this.cartItemDtos);
-    }
-
-    public void testovaciaMetoda(ItemDto itemDto) {
-        counter++;
     }
 
 }

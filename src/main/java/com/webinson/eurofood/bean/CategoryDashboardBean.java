@@ -8,13 +8,18 @@ import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 
@@ -83,6 +88,18 @@ public class CategoryDashboardBean {
     @Setter
     private Part file;
 
+    @Getter
+    @Setter
+    private Part fileNew;
+
+    @Getter
+    @Setter
+    private Part fileNewSide;
+
+    @Getter
+    @Setter
+    private Part fileChangeSub;
+
     @PostConstruct
     private void init() {
         rootCategories = categoryService.getRootCategories();
@@ -109,38 +126,50 @@ public class CategoryDashboardBean {
         }
     }
 
-    public String onChangeRootCategory() {
+    /*public void handleFileUpload(AjaxBehaviorEvent event) throws IOException {
+        System.out.println("file size: " + file.getSize());
+        System.out.println("file type: " + file.getContentType());
+        System.out.println("file info: " + file.getHeader("Content-Disposition"));
+        inputSelectedRootCategory.setImage(IOUtils.toByteArray(file.getInputStream()));
+        categoryDao.save(inputSelectedRootCategory);
+    }*/
+
+    public String onChangeRootCategory() throws IOException {
         Category category;
         category = categoryDao.findByName(selectedRootCategory);
         category.setName(inputSelectedRootCategory.getName());
         category.setUrl(inputSelectedRootCategory.getUrl());
+        category.setImage(IOUtils.toByteArray(file.getInputStream()));
         categoryDao.save(category);
         return "pretty:dashboard";
     }
 
-    public String onChangeSubCategory() {
+    public String onChangeSubCategory() throws IOException {
         Category category;
         category = categoryDao.findByName(selectedSubCategory);
         category.setName(inputSelectedSubCategory.getName());
         category.setUrl(inputSelectedSubCategory.getUrl());
+        category.setImage(IOUtils.toByteArray(fileChangeSub.getInputStream()));
         categoryDao.save(category);
         return "pretty:dashboard";
     }
 
-    public String onSaveRootCategory() {
+    public String onSaveRootCategory() throws IOException {
         Category category = new Category();
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
         category.setBase(true);
+        category.setImage(IOUtils.toByteArray(fileNew.getInputStream()));
         categoryService.saveRootCategory(category);
         return "pretty:dashboard";
     }
 
-    public String onSaveSubCategory() {
+    public String onSaveSubCategory() throws IOException {
         Category category = new Category();
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
         category.setParent(categoryService.getCategoryByName(selectedRootCategory));
+        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
         category.setBase(false);
         categoryService.saveRootCategory(category);
         return "pretty:dashboard";
@@ -153,10 +182,11 @@ public class CategoryDashboardBean {
         return "pretty:dashboard";
     }
 
-    public String onSubCategoryAdd() {
+    public String onSubCategoryAdd() throws IOException {
         Category category = new Category();
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
+        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
         category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
         categoryDao.save(category);
         return "pretty:dashboard";
@@ -178,13 +208,13 @@ public class CategoryDashboardBean {
         return selectedRootCategoryAssign;
     }
 
-
     public String getBaseImage(Category category) {
-        if(category.getImage() == null) {
+        if (category.getImage() == null) {
             return "";
         }
         String newImage = "";
         newImage = Base64.getEncoder().encodeToString(category.getImage());
         return newImage;
     }
+
 }

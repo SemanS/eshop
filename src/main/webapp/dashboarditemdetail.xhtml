@@ -1,3 +1,4 @@
+<!--
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -8,12 +9,12 @@
       xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
-    <!-- Standard Meta -->
+    &lt;!&ndash; Standard Meta &ndash;&gt;
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
-    <!-- Site Properties -->
+    &lt;!&ndash; Site Properties &ndash;&gt;
     <title>Zuzka</title>
 
     <h:outputStylesheet name="css/semantic.min.css"/>
@@ -32,9 +33,9 @@
 
     <div class="ui container">
 
-        <!--<ui:insert name="attachedMenu">
+        &lt;!&ndash;<ui:insert name="attachedMenu">
             <ui:include src="WEB-INF/templates/attached-menu-dashboard.xhtml"/>
-        </ui:insert>-->
+        </ui:insert>&ndash;&gt;
 
 
         <h:form id="forma" styleClass="ui form" enctype="multipart/form-data">
@@ -129,16 +130,16 @@
                                 <div class="field">
 
                                     <h:selectOneMenu value="#{editorController.selectedCategory}">
-                                        <!--<f:converter binding="#{utils.entityConverter}"/>-->
-                                        <!--value="#{editorController.categories.get(editorController.itemDto.category.id -1)}">-->
-                                        <!--<f:selectItem
+                                        &lt;!&ndash;<f:converter binding="#{utils.entityConverter}"/>&ndash;&gt;
+                                        &lt;!&ndash;value="#{editorController.categories.get(editorController.itemDto.category.id -1)}">&ndash;&gt;
+                                        &lt;!&ndash;<f:selectItem
                                                 itemLabel="#{editorController.categories.get(editorController.itemDto.category.id -1).name}"
-                                        />-->
+                                        />&ndash;&gt;
                                         <f:selectItems value="#{editorController.categories}" var="c"
                                                        itemValue="#{c.name}" itemLabel="#{c.name}"/>
                                     </h:selectOneMenu>
 
-                                    <!--<div class="ui dropdown selection">
+                                    &lt;!&ndash;<div class="ui dropdown selection">
                                         <input name="gender" type="hidden"/>
                                         <div class="default text">Select Gender</div>
                                         <i class="dropdown icon"></i>
@@ -146,7 +147,7 @@
                                             <div class="item">Male</div>
                                             <div class="item">Female</div>
                                         </div>
-                                    </div>-->
+                                    </div>&ndash;&gt;
                                 </div>
                             </div>
                         </div>
@@ -176,4 +177,4 @@
 
 </h:body>
 
-</html>
+</html>-->

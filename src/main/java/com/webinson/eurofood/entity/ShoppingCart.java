@@ -35,7 +35,7 @@ public class ShoppingCart implements Serializable {
 
     @Getter
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -50,7 +50,4 @@ public class ShoppingCart implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeStamp;
 
-    public void addCartItem(CartItem cartItem) {
-        cartItems.add(cartItem);
-    }
 }

@@ -5,6 +5,7 @@ import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
+import com.webinson.eurofood.entity.QCategory;
 import com.webinson.eurofood.service.CategoryService;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;

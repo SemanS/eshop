@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Created by Slavo on 10/4/2016.
  */
-@Data
+/*@Data*/
 @Component
 @Scope("session")
 @URLBeanName("itemView")
@@ -150,13 +150,13 @@ public class ItemView implements Serializable {
         return itemService.getItemsByCategory(this.selectedCategory);
     }
 
-    public ItemDto itemDescription() {
+    /*public ItemDto itemDescription() {
         return itemService.getItemByUrl(this.selectedItem.getUrl());
-    }
+    }*/
 
-    public void onDashboardItemDetail(ItemDto itemDto) throws IOException {
+    /*public void onDashboardItemDetail(ItemDto itemDto) throws IOException {
         FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard/" + itemDto.getUrl());
-    }
+    }*/
 
     public void onCategory(CategoryDto categoryDto) throws IOException {
         selectedCategory = categoryAssembler.toDto(categoryDao.findById(categoryDto.getId()));
@@ -166,7 +166,6 @@ public class ItemView implements Serializable {
     public void onItem(ItemDto itemDto) throws IOException {
         itemDto.setQuantity(1);
         selectedItem = itemDto;
-        /*selectedItem.setQuantity(1);*/
         FacesContext.getCurrentInstance().getExternalContext().redirect("/store/" + itemDto.getUrl());
         System.out.println("daco");
     }

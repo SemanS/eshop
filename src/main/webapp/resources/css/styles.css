@@ -105,7 +105,6 @@
 
 /*eshop*/
 
-
 .ui-widget-header {
     /*border: none !important;
     background: none !important;*/
@@ -307,4 +306,10 @@ body {
 .ui-datatable th.ui-state-active {
     color: #0f0f10;
 !important;
+}
+
+.ui.button {
+    padding: 0.7em 0.6em !important;
+
+
 }

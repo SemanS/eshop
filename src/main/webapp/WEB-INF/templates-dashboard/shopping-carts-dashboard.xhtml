@@ -19,6 +19,8 @@
                      reflow="true" selection="#{shoppingCartDashboardBean.selectedShoppingCart}">
             <p:ajax event="rowSelect" listener="#{shoppingCartDashboardBean.onRowSelect}"
                     update=":orderDetailId"/>
+            <p:ajax event="rowUnselect" listener="#{shoppingCartDashboardBean.onRowUnselect}"
+                    update=":orderDetailId"/>
             <!--<p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
                 <h:outputText value="#{shoppingCart.id}"/>
             </p:column>-->

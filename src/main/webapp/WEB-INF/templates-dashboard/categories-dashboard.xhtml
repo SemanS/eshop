@@ -31,7 +31,7 @@
 
     <!--<div class="headerDivider" style="margin-top: 10px;"></div>-->
 
-    <h:form id="categoryDetailId" styleClass="ui form six wide column">
+    <h:form id="categoryDetailId" styleClass="ui form six wide column" enctype="multipart/form-data">
 
         <p:tabView>
             <p:tab title="Zmeniť kategóriu">
@@ -67,7 +67,8 @@
                         <h:inputFile id="upload"
                                      value="#{categoryDashboardBean.file}"
                                      label="Insert image"
-                                     update="editor forma">
+                                     update="categoryDetailId">
+                            <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
                         </h:inputFile>
                     </div>
                     <div class="field">
@@ -77,11 +78,11 @@
                     </div>
                 </div>
 
-                <p:commandLink class="medium ui button" icon="ui-icon-star"
+                <h:commandLink class="medium ui button" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
                                action="#{categoryDashboardBean.onChangeRootCategory()}"
                                value="Zmeniť hlavnú kategóriu">
-                </p:commandLink>
+                </h:commandLink>
 
                 <pre></pre>
                 <h4 class="ui horizontal divider header" style="margin-top: 40px">
@@ -119,7 +120,7 @@
                     <div class="field">
                         <label>Vložiť obrázok kategórie</label>
                         <h:inputFile id="asds"
-                                     value="#{categoryDashboardBean.file}"
+                                     value="#{categoryDashboardBean.fileChangeSub}"
                                      label="Insert image"
                                      update="editor forma">
                         </h:inputFile>
@@ -127,15 +128,15 @@
                     <div class="field">
                         <label>Obrázok kategórie</label>
                         <img class="ui image"
-                             src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                             src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedSubCategory)}"/>
                     </div>
                 </div>
 
-                <p:commandLink class="medium ui button" icon="ui-icon-star"
+                <h:commandLink class="medium ui button" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
                                action="#{categoryDashboardBean.onChangeSubCategory()}"
-                               value="Zemniť vedľajšiu kategóriu">
-                </p:commandLink>
+                               value="Zmeniť vedľajšiu kategóriu">
+                </h:commandLink>
                 <pre></pre>
                 <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
                 <div class="two fields">
@@ -147,11 +148,11 @@
                         </h:selectOneMenu>
                     </div>
                     <div class="field">
-                        <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
+                        <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
                                        style="border-radius: 0px !important; color: blue"
                                        action="#{categoryDashboardBean.onSubCategoryAssign()}"
                                        value="Priradiť ku hlavnej kategórii">
-                        </p:commandLink>
+                        </h:commandLink>
                     </div>
                 </div>
             </p:tab>
@@ -175,11 +176,27 @@
                                      type="text"/>
                     </div>
                 </div>
-                <p:commandLink class="medium ui button" icon="ui-icon-star"
+                <div class="two fields">
+                    <div class="field">
+                        <label>Vložiť obrázok kategórie</label>
+                        <h:inputFile id="dw"
+                                     value="#{categoryDashboardBean.fileNew}"
+                                     label="Insert image"
+                                     update="categoryDetailId">
+                            <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
+                        </h:inputFile>
+                    </div>
+                    <div class="field">
+                        <label>Obrázok kategórie</label>
+                        <img class="ui image"
+                             src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                    </div>
+                </div>
+                <h:commandLink class="medium ui button" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
                                action="#{categoryDashboardBean.onSaveRootCategory()}"
                                value="Pridať hlavnú kategóriu">
-                </p:commandLink>
+                </h:commandLink>
 
                 <pre></pre>
                 <h4 class="ui horizontal divider header" style="margin-top: 40px">
@@ -202,6 +219,23 @@
                     </div>
                 </div>
 
+                <div class="two fields">
+                    <div class="field">
+                        <label>Vložiť obrázok kategórie</label>
+                        <h:inputFile id="dw2"
+                                     value="#{categoryDashboardBean.fileNewSide}"
+                                     label="Insert image"
+                                     update="categoryDetailId">
+                            <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
+                        </h:inputFile>
+                    </div>
+                    <div class="field">
+                        <label>Obrázok kategórie</label>
+                        <img class="ui image"
+                             src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                    </div>
+                </div>
+
                 <pre></pre>
                 <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
 
@@ -212,11 +246,11 @@
                     </h:selectOneMenu>
                 </div>
 
-                <p:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
                                style="border-radius: 0px !important; color: blue"
                                action="#{categoryDashboardBean.onSubCategoryAdd()}"
                                value="Priradiť ku hlavnej kategórii">
-                </p:commandLink>
+                </h:commandLink>
 
             </p:tab>
 

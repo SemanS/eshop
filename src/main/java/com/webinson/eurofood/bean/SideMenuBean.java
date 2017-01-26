@@ -14,6 +14,7 @@ import org.primefaces.model.menu.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -25,7 +26,7 @@ import java.io.IOException;
  * Created by Slavo on 12/1/2016.
  */
 @Component
-@ApplicationScope
+@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
 public class SideMenuBean {
 
     @Getter

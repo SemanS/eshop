@@ -62,12 +62,13 @@ public class ShoppingCartDashboardBean {
     private void init() {
         this.shoppingCarts = new ShoppingCartLazyDataModel(shoppingCartService);
         shoppingCartBool = new ShoppingCart();
-        itemList = new ArrayList<>();
     }
 
     public void onRowSelect(SelectEvent event) {
+
         selectedShoppingCart = shoppingCartDao.findById(((ShoppingCart) event.getObject()).getId());
         if (shoppingCartBool.getId() != selectedShoppingCart.getId()) {
+            itemList = new ArrayList<>();
             shoppingCartBool = selectedShoppingCart;
             for (CartItem cartItem : selectedShoppingCart.getCartItems()) {
                 ItemDto itemDto = itemAssembler.toDto(itemDao.findById(cartItem.getItemId()));
@@ -75,6 +76,11 @@ public class ShoppingCartDashboardBean {
                 itemList.add(itemDto);
             }
         }
+    }
+
+    public void onRowUnselect(SelectEvent event) {
+        selectedShoppingCart = null;
+        itemList = null;
     }
 
     public void onExpedite() {

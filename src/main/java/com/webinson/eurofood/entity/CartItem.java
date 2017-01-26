@@ -30,7 +30,7 @@ public class CartItem implements Serializable {
     @Setter
     private Long itemId;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shoppingcart_id")
     @Getter
     @Setter

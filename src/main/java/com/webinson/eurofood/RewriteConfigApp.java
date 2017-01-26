@@ -28,9 +28,7 @@ public class RewriteConfigApp extends HttpConfigurationProvider {
                 .addRule(Join.path("/registration").to("/register.xhtml"))
                 .addRule(Join.path("/store").to("/eshop.xhtml"))
                 .addRule(Join.path("/user-login").to("/userLogin.xhtml"))
-                .addRule(Join.path("/registration").to("/register.xhtml"));
-                /*.addRule()
-                .when(Direction.isInbound().and(Path.matches("/index.xhtml")))
-                .perform(Forward.to("/Nelahozeves"));*/
+                .addRule(Join.path("/registration").to("/register.xhtml"))
+                .addRule(Join.path("/checkoutCart").to("/checkoutCart.xhtml"));
     }
 }

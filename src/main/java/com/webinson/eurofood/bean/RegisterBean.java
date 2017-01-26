@@ -82,7 +82,7 @@ public class RegisterBean {
 
     @Getter
     @Setter
-    private String subscribed = "No";
+    private String subscribed = "Yes";
 
     @Autowired
     private UserService userService;

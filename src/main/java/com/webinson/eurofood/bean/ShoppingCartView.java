@@ -6,6 +6,7 @@ import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.entity.CartItem;
+import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.service.CartItemService;
 import com.webinson.eurofood.service.ShoppingCartService;
 import lombok.Getter;
@@ -21,10 +22,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Slavo on 1/6/2017.
@@ -150,6 +148,15 @@ public class ShoppingCartView {
 
     public void checkout() {
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, this.cartItemDtos);
+    }
+
+    public String onDeleteItem(CartItemDto cartItemDto) {
+        for (CartItemDto cItemDto : cartItemDtos) {
+            if (cartItemDto == cItemDto) {
+                cartItemDtos.remove(cItemDto);
+            }
+        }
+        return "pretty:checkoutCart";
     }
 
 }

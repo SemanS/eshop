@@ -33,11 +33,6 @@
     <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
     <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
 
-    <!--<div class="sixteen wide column"><img class="ui fluid image" src="../../resources/images/header.jpg"/>
-    </div>-->
-
-    <!--<p:panelGrid columns="7" layout="grid">-->
-
     <div class="ui stackable grid">
         <div class="ui three wide column">
             <h:outputLink class="" value="#{request.contextPath}/" style="border-radius: 0px !important;">
@@ -77,10 +72,7 @@
                                   style="color:black !important;border-radius: 0px !important;">
                         Prihlásenie
                     </h:outputLink>
-                    <!--
-                                        <a class="ui button itemSideMenu" id="logIn" style="border-radius: 0px !important;">
-                                            Prihlásenie
-                                        </a>-->
+
                 </ui:fragment>
 
                 <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
@@ -91,7 +83,7 @@
                     </h:outputLink>
                 </ui:fragment>
 
-                <h:outputLink class="ui button itemSideMenu"
+                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/checkoutCart"
                               style="color:black !important;border-radius: 0px !important;">
                     Môj košík
                 </h:outputLink>

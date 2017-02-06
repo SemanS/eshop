@@ -26,7 +26,7 @@ import java.io.IOException;
  * Created by Slavo on 12/1/2016.
  */
 @Component
-@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
+@ApplicationScope
 public class SideMenuBean {
 
     @Getter
@@ -43,5 +43,13 @@ public class SideMenuBean {
     public void init() {
         treeModel = categoryService.createModel();
     }
+
+    /*public boolean hasNoChildren(String name) {
+        if (categoryDao.findByName(name).getChildren() == null) {
+            return false;
+        }
+        return true;
+
+    }*/
 
 }

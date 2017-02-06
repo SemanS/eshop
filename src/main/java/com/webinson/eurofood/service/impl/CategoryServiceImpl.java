@@ -107,10 +107,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     public TreeModel<CategoryDto> createModel() {
         TreeModel<CategoryDto> treeModel = new ListTreeModel<>();
-        for (Category cat : categoryDao.findAll()) {
+        List<Category> categories = categoryDao.findAll();
+        for (Category cat : categories) {
             if (cat.getParent() == null) {
                 allCategories.add(categoryAssembler.toDto(cat));
-
             }
         }
         buildTreeModel(treeModel, allCategories);
@@ -119,7 +119,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
         for (CategoryDto item : items) {
-            buildTreeModel(treeModel.addChild(item), createSubNodes(item));
+            /*buildTreeModel(treeModel.addChild(item), createSubNodes(item));*/
+            treeModel.addChild(item);
         }
     }
 

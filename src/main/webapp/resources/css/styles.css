@@ -313,3 +313,9 @@ body {
 
 
 }
+.ui-accordion .ui-accordion-header {
+    border: none !important;
+    background: none !important;
+}
+
+.ui-state-focus { outline: none; }

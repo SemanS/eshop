@@ -111,7 +111,7 @@ public class CategoryDashboardBean {
     }
 
     public Category initRootCategory() {
-        if (rootCategories == null) {
+        if (rootCategories.size() == 0) {
             return inputSelectedRootCategory = new Category();
         } else {
             return inputSelectedRootCategory = rootCategories.get(0);
@@ -119,7 +119,7 @@ public class CategoryDashboardBean {
     }
 
     public Category initSubCategory() {
-        if (categories == null) {
+        if (categories.size() == 0) {
             return inputSelectedSubCategory = new Category();
         } else {
             return inputSelectedSubCategory = categories.get(0);

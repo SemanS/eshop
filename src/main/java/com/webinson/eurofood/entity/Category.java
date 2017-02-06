@@ -43,7 +43,7 @@ public class Category implements Serializable {
     @Setter
     private List<Category> children;
 
-    @Column(name = "img")
+    @Column(name = "img_description")
     @Getter
     @Setter
     private byte[] image;
@@ -58,7 +58,7 @@ public class Category implements Serializable {
     @Setter
     private String url;
 
-    @Column(name = "img_description")
+    @Column(name = "img")
     @Getter
     @Setter
     private byte[] imageDescription;

@@ -9,16 +9,30 @@
 
 <h4>Kategórie:</h4>
 <h:form>
-    <div class="ui grid stackable">
+   <!-- <div class="ui grid stackable">
         <div class="ui fluid accordion">
             <o:tree value="#{sideMenuBean.treeModel}" var="category">
                 <o:treeNode level="0">
                     <o:treeNodeItem>
-                        <ui:fragment rendered="#{category.base == true}">
+                        <ui:fragment
+                                rendered="#{category.base == true}">
                             <div class="title">
-                                <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                                <ui:fragment
+                                        rendered="#{sideMenuBean.hasNoChildren(category.name) == true}">
+                                    <h:commandLink action="#{itemView.onCategory(category)}">
+                                        &lt;!&ndash;<f:ajax execute="@form :submitCategory" render=":submitCategory"/>&ndash;&gt;
+                                        <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                                    </h:commandLink>
+                                </ui:fragment>
+                                <ui:fragment
+                                        rendered="#{sideMenuBean.hasNoChildren(category.name) == false}">
+                                    &lt;!&ndash;<h:commandLink action="#{itemView.onCategory(category)}">&ndash;&gt;
+                                        <img class="ui image" src="data:image/png;base64,#{category.image}"/>
+                                    &lt;!&ndash;</h:commandLink>&ndash;&gt;
+                                </ui:fragment>
                             </div>
                         </ui:fragment>
+
                         <ui:fragment rendered="#{category.base == false}">
                             <h:commandLink actionListener="#{sideMenuBean.onImageDescriptionChange(category)}">
                                 <div class="content">
@@ -35,7 +49,7 @@
                         <o:treeNodeItem>
                             <div class="transition hidden">
                                 <h:commandLink action="#{itemView.onCategory(category)}">
-                                    <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
+                                    &lt;!&ndash;<f:ajax execute="@form :submitCategory" render=":submitCategory"/>&ndash;&gt;
                                     <img class="ui image" src="data:image/png;base64,#{category.image}"/>
                                 </h:commandLink>
                             </div>
@@ -45,6 +59,31 @@
                 </o:treeNode>
             </o:tree>
         </div>
-    </div>
+    </div>-->
+
+    <p:accordionPanel>
+        <!--<f:facet name="last">
+            <link type="text/css" rel="stylesheet" href="css/styleSideMenu.css"></link>
+        </f:facet>-->
+        <p:tab>
+            <f:facet name="title">
+                <!--<h:outputText value="tab title"/>-->
+                <img src="../../resources/images/calculator.png"/>
+            </f:facet>
+            <img src="../../resources/images/calculator.png"/>
+        </p:tab>
+        <p:tab title="Godfather Part II">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather2.jpg"/>
+                <h:outputText value="Francis Ford Coppola's legendary..."/>
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part III">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather3.jpg"/>
+                <h:outputText value="After a break of more than 15 years..."/>
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
 </h:form>
 </html>

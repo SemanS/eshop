@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Slavo on 12/2/2016.
@@ -133,12 +132,13 @@ public class CategoryServiceImpl implements CategoryService {
             TreeNode node = new DefaultTreeNode(cat, rootNode);
             createSubCategories(cat, node);
         }
+
         return rootNode;
     }
 
     public List<Category> getCategoryRootNodeList() {
         List<Category> rootCategories = new ArrayList<Category>();
-        for (Category cat : categoryDao.findAll()) {
+        for (Category cat : findAllSorted()) {
             if (cat.getParent() == null) {
                 rootCategories.add(cat);
             }
@@ -162,7 +162,7 @@ public class CategoryServiceImpl implements CategoryService {
     private List<Category> getSubCategories(Category category) {
         List<Category> subCategoriesNodeList = new ArrayList<>();
         if (category.getChildren() != null) {
-            for (Category cat : category.getChildren()) {
+            for (Category cat : findAllSubSorted(category)) {
                 subCategoriesNodeList.add(cat);
             }
         }
@@ -180,4 +180,94 @@ public class CategoryServiceImpl implements CategoryService {
         QCategory category = QCategory.category;
         return query.from(category).where(category.name.eq(name)).fetchOne();
     }
+
+    @Override
+    public void saveSelectedTreeNode(TreeNode dragNode, TreeNode dropNode, int dropIndex) {
+        List<Category> rootCategories = new ArrayList<>();
+
+        Category draggedCategory = (Category) dragNode.getData();
+        int actualPosition = draggedCategory.getPosition();
+        draggedCategory.setPosition(dropIndex);
+        Category droppedCategory = (Category) dropNode.getData();
+
+        if (droppedCategory.getName() != null) {
+            for (Category cat : droppedCategory.getChildren()) {
+                if ((cat.getPosition() <= actualPosition) && cat.getId() != draggedCategory.getId()) {
+                    cat.setPosition(cat.getPosition() + 1);
+                    categoryDao.save(cat);
+                }
+            }
+            boolean isTrue = false;
+            if(droppedCategory.getChildren().size() == 0) {
+                droppedCategory.getChildren().add(draggedCategory);
+                draggedCategory.setParent(droppedCategory);
+            }
+            for (Category cat : droppedCategory.getChildren()) {
+                if (cat.getParent().getId() != draggedCategory.getParent().getId()) {
+                    isTrue = true;
+                }
+            }
+            if (isTrue) {
+                droppedCategory.getChildren().add(draggedCategory);
+                draggedCategory.setParent(droppedCategory);
+                /*droppedCategory.getChildren().add(draggedCategory);
+                draggedCategory.setParent(droppedCategory);*/
+                /*draggedCategory.setParent(droppedCategory);*/
+            }
+            /*draggedCategory.setPosition(findLastPositionByCategory(droppedCategory));*/
+            categoryDao.save(droppedCategory);
+            categoryDao.save(draggedCategory);
+        }
+
+        if (droppedCategory.getName() == null) {
+
+            for (Category cat : getRootCategories()) {
+                if (cat.getPosition() >= draggedCategory.getPosition()) {
+                    cat.setPosition(cat.getPosition() + 1);
+                    categoryDao.save(cat);
+                }
+            }
+
+            draggedCategory.setParent(null);
+            /*draggedCategory.setPosition(findLastPositionByCategory(droppedCategory));*/
+            categoryDao.save(draggedCategory);
+        }
+
+    }
+
+    @Override
+    public int findLastPositionByCategory(Category category) {
+
+        int lastPosition = 0;
+        if (category.getParent() == null) {
+            for (Category cat : getRootCategories()) {
+                if (cat.getPosition() > lastPosition) {
+                    lastPosition = cat.getPosition();
+                }
+            }
+        }
+
+        if (category.getParent() != null) {
+            for (Category cat : categoryDao.findByParentId((Long) category.getParent().getId())) {
+                if (cat.getPosition() > lastPosition) {
+                    lastPosition = cat.getPosition();
+                }
+            }
+        }
+        return lastPosition;
+    }
+
+    public List<Category> findAllSorted() {
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        return query.from(category).orderBy(category.position.asc()).fetch();
+    }
+
+    public List<Category> findAllSubSorted(Category cat) {
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        return query.from(category).orderBy(category.position.asc()).where(category.parent.id.eq(cat.getId())).fetch();
+    }
+
+
 }

@@ -13,6 +13,7 @@ public class CategoryDto {
     private Long id;
     private String name;
     private CategoryDto parent;
+    private List<CategoryDto> children;
     private String image;
     private boolean base;
     private String url;

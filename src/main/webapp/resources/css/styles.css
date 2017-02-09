@@ -311,11 +311,25 @@ body {
 .ui.button {
     padding: 0.7em 0.6em !important;
 
-
 }
+
 .ui-accordion .ui-accordion-header {
     border: none !important;
     background: none !important;
 }
 
-.ui-state-focus { outline: none; }
+.ui-state-focus {
+    outline: none;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 0.4em 2.2em !important;
+    margin-top: -6px !important;
+    margin-bottom: 0px !important;
+    width: 110% !important;
+    margin-left: 10px !important;
+}
+
+.ui-accordion .ui-accordion-header {
+    padding: .0em .5em .3em 2.2em !important;
+}

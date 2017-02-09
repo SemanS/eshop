@@ -11,19 +11,34 @@
 <div class="ui stackable grid">
 
     <div class="one wide column"></div>
+    <h:form id="treeForm">
+
+        <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
+                selection="#{categoryTreeTableBean.selectedNode}"
+                draggable="true" droppable="true" dragdropScope="demo">
+            <p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}" update=":treeForm :itemsFormId"/>
+            <p:treeNode>
+                <h:outputText value="#{node.name}"/>
+            </p:treeNode>
+        </p:tree>
+
+    </h:form>
+
     <h:form id="itemsFormId" styleClass="eight wide column">
         <p:treeTable value="#{categoryTreeTableBean.rootCategories}" var="category"
-                     style="font-size: 100% !important;">
+                     style="font-size: 100% !important;" draggableRows="true">
             <f:facet name="header">
                 Zoznam kategórií
             </f:facet>
             <!-- <p:ajax event="expand" listener="#{categoryDashboardBean.onNodeExpandIncome(category)}"/>
              <p:ajax event="collapse" listener="#{categoryDashboardBean.onNodeCollapseIncome(category)}"/>-->
-
-            <p:column headerText="Názov" style="width:70%">
+            <p:column headerText="Obr." style="text-align: center; width:20%">
+                <img class="ui image tiny" src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>
+            </p:column>
+            <p:column headerText="Názov" style="width:40%">
                 <h:outputText value="#{category.name}"/>
             </p:column>
-            <p:column headerText="Url" style="width:70%">
+            <p:column headerText="Url" style="width:40%">
                 <h:outputText value="#{category.url}"/>
             </p:column>
         </p:treeTable>

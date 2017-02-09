@@ -62,4 +62,9 @@ public class Category implements Serializable {
     @Getter
     @Setter
     private byte[] imageDescription;
+
+    @Column(name = "position")
+    @Getter
+    @Setter
+    private int position;
 }

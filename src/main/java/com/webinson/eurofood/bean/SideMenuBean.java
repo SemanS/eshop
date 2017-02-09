@@ -1,47 +1,44 @@
 package com.webinson.eurofood.bean;
 
+import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import lombok.Getter;
-import lombok.Setter;
-import org.omnifaces.model.tree.TreeModel;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.TreeNode;
-import org.primefaces.model.menu.*;
+import org.primefaces.component.accordionpanel.AccordionPanel;
+import org.primefaces.event.TabChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.annotation.ApplicationScope;
 import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+
+import java.util.List;
 
 /**
  * Created by Slavo on 12/1/2016.
  */
 @Component
-@ApplicationScope
+@SessionScope
 public class SideMenuBean {
 
     @Getter
-    @Setter
-    private TreeModel<CategoryDto> treeModel;
+    private List<CategoryDto> categories;
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    CategoryAssembler categoryAssembler;
 
     @Autowired
     CategoryDao categoryDao;
 
     @PostConstruct
     public void init() {
-        treeModel = categoryService.createModel();
+        /*treeModel = categoryService.createModel();*/
+        categories = categoryAssembler.toDtos(categoryDao.findAll());
     }
 
     /*public boolean hasNoChildren(String name) {
@@ -51,5 +48,11 @@ public class SideMenuBean {
         return true;
 
     }*/
+
+    public void onTabChange(TabChangeEvent event) {
+        String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();
+
+        System.out.println("Active:" + activeIndex);
+    }
 
 }

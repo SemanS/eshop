@@ -35,4 +35,11 @@ public interface CategoryService {
     void saveRootCategory(Category category);
 
     Category getCategoryByName(String name);
+
+    List<Category> getCategoryRootNodeList();
+
+    void saveSelectedTreeNode(TreeNode dragNode, TreeNode dropNode, int dropIndex);
+
+    int findLastPositionByCategory(Category category);
+
 }

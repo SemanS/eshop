@@ -7,6 +7,7 @@ import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.QCategory;
 import com.webinson.eurofood.service.CategoryService;
+import org.apache.commons.lang3.SerializationUtils;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.DefaultTreeNode;
@@ -183,56 +184,136 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void saveSelectedTreeNode(TreeNode dragNode, TreeNode dropNode, int dropIndex) {
-        List<Category> rootCategories = new ArrayList<>();
 
         Category draggedCategory = (Category) dragNode.getData();
         int actualPosition = draggedCategory.getPosition();
+        Category actualDraggedCategory;
+        actualDraggedCategory = SerializationUtils.clone(draggedCategory);
         draggedCategory.setPosition(dropIndex);
         Category droppedCategory = (Category) dropNode.getData();
 
+        /*Category to Category*/
+        /*Category to Subcategory*/
         if (droppedCategory.getName() != null) {
-            for (Category cat : droppedCategory.getChildren()) {
-                if ((cat.getPosition() <= actualPosition) && cat.getId() != draggedCategory.getId()) {
-                    cat.setPosition(cat.getPosition() + 1);
+            if (draggedCategory.getParent() == null) {
+
+                for (Category cat : getRootCategories()) {
+                    if (actualPosition > droppedCategory.getPosition()) {
+                        if ((cat.getPosition() > actualPosition)) {
+                            if (droppedCategory.getId() != cat.getId()) {
+                                cat.setPosition(cat.getPosition() - 1);
+                                categoryDao.save(cat);
+                            }
+                        }
+                    }
+                    if (actualPosition < droppedCategory.getPosition()) {
+                        if ((cat.getPosition() > actualPosition)) {
+                            if (droppedCategory.getId() == cat.getId()) {
+                                droppedCategory.setPosition(cat.getPosition() - 1);
+                                categoryDao.save(droppedCategory);
+                            }
+                            if (droppedCategory.getId() != cat.getId()) {
+                                cat.setPosition(cat.getPosition() - 1);
+                                categoryDao.save(cat);
+                            }
+                        }
+                    }
+                }
+
+                droppedCategory.getChildren().add(draggedCategory);
+                draggedCategory.setParent(droppedCategory);
+                categoryDao.save(droppedCategory);
+                categoryDao.save(draggedCategory);
+
+                if (draggedCategory.getParent() != null) {
+                    for (Category cat : droppedCategory.getChildren()) {
+                        if (cat.getPosition() >= draggedCategory.getPosition() && cat.getId() != draggedCategory.getId()) {
+                            cat.setPosition(cat.getPosition() + 1);
+                            categoryDao.save(cat);
+                        }
+                    }
+                }
+
+            }
+
+            /*Subcategory to subcategory*/
+            if (actualDraggedCategory.getParent() != null && droppedCategory == null) {
+                for (Category cat : droppedCategory.getChildren()) {
+                    if (cat.getPosition() <= actualPosition && cat.getPosition() >= draggedCategory.getPosition() && actualPosition > dropIndex) {
+                        cat.setPosition(cat.getPosition() + 1);
+                        categoryDao.save(cat);
+                    }
+
+                    if (cat.getPosition() >= actualPosition && cat.getPosition() <= draggedCategory.getPosition() && actualPosition < dropIndex) {
+
+                        cat.setPosition(cat.getPosition() - 1);
+                        categoryDao.save(cat);
+                    }
+                }
+                categoryDao.save(draggedCategory);
+            }
+        }
+
+        /*Category to category*/
+        if (droppedCategory.getName() == null) {
+            if (draggedCategory.getParent() == null) {
+                actualPosition = categoryDao.findById(draggedCategory.getId()).getPosition();
+                for (Category cat : getRootCategories()) {
+                    if (actualPosition > draggedCategory.getPosition()) {
+                        if ((cat.getPosition() < actualPosition && cat.getPosition() >= draggedCategory.getPosition())) {
+                            cat.setPosition(cat.getPosition() + 1);
+                            categoryDao.save(cat);
+                        }
+                    }
+                    if (actualPosition < draggedCategory.getPosition()) {
+                        if ((cat.getPosition() > actualPosition && cat.getPosition() <= draggedCategory.getPosition())) {
+                            cat.setPosition(cat.getPosition() - 1);
+                            categoryDao.save(cat);
+                        }
+                    }
+                }
+                categoryDao.save(draggedCategory);
+            }
+        }
+
+        /*Subcategory to category*/
+        if (droppedCategory.getName() == null && draggedCategory.getParent() != null) {
+
+            for (Category cat : categoryDao.findById(draggedCategory.getParent().getId()).getChildren()) {
+                if (draggedCategory.getId() != cat.getId() && cat.getPosition() >= actualPosition) {
+                    cat.setPosition(cat.getPosition() - 1);
                     categoryDao.save(cat);
                 }
             }
-            boolean isTrue = false;
-            if(droppedCategory.getChildren().size() == 0) {
-                droppedCategory.getChildren().add(draggedCategory);
-                draggedCategory.setParent(droppedCategory);
-            }
-            for (Category cat : droppedCategory.getChildren()) {
-                if (cat.getParent().getId() != draggedCategory.getParent().getId()) {
-                    isTrue = true;
-                }
-            }
-            if (isTrue) {
-                droppedCategory.getChildren().add(draggedCategory);
-                draggedCategory.setParent(droppedCategory);
-                /*droppedCategory.getChildren().add(draggedCategory);
-                draggedCategory.setParent(droppedCategory);*/
-                /*draggedCategory.setParent(droppedCategory);*/
-            }
-            /*draggedCategory.setPosition(findLastPositionByCategory(droppedCategory));*/
-            categoryDao.save(droppedCategory);
-            categoryDao.save(draggedCategory);
-        }
-
-        if (droppedCategory.getName() == null) {
 
             for (Category cat : getRootCategories()) {
-                if (cat.getPosition() >= draggedCategory.getPosition()) {
+                if (cat.getPosition() >= dropIndex) {
                     cat.setPosition(cat.getPosition() + 1);
                     categoryDao.save(cat);
                 }
             }
-
             draggedCategory.setParent(null);
-            /*draggedCategory.setPosition(findLastPositionByCategory(droppedCategory));*/
             categoryDao.save(draggedCategory);
         }
 
+        /*Subcategory to subcategory in another category*/
+        if (actualDraggedCategory.getParent() != null && droppedCategory != null) {
+            for (Category dragCat : draggedCategory.getParent().getChildren()) {
+                if (dragCat.getPosition() > actualPosition && dragCat.getId() != draggedCategory.getId()) {
+                    dragCat.setPosition(dragCat.getPosition() - 1);
+                    categoryDao.save(dragCat);
+                }
+            }
+            for (Category dropCat : droppedCategory.getChildren()) {
+                if (dropCat.getPosition() >= draggedCategory.getPosition() && dropCat.getId() != draggedCategory.getId()) {
+                    dropCat.setPosition(dropCat.getPosition() + 1);
+                    categoryDao.save(dropCat);
+                }
+            }
+            droppedCategory.getChildren().add(draggedCategory);
+            draggedCategory.setParent(droppedCategory);
+            categoryDao.save(draggedCategory);
+        }
     }
 
     @Override

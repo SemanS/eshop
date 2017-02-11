@@ -5,7 +5,9 @@ import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
+import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.TreeNodeComparator;
 import org.primefaces.util.TreeUtils;
@@ -31,7 +33,11 @@ public class CategoryTreeTableBean {
 
     @Getter
     @Setter
-    private TreeNode selectedNode;
+    private Category selectedCategory;
+
+    @Getter
+    @Setter
+    private TreeNode selectedNode = new DefaultTreeNode();
 
     @Autowired
     CategoryService categoryService;
@@ -43,7 +49,12 @@ public class CategoryTreeTableBean {
     public void init() {
         Category category = new Category();
         rootCategories = categoryService.buildCategories();
+        /*selectedNode = rootCategories.getChildren().get(0);*/
         /*selectedNode = categoryService.buildCategories();*/
+    }
+
+    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
+        selectedCategory = (Category) nodeSelectEvent.getTreeNode().getData();
     }
 
     public void onDragDrop(TreeDragDropEvent event) {

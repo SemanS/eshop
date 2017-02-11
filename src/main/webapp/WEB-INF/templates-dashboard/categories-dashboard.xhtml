@@ -9,27 +9,29 @@
 <!--xmlns:h="http://java.sun.com/jsf/html"-->
 <pre></pre>
 
-
-<h:form id="treeForm" styleClass="ui stackable grid">
+<div class="ui stackable grid">
     <div class="one wide column"></div>
+    <h:form id="treeForm" styleClass="">
 
-    <div class="four wide column">
-        <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
-                selection="#{categoryTreeTableBean.selectedNode}"
-                draggable="true" droppable="true" dragdropScope="demo">
-            <p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
-                    update=":treeForm:tabView"/>
-            <p:ajax event="select" update=":treeForm:tabView" listener="#{categoryTreeTableBean.TreeNodeToCategory}"/>
-            <p:treeNode>
-                <h:outputText value="#{node.name}"/>
-            </p:treeNode>
-            <p:treeNode>
-                <img class="ui image small"
-                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
-            </p:treeNode>
-        </p:tree>
-    </div>
 
+        <div class="four wide column">
+            <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
+                    selection="#{categoryDashboardBean.selectedNode}"
+                    draggable="true" droppable="true" dragdropScope="demo">
+                <p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
+                        update=":categoryDetailId:tabView"/>
+                <p:ajax event="select" update=":treeForm :categoryDetailId"
+                        listener="#{categoryDashboardBean.TreeNodeToCategory}"/>
+                <p:treeNode>
+                    <h:outputText value="#{node.name}"/>
+                </p:treeNode>
+                <p:treeNode>
+                    <img class="ui image small"
+                         src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
+                </p:treeNode>
+            </p:tree>
+        </div>
+    </h:form>
     <!--<h:form id="itemsFormId" styleClass="six wide column">
         <p:treeTable value="#{categoryTreeTableBean.rootCategories}" var="category"
                      style="font-size: 100% !important;" draggableRows="true">
@@ -51,8 +53,8 @@
         </p:treeTable>
     </h:form>-->
 
-    <!--<h:form id="categoryDetailId" styleClass="ui form" enctype="multipart/form-data">-->
-    <div class="ui form eight wide column">
+    <h:form id="categoryDetailId" styleClass="ui form eight wide column">
+
         <p:tabView id="tabView">
             <div class="five wide column">
                 <p:tab title="Zmeniť kategóriu">
@@ -104,7 +106,7 @@
                     <h:commandLink class="medium ui button" icon="ui-icon-star"
                                    style="border-radius: 0px !important; color: blue"
                                    action="#{categoryDashboardBean.onChangeRootCategory()}"
-                                   value="Zmeniť hlavnú kategóriu">
+                                   value="Zmeniť kategóriu">
                     </h:commandLink>
                     <!--
                                         <pre></pre>
@@ -279,10 +281,10 @@
                 </p:tab>
             </div>
         </p:tabView>
-    </div>
 
-    <div class="one wide column"></div>
-</h:form>
 
+        <div class="one wide column"></div>
+    </h:form>
+</div>
 
 </html>

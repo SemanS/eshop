@@ -42,4 +42,6 @@ public interface CategoryService {
 
     int findLastPositionByCategory(Category category);
 
+    int findLastRootPosition();
+
 }

@@ -10,7 +10,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -70,6 +73,10 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
+    private TreeNode selectedNode = new DefaultTreeNode();
+
+    @Getter
+    @Setter
     private Category inputSelectedRootCategory;
 
     @Getter
@@ -110,6 +117,10 @@ public class CategoryDashboardBean {
         initSubCategory();
     }
 
+    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
+        inputSelectedRootCategory = (Category) nodeSelectEvent.getTreeNode().getData();
+    }
+
     public Category initRootCategory() {
         if (rootCategories.size() == 0) {
             return inputSelectedRootCategory = new Category();
@@ -126,20 +137,14 @@ public class CategoryDashboardBean {
         }
     }
 
-    /*public void handleFileUpload(AjaxBehaviorEvent event) throws IOException {
-        System.out.println("file size: " + file.getSize());
-        System.out.println("file type: " + file.getContentType());
-        System.out.println("file info: " + file.getHeader("Content-Disposition"));
-        inputSelectedRootCategory.setImage(IOUtils.toByteArray(file.getInputStream()));
-        categoryDao.save(inputSelectedRootCategory);
-    }*/
-
     public String onChangeRootCategory() throws IOException {
         Category category;
-        category = categoryDao.findByName(selectedRootCategory);
+        category = categoryDao.findById(inputSelectedRootCategory.getId());
         category.setName(inputSelectedRootCategory.getName());
         category.setUrl(inputSelectedRootCategory.getUrl());
-        category.setImage(IOUtils.toByteArray(file.getInputStream()));
+        if (file != null) {
+            category.setImage(IOUtils.toByteArray(file.getInputStream()));
+        }
         categoryDao.save(category);
         return "pretty:dashboard";
     }
@@ -159,7 +164,10 @@ public class CategoryDashboardBean {
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
         category.setBase(true);
-        category.setImage(IOUtils.toByteArray(fileNew.getInputStream()));
+        if (file != null) {
+            category.setImage(IOUtils.toByteArray(fileNew.getInputStream()));
+        }
+        category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
         return "pretty:dashboard";
     }

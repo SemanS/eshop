@@ -338,6 +338,17 @@ public class CategoryServiceImpl implements CategoryService {
         return lastPosition;
     }
 
+    @Override
+    public int findLastRootPosition() {
+        int lastPosition = 0;
+        for (Category cat : getCategoryRootNodeList()) {
+            if (cat.getPosition() > lastPosition) {
+                lastPosition = cat.getPosition();
+            }
+        }
+        return lastPosition;
+    }
+
     public List<Category> findAllSorted() {
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;

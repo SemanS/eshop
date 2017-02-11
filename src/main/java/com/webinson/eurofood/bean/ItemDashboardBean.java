@@ -11,15 +11,28 @@ import com.webinson.eurofood.service.ItemService;
 import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
+import net.coobird.thumbnailator.filters.Watermark;
+import net.coobird.thumbnailator.geometry.Positions;
+import org.apache.commons.io.IOUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 
@@ -68,6 +81,10 @@ public class ItemDashboardBean {
     @Setter
     private List<String> rootCategoriesString;
 
+    @Getter
+    @Setter
+    private UploadedFile file;
+
     @PostConstruct
     private void init() {
         categories = categoryService.getNonRootCategories();
@@ -85,10 +102,27 @@ public class ItemDashboardBean {
         selectedCategory = selectedItem.getCategory().getName();
     }
 
-    public String onSaveItem() {
+    public String onSaveItem() throws IOException {
+        if (file.getSize() != 0) {
+
+            Resource resource = new ClassPathResource("/images/calculator.png");
+            InputStream is = getClass().getResourceAsStream("/eurofood_logo.png");
+            BufferedImage originalImage = ImageIO.read(file.getInputstream());
+            BufferedImage watermarkImage = ImageIO.read(is);
+            Watermark filter = new Watermark(Positions.CENTER, watermarkImage, 0.5f);
+            BufferedImage watermarkedImage = filter.apply(originalImage);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(watermarkedImage, "jpg", baos);
+            byte[] bytes = baos.toByteArray();
+
+            selectedItem.setImage(bytes);
+        }
         selectedItem.setCategory(categoryDao.findByName(selectedCategory));
         itemDao.save(selectedItem);
-        return "pretty:dashboard";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath() + "pretty:dashboard");
+        return "";
     }
 
     public String onDeleteItem() {
@@ -97,7 +131,7 @@ public class ItemDashboardBean {
     }
 
     public String getBaseImage(Item item) {
-        if(item.getImage() == null) {
+        if (item.getImage() == null) {
             return "";
         }
         String newImage = "";

@@ -21,8 +21,8 @@ public class ItemDto {
     private String url;
     private Category category;
     private int internalNumber;
-    private int priceNetto;
-    private int priceBrutto;
+    private double priceNetto;
+    private double priceBrutto;
     private String eanNumber;
     private Producer producer;
     private int piecesInCarton;

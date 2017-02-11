@@ -4,76 +4,67 @@
      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!--<context-param>
-        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-        <param-value>server</param-value>
-    </context-param>-->
-    <!--<error-page>
-        <error-code>500</error-code>
-        <location>/error</location>
-    </error-page>
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error</location>
-    </error-page>-->
-    <!--
-        <listener>
-            <listener-class>org.ocpsoft.rewrite.servlet.impl.RewriteServletRequestListener</listener-class>
-        </listener>
-
-        <listener>
-            <listener-class>org.ocpsoft.rewrite.servlet.impl.RewriteServletContextListener</listener-class>
-        </listener>
-
-        <filter>
-            <filter-name>OCPsoft Rewrite Filter</filter-name>
-            <filter-class>org.ocpsoft.rewrite.servlet.RewriteFilter</filter-class>
-            <async-supported>true</async-supported>
-        </filter>
-        <filter-mapping>
-            <filter-name>OCPsoft Rewrite Filter</filter-name>
-            <url-pattern>/*</url-pattern>
-            <dispatcher>FORWARD</dispatcher>
-            <dispatcher>REQUEST</dispatcher>
-            <dispatcher>INCLUDE</dispatcher>
-            <dispatcher>ASYNC</dispatcher>
-            <dispatcher>ERROR</dispatcher>
-        </filter-mapping>-->
-
-    <!--<servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-
-    <context-param>
-        <param-name>primefaces.UPLOADER</param-name>
-        <param-value>commons</param-value>
-    </context-param>-->
-
-    <filter>
+    <!--<filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <url-pattern>/*</url-pattern>
         <servlet-name>Faces Servlet</servlet-name>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
 
-    <context-param>
+   <!-- <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>commons</param-value>
+    </context-param>-->
+
+    <!-- Pretty faces -->
+    <!--<listener>
+        <listener-class>org.ocpsoft.rewrite.servlet.impl.RewriteServletRequestListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.ocpsoft.rewrite.servlet.impl.RewriteServletContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>OCPsoft Rewrite Filter</filter-name>
+        <filter-class>org.ocpsoft.rewrite.servlet.RewriteFilter</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+        <filter-name>OCPsoft Rewrite Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>-->
+
+
+
+    <!--<context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>commons</param-value>
+    </context-param>
+    <filter>
+        <filter-name>PrimeFaces FileUpload Filter</filter-name>
+        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+    </filter>-->
+    <!-- <filter-mapping>
+         <filter-name>PrimeFaces FileUpload Filter</filter-name>
+         <servlet-name>Faces Servlet</servlet-name>
+         <dispatcher>FORWARD</dispatcher>
+     </filter-mapping>-->
+
+   <!-- <context-param>
         <param-name>com.sun.faces.enableViewStateIdRendering</param-name>
         <param-value>false</param-value>
-    </context-param>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    </context-param>-->
+
+
     <!--
     If you intend to hide the resources from public access
     -->
@@ -84,10 +75,6 @@
     </context-param>-->
 
     <!-- Map these files with JSF -->
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
 
     <!--
 
@@ -105,16 +92,6 @@
             <servlet-name>DirectoryListing</servlet-name>
             <url-pattern>/</url-pattern>
         </servlet-mapping>-->
-
-    <!-- <filter>
-         <filter-name>PrimeFaces FileUpload Filter</filter-name>
-         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-     </filter>
-     <filter-mapping>
-         <filter-name>PrimeFaces FileUpload Filter</filter-name>
-         <servlet-name>Faces Servlet</servlet-name>
-     </filter-mapping>
- -->
 
 
     <!-- pretty faces -->

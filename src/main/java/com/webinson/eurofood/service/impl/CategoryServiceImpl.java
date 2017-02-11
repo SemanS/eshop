@@ -346,7 +346,7 @@ public class CategoryServiceImpl implements CategoryService {
                 lastPosition = cat.getPosition();
             }
         }
-        return lastPosition;
+        return lastPosition + 1;
     }
 
     public List<Category> findAllSorted() {

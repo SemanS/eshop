@@ -5,13 +5,17 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+<style>
+    .ui.card, .ui.cards > .card {
+        border-radius: 0 !important;
+    }
+</style>
 <div class="ui container text">
     <h4 class="ui horizontal divider header">
         <!--<i class="tag icon"></i>-->
-        <!--#{category.name}-->
+        #{itemView.selectedCategory.name}
     </h4>
 </div>
-<pre></pre>
 <pre></pre>
 <div class="ui container">
     <h:form>
@@ -20,32 +24,58 @@
                 <div class="column">
 
                     <div class="ui fluid card">
+                        <div class="content">
+                            <h:commandLink
+                                    action="#{itemView.onItem(item)}">
+                                <h4 style="text-align: center">#{item.header}</h4>
+                            </h:commandLink>
+                        </div>
 
-                        <div class="blurring dimmable image">
-                            <img class="ui image" src="data:image/png;base64,#{item.image}"/>
+                        <div class="ui small image centered" style="margin-top: -10px">
+                            <img src="data:image/png;base64,#{item.image}"/>
                         </div>
 
                         <div class="content">
                             <div class="description ui green">
 
-                                <a class="ui blue ribbon label">#{item.priceNetto} EUR</a>
-                                <!--    <h4 class="centered">#{item.priceNetto} EUR</h4>-->
-                                <span class="meta" style="text-align: right">Skladom</span>
+                                <!--<a class="ui blue ribbon label">#{item.priceNetto} EUR s DPH</a>
+                                <span class="meta" style="text-align: right">Skladom</span>-->
+
 
                             </div>
 
-                            <div class="description" style="margin-top: 10px; text-align: center">
-                                <h:commandLink style="color:black; " action="#{itemView.onItem(item)}">
-                                    #{item.text}
-                                </h:commandLink>
+                            <div class="description" style="text-align: center">
+                                <div class="left floated centered">
+                                    <h3 class="">
+                                        #{item.priceBrutto} EUR</h3> s DPH
+                                </div>
+
+                                <div class="right floated centered">
+                                    <h4 class="">
+                                        #{item.priceNetto} EUR</h4> bez DPH
+                                </div>
+
+                                <!--<h:commandLink style="color:black; " action="#{itemView.onItem(item)}">
+                                    #{item.header}
+                                </h:commandLink>-->
                             </div>
 
                         </div>
-                        <h:commandLink class="ui bottom attached button"
+                        <!--<div class="extra content">
+
+                                <span class="left floated">
+        13.50 bez DPH
+      </span>
+                            <span class="right floated">
+        14.80 s DPH
+      </span>
+
+                        </div>-->
+                        <!--<h:commandLink class="ui bottom attached button"
                                        action="#{shoppingCartView.addItemToCart(item)}">
                             <i class="add icon"></i>
                             Pridať do košíka
-                        </h:commandLink>
+                        </h:commandLink>-->
 
                     </div>
 

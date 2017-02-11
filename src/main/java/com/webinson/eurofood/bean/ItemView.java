@@ -10,6 +10,7 @@ import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
+import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.*;
@@ -133,9 +134,9 @@ public class ItemView implements Serializable {
         return itemService.getItemsByCategory(this.selectedCategory);
     }
 
-    public void onCategory(CategoryDto categoryDto) throws IOException {
-        selectedCategory = categoryAssembler.toDto(categoryDao.findById(categoryDto.getId()));
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + categoryDto.getUrl());
+    public void onCategory(Category category) throws IOException {
+        selectedCategory = categoryAssembler.toDto(categoryDao.findById(category.getId()));
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
     }
 
     public void onItem(ItemDto itemDto) throws IOException {

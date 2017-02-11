@@ -181,12 +181,16 @@
     position: relative;
     top: 0;
     left: 0;
+    width: 120%;
+
 }
 
 .image1 {
     position: relative;
     top: 0;
+    padding-top: 14px;
     left: 0;
+    width: 90%;
 }
 
 .image2 {
@@ -221,9 +225,9 @@
 }
 
 .calculator {
-    height: 105px;
-    width: 430px;
-    background-image: url(../../resources/images/calculator.jpg) !important;
+    height: 108px;
+    width: 493px;
+    background-image: url(../../resources/images/calculator_new.png) !important;
     background-repeat: no-repeat !important;
 }
 

@@ -62,12 +62,12 @@ public class Item implements Serializable {
     @Column(name = "price_netto")
     @Getter
     @Setter
-    private int priceNetto;
+    private double priceNetto;
 
     @Column(name = "price_brutto")
     @Getter
     @Setter
-    private int priceBrutto;
+    private double priceBrutto;
 
     @Column(name = "ean")
     @Getter

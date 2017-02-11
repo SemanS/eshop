@@ -11,7 +11,7 @@
 
 <div class="ui stackable grid">
     <div class="one wide column"></div>
-    <h:form id="treeForm" styleClass="">
+    <h:form id="treeForm">
 
 
         <div class="four wide column">
@@ -19,8 +19,8 @@
                     selection="#{categoryDashboardBean.selectedNode}"
                     draggable="true" droppable="true" dragdropScope="demo">
                 <p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
-                        update=":categoryDetailId:tabView"/>
-                <p:ajax event="select" update=":treeForm :categoryDetailId"
+                        update=":tabView:tab1"/>
+                <p:ajax event="select" update=":treeForm :tabView:tab1"
                         listener="#{categoryDashboardBean.TreeNodeToCategory}"/>
                 <p:treeNode>
                     <h:outputText value="#{node.name}"/>
@@ -53,238 +53,161 @@
         </p:treeTable>
     </h:form>-->
 
-    <h:form id="categoryDetailId" styleClass="ui form eight wide column">
+    <div id="categoryDetailId" class="ui form eight wide column">
 
         <p:tabView id="tabView">
             <div class="five wide column">
+
                 <p:tab title="Zmeniť kategóriu">
-                    <h4 class="ui horizontal divider header" style="margin-top: 20px">
-                        Hlavné kategórie
-                    </h4>
-                    <!--<div class="field">
-                        <h:outputText
-                                value="#{categoryTreeTableBean.selectedCategory.name}"/>
-                        <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategory}">
-                            <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
-                                           itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                            <f:ajax event="change" render=":categoryDetailId"
-                                    listener="#{categoryDashboardBean.onChangeSelectedRootCategory(categoryDashboardBean.selectedRootCategory)}"/>
-                        </h:selectOneMenu>
-                    </div>-->
+                    <h:form id="tab1" enctype="multipart/form-data">
 
-                    <div class="two fields">
-                        <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputSelectedRootCategory.name}"
-                                         placeholder="Zadajte názov hlavnej kategórie"
-                                         type="text"/>
+                        <h4 class="ui horizontal divider header" style="margin-top: 20px">
+                            Detail kategórie
+                        </h4>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputSelectedRootCategory.name}"
+                                             placeholder="Zadajte názov hlavnej kategórie"
+                                             type="text"/>
+                            </div>
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputSelectedRootCategory.url}"
+                                             placeholder="Zadajte url hlavnej kategórie"
+                                             type="text"/>
+                            </div>
+                        </div>
+
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Vložiť obrázok kategórie</label>
+                                <p:fileUpload id="fileUpload" value="#{categoryDashboardBean.file}" mode="simple"
+                                              skinSimple="true"/>
+
+                            </div>
+                            <div class="field">
+                                <label>Obrázok kategórie</label>
+                                <img class="ui image"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                            </div>
                         </div>
                         <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputSelectedRootCategory.url}"
-                                         placeholder="Zadajte url hlavnej kategórie"
-                                         type="text"/>
+                            <h:commandLink id="commandLink1"
+                                           class="medium ui button" icon="ui-icon-star"
+                                           style="border-radius: 0px !important; color: blue"
+                                           action="#{categoryDashboardBean.onChangeRootCategory()}"
+                                           value="Zmeniť kategóriu"
+                                           update=":tab1">
+                            </h:commandLink>
                         </div>
-                    </div>
-                    <div class="two fields">
-                        <div class="field">
-                            <label>Vložiť obrázok kategórie</label>
-                            <h:inputFile id="upload"
-                                         value="#{categoryDashboardBean.file}"
-                                         label="Insert image"
-                                         update="categoryDetailId">
-                                <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
-                            </h:inputFile>
-                        </div>
-                        <div class="field">
-                            <label>Obrázok kategórie</label>
-                            <img class="ui image"
-                                 src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
-                        </div>
-                    </div>
-
-                    <h:commandLink class="medium ui button" icon="ui-icon-star"
-                                   style="border-radius: 0px !important; color: blue"
-                                   action="#{categoryDashboardBean.onChangeRootCategory()}"
-                                   value="Zmeniť kategóriu">
-                    </h:commandLink>
-                    <!--
-                                        <pre></pre>
-                                        <h4 class="ui horizontal divider header" style="margin-top: 40px">
-                                            Vedľajšie kategórie
-                                        </h4>
-
-                                        <div class="field">
-                                            <h:selectOneMenu value="#{categoryDashboardBean.selectedSubCategory}">
-                                                &lt;!&ndash;<f:selectItem itemLabel="#{itemDashboardBean.selectedItem.category.name}"/>&ndash;&gt;
-                                                <f:selectItems value="#{categoryDashboardBean.categories}" var="c"
-                                                               itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                                                <f:ajax event="change" render=":categoryDetailId"
-                                                        listener="#{categoryDashboardBean.onChangeSelectedSubCategory(categoryDashboardBean.selectedSubCategory)}"/>
-
-                                                <f:ajax event="change" render=":categoryDetailId"
-                                                        listener="#{categoryDashboardBean.onChangeAssignedCategory(categoryDashboardBean.selectedSubCategory)}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <p:inputText styleClass="nonBorder"
-                                                             value="#{categoryDashboardBean.inputSelectedSubCategory.name}"
-                                                             placeholder="Zadajte názov vedľajšej kategórie"
-                                                             type="text"/>
-                                            </div>
-                                            <div class="field">
-                                                <p:inputText styleClass="nonBorder"
-                                                             value="#{categoryDashboardBean.inputSelectedSubCategory.url}"
-                                                             placeholder="Zadajte url vedľajšej kategórie"
-                                                             type="text"/>
-                                            </div>
-                                        </div>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <label>Vložiť obrázok kategórie</label>
-                                                <h:inputFile id="asds"
-                                                             value="#{categoryDashboardBean.fileChangeSub}"
-                                                             label="Insert image"
-                                                             update="editor forma">
-                                                </h:inputFile>
-                                            </div>
-                                            <div class="field">
-                                                <label>Obrázok kategórie</label>
-                                                <img class="ui image"
-                                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedSubCategory)}"/>
-                                            </div>
-                                        </div>
-
-                                        <h:commandLink class="medium ui button" icon="ui-icon-star"
-                                                       style="border-radius: 0px !important; color: blue"
-                                                       action="#{categoryDashboardBean.onChangeSubCategory()}"
-                                                       value="Zmeniť vedľajšiu kategóriu">
-                                        </h:commandLink>
-                                        <pre></pre>
-                                        <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
-                                        <div class="two fields">
-                                            <div class="field">
-                                                <h:selectOneMenu id="selectedRootCategoryAssignId"
-                                                                 value="#{categoryDashboardBean.selectedRootCategoryAssign}">
-                                                    <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
-                                                                   itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-                                            <div class="field">
-                                                <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                                                               style="border-radius: 0px !important; color: blue"
-                                                               action="#{categoryDashboardBean.onSubCategoryAssign()}"
-                                                               value="Priradiť ku hlavnej kategórii">
-                                                </h:commandLink>
-                                            </div>
-                                        </div>-->
+                    </h:form>
                 </p:tab>
+
+
             </div>
             <div class="five wide column">
+
                 <p:tab title="Pridať kategóriu">
-                    <h4 class="ui horizontal divider header" style="margin-top: 20px">
-                        <!--<i class="tag icon"></i>-->
-                        Hlavné kategórie
-                    </h4>
-                    <div class="two fields">
-                        <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputRootCategory.name}"
-                                         placeholder="Zadajte názov hlavnej kategórie"
-                                         type="text"/>
+                    <h:form id="tab2" enctype="multipart/form-data">
+                        <h4 class="ui horizontal divider header" style="margin-top: 20px">
+                            <!--<i class="tag icon"></i>-->
+                            Hlavné kategórie
+                        </h4>
+                        <div class="two fields">
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputRootCategory.name}"
+                                             placeholder="Zadajte názov hlavnej kategórie"
+                                             type="text"/>
+                            </div>
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputRootCategory.url}"
+                                             placeholder="Zadajte url hlavnej kategórie"
+                                             type="text"/>
+                            </div>
                         </div>
-                        <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputRootCategory.url}"
-                                         placeholder="Zadajte url hlavnej kategórie"
-                                         type="text"/>
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Vložiť obrázok kategórie</label>
+                                <p:fileUpload id="newFileUpload" value="#{categoryDashboardBean.newRootFile}"
+                                              mode="simple"
+                                              skinSimple="true"/>
+                            </div>
+                            <div class="field">
+                                <label>Obrázok kategórie</label>
+                                <img class="ui image"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="two fields">
-                        <div class="field">
-                            <label>Vložiť obrázok kategórie</label>
-                            <h:inputFile id="dw"
-                                         value="#{categoryDashboardBean.fileNew}"
-                                         label="Insert image"
-                                         update="categoryDetailId">
-                                <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
-                            </h:inputFile>
-                        </div>
-                        <div class="field">
-                            <label>Obrázok kategórie</label>
-                            <img class="ui image"
-                                 src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
-                        </div>
-                    </div>
-                    <h:commandLink class="medium ui button" icon="ui-icon-star"
-                                   style="border-radius: 0px !important; color: blue"
-                                   action="#{categoryDashboardBean.onSaveRootCategory()}"
-                                   value="Pridať hlavnú kategóriu">
-                    </h:commandLink>
+                        <h:commandLink class="medium ui button" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: blue"
+                                       action="#{categoryDashboardBean.onSaveRootCategory()}"
+                                       value="Pridať hlavnú kategóriu">
+                        </h:commandLink>
 
-                    <pre></pre>
-                    <h4 class="ui horizontal divider header" style="margin-top: 40px">
-                        <!--<i class="tag icon"></i>-->
-                        Vedľajšie kategórie
-                    </h4>
+                        <pre></pre>
+                        <h4 class="ui horizontal divider header" style="margin-top: 40px">
+                            <!--<i class="tag icon"></i>-->
+                            Vedľajšie kategórie
+                        </h4>
 
-                    <div class="two fields">
-                        <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputSubCategory.name}"
-                                         placeholder="Zadajte názov vedľajšej kategórie"
-                                         type="text"/>
+                        <div class="two fields">
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputSubCategory.name}"
+                                             placeholder="Zadajte názov vedľajšej kategórie"
+                                             type="text"/>
+                            </div>
+                            <div class="field">
+                                <p:inputText styleClass="nonBorder"
+                                             value="#{categoryDashboardBean.inputSubCategory.url}"
+                                             placeholder="Zadajte url vedľajšej kategórie"
+                                             type="text"/>
+                            </div>
                         </div>
-                        <div class="field">
-                            <p:inputText styleClass="nonBorder"
-                                         value="#{categoryDashboardBean.inputSubCategory.url}"
-                                         placeholder="Zadajte url vedľajšej kategórie"
-                                         type="text"/>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Vložiť obrázok kategórie</label>
+                                <p:fileUpload id="newSubFile" value="#{categoryDashboardBean.newSubFile}" mode="simple"
+                                              skinSimple="true"/>
+                            </div>
+                            <div class="field">
+                                <label>Obrázok kategórie</label>
+                                <img class="ui image"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="two fields">
+                        <pre></pre>
+                        <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
+
                         <div class="field">
-                            <label>Vložiť obrázok kategórie</label>
-                            <h:inputFile id="dw2"
-                                         value="#{categoryDashboardBean.fileNewSide}"
-                                         label="Insert image"
-                                         update="categoryDetailId">
-                                <!--<f:ajax listener="#{categoryDashboardBean.handleFileUpload}" render=":categoryDetailId"/>-->
-                            </h:inputFile>
+                            <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategoryAdd}">
+                                <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
+                                               itemValue="#{c.name}" itemLabel="#{c.name}"/>
+                            </h:selectOneMenu>
                         </div>
-                        <div class="field">
-                            <label>Obrázok kategórie</label>
-                            <img class="ui image"
-                                 src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
-                        </div>
-                    </div>
 
-                    <pre></pre>
-                    <label>Priradiť vedľajšiu kategóriu ku hlavnej kategórii:</label>
-
-                    <div class="field">
-                        <h:selectOneMenu value="#{categoryDashboardBean.selectedRootCategoryAdd}">
-                            <f:selectItems value="#{categoryDashboardBean.rootCategories}" var="c"
-                                           itemValue="#{c.name}" itemLabel="#{c.name}"/>
-                        </h:selectOneMenu>
-                    </div>
-
-                    <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
-                                   style="border-radius: 0px !important; color: blue"
-                                   action="#{categoryDashboardBean.onSubCategoryAdd()}"
-                                   value="Priradiť ku hlavnej kategórii">
-                    </h:commandLink>
-
+                        <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: blue"
+                                       action="#{categoryDashboardBean.onSubCategoryAdd()}"
+                                       value="Priradiť ku hlavnej kategórii">
+                        </h:commandLink>
+                    </h:form>
                 </p:tab>
+
             </div>
+
         </p:tabView>
 
 
         <div class="one wide column"></div>
-    </h:form>
+    </div>
 </div>
 
 </html>

@@ -8,6 +8,20 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h4>Kategórie:</h4>
+<style>
+    .ui-widget-content {
+        border: none !important;
+    }
+
+    .ui-tree .ui-treenode-label {
+        padding: 0 0px !important;
+    }
+
+    .ui-tree {
+        width: auto !important;
+    }
+
+</style>
 <h:form>
     <!-- <div class="ui grid stackable">
          <div class="ui fluid accordion">
@@ -72,55 +86,53 @@
         </ui:fragment>
     </ui:repeat>-->
 
-    <ui:repeat value="#{sideMenuBean.categories}" var="category">
+    <!-- <ui:repeat value="#{sideMenuBean.categories}" var="category">
 
-        <ui:fragment rendered="#{category.base == true and category.children.size() == 0}">
-            <img class="ui image" src="data:image/png;base64,#{category.image}" style="width: 83%; margin-left: 25px; margin-bottom: 5px"/>
-        </ui:fragment>
+         <ui:fragment rendered="#{category.base == true and category.children.size() == 0}">
+             <img class="ui image" src="data:image/png;base64,#{category.image}" style="width: 83%; margin-left: 25px; margin-bottom: 5px"/>
+         </ui:fragment>
 
-        <ui:fragment rendered="#{category.base == true and category.children.size() != 0}" dynamic="true"
-                     multiple="true">
-            <p:accordionPanel activeIndex="null">
-                <p:ajax event="tabChange" listener="#{sideMenuBean.onTabChange}"/>
-                <!--<f:facet name="last">
-                    <link type="text/css" rel="stylesheet" href="css/styleSideMenu.css"></link>
-                </f:facet>-->
+         <ui:fragment rendered="#{category.base == true and category.children.size() != 0}" dynamic="true"
+                      multiple="true">
+             <p:accordionPanel activeIndex="null">
+                 <p:ajax event="tabChange" listener="#{sideMenuBean.onTabChange}"/>
 
 
-                <p:tab>
-                    <f:facet name="title">
-                        <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                        <!--<h:outputText value="tab title"/>-->
-                        <!--<img src="../../resources/images/calculator.png"/>-->
-                        <!--<ui:fragment rendered="#{category.base == true}">
-                            <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                        </ui:fragment>-->
-                    </f:facet>
-                    <ui:repeat value="#{category.children}" var="subCategory">
-                        <img class="ui image" src="data:image/png;base64,#{subCategory.image}"/>
-                    </ui:repeat>
-                    <!--<ui:fragment rendered="#{category.base == false}">
-                        <img class="ui image" src="data:image/png;base64,#{category.children.image}"/>
-                    </ui:fragment>-->
-                    <!--<img src="../../resources/images/calculator.png"/>-->
-                </p:tab>
 
-                <!--<p:tab title="Godfather Part II">
-                    <h:panelGrid columns="2" cellpadding="10">
-                        <p:graphicImage name="demo/images/godfather/godfather2.jpg"/>
-                        <h:outputText value="Francis Ford Coppola's legendary..."/>
-                    </h:panelGrid>
-                </p:tab>
-                <p:tab title="Godfather Part III">
-                    <h:panelGrid columns="2" cellpadding="10">
-                        <p:graphicImage name="demo/images/godfather/godfather3.jpg"/>
-                        <h:outputText value="After a break of more than 15 years..."/>
-                    </h:panelGrid>
-                </p:tab>-->
-            </p:accordionPanel>
-        </ui:fragment>
+                 <p:tab>
+                     <f:facet name="title">
+                         <img class="ui image" src="data:image/png;base64,#{category.image}"/>
 
-    </ui:repeat>
+                     </f:facet>
+                     <ui:repeat value="#{category.children}" var="subCategory">
+                         <img class="ui image" src="data:image/png;base64,#{subCategory.image}"/>
+                     </ui:repeat>
+
+                 </p:tab>
+
+             </p:accordionPanel>
+         </ui:fragment>
+
+     </ui:repeat>-->
+
+    <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
+            selection="#{categoryDashboardBean.selectedNode}" animate="true">
+        <!--<p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
+                update=":tabView:tab1"/>
+        <p:ajax event="select" update=":treeForm :tabView:tab1"
+                listener="#{categoryDashboardBean.TreeNodeToCategory}"/>-->
+        <!--<p:treeNode>
+            <h:outputText value="#{node.name}"/>
+        </p:treeNode>-->
+        <p:treeNode>
+            <h:commandLink action="#{itemView.onCategory(node)}">
+                <f:ajax execute="@form :submitCategory" render=":submitCategory"/>
+                <img class="ui image small"
+                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
+            </h:commandLink>
+
+        </p:treeNode>
+    </p:tree>
 
 </h:form>
 </html>

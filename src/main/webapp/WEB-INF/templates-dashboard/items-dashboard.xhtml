@@ -30,9 +30,9 @@
             <p:column headerText="Header" sortBy="#{item.header}" filterBy="#{item.header}">
                 <h:outputText value="#{item.header}"/>
             </p:column>
-            <p:column headerText="Text" sortBy="#{item.text}" filterBy="#{item.text}">
+            <!--<p:column headerText="Text" sortBy="#{item.text}" filterBy="#{item.text}">
                 <h:outputText value="#{item.text}"/>
-            </p:column>
+            </p:column>-->
             <p:column headerText="Kategória" filterBy="#{item.category.name}" sortBy="#{item.category.name}"
                       filterMatchMode="exact">
                 <f:facet name="filter">
@@ -55,7 +55,7 @@
 
     <!--<div class="headerDivider" style=" margin-top: 10px"></div>-->
 
-    <h:form id="productDetailId" styleClass="ui form six wide column">
+    <h:form id="productDetailId" styleClass="ui form six wide column" enctype="multipart/form-data">
         <p:tabView>
             <p:tab title="Detail produktu">
                 <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
@@ -109,6 +109,21 @@
                                          type="text"/>
                         </div>
                     </div>
+
+                    
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Vložiť obrázok produktu</label>
+                            <p:fileUpload id="newSubFile" value="#{itemDashboardBean.file}" mode="simple"
+                                          skinSimple="true"/>
+                        </div>
+                        <div class="field">
+                            <label>Obrázok produktu</label>
+                            <img class="ui image tiny"
+                                 src="data:image/png;base64,#{itemDashboardBean.getBaseImage(itemDashboardBean.selectedItem)}"/>
+                        </div>
+                    </div>
+
                     <label>Kategória produktu:</label>
                     <div class="field">
                         <h:selectOneMenu value="#{itemDashboardBean.selectedCategory}">
@@ -118,7 +133,8 @@
                     </div>
                     <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
                                    style="border-radius: 0px !important; margin-top: 10px; color: green"
-                                   action="#{itemDashboardBean.onSaveItem()}" update=":itemsFormId :productDetailId"
+                                   actionListener="#{itemDashboardBean.onSaveItem()}"
+                                   update=":itemsFormId :productDetailId"
                                    value="Uložiť produkt&#160;&#160;">
                         <!--<f:ajax onevent="handleDisableButton"/>-->
                     </h:commandLink>

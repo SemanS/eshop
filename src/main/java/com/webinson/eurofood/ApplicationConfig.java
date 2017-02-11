@@ -39,7 +39,7 @@ import java.util.Map;
 @Configuration
 @EnableAutoConfiguration
 @EnableTransactionManagement
-@SpringBootApplication
+/*@SpringBootApplication*/
 @ComponentScan(basePackages = {"com.webinson.eurofood, it.ozimov.springboot"})
 @EnableJpaRepositories(basePackages = "com.webinson.eurofood.dao")
 @EntityScan(basePackages = {"com.webinson.eurofood.entity"})
@@ -66,9 +66,9 @@ public class ApplicationConfig extends SpringBootServletInitializer {
     static class Entities {
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SpringApplication.run(ApplicationConfig.class, args);
-    }
+    }*/
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -76,18 +76,19 @@ public class ApplicationConfig extends SpringBootServletInitializer {
     }
 
 
-@Bean
+    @Bean
     public FacesServlet facesServlet() {
         return new FacesServlet();
     }
-    @Bean
+
+    /*@Bean
     public FilterRegistrationBean facesUploadFilterRegistration() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean(new FileUploadFilter(), facesServletRegistration());
         registrationBean.setName("PrimeFaces FileUpload Filter");
         registrationBean.addUrlPatterns("");
         registrationBean.setDispatcherTypes(DispatcherType.FORWARD, DispatcherType.REQUEST);
         return registrationBean;
-    }
+    }*/
 
     @Bean
     public ServletRegistrationBean facesServletRegistration() {
@@ -107,22 +108,22 @@ public class ApplicationConfig extends SpringBootServletInitializer {
                 servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", Boolean.TRUE.toString());
                 servletContext.setInitParameter("javax.faces.FACELETS_SKIP_COMMENTS", Boolean.TRUE.toString());
                 servletContext.setInitParameter("primefaces.FONT_AWESOME", Boolean.TRUE.toString());
-                servletContext.setInitParameter("primefaces.UPLOADER", "commons");
-                servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "server");
+                /*servletContext.setInitParameter("primefaces.UPLOADER", "commons");*/
+                servletContext.setInitParameter("javax.faces.STATE_SAVING_METHOD", "client");
             }
         };
 
     }
 
-    @Bean
+    /*@Bean
     public Converter getHandler() {
         Converter handler = new Converter();
         handler.setMarshaller(getCastorMarshaller());
         handler.setUnmarshaller(getCastorMarshaller());
         return handler;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public Jaxb2Marshaller getCastorMarshaller() {
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
         jaxb2Marshaller.setPackagesToScan("com.webinson.clickablebudget.dto");
@@ -130,7 +131,7 @@ public class ApplicationConfig extends SpringBootServletInitializer {
         map.put("jaxb.formatted.output", true);
         jaxb2Marshaller.setMarshallerProperties(map);
         return jaxb2Marshaller;
-    }
+    }*/
 
     @Bean
     public DataSource dataSource() {

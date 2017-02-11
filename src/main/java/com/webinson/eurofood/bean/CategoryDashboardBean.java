@@ -1,28 +1,24 @@
 package com.webinson.eurofood.bean;
 
 import com.webinson.eurofood.dao.CategoryDao;
-import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.entity.Category;
-import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.service.CategoryService;
-import com.webinson.eurofood.service.ItemService;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.NodeSelectEvent;
-import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
+import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
-import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
 
@@ -93,7 +89,15 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
-    private Part file;
+    private UploadedFile file;
+
+    @Getter
+    @Setter
+    private UploadedFile newRootFile;
+
+    @Getter
+    @Setter
+    private UploadedFile newSubFile;
 
     @Getter
     @Setter
@@ -137,19 +141,22 @@ public class CategoryDashboardBean {
         }
     }
 
+    /*Change root category*/
     public String onChangeRootCategory() throws IOException {
         Category category;
         category = categoryDao.findById(inputSelectedRootCategory.getId());
         category.setName(inputSelectedRootCategory.getName());
         category.setUrl(inputSelectedRootCategory.getUrl());
-        if (file != null) {
-            category.setImage(IOUtils.toByteArray(file.getInputStream()));
+        if (file.getSize() != 0) {
+            category.setImage(IOUtils.toByteArray(file.getInputstream()));
         }
         categoryDao.save(category);
-        return "pretty:dashboard";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());
+        return "";
     }
 
-    public String onChangeSubCategory() throws IOException {
+    /*public String onChangeSubCategory() throws IOException {
         Category category;
         category = categoryDao.findByName(selectedSubCategory);
         category.setName(inputSelectedSubCategory.getName());
@@ -157,19 +164,21 @@ public class CategoryDashboardBean {
         category.setImage(IOUtils.toByteArray(fileChangeSub.getInputStream()));
         categoryDao.save(category);
         return "pretty:dashboard";
-    }
+    }*/
 
+    /*Save new root category*/
     public String onSaveRootCategory() throws IOException {
         Category category = new Category();
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
-        category.setBase(true);
-        if (file != null) {
+        if (newRootFile.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(fileNew.getInputStream()));
         }
         category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
-        return "pretty:dashboard";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());
+        return "";
     }
 
     public String onSaveSubCategory() throws IOException {
@@ -177,9 +186,12 @@ public class CategoryDashboardBean {
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
         category.setParent(categoryService.getCategoryByName(selectedRootCategory));
-        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
-        category.setBase(false);
+        if (newSubFile.getSize() != 0) {
+            category.setImage(IOUtils.toByteArray(newSubFile.getInputstream()));
+        }
         categoryService.saveRootCategory(category);
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());
         return "pretty:dashboard";
     }
 
@@ -190,7 +202,28 @@ public class CategoryDashboardBean {
         return "pretty:dashboard";
     }
 
+    /*public void onUploadImage() throws IOException {
+        if (file != null) {
+            Category category = categoryDao.findById(inputSelectedRootCategory.getId());
+            category.setImage(IOUtils.toByteArray(file.getInputstream()));
+            categoryDao.save(category);
+            *//*FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);*//*
+        }
+    }*/
+
+    /*Add new subCategory*/
     public String onSubCategoryAdd() throws IOException {
+        Category category = new Category();
+        category.setName(inputSubCategory.getName());
+        category.setUrl(inputSubCategory.getUrl());
+        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
+        category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
+        categoryDao.save(category);
+        return "pretty:dashboard";
+    }
+
+    /*public String onSubCategoryAdd() throws IOException {
         Category category = new Category();
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
@@ -214,7 +247,7 @@ public class CategoryDashboardBean {
         Category category = categoryDao.findByName(name);
         selectedRootCategoryAssign = category.getParent().getName();
         return selectedRootCategoryAssign;
-    }
+    }*/
 
     public String getBaseImage(Category category) {
         if (category.getImage() == null) {
@@ -224,5 +257,13 @@ public class CategoryDashboardBean {
         newImage = Base64.getEncoder().encodeToString(category.getImage());
         return newImage;
     }
+
+    /*public void handleFileUpload(AjaxBehaviorEvent event) throws IOException {
+        System.out.println("file size: " + file.getSize());
+        System.out.println("file type: " + file.getContentType());
+        System.out.println("file info: " + file.getHeader("Content-Disposition"));
+        inputSelectedRootCategory.setImage(IOUtils.toByteArray(file.getInputStream()));
+        categoryDao.save(inputSelectedRootCategory);
+    }*/
 
 }

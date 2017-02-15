@@ -1,29 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html">
 
 <h:form id="calculatorId">
     <div class="ui grid">
         <div class="two wide column ui fluid image">
-            <div class="parent">
+            <img class="image1" src="data:image/png;base64,#{itemView.onImageDescriptionChange()}"/>
+            <!--<div class="parent">
                 <img class="image1" src="data:image/png;base64,#{itemView.onImageDescriptionChange()}"/>
                 <img class="image2" src="../../resources/images/eurofood_logo.png"/>
-            </div>
+            </div>-->
         </div>
         <div class="ten wide column ui fluid image ">
 
             <div style="direction: rtl;" class="customfont calculator">
 
-                <h:inputText value="#{shoppingCartView.counterBrutto}" disabled="true"
-                             style="margin-top:35px!important; margin-right:100px!important; width:205px!important;
+                <h:inputText value="EUR #{shoppingCartView.counterBrutto}" disabled="true"
+                             style="margin-top:35px!important; margin-right:30px!important; width:205px!important;
                              background-color:#7dbede;border: none!important;"/>
 
-                <h:inputText value="#{shoppingCartView.counterNetto}" disabled="true"
-                             style="margin-top:25px!important; margin-right:10px!important; width:155px!important;
+                <h:inputText value="EUR #{shoppingCartView.counterNetto}" disabled="true"
+                             style="margin-top:25px!important; margin-right:10px!important; width:205px!important;
                              background-color:#7dbede;border: none!important;"/>
 
                 <!--<h:inputText id="shoppingCartCounterId" value="#{shoppingCartView.counter}" disabled="true"

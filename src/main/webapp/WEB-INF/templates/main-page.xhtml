@@ -9,7 +9,7 @@
 
     <div class="ui grid">
         <div class="sixteen wide column">
-            
+
             <p:carousel numVisible="1" effect="easeInStrong" responsive="true"
                         autoPlayInterval="7000" circular="true">
                 <p:tab title="Godfather Part I">
@@ -30,50 +30,57 @@
     </div>
     <h4 class="ui horizontal divider header">
         <!--<i class="tag icon"></i>-->
-        Produkty
+        Zľavnené produkty
     </h4>
 
     <pre></pre>
 
-
     <h:form>
         <div class="thirteen wide column widget" id="MainContent">
-            <div class="ui four cards">
+            <div class="ui grid four column stackable centered">
 
-                <ui:repeat value="#{itemView.getItems()}" var="item">
-
-                    <div class="card">
-                        <div class="blurring dimmable image">
-
-                            <!--<div class="ui inverted dimmer">-->
-                            <h:commandLink id="ajax3" action="#{itemView.onItemDetail(item)}"
-                                           actionListener="#{shoppingCartView.testovaciaMetoda}"
-                                           styleClass="ui inverted dimmer">
-                                <div class="content">
-
-                                    <div class="description">
-                                        <h3>Elliot Fu is a film-maker from New York.</h3>
-                                    </div>
-
+                <ui:repeat value="#{itemView.promotedItems}" var="item">
+                    <div class="column">
+                        <div class="ui fluid card">
+                            <div class="content">
+                                <h:commandLink
+                                        action="#{itemView.onItem(item)}">
+                                    <h4 style="text-align: center">#{item.header}</h4>
+                                </h:commandLink>
+                            </div>
+                            <div class="ui small image centered" style="margin-top: -10px">
+                                <img src="data:image/png;base64,#{item.image}"/>
+                            </div>
+                            <div class="content">
+                                <div class="description ui green">
                                 </div>
-                            </h:commandLink>
-                            <!--</div>-->
-                            <img src="resources/images/image1.jpg"/>
-                        </div>
-                        <div class="content">
-                            <a class="header">Maslo</a>
-                            <div class="meta">
-                                <span class="date">Create in Sep 2014</span>
+                                <div class="description" style="text-align: center">
+                                    <div class="left floated centered">
+                                        <h3 class="">
+                                            #{item.priceBrutto} EUR</h3> s DPH
+                                    </div>
+                                    <div class="right floated centered">
+                                        <h4 class="">
+                                            #{item.priceNetto} EUR</h4> bez DPH
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </ui:repeat>
             </div>
+        </div>
 
+        <h4 class="ui horizontal divider header">
+            Spolupracujeme
+        </h4>
+
+        <div class="thirteen wide column widget">
+            <img class="ui fluid image"
+                 src="../../resources/images/logos.png"/>
         </div>
     </h:form>
-
+   
 </h:body>
 
 </html>

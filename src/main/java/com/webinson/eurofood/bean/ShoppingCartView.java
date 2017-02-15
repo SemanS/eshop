@@ -146,8 +146,9 @@ public class ShoppingCartView {
         return "pretty:";
     }
 
-    public void checkout() {
+    public String checkout() {
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, this.cartItemDtos);
+        return "checkout.xhtml?faces-redirect=true";
     }
 
     public String onDeleteItem(CartItemDto cartItemDto) {

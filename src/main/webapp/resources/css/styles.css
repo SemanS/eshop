@@ -129,7 +129,7 @@
 }
 
 .itemBg {
-    background-image: url("../../resources/images/mliecne_bg.png") !important;
+    /*background-image: url("../../resources/images/mliecne_bg.png") !important;*/
     padding: 2.5em 0 !important;
     margin-bottom: 0.5em !important;
     background-repeat: repeat-y;
@@ -209,7 +209,7 @@
     src: url('http://www.fontsaddict.com/fontface/calculator-script-mt-regular.ttf') format("truetype") !important;
 }*/
 
-@font-face {
+/*@font-face {
     font-family: "Calculator Digits";
     src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot");
     src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot?#iefix") format("embedded-opentype"),
@@ -217,10 +217,20 @@
     url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff") format("woff"),
     url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.ttf") format("truetype"),
     url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.svg#Calculator Digits") format("svg");
+}*/
+
+@font-face {
+    font-family: "Orbitron";
+    src: url("../../resources/css/fonts/digital-7.regular.ttf");
+    /*    src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot?#iefix") format("embedded-opentype"),
+        url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff2") format("woff2"),
+        url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff") format("woff"),
+        url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.ttf") format("truetype"),
+        url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.svg#Calculator Digits") format("svg");*/
 }
 
 .customfont {
-    font-family: "Calculator Digits" !important;
+    font-family: "Orbitron" !important;
     font-size: large;
 }
 
@@ -336,4 +346,8 @@ body {
 
 .ui-accordion .ui-accordion-header {
     padding: .0em .5em .3em 2.2em !important;
+}
+
+.ui-spinner .ui-icon-triangle-1-s {
+    margin-top: -8px !important;
 }

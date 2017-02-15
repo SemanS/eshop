@@ -83,20 +83,44 @@
                     </h:outputLink>
                 </ui:fragment>
 
-                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/checkoutCart"
-                              style="color:black !important;border-radius: 0px !important;">
-                    Môj košík
-                </h:outputLink>
+                <ui:fragment rendered="#{shoppingCartView.counter > 0}">
+                    <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/checkoutCart"
+                                  style="color:black !important;border-radius: 0px !important;">
+                        Môj košík
+                    </h:outputLink>
+                </ui:fragment>
 
-                <p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
+                <!--<p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
                                 value="#{mapView.selectedCitySubmit}"
-                                style="margin-right:10px; line-height: 200% !important;" size="40"
+                                style="margin-right:10px; margin-top: 5px!important; line-height: 200% !important;"
+                                size="40"
                                 styleClass="ui search"
-                                completeMethod="#{mapView.completeText}" effect="fade"/>
-                <h:commandButton style="border-radius: 0px !important;" styleClass="ui button blue item"
+                                completeMethod="#{mapView.completeText}" effect="fade"/>-->
+                <!--<i class="search icon"></i>-->
+                <!--<h:commandButton style="border-radius: 0px !important;" styleClass="ui button blue item"
                                  actionListener="#{mapView.onSubmit}" value="Hľadať"
                                  icon="fa fa-search">
-                </h:commandButton>
+                </h:commandButton>-->
+
+                <div class="ui icon input">
+                    <p:autoComplete id="acMinLength2" placeholder="Zadajte názov produktu:" minQueryLength="2"
+                                    value="#{mapView.selectedCitySubmit}"
+                                    style="margin-top: 5px!important;"
+                                    size="40"
+                                    styleClass="ui search"
+                                    completeMethod="#{mapView.completeText}" effect="fade"/>
+                    <!--<h:commandLink style="border-radius: 0px !important;" styleClass="ui button blue item"
+                                     actionListener="#{mapView.onSubmit}" value="Hľadať"
+                                     icon="fa fa-search">
+                    </h:commandLink>-->
+                    <i class="inverted circular search link icon" style="margin-top: 5px!important;">
+                        <h:link style="border-radius: 0px !important; "
+
+                                actionListener="#{mapView.onSubmit}">
+                        </h:link>
+                    </i>
+                </div>
+
             </div>
         </div>
     </div>

@@ -85,6 +85,10 @@ public class ItemView implements Serializable {
 
     @Getter
     @Setter
+    private List<ItemDto> promotedItems;
+
+    @Getter
+    @Setter
     private String itemUrl;
 
     @Getter
@@ -106,6 +110,7 @@ public class ItemView implements Serializable {
         // Add a message here, "The item {..} could not be found."
         return "";
     }
+
     @URLAction
     public String loadItem() throws IOException {
 
@@ -122,6 +127,7 @@ public class ItemView implements Serializable {
     public void init() {
 
         items = itemService.getAllItems();
+        promotedItems = itemService.getAllPromotedItems();
         //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
     }
 

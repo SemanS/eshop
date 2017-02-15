@@ -94,6 +94,21 @@
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
                             </div>
                         </div>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Vložiť pod obrázok kategórie</label>
+                                <p:fileUpload id="fileUpload2" value="#{categoryDashboardBean.imgDescription}" mode="simple"
+                                              skinSimple="true"/>
+
+                            </div>
+                            <div class="field">
+                                <label>Obrázok kategórie</label>
+                                <img class="ui image"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImageDescription(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                            </div>
+                        </div>
+
                         <div class="field">
                             <h:commandLink id="commandLink1"
                                            class="medium ui button" icon="ui-icon-star"

@@ -15,18 +15,20 @@ import java.util.Map;
  */
 public interface ItemService {
 
-    public List<ItemDto> getAllItems();
+    List<ItemDto> getAllItems();
 
-    public String getTextOfItemByUrl(String url);
+    String getTextOfItemByUrl(String url);
 
-    public ItemDto getItemByUrl(String url);
+    ItemDto getItemByUrl(String url);
 
-    public void saveItemByUrl(String url, String text);
+    void saveItemByUrl(String url, String text);
 
-    public List<ItemDto> getItemsByCategory(CategoryDto categoryDto);
+    List<ItemDto> getItemsByCategory(CategoryDto categoryDto);
 
     Page<Item> findByFilter(Map<String, String> filters, Pageable pageable);
 
-    public ItemDto getItemById(Long id);
+    ItemDto getItemById(Long id);
+
+    List<ItemDto> getAllPromotedItems();
 
 }

@@ -10,6 +10,8 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Slavo on 10/17/2016.
  */
@@ -20,5 +22,6 @@ public interface ItemDao extends JpaRepository<Item, Long>, QueryDslPredicateExe
 
     Item findById(Long id);
 
-    public Page<Item> findByHeader(String header, Pageable pageable);
+    Page<Item> findByHeader(String header, Pageable pageable);
+
 }

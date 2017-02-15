@@ -297,7 +297,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         /*Subcategory to subcategory in another category*/
-        if (actualDraggedCategory.getParent() != null && droppedCategory != null) {
+        if (actualDraggedCategory.getParent() != null && droppedCategory.getId() != null) {
             for (Category dragCat : draggedCategory.getParent().getChildren()) {
                 if (dragCat.getPosition() > actualPosition && dragCat.getId() != draggedCategory.getId()) {
                     dragCat.setPosition(dragCat.getPosition() - 1);

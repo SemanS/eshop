@@ -9,7 +9,7 @@
 
 <h4>Kategórie:</h4>
 <style>
-    .ui-widget-content {
+    .ui-widget-content.treeSideMenu {
         border: none !important;
     }
 
@@ -21,109 +21,21 @@
         width: auto !important;
     }
 
+    .ui-icon-triangle-1-e {
+        margin-top: 13px !important;
+    }
+
+    .ui-icon-triangle-1-s {
+        margin-top: 13px !important;
+    }
+
 </style>
 <h:form>
-    <!-- <div class="ui grid stackable">
-         <div class="ui fluid accordion">
-             <o:tree value="#{sideMenuBean.treeModel}" var="category">
-                 <o:treeNode level="0">
-                     <o:treeNodeItem>
-                         <ui:fragment
-                                 rendered="#{category.base == true}">
-                             <div class="title">
-                                 <ui:fragment
-                                         rendered="#{sideMenuBean.hasNoChildren(category.name) == true}">
-                                     <h:commandLink action="#{itemView.onCategory(category)}">
-                                         &lt;!&ndash;<f:ajax execute="@form :submitCategory" render=":submitCategory"/>&ndash;&gt;
-                                         <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                                     </h:commandLink>
-                                 </ui:fragment>
-                                 <ui:fragment
-                                         rendered="#{sideMenuBean.hasNoChildren(category.name) == false}">
-                                     &lt;!&ndash;<h:commandLink action="#{itemView.onCategory(category)}">&ndash;&gt;
-                                         <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                                     &lt;!&ndash;</h:commandLink>&ndash;&gt;
-                                 </ui:fragment>
-                             </div>
-                         </ui:fragment>
 
-                         <ui:fragment rendered="#{category.base == false}">
-                             <h:commandLink actionListener="#{sideMenuBean.onImageDescriptionChange(category)}">
-                                 <div class="content">
-                                     <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                                 </div>
-                             </h:commandLink>
-                         </ui:fragment>
-                         <o:treeInsertChildren/>
-                     </o:treeNodeItem>
-                 </o:treeNode>
-
-                 <o:treeNode>
-                     <div class="content">
-                         <o:treeNodeItem>
-                             <div class="transition hidden">
-                                 <h:commandLink action="#{itemView.onCategory(category)}">
-                                     &lt;!&ndash;<f:ajax execute="@form :submitCategory" render=":submitCategory"/>&ndash;&gt;
-                                     <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-                                 </h:commandLink>
-                             </div>
-                             <o:treeInsertChildren/>
-                         </o:treeNodeItem>
-                     </div>
-                 </o:treeNode>
-             </o:tree>
-         </div>
-     </div>-->
-
-    <!-- <ui:repeat value="#{sideMenuBean.categories}" var="item">
-         <h:outputText value="#{item.getHeader()}"/>
-     </ui:repeat>-->
-
-    <!--<ui:repeat value="#{sideMenuBean.categories}" var="category">
-
-        <ui:fragment rendered="#{category.base == true and category.children.size() == 0}">
-            <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-        </ui:fragment>
-    </ui:repeat>-->
-
-    <!-- <ui:repeat value="#{sideMenuBean.categories}" var="category">
-
-         <ui:fragment rendered="#{category.base == true and category.children.size() == 0}">
-             <img class="ui image" src="data:image/png;base64,#{category.image}" style="width: 83%; margin-left: 25px; margin-bottom: 5px"/>
-         </ui:fragment>
-
-         <ui:fragment rendered="#{category.base == true and category.children.size() != 0}" dynamic="true"
-                      multiple="true">
-             <p:accordionPanel activeIndex="null">
-                 <p:ajax event="tabChange" listener="#{sideMenuBean.onTabChange}"/>
-
-
-
-                 <p:tab>
-                     <f:facet name="title">
-                         <img class="ui image" src="data:image/png;base64,#{category.image}"/>
-
-                     </f:facet>
-                     <ui:repeat value="#{category.children}" var="subCategory">
-                         <img class="ui image" src="data:image/png;base64,#{subCategory.image}"/>
-                     </ui:repeat>
-
-                 </p:tab>
-
-             </p:accordionPanel>
-         </ui:fragment>
-
-     </ui:repeat>-->
-
-    <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
+    <p:tree id="tree2" styleClass="treeSideMenu" value="#{categoryTreeTableBean.rootCategories}" var="node"
+            selectionMode="single"
             selection="#{categoryDashboardBean.selectedNode}" animate="true">
-        <!--<p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
-                update=":tabView:tab1"/>
-        <p:ajax event="select" update=":treeForm :tabView:tab1"
-                listener="#{categoryDashboardBean.TreeNodeToCategory}"/>-->
-        <!--<p:treeNode>
-            <h:outputText value="#{node.name}"/>
-        </p:treeNode>-->
+
         <p:treeNode>
             <h:commandLink action="#{itemView.onCategory(node)}">
                 <f:ajax execute="@form :submitCategory" render=":submitCategory"/>

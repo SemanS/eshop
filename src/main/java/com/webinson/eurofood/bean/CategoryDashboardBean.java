@@ -93,6 +93,10 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
+    private UploadedFile imgDescription;
+
+    @Getter
+    @Setter
     private UploadedFile newRootFile;
 
     @Getter
@@ -101,11 +105,19 @@ public class CategoryDashboardBean {
 
     @Getter
     @Setter
-    private Part fileNew;
+    private UploadedFile newImg;
 
     @Getter
     @Setter
-    private Part fileNewSide;
+    private UploadedFile newSideImg;
+
+    @Getter
+    @Setter
+    private UploadedFile newSideImgDescription;
+
+    @Getter
+    @Setter
+    private UploadedFile newImgDescription;
 
     @Getter
     @Setter
@@ -150,6 +162,9 @@ public class CategoryDashboardBean {
         if (file.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(file.getInputstream()));
         }
+        if (imgDescription.getSize() != 0) {
+            category.setImageDescription(IOUtils.toByteArray(imgDescription.getInputstream()));
+        }
         categoryDao.save(category);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath());
@@ -172,7 +187,10 @@ public class CategoryDashboardBean {
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
         if (newRootFile.getSize() != 0) {
-            category.setImage(IOUtils.toByteArray(fileNew.getInputStream()));
+            category.setImage(IOUtils.toByteArray(newImg.getInputstream()));
+        }
+        if (imgDescription.getSize() != 0) {
+            category.setImage(IOUtils.toByteArray(newImgDescription.getInputstream()));
         }
         category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
@@ -217,7 +235,12 @@ public class CategoryDashboardBean {
         Category category = new Category();
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
-        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
+        if (newSideImg.getSize() != 0) {
+            category.setImage(IOUtils.toByteArray(newSideImg.getInputstream()));
+        }
+        if (newSideImgDescription.getSize() != 0) {
+            category.setImage(IOUtils.toByteArray(newSideImgDescription.getInputstream()));
+        }
         category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
         categoryDao.save(category);
         return "pretty:dashboard";
@@ -255,6 +278,15 @@ public class CategoryDashboardBean {
         }
         String newImage = "";
         newImage = Base64.getEncoder().encodeToString(category.getImage());
+        return newImage;
+    }
+
+    public String getBaseImageDescription(Category category) {
+        if (category.getImageDescription() == null) {
+            return "";
+        }
+        String newImage = "";
+        newImage = Base64.getEncoder().encodeToString(category.getImageDescription());
         return newImage;
     }
 

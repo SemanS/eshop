@@ -88,6 +88,14 @@ public class ItemServiceImpl implements ItemService {
         return itemAssembler.toDto(itemDao.findById(id));
     }
 
+    @Override
+    public List<ItemDto> getAllPromotedItems() {
+        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
+        QItem item = QItem.item;
+        List<Item> items = query.from(item).select(item).where(item.isDiscount.eq(true)).fetch();
+        return itemAssembler.toDtos(items);
+    }
+
     private Specification<Item> getFilterSpecification(Map<String, String> filterValues) {
         return (Root<Item> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
             Optional<Predicate> predicate = filterValues.entrySet().stream()

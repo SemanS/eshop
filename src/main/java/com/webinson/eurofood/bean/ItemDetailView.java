@@ -21,12 +21,10 @@ public class ItemDetailView implements Serializable {
 
     @Getter
     @Setter
-    /*@ManagedProperty(value = "#{param.selectedCard}")*/
     public String selectedCard;
 
     @Getter
     @Setter
-/*    @ManagedProperty(value = "#{param.selectedCategory}")*/
     public String selectedCategory;
 
     @Getter

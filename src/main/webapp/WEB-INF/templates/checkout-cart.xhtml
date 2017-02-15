@@ -4,14 +4,19 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
 
+
 <h:form id="checkoutCartForm">
-    <p:dataTable var="cart" value="#{shoppingCartView.cartItemDtos}" dir="rtl">
-        <p:column headerText="VYMAZAŤ" width="12%">
-            <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                           style="border-radius: 0px !important; color: red"
+    <pre></pre>
+    <p:dataTable var="cart"
+                 value="#{shoppingCartView.cartItemDtos}"
+                 dir="rtl">
+        <p:column headerText="VYMAZAŤ" width="12%" style="text-align: center">
+            <h:commandLink class="remove circle icon"
+                           style="border-radius: 0px !important; color: red;"
                            action="#{shoppingCartView.onDeleteItem(cart)}"
-                           value="Vymazať produkt&#160;&#160;">
+                           value="">
                 <!--<f:ajax render="@form"/>-->
+                <i class="remove circle icon"></i>
             </h:commandLink>
         </p:column>
 
@@ -34,7 +39,7 @@
         </p:column>
 
         <p:column headerText="NÁZOV PRODUKTU">
-            <h:outputText value="#{cart.itemDto.text}"/>
+            <h:outputText value="#{cart.itemDto.header}"/>
         </p:column>
 
         <p:column headerText="OBRÁZOK" width="12%" style="text-align: center">
@@ -42,7 +47,8 @@
         </p:column>
     </p:dataTable>
 
-    <h:commandLink class="ui primary button" action="#{shoppingCartView.checkout()}"
+    <h:commandLink class="ui medium button right floated" action="#{shoppingCartView.checkout()}"
+                   style="border-radius: 0px !important; margin-top: 50px; color: green"
                    value="Checkout">
         <i class="right chevron icon"></i>
     </h:commandLink>

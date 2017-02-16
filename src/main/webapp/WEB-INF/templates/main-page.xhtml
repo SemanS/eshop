@@ -5,16 +5,27 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
+<style>
+    .ui-widget-content.carouselStyle {
+        border: none !important;
+    }
+
+    .ui-widget-header {
+        background: none !important;
+        border: none !important;
+    }
+</style>
 <h:body>
 
     <div class="ui grid">
         <div class="sixteen wide column">
 
-            <p:carousel numVisible="1" effect="easeInStrong" responsive="true"
+            <p:carousel styleClass="carouselStyle" numVisible="1" effect="easeInStrong" responsive="true"
                         autoPlayInterval="7000" circular="true">
                 <p:tab title="Godfather Part I">
                     <h:panelGrid columns="2" cellpadding="10">
                         <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
+
                         <img class="ui fluid image"
                              src="resources/images/slide1.PNG"/>
                     </h:panelGrid>
@@ -49,7 +60,10 @@
                                 </h:commandLink>
                             </div>
                             <div class="ui small image centered" style="margin-top: -10px">
-                                <img src="data:image/png;base64,#{item.image}"/>
+                                <h:commandLink
+                                        action="#{itemView.onItem(item)}">
+                                    <img src="data:image/png;base64,#{item.image}"/>
+                                </h:commandLink>
                             </div>
                             <div class="content">
                                 <div class="description ui green">
@@ -80,7 +94,7 @@
                  src="../../resources/images/logos.png"/>
         </div>
     </h:form>
-   
+
 </h:body>
 
 </html>

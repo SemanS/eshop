@@ -122,7 +122,7 @@ public class ItemDashboardBean {
         itemDao.save(selectedItem);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath() + "pretty:dashboard");
-        return "";
+        return "dashboard-products?faces-redirect=true";
     }
 
     public String onDeleteItem() {

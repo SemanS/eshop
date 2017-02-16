@@ -351,3 +351,7 @@ body {
 .ui-spinner .ui-icon-triangle-1-s {
     margin-top: -8px !important;
 }
+
+.ui.card, .ui.cards > .card {
+    border-radius: 0 !important;
+}

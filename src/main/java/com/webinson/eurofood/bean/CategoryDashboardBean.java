@@ -189,9 +189,9 @@ public class CategoryDashboardBean {
         if (newRootFile.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(newImg.getInputstream()));
         }
-        if (imgDescription.getSize() != 0) {
+        /*if (imgDescription.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(newImgDescription.getInputstream()));
-        }
+        }*/
         category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

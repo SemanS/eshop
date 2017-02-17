@@ -12,6 +12,7 @@ import org.primefaces.model.TreeNode;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -35,29 +36,23 @@ public class CategoryDashboardBean {
     @Autowired
     private CategoryService categoryService;
 
+    /*Root Categories*/
     @Getter
     @Setter
     private List<Category> rootCategories;
 
+    /*Non Root Categories*/
     @Getter
     @Setter
     private List<Category> categories;
 
-    @Getter
+    /*@Getter
     @Setter
-    private String selectedRootCategory;
+    private String selectedRootCategory;*/
 
-    @Getter
+    /*@Getter
     @Setter
-    private String selectedCategory;
-
-    @Getter
-    @Setter
-    private String selectedSubCategory;
-
-    @Getter
-    @Setter
-    private List<String> rootCategoriesString;
+    private String selectedSubCategory;*/
 
     @Getter
     @Setter
@@ -67,61 +62,54 @@ public class CategoryDashboardBean {
     @Setter
     private Category inputSubCategory;
 
-    @Getter
-    @Setter
-    private TreeNode selectedNode = new DefaultTreeNode();
-
+    /*Selected Root category*/
     @Getter
     @Setter
     private Category inputSelectedRootCategory;
 
+    /*Selected sub category*/
     @Getter
     @Setter
     private Category inputSelectedSubCategory;
 
-    @Getter
-    @Setter
-    private String selectedRootCategoryAssign;
-
+    /*Value to selected one menu*/
     @Getter
     @Setter
     private String selectedRootCategoryAdd;
 
+    /*Main image of root category*/
     @Getter
     @Setter
     private UploadedFile file;
 
+    /*Secondary image of root category*/
     @Getter
     @Setter
     private UploadedFile imgDescription;
 
+    /*Main image of new root category*/
     @Getter
     @Setter
     private UploadedFile newRootFile;
 
+    /*Secondary image of new root category*/
     @Getter
     @Setter
-    private UploadedFile newSubFile;
+    private UploadedFile newImgDescription;
 
-    @Getter
-    @Setter
-    private UploadedFile newImg;
-
+    /*Main image of new sub category*/
     @Getter
     @Setter
     private UploadedFile newSideImg;
 
+    /*Secondary image of new sub category*/
     @Getter
     @Setter
     private UploadedFile newSideImgDescription;
 
     @Getter
     @Setter
-    private UploadedFile newImgDescription;
-
-    @Getter
-    @Setter
-    private Part fileChangeSub;
+    private TreeNode selectedNode = new DefaultTreeNode();
 
     @PostConstruct
     private void init() {
@@ -171,64 +159,23 @@ public class CategoryDashboardBean {
         return "";
     }
 
-    /*public String onChangeSubCategory() throws IOException {
-        Category category;
-        category = categoryDao.findByName(selectedSubCategory);
-        category.setName(inputSelectedSubCategory.getName());
-        category.setUrl(inputSelectedSubCategory.getUrl());
-        category.setImage(IOUtils.toByteArray(fileChangeSub.getInputStream()));
-        categoryDao.save(category);
-        return "pretty:dashboard";
-    }*/
-
     /*Save new root category*/
     public String onSaveRootCategory() throws IOException {
         Category category = new Category();
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
         if (newRootFile.getSize() != 0) {
-            category.setImage(IOUtils.toByteArray(newImg.getInputstream()));
+            category.setImage(IOUtils.toByteArray(newRootFile.getInputstream()));
         }
-        /*if (imgDescription.getSize() != 0) {
+        if (newImgDescription.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(newImgDescription.getInputstream()));
-        }*/
+        }
         category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath());
         return "";
     }
-
-    public String onSaveSubCategory() throws IOException {
-        Category category = new Category();
-        category.setName(inputSubCategory.getName());
-        category.setUrl(inputSubCategory.getUrl());
-        category.setParent(categoryService.getCategoryByName(selectedRootCategory));
-        if (newSubFile.getSize() != 0) {
-            category.setImage(IOUtils.toByteArray(newSubFile.getInputstream()));
-        }
-        categoryService.saveRootCategory(category);
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect(context.getRequestContextPath());
-        return "pretty:dashboard";
-    }
-
-    public String onSubCategoryAssign() {
-        Category category = categoryDao.findByName(selectedSubCategory);
-        category.setParent(categoryDao.findByName(selectedRootCategoryAssign));
-        categoryDao.save(category);
-        return "pretty:dashboard";
-    }
-
-    /*public void onUploadImage() throws IOException {
-        if (file != null) {
-            Category category = categoryDao.findById(inputSelectedRootCategory.getId());
-            category.setImage(IOUtils.toByteArray(file.getInputstream()));
-            categoryDao.save(category);
-            *//*FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);*//*
-        }
-    }*/
 
     /*Add new subCategory*/
     public String onSubCategoryAdd() throws IOException {
@@ -243,34 +190,11 @@ public class CategoryDashboardBean {
         }
         category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
         categoryDao.save(category);
-        return "pretty:dashboard";
-    }
 
-    /*public String onSubCategoryAdd() throws IOException {
-        Category category = new Category();
-        category.setName(inputSubCategory.getName());
-        category.setUrl(inputSubCategory.getUrl());
-        category.setImage(IOUtils.toByteArray(fileNewSide.getInputStream()));
-        category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
-        categoryDao.save(category);
-        return "pretty:dashboard";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());
+        return "";
     }
-
-    public String onChangeSelectedRootCategory(String name) {
-        inputSelectedRootCategory = categoryDao.findByName(name);
-        return inputSelectedRootCategory.getName();
-    }
-
-    public String onChangeSelectedSubCategory(String name) {
-        inputSelectedSubCategory = categoryDao.findByName(name);
-        return inputSelectedSubCategory.getName();
-    }
-
-    public String onChangeAssignedCategory(String name) {
-        Category category = categoryDao.findByName(name);
-        selectedRootCategoryAssign = category.getParent().getName();
-        return selectedRootCategoryAssign;
-    }*/
 
     public String getBaseImage(Category category) {
         if (category.getImage() == null) {
@@ -289,13 +213,5 @@ public class CategoryDashboardBean {
         newImage = Base64.getEncoder().encodeToString(category.getImageDescription());
         return newImage;
     }
-
-    /*public void handleFileUpload(AjaxBehaviorEvent event) throws IOException {
-        System.out.println("file size: " + file.getSize());
-        System.out.println("file type: " + file.getContentType());
-        System.out.println("file info: " + file.getHeader("Content-Disposition"));
-        inputSelectedRootCategory.setImage(IOUtils.toByteArray(file.getInputStream()));
-        categoryDao.save(inputSelectedRootCategory);
-    }*/
 
 }

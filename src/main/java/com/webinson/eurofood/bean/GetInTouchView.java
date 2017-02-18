@@ -37,11 +37,6 @@ public class GetInTouchView {
     @Setter
     private String email;
 
-    /*public String updateData() {
-        System.out.println(name);
-        return "confirmation?faces-redirect=true";
-    }*/
-
     public String updateData() throws UnsupportedEncodingException {
         final Email email = EmailImpl.builder()
                 .from(new InternetAddress("ceo@webinson.com", "Message from webinson"))

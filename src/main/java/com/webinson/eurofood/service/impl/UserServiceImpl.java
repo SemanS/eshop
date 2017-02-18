@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setEnabled(true);
 
         authority.setUsername(userDto.getEmail());
         authority.setAuthority("ROLE_USER");

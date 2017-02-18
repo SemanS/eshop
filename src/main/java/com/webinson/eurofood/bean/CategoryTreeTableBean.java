@@ -47,10 +47,7 @@ public class CategoryTreeTableBean {
 
     @PostConstruct
     public void init() {
-        Category category = new Category();
         rootCategories = categoryService.buildCategories();
-        /*selectedNode = rootCategories.getChildren().get(0);*/
-        /*selectedNode = categoryService.buildCategories();*/
     }
 
     public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {

@@ -3,8 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head>
+
+</h:head>
 <h:body>
     <script>
         $(document).ready(function () {
@@ -102,25 +106,27 @@
                                  icon="fa fa-search">
                 </h:commandButton>-->
 
-                <div class="ui icon input">
-                    <p:autoComplete id="acMinLength2" placeholder="Zadajte názov produktu:" minQueryLength="2"
-                                    value="#{mapView.selectedCitySubmit}"
-                                    style="margin-top: 5px!important;"
-                                    size="40"
-                                    styleClass="ui search"
-                                    completeMethod="#{mapView.completeText}" effect="fade"/>
-                    <!--<h:commandLink style="border-radius: 0px !important;" styleClass="ui button blue item"
-                                     actionListener="#{mapView.onSubmit}" value="Hľadať"
-                                     icon="fa fa-search">
-                    </h:commandLink>-->
-                    <i class="inverted circular search link icon" style="margin-top: 5px!important;">
-                        <h:link style="border-radius: 0px !important; "
+                <h:form>
 
-                                actionListener="#{mapView.onSubmit}">
-                        </h:link>
-                    </i>
-                </div>
+                    <div class="ui action input">
+                        <p:autoComplete id="acMinLength2" placeholder="Zadajte názov produktu:" minQueryLength="1"
+                                        value="#{searchBean.selectedItem}"
+                                        style="margin-top: 5px!important;"
+                                        size="30"
+                                        styleClass=""
+                                        completeMethod="#{searchBean.completeText}"/>
 
+                        <!--<h:commandLink style="border-radius: 0px !important;" styleClass="ui button blue item"
+                                         actionListener="#{mapView.onSubmit}" value="Hľadať"
+                                         icon="fa fa-search">
+                        </h:commandLink>-->
+                        <p:commandLink styleClass="ui icon button"
+                                       style="margin-left: -10px !important; z-index: 1 !important; margin-top: 5px"
+                                       action="#{searchBean.onSearch}">
+                            <i class="search icon"></i>
+                        </p:commandLink>
+                    </div>
+                </h:form>
             </div>
         </div>
     </div>

@@ -31,4 +31,10 @@ public interface ItemService {
 
     List<ItemDto> getAllPromotedItems();
 
+    List<String> queryByName(String name);
+
+    ItemDto getItemByName(String name);
+
+    boolean itemExist(String name);
+
 }

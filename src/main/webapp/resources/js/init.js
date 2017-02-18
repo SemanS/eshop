@@ -7,24 +7,24 @@
         ;
 
         /*$('.special.cards .image').dimmer({
-            on: 'hover'
-        });
+         on: 'hover'
+         });
 
-        $('.ui.slider').slider('behavior', arguments);
+         $('.ui.slider').slider('behavior', arguments);
 
 
-        $('.ui.sticky')
-            .sticky({
-                context: '#railShoppingCartId'
-            })
-        ;*/
+         $('.ui.sticky')
+         .sticky({
+         context: '#railShoppingCartId'
+         })
+         ;*/
 
         /*$('.context.example .ui.sidebar')
-            .sidebar({
-                context: $('.context.example .bottom.segment')
-            })
-            .sidebar('attach events', '.context.example .menu .item')
-        ;*/
+         .sidebar({
+         context: $('.context.example .bottom.segment')
+         })
+         .sidebar('attach events', '.context.example .menu .item')
+         ;*/
 
         $('a.sidebar-toggle').click(function () {
             $('#sidebar').sidebar('toggle')

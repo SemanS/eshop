@@ -56,6 +56,7 @@ public class RegisterBean {
 
     @Getter
     @Setter
+    @Size(min = 3, max = 32, message = "Zadajte prosím PSČ v správnom tvare!")
     private String postalCode;
 
     @Getter

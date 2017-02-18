@@ -96,6 +96,38 @@ public class ItemServiceImpl implements ItemService {
         return itemAssembler.toDtos(items);
     }
 
+    @Override
+    public List<String> queryByName(String name) {
+        List<String> queried = new ArrayList<String>();
+
+        for (Item item : itemDao.findAll()) {
+            if (item.getHeader().startsWith(name)) {
+                queried.add(item.getHeader());
+            }
+        }
+        return queried;
+    }
+
+    @Override
+    public boolean itemExist(String name) {
+        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
+        QItem item = QItem.item;
+        Item item1 = query.from(item).select(item).where(item.header.eq(name)).fetchOne();
+        if (item1 != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public ItemDto getItemByName(String name) {
+        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
+        QItem item = QItem.item;
+        Item item1 = query.from(item).select(item).where(item.header.eq(name)).fetchOne();
+        return itemAssembler.toDto(item1);
+    }
+
     private Specification<Item> getFilterSpecification(Map<String, String> filterValues) {
         return (Root<Item> root, CriteriaQuery<?> query, CriteriaBuilder builder) -> {
             Optional<Predicate> predicate = filterValues.entrySet().stream()

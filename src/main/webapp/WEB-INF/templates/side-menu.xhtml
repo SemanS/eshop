@@ -21,19 +21,21 @@
         width: auto !important;
     }
 
-    .ui-icon-triangle-1-e {
+    .ui-icon-triangle-1-w {
         margin-top: 13px !important;
+        background-position: -16px -128px !important;
     }
 
     .ui-icon-triangle-1-s {
         margin-top: 13px !important;
+        background-position: -48px -128px !important;
     }
 
 </style>
 <h:form>
 
     <p:tree id="tree2" styleClass="treeSideMenu" value="#{categoryTreeTableBean.rootCategories}" var="node"
-            selectionMode="single"
+            selectionMode="single" dir="rtl"
             selection="#{categoryDashboardBean.selectedNode}" animate="true">
 
         <p:treeNode>
@@ -47,4 +49,5 @@
     </p:tree>
 
 </h:form>
+
 </html>

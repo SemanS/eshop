@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -31,7 +32,7 @@ import java.util.List;
  * Created by Slavo on 10/4/2016.
  */
 @Component
-@Scope("session")
+@RequestScoped
 @URLBeanName("itemView")
 @URLMappings(mappings = {
         @URLMapping(

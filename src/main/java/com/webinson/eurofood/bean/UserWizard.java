@@ -64,11 +64,6 @@ public class UserWizard implements Serializable {
         radioValueDelivery = "Yes";
     }
 
-    /*public void selectRadioItem() {
-        String selectedItem = this.radioValue;
-        System.out.println(selectedItem);
-    }*/
-
     public void save() {
         FacesMessage msg = new FacesMessage("Successful", "Welcome :" + userDto.getEmail());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -96,17 +91,7 @@ public class UserWizard implements Serializable {
 
     public String onFlowProcess(FlowEvent event) {
 
-        /*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.getName() != "anonymousUser") {
-            return event.getNewStep();
-        }*/
-        /*if (skip) {
-            skip = false;   //reset in case userDto goes back
-            return "confirm";
-        } */
-        /*else {
-            return event.getNewStep();
-        }*/
         return event.getNewStep();
+        
     }
 }

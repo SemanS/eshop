@@ -37,17 +37,8 @@ public class SideMenuBean {
 
     @PostConstruct
     public void init() {
-        /*treeModel = categoryService.createModel();*/
         categories = categoryAssembler.toDtos(categoryDao.findAll());
     }
-
-    /*public boolean hasNoChildren(String name) {
-        if (categoryDao.findByName(name).getChildren() == null) {
-            return false;
-        }
-        return true;
-
-    }*/
 
     public void onTabChange(TabChangeEvent event) {
         String activeIndex = ((AccordionPanel) event.getComponent()).getActiveIndex();

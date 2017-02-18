@@ -6,7 +6,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-
 <div id="MainContent">
 
     <div class="ui mobile only grid">
@@ -18,8 +17,12 @@
         </div>
     </div>
 
+    <h2 class="ui horizontal divider header">
+        <!--<i class="tag icon"></i>-->
+        Vytvoriť zákaznícky účet
+    </h2>
 
-    <h:form styleClass="ui form">
+    <h:form id="registerForm" styleClass="ui form">
         <!--<p:growl autoUpdate="true" showDetail="true"/>-->
         <p:messages autoUpdate="true"/>
         <h4 class="ui dividing header">VAŠE OSOBNÉ INFORMÁCIE</h4>
@@ -42,46 +45,53 @@
             </div>
 
         </div>
-        <div class="field">
-            <label>Email:</label>
+
+        <div class="two fields">
             <div class="field">
-                <p:inputText id="emailId" styleClass="nonBorder" value="#{registerBean.email}"
-                             placeholder="Emailová adresa"
-                             type="text"/>
+                <label>Email:</label>
+                <div class="field">
+                    <p:inputText id="emailId" styleClass="nonBorder" value="#{registerBean.email}"
+                                 placeholder="Emailová adresa" validator="#{emailExistValidator.validate}"
+                                 type="text"/>
+                    <p:message for="emailId"/>
+                </div>
+            </div>
+            <div class="field">
+                <label>Telefón:</label>
+                <div class="field">
+                    <p:inputText id="phoneNumberId" styleClass="nonBorder"
+                                 value="#{registerBean.phoneNumber}"
+                                 placeholder="Telefón"
+                                 type="text"/>
+                    <p:message for="phoneNumberId"/>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <label>Telefón:</label>
-            <div class="field">
-                <p:inputText id="phoneNumberId" styleClass="nonBorder"
-                             value="#{registerBean.phoneNumber}"
-                             placeholder="Telefón"
-                             type="text"/>
-                <p:message for="phoneNumberId"/>
-            </div>
-        </div>
+
         <h4 class="ui dividing header">VAŠA ADRESA</h4>
-        <div class="field">
-            <label>Spoločnosť:</label>
+        <div class="two fields">
             <div class="field">
-                <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
-                             placeholder="Názov spoločnost"
-                             type="text"/>
+                <label>Spoločnosť:</label>
+                <div class="field">
+                    <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
+                                 placeholder="Názov spoločnosti"
+                                 type="text"/>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label>IČO:</label>
             <div class="field">
-                <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
-                             placeholder="IČO"
-                             type="text"/>
+                <label>IČO:</label>
+                <div class="field">
+                    <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
+                                 placeholder="IČO"
+                                 type="text"/>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label>DIČ/IČ DPH:</label>
             <div class="field">
-                <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
-                             placeholder="DIČ/IČ DPH" type="text"/>
+                <label>DIČ/IČ DPH:</label>
+                <div class="field">
+                    <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
+                                 placeholder="DIČ/IČ DPH" type="text"/>
+                </div>
             </div>
         </div>
         <div class="field">
@@ -97,12 +107,13 @@
                     <p:inputText id="pscId" value="#{registerBean.postalCode}" styleClass="nonBorder"
                                  placeholder="PSČ"
                                  type="text"/>
+                    <p:message for="pscId"/>
                 </div>
                 <div class="six wide field">
-                    <p:message for="cityId"/>
                     <p:inputText id="cityId" value="#{registerBean.city}" styleClass="nonBorder"
                                  placeholder="Mesto"
                                  type="text"/>
+                    <p:message for="cityId"/>
                 </div>
             </div>
         </div>
@@ -112,7 +123,7 @@
                 <div class="field">
                     <h:outputLabel for="pwd1" value="Heslo: *"/>
                     <p:password id="pwd1" match="pwd2" styleClass="nonBorder"
-                                value="#{registerBean.password}" label="Password 1" required="true"/>
+                                value="#{registerBean.password}" label="Password 1"/>
                     <p:message for="pwd1"/>
                 </div>
                 <div class="field">
@@ -148,16 +159,35 @@
         <p:message for="checked"/>
         <pre></pre>
         <div class="field">
-            <p:commandLink value="Send" action="#{registerBean.updateData()}"
-                           styleClass="ui button" validateClient="true">
+            <p:commandLink value="Pokračovať" action="#{registerBean.updateData()}"
+                           styleClass="ui positive button" validateClient="true">
             </p:commandLink>
         </div>
     </h:form>
 
 </div>
+
 <ui:insert name="sa">
     <ui:include src="modal-privacy.xhtml"/>
 </ui:insert>
 
+<h:form id="modaldiv" styleClass="ui basic modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Ochrana osobných údajov
+    </div>
 
+    <div class="content">
+        Osobné údaje sú chránené pred zverejnením a použitím treťou osobou. Sú použité iba pre zasielanie objednanej zásielky a pre komunikáciu so zákazníkom.
+        Zákony a predpisy: - zák. č. 428/2002 Zb. o ochrane osobných údajov
+    </div>
+</h:form>
+
+<script>
+    $(document).ready(function () {
+        $('#privacyId').click(function () {
+            $('#modaldiv').modal('show');
+        });
+    });
+</script>
 </html>

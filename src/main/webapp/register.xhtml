@@ -42,40 +42,19 @@
             </ui:insert>
         </div>
 
-        <div class="sixteen wide column" id="Middle">
-
-
-            <h2 class="ui horizontal divider header">
-                <!--<i class="tag icon"></i>-->
-                Vytvoriť zákaznícky účet
-            </h2>
-
-            <div class="thirteen wide column" id="Content">
+            <div class="eleven wide column centered" id="Content">
                 <ui:insert name="userRegisterId">
                     <ui:include src="WEB-INF/templates/user-register.xhtml"/>
                 </ui:insert>
             </div>
 
-            <div class="sixteen wide theme column" id="Footer">
-                <div class="ui stackable page grid">
-                    <div class="four wide column">
-                        <a href="http://mixerp.org" target="_blank">
-                            <img src="/Static/images/powered-by.png"/>
-                        </a>
-                    </div>
-                    <div class="twelve wide column">
-                        <div class="footer-text">
-                            <p>Copyright © 2016. Eurofood.</p>
-                            <p><a href="http://mixerp.org/contact-us/" target="_blank">Kontaktujte nás</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <ui:insert name="sa">
-        <ui:include src="WEB-INF/templates/modal-privacy.xhtml"/>
+    <ui:insert name="footer">
+        <ui:include src="WEB-INF/templates/footer.xhtml"/>
     </ui:insert>
+    <!--<ui:insert name="sa">
+        <ui:include src="WEB-INF/templates/modal-privacy.xhtml"/>
+    </ui:insert>-->
     <script type="text/javascript">
         /**
          * Faces Validator

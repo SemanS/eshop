@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+    <div id="MainContent">
+
+        <div class="ui mobile only grid">
+            <div id="PhoneMenu" style="max-width: 500px; padding-bottom: 24px;">
+                <div class="ui grid">
+                    <div class="ui four column doubling row" id="menu-cols">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h:form id="registerForm" styleClass="ui form">
+            <!--<p:growl autoUpdate="true" showDetail="true"/>-->
+            <p:messages autoUpdate="true"/>
+            <div class="field">
+                <label>Osobné údaje:</label>
+                <div class="two fields">
+                    <div class="field">
+                        <p:inputText id="firstNameId" styleClass="nonBorder"
+                                     value="#{registerBean.firstname}"
+                                     placeholder="Meno"
+                                     type="text"/>
+                        <p:message for="firstNameId"/>
+                    </div>
+                    <div class="field">
+                        <p:inputText id="lastNameId" styleClass="nonBorder" value="#{registerBean.lastname}"
+                                     placeholder="Priezvisko"
+                                     type="text"/>
+                        <p:message for="lastNameId"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>Spoločnosť:</label>
+                    <div class="field">
+                        <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
+                                     placeholder="Názov spoločnosti"
+                                     type="text"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>IČO:</label>
+                    <div class="field">
+                        <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
+                                     placeholder="IČO"
+                                     type="text"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>DIČ/IČ DPH:</label>
+                    <div class="field">
+                        <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
+                                     placeholder="DIČ/IČ DPH" type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Adresa:</label>
+                <div class="fields">
+                    <div class="six wide field">
+                        <p:inputText id="streetId" value="#{registerBean.street}" styleClass="nonBorder"
+                                     placeholder="Ulica"
+                                     type="text"/>
+                        <p:message for="streetId"/>
+                    </div>
+                    <div class="four wide field">
+                        <p:inputText id="pscId" value="#{registerBean.postalCode}" styleClass="nonBorder"
+                                     placeholder="PSČ"
+                                     type="text"/>
+                        <p:message for="pscId"/>
+                    </div>
+                    <div class="six wide field">
+                        <p:inputText id="cityId" value="#{registerBean.city}" styleClass="nonBorder"
+                                     placeholder="Mesto"
+                                     type="text"/>
+                        <p:message for="cityId"/>
+                    </div>
+                </div>
+            </div>
+
+        </h:form>
+
+    </div>
+
+    <ui:insert name="sa">
+        <ui:include src="modal-privacy.xhtml"/>
+    </ui:insert>
+</h:body>
+</html>

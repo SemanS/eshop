@@ -189,6 +189,7 @@ public class CategoryDashboardBean {
             category.setImage(IOUtils.toByteArray(newSideImgDescription.getInputstream()));
         }
         category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
+        category.setPosition(categoryService.findLastPositionByCategoryForBean(categoryDao.findByName(selectedRootCategoryAdd)));
         categoryDao.save(category);
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
@@ -212,6 +213,11 @@ public class CategoryDashboardBean {
         String newImage = "";
         newImage = Base64.getEncoder().encodeToString(category.getImageDescription());
         return newImage;
+    }
+
+    public void onDeleteCategory() throws IOException {
+        categoryService.deleteCategory(inputSelectedRootCategory);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard-categories.xhtml");
     }
 
 }

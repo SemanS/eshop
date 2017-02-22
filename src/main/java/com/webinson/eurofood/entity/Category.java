@@ -38,7 +38,7 @@ public class Category implements Serializable {
     @Setter
     private Category parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent",  fetch = FetchType.EAGER)
     @Getter
     @Setter
     private List<Category> children;

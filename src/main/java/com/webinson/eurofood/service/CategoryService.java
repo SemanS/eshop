@@ -44,4 +44,8 @@ public interface CategoryService {
 
     int findLastRootPosition();
 
+    int findLastPositionByCategoryForBean(Category category);
+
+    void deleteCategory(Category category);
+
 }

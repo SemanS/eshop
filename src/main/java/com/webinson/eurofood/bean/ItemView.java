@@ -32,15 +32,11 @@ import java.util.List;
  * Created by Slavo on 10/4/2016.
  */
 @Component
-@RequestScoped
+@ViewScoped
 @URLBeanName("itemView")
 @URLMappings(mappings = {
         @URLMapping(
-                id = "index",
-                pattern = "/",
-                viewId = "/index.xhtml"),
-        @URLMapping(
-                id = "itemDetail",
+                id = "itemDetail2",
                 pattern = "/store/#{ itemUrl : itemView.itemUrl}",
                 viewId = "/itemDetail.xhtml"),
         @URLMapping(
@@ -127,6 +123,10 @@ public class ItemView implements Serializable {
     @PostConstruct
     public void init() {
 
+        if (itemUrl != null) {
+            this.selectedItem = itemService.getItemByUrl(itemUrl);
+        }
+
         items = itemService.getAllItems();
         promotedItems = itemService.getAllPromotedItems();
         //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
@@ -150,7 +150,6 @@ public class ItemView implements Serializable {
         itemDto.setQuantity(1);
         selectedItem = itemDto;
         FacesContext.getCurrentInstance().getExternalContext().redirect("/store/" + itemDto.getUrl());
-        System.out.println("daco");
     }
 
 }

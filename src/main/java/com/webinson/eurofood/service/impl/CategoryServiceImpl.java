@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.*;
 
 /**
@@ -186,18 +187,20 @@ public class CategoryServiceImpl implements CategoryService {
     public void saveSelectedTreeNode(TreeNode dragNode, TreeNode dropNode, int dropIndex) {
 
         Category draggedCategory = (Category) dragNode.getData();
-        int actualPosition = draggedCategory.getPosition();
+        int actualPosition = categoryDao.findByName(draggedCategory.getName()).getPosition();
+        int actualPosition2 = draggedCategory.getPosition();
+        /*int actualPosition2 = categoryDao.findByName(draggedCategory.getName()).getPosition();*/
         Category actualDraggedCategory;
         actualDraggedCategory = SerializationUtils.clone(draggedCategory);
         draggedCategory.setPosition(dropIndex);
         Category droppedCategory = (Category) dropNode.getData();
 
-        /*Category to Category*/
         /*Category to Subcategory*/
         if (droppedCategory.getName() != null) {
             if (draggedCategory.getParent() == null) {
 
                 for (Category cat : getRootCategories()) {
+                    /*ZMENA>=*/
                     if (actualPosition > droppedCategory.getPosition()) {
                         if ((cat.getPosition() > actualPosition)) {
                             if (droppedCategory.getId() != cat.getId()) {
@@ -206,7 +209,7 @@ public class CategoryServiceImpl implements CategoryService {
                             }
                         }
                     }
-                    if (actualPosition < droppedCategory.getPosition()) {
+                    if (actualPosition <= droppedCategory.getPosition()) {
                         if ((cat.getPosition() > actualPosition)) {
                             if (droppedCategory.getId() == cat.getId()) {
                                 droppedCategory.setPosition(cat.getPosition() - 1);
@@ -225,19 +228,21 @@ public class CategoryServiceImpl implements CategoryService {
                 categoryDao.save(droppedCategory);
                 categoryDao.save(draggedCategory);
 
-                if (draggedCategory.getParent() != null) {
-                    for (Category cat : droppedCategory.getChildren()) {
-                        if (cat.getPosition() >= draggedCategory.getPosition() && cat.getId() != draggedCategory.getId()) {
-                            cat.setPosition(cat.getPosition() + 1);
-                            categoryDao.save(cat);
-                        }
+                /*if (actualDraggedCategory.getParent() != null) {*/
+                for (Category cat : droppedCategory.getChildren()) {
+                    if (cat.getPosition() >= draggedCategory.getPosition() && cat.getId() != draggedCategory.getId()) {
+                        cat.setPosition(cat.getPosition() + 1);
+                        categoryDao.save(cat);
                     }
                 }
+                /*}*/
 
             }
 
+            /*Zmena*/
             /*Subcategory to subcategory*/
-            if (actualDraggedCategory.getParent() != null && droppedCategory == null) {
+            if (actualDraggedCategory.getParent() != null && droppedCategory != null && draggedCategory.getParent().getId() == droppedCategory.getId()) {
+            /*if (actualDraggedCategory.getParent() != null && droppedCategory == null) {*/
                 for (Category cat : droppedCategory.getChildren()) {
                     if (cat.getPosition() <= actualPosition && cat.getPosition() >= draggedCategory.getPosition() && actualPosition > dropIndex) {
                         cat.setPosition(cat.getPosition() + 1);
@@ -245,7 +250,6 @@ public class CategoryServiceImpl implements CategoryService {
                     }
 
                     if (cat.getPosition() >= actualPosition && cat.getPosition() <= draggedCategory.getPosition() && actualPosition < dropIndex) {
-
                         cat.setPosition(cat.getPosition() - 1);
                         categoryDao.save(cat);
                     }
@@ -297,7 +301,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         /*Subcategory to subcategory in another category*/
-        if (actualDraggedCategory.getParent() != null && droppedCategory.getId() != null) {
+        if (actualDraggedCategory.getParent() != null && droppedCategory.getId() != null && draggedCategory.getParent().getId() != droppedCategory.getId()) {
             for (Category dragCat : draggedCategory.getParent().getChildren()) {
                 if (dragCat.getPosition() > actualPosition && dragCat.getId() != draggedCategory.getId()) {
                     dragCat.setPosition(dragCat.getPosition() - 1);
@@ -305,10 +309,12 @@ public class CategoryServiceImpl implements CategoryService {
                 }
             }
             for (Category dropCat : droppedCategory.getChildren()) {
+                /*Zmena*/
                 if (dropCat.getPosition() >= draggedCategory.getPosition() && dropCat.getId() != draggedCategory.getId()) {
                     dropCat.setPosition(dropCat.getPosition() + 1);
                     categoryDao.save(dropCat);
                 }
+
             }
             droppedCategory.getChildren().add(draggedCategory);
             draggedCategory.setParent(droppedCategory);
@@ -347,6 +353,56 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         return lastPosition + 1;
+    }
+
+    @Override
+    public int findLastPositionByCategoryForBean(Category category) {
+
+        int lastPosition = 0;
+
+        for (Category cat : categoryDao.findById(category.getId()).getChildren()) {
+            if (cat.getPosition() > lastPosition) {
+                lastPosition = cat.getPosition();
+            }
+        }
+        if (categoryDao.findById(category.getId()).getChildren().size() != 1) {
+            if (lastPosition == 0) {
+                lastPosition = 0;
+            } else {
+                lastPosition++;
+            }
+        } else {
+            lastPosition++;
+        }
+
+        return lastPosition;
+
+    }
+
+    @Transactional
+    @Override
+    public void deleteCategory(Category category) {
+
+        if (category.getParent() == null) {
+            for (Category cat : categoryDao.findAll()) {
+
+                if (cat.getPosition() > category.getPosition()) {
+                    cat.setPosition(cat.getPosition() - 1);
+                    categoryDao.save(cat);
+                }
+            }
+        }
+
+        if (category.getParent() != null) {
+            for (Category cat : categoryDao.findById(category.getParent().getId()).getChildren()) {
+                if (cat.getPosition() > category.getPosition()) {
+                    cat.setPosition(cat.getPosition() - 1);
+                    categoryDao.save(cat);
+                }
+            }
+        }
+
+        categoryDao.removeById(category.getId());
     }
 
     public List<Category> findAllSorted() {

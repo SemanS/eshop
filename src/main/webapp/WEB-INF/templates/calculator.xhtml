@@ -6,47 +6,26 @@
 <h:form id="calculatorId">
     <div class="ui grid">
         <div class="two wide column ui fluid image">
-            <!--<img class="image1" src="data:image/png;base64,#{itemView.onImageDescriptionChange()}"/>-->
-            <!--<div class="parent">
-                <img class="image1" src="data:image/png;base64,#{itemView.onImageDescriptionChange()}"/>
-                <img class="image2" src="../../resources/images/eurofood_logo.png"/>
-            </div>-->
         </div>
         <div class="ten wide column ui fluid image ">
 
             <div style="direction: rtl;" class="customfont calculator">
 
-                <h:inputText value="EUR #{shoppingCartView.counterBrutto}" disabled="true"
-                             style="margin-top:35px!important; margin-right:30px!important; width:205px!important;
+                <h:inputText value="#{doubleToString.doubleToString(shoppingCartView.counterBrutto)}" disabled="true"
+                             style="text-align: right;direction:ltr; margin-top:35px!important; margin-right:30px!important; width:205px!important;
                              background-color:#7dbede;border: none!important;"/>
 
-                <h:inputText value="EUR #{shoppingCartView.counterNetto}" disabled="true"
-                             style="margin-top:25px!important; margin-right:10px!important; width:205px!important;
+                <h:inputText value="#{doubleToString.doubleToString(shoppingCartView.counterNetto)}" disabled="true"
+                             style="text-align: right;direction:ltr;margin-top:25px!important; margin-right:10px!important; width:205px!important;
                              background-color:#7dbede;border: none!important;"/>
 
-                <!--<h:inputText id="shoppingCartCounterId" value="#{shoppingCartView.counter}" disabled="true"
-                             style="margin-top:25px!important; margin-right:10px!important; width:75px!important;
-                             background-color:#7dbede;border: none!important;"/>-->
                 <h:commandButton action="#{shoppingCartView.onRestartCounter()}" styleClass="transparentButton"
                                  style="margin-top:25px!important; margin-right:50px!important;"/>
 
-
-                <!--<div class="rightColumn">
-                    <h:outputText value="15085"/>
-                </div>
-                <div class="centeredColumn">
-                    <h:outputText value="150000000"/>
-                </div>
-                <div class="leftColumn">
-                    <h:outputText value="15"/>
-                </div>-->
-
             </div>
-            <!--<img src="../../resources/images/calculator.png"/>-->
+
         </div>
-        <!--<div class="two wide column ui fluid image">
-            <img src="../../resources/images/kosik.png"/>
-        </div>-->
+
     </div>
 
 </h:form>

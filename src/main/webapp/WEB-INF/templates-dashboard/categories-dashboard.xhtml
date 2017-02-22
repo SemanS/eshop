@@ -109,14 +109,20 @@
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImageDescription(categoryDashboardBean.inputSelectedRootCategory)}"/>
                             </div>
                         </div>
-
+                        <pre></pre>
                         <div class="field">
                             <h:commandLink id="commandLink1"
                                            class="medium ui button" icon="ui-icon-star"
-                                           style="border-radius: 0px !important; color: blue"
+                                           style="border-radius: 0px !important; color: green"
                                            action="#{categoryDashboardBean.onChangeRootCategory()}"
-                                           value="Zmeniť kategóriu"
+                                           value="Uložiť kategóriu"
                                            update=":tab1">
+                            </h:commandLink>
+                            <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
+                                           style="border-radius: 0px !important; margin-top: 10px; color: red"
+                                           action="#{categoryDashboardBean.onDeleteCategory()}"
+                                           update=":tab1"
+                                           value="Zmazať kategóriu&#160;&#160;">
                             </h:commandLink>
                         </div>
                     </h:form>
@@ -196,7 +202,8 @@
                             </div>
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
-                                <p:fileUpload id="newSubFile2" value="#{categoryDashboardBean.newSideImgDescription}" mode="simple"
+                                <p:fileUpload id="newSubFile2" value="#{categoryDashboardBean.newSideImgDescription}"
+                                              mode="simple"
                                               skinSimple="true"/>
                             </div>
                         </div>

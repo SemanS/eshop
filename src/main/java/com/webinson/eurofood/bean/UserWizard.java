@@ -34,11 +34,11 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
-    private Address address;
+    AddressDto selectedAddressDto;
 
-    @Getter
+/*    @Getter
     @Setter
-    private boolean skip;
+    private Address address;*/
 
     @Getter
     @Setter
@@ -76,9 +76,8 @@ public class UserWizard implements Serializable {
 
     public String currentUserAddress() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        AddressDto addressDto = new AddressDto();
-        addressDto = userService.getAddressByUsername(authentication.getName());
-        return addressDto.getFirstName() + " " + addressDto.getLastName() + ", " + addressDto.getStreet() + ", " + addressDto.getCity() + ", " + addressDto.getPostalCode();
+        selectedAddressDto = userService.getAddressByUsername(authentication.getName());
+        return selectedAddressDto.getFirstName() + " " + selectedAddressDto.getLastName() + ", " + selectedAddressDto.getStreet() + ", " + selectedAddressDto.getCity() + ", " + selectedAddressDto.getPostalCode();
     }
 
     public String onContinue() {
@@ -89,9 +88,16 @@ public class UserWizard implements Serializable {
         }
     }
 
+    public String saveAll() {
+        if (radioValueFacturation == "No") {
+
+        }
+        return "";
+    }
+
     public String onFlowProcess(FlowEvent event) {
 
         return event.getNewStep();
-        
+
     }
 }

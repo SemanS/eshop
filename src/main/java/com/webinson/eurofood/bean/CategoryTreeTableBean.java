@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.util.Collections;
 
 /**
@@ -47,6 +48,7 @@ public class CategoryTreeTableBean {
 
     @PostConstruct
     public void init() {
+
         rootCategories = categoryService.buildCategories();
     }
 
@@ -54,7 +56,7 @@ public class CategoryTreeTableBean {
         selectedCategory = (Category) nodeSelectEvent.getTreeNode().getData();
     }
 
-    public void onDragDrop(TreeDragDropEvent event) {
+    public void onDragDrop(TreeDragDropEvent event) throws IOException {
         TreeNode dragNode = event.getDragNode();
         TreeNode dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
@@ -62,6 +64,7 @@ public class CategoryTreeTableBean {
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dragged " + dragNode.getData(), "Dropped on " + dropNode.getData() + " at " + dropIndex);
         FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard-categories.xhtml");
     }
 
 

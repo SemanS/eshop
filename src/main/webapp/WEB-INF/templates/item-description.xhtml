@@ -6,85 +6,88 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-<pre></pre>
+<h:body>
+    <pre></pre>
 
-<div class="ui divided items">
+    <div class="ui divided items">
 
-    <div class="item">
-        <div class="ui wide column sixteen widget">
-            <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17s,5g</h5>
-            <div class="meta">
-                <span class="cinema">Kávy</span>
-            </div>
+        <div class="item">
+            <div class="ui wide column sixteen widget">
+                <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17s,5g</h5>
+                <div class="meta">
+                    <span class="cinema">Kávy</span>
+                </div>
                 <img class="ui centered small image" src="data:image/png;base64,#{itemView.selectedItem.image}"/>
-            <div class="ui grid" style="margin-top: 10px">
-                <div class="eight wide column right aligned">
-                    <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
+                <div class="ui grid" style="margin-top: 10px">
+                    <div class="eight wide column right aligned">
+                        <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px; color:red; font-size: large"></h:outputText></h4>
-                </div>
+                    </div>
 
-                <div class="eight wide column left aligned">
-                    <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
+                    <div class="eight wide column left aligned">
+                        <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px;"></h:outputText></h4>
-                </div>
-                <div class="eight wide column right aligned" style="margin-top: -20px;">
-                    <h:outputText value="cena netto"/>
-                </div>
-                <div class="eight wide column left aligned" style="margin-top: -20px">
-                    <h:outputText value="cena brutto"/>
+                    </div>
+                    <div class="eight wide column right aligned" style="margin-top: -20px;">
+                        <h:outputText value="cena netto"/>
+                    </div>
+                    <div class="eight wide column left aligned" style="margin-top: -20px">
+                        <h:outputText value="cena brutto"/>
+                    </div>
                 </div>
             </div>
+            <div class="headerDivider" style="margin-left: 0px"></div>
+            <div class="content" style="margin-left: 20px">
+
+                <h:form>
+                    <pre></pre>
+                    <pre></pre>
+                    <div class="description">
+                        <p:panelGrid columns="2" styleClass="cleanSpinner">
+
+                            <h:outputText value="číslo produktu:"/>
+                            <h:outputText style="color: green" value="#{itemView.selectedItem.internalNumber}"/>
+
+                            <h:outputText value="názov produktu:"/>
+                            <h:outputText style="color: red" value="#{itemView.selectedItem.header}"/>
+
+                            <h:outputText value="EÁN:"/>
+                            <h:outputText style="color: green" value="#{itemView.selectedItem.eanNumber}"/>
+
+                            <h:outputText value="počet kusov v kartóne:"/>
+                            <h:outputText style="color: green" value="#{itemView.selectedItem.piecesInCarton}"/>
+
+                            <h:outputText value="počet kartónov na palete:"/>
+                            <h:outputText style="color: green" value="#{itemView.selectedItem.cartonInPalette}"/>
+
+                            <h:outputText value="počet kusov na palete:"/>
+                            <h:outputText style="color: green" value="#{itemView.selectedItem.piecesInPalette}"/>
+
+                            <p:spinner styleClass="cleanSpinner2" style="margin-top: 40px" id="ajaxSpinner" size="3"
+                                       min="1"
+                                       value="#{shoppingCartView.shoppingCartQuantity}">
+                                <p:ajax update="calculatorId" process="@form"/>
+                            </p:spinner>
+
+                            <pre></pre>
+
+                            <h:commandLink class="medium ui button" icon="ui-icon-star"
+                                           style="border-radius: 0px !important; margin-top: 50px; color: red"
+                                           action="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
+                                           value="Vložiť do košíka&#160;&#160;">
+                                <f:ajax onevent="handleDisableButton"/>
+
+                                <i class="left shop icon"></i>
+                            </h:commandLink>
+                        </p:panelGrid>
+                        <!--<div class="ui label">IMAX</div>
+                        <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
+                    </div>
+                </h:form>
+
+            </div>
         </div>
-        <div class="headerDivider" style="margin-left: 0px"></div>
-        <div class="content" style="margin-left: 20px">
 
-            <h:form>
-                <pre></pre>
-                <pre></pre>
-                <div class="description">
-                    <p:panelGrid columns="2" styleClass="cleanSpinner">
-
-                        <h:outputText value="číslo produktu:"/>
-                        <h:outputText style="color: green" value="#{itemView.selectedItem.internalNumber}"/>
-
-                        <h:outputText value="názov produktu:"/>
-                        <h:outputText style="color: red" value="#{itemView.selectedItem.header}"/>
-
-                        <h:outputText value="EÁN:"/>
-                        <h:outputText style="color: green" value="#{itemView.selectedItem.eanNumber}"/>
-
-                        <h:outputText value="počet kusov v kartóne:"/>
-                        <h:outputText style="color: green" value="#{itemView.selectedItem.piecesInCarton}"/>
-
-                        <h:outputText value="počet kartónov na palete:"/>
-                        <h:outputText style="color: green" value="#{itemView.selectedItem.cartonInPalette}"/>
-
-                        <h:outputText value="počet kusov na palete:"/>
-                        <h:outputText style="color: green" value="#{itemView.selectedItem.piecesInPalette}"/>
-
-                        <p:spinner styleClass="cleanSpinner2" style="margin-top: 40px" id="ajaxSpinner" size="3" min="1"
-                                   value="#{shoppingCartView.shoppingCartQuantity}">
-                            <p:ajax update="calculatorId" process="@form"/>
-                        </p:spinner>
-
-                        <pre></pre>
-
-                        <h:commandLink class="medium ui button" icon="ui-icon-star"
-                                       style="border-radius: 0px !important; margin-top: 50px; color: red"
-                                       action="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
-                                       value="Vložiť do košíka&#160;&#160;">
-                            <f:ajax onevent="handleDisableButton"/>
-
-                            <i class="left shop icon"></i>
-                        </h:commandLink>
-                    </p:panelGrid>
-                    <!--<div class="ui label">IMAX</div>
-                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
-                </div>
-            </h:form>
-
-        </div>
     </div>
-
-</div>
+</h:body>
 </html>

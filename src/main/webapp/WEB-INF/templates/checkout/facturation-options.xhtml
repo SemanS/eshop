@@ -32,15 +32,15 @@
 
             </div>
 
-
             <div class="ui sixteen wide column">
                 <h:panelGroup id="uawGroup" layout="block">
                     <div class="eight wide column">
-                        <h:inputText value="#{userWizard.currentUserAddress()}" rendered="#{userWizard.radioValueFacturation == 'Yes'}" disabled="true"/>
+                        <h:inputText value="#{userWizard.currentUserAddress()}"
+                                     rendered="#{userWizard.radioValueFacturation == 'Yes'}" disabled="true"/>
                     </div>
                     <h:outputFormat rendered="#{userWizard.radioValueFacturation == 'No'}">
                         <ui:insert name="userRegisterId">
-                            <ui:include src="/WEB-INF/templates/user-register.xhtml"/>
+                            <ui:include src="/WEB-INF/templates/address-register.xhtml"/>
                         </ui:insert>
                     </h:outputFormat>
                 </h:panelGroup>

@@ -106,7 +106,7 @@ public class ItemDashboardBean {
         if (file.getSize() != 0) {
 
             Resource resource = new ClassPathResource("/images/calculator.png");
-            InputStream is = getClass().getResourceAsStream("/eurofood_logo.png");
+            InputStream is = getClass().getResourceAsStream("/eurofood_logo_product.png");
             BufferedImage originalImage = ImageIO.read(file.getInputstream());
             BufferedImage watermarkImage = ImageIO.read(is);
             Watermark filter = new Watermark(Positions.CENTER, watermarkImage, 0.5f);

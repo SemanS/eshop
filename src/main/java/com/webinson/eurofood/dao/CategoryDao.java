@@ -27,4 +27,6 @@ public interface CategoryDao extends JpaRepository<Category, Long>, QueryDslPred
 
     Category findByName(String name);
 
+    Long removeById(Long id);
+
 }

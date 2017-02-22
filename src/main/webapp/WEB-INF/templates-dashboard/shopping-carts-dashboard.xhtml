@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:of="http://omnifaces.org/functions">
 
 <pre></pre>
 <div class="ui stackable grid">
@@ -24,6 +25,9 @@
             <!--<p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
                 <h:outputText value="#{shoppingCart.id}"/>
             </p:column>-->
+            <p:column headerText="Dátum objednávky" sortBy="#{shoppingCart.timeStamp}">
+                <h:outputText value="#{of:formatDate(shoppingCart.timeStamp.time, 'dd.MM.yyyy HH:mm')}"/>
+            </p:column>
             <p:column headerText="Používateľ" sortBy="#{shoppingCart.user.username}"
                       filterBy="#{shoppingCart.user.username}">
                 <h:outputText value="#{shoppingCart.user.username}"/>
@@ -31,7 +35,7 @@
             <p:column headerText="Počet položiek">
                 <h:outputText value="#{shoppingCart.cartItems.size()}"/>
             </p:column>
-            <p:column headerText="Vyexpedované" style="text-align: center">
+            <p:column headerText="Vyexpedované" style="text-align: center" sortBy="#{shoppingCart.processed}">
                 <ui:fragment rendered="#{shoppingCart.processed}">
                     <i class="check green circle icon"></i>
                 </ui:fragment>

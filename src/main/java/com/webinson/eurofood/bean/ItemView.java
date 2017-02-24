@@ -36,11 +36,11 @@ import java.util.List;
 @URLBeanName("itemView")
 @URLMappings(mappings = {
         @URLMapping(
-                id = "itemDetail2",
+                id = "detailItem",
                 pattern = "/store/#{ itemUrl : itemView.itemUrl}",
                 viewId = "/itemDetail.xhtml"),
         @URLMapping(
-                id = "category",
+                id = "detailCategory",
                 pattern = "/category/#{ categoryUrl: itemView.categoryUrl}",
                 viewId = "/eshop.xhtml"),
 })
@@ -96,7 +96,7 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedCategoryImage;
 
-    @URLAction
+    @URLAction(onPostback=false)
     public String loadCategory() throws IOException {
 
         if (categoryUrl != null) {
@@ -108,7 +108,7 @@ public class ItemView implements Serializable {
         return "";
     }
 
-    @URLAction
+    @URLAction(onPostback=false)
     public String loadItem() throws IOException {
 
         if (itemUrl != null) {

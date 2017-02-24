@@ -92,6 +92,10 @@ public class UserWizard implements Serializable {
     @Autowired
     private RegisterBean registerBean;
 
+    @Getter
+    @Setter
+    private int currentLevel = 1;
+
     @PostConstruct
     public void init() {
         radioValueFacturation = "Yes";

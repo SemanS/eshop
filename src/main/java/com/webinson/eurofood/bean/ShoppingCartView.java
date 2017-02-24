@@ -1,5 +1,8 @@
 package com.webinson.eurofood.bean;
 
+import com.ocpsoft.pretty.faces.annotation.URLAction;
+import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import com.webinson.eurofood.assembler.CartItemAssembler;
 import com.webinson.eurofood.assembler.ShoppingCartAssembler;
 import com.webinson.eurofood.dto.CartItemDto;
@@ -8,9 +11,11 @@ import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.entity.CartItem;
 import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.service.CartItemService;
+import com.webinson.eurofood.service.ItemService;
 import com.webinson.eurofood.service.ShoppingCartService;
 import lombok.Getter;
 import lombok.Setter;
+import org.ocpsoft.rewrite.faces.navigate.Navigate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -52,6 +57,15 @@ public class ShoppingCartView {
     @Getter
     @Setter
     private float total;
+    @Getter
+    @Setter
+    private String itemUrl;
+    @Getter
+    @Setter
+    ItemDto itemDto;
+
+    @Autowired
+    ItemService itemService;
 
     @Autowired
     ShoppingCartService shoppingCartService;
@@ -64,6 +78,17 @@ public class ShoppingCartView {
 
     @Autowired
     CartItemService cartItemService;
+
+    public String loadItem() throws IOException {
+
+        if (itemUrl != null) {
+            this.itemDto = itemService.getItemByUrl(itemUrl);
+            return itemDto.getUrl();
+        }
+
+        // Add a message here, "The item {..} could not be found."
+        return "";
+    }
 
     @PostConstruct
     public void init() {
@@ -79,7 +104,7 @@ public class ShoppingCartView {
         return "pretty:";
     }
 
-    public String addItemToCart(ItemDto itemDto) {
+    public void addItemToCart(ItemDto itemDto) throws IOException {
 
         if (shoppingCartQuantity >= 1) {
 
@@ -143,7 +168,8 @@ public class ShoppingCartView {
             }
             shoppingCartQuantity = 1;
         }
-        return "pretty:";
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());
     }
 
     public String checkout() {

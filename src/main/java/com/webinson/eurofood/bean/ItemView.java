@@ -1,19 +1,24 @@
 package com.webinson.eurofood.bean;
 
-import com.ocpsoft.pretty.faces.annotation.URLAction;
-import com.ocpsoft.pretty.faces.annotation.URLBeanName;
-import com.ocpsoft.pretty.faces.annotation.URLMapping;
-import com.ocpsoft.pretty.faces.annotation.URLMappings;
+import com.ocpsoft.pretty.faces.annotation.*;
 import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.assembler.ItemAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
+import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
+import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import lombok.*;
+import org.ocpsoft.rewrite.annotation.Join;
+import org.ocpsoft.rewrite.annotation.Parameter;
+import org.ocpsoft.rewrite.annotation.RequestAction;
+import org.ocpsoft.rewrite.el.ELBeanName;
+import org.ocpsoft.rewrite.faces.annotation.Deferred;
+import org.ocpsoft.rewrite.faces.annotation.IgnorePostback;
 import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,27 +32,29 @@ import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Slavo on 10/4/2016.
  */
 @Component
+@ELBeanName(value = "itemView")
 @ViewScoped
-@URLBeanName("itemView")
-@URLMappings(mappings = {
+@Join(path = "/store/{itemUrl}", to="/itemDetail.xhtml")
+/*@URLMappings(mappings = {
         @URLMapping(
                 id = "detailItem",
-                pattern = "/store/#{ itemUrl : itemView.itemUrl}",
+                pattern = "/store/#{itemUrl: itemView.itemUrl}",
                 viewId = "/itemDetail.xhtml"),
         @URLMapping(
                 id = "detailCategory",
                 pattern = "/category/#{ categoryUrl: itemView.categoryUrl}",
                 viewId = "/eshop.xhtml"),
-})
+})*/
 public class ItemView implements Serializable {
 
-    @Autowired
-    CategoryDao categoryDao;
+    /*@Autowired
+    CategoryDao categoryDao;*/
 
     @Autowired
     ItemDao itemDao;
@@ -61,20 +68,20 @@ public class ItemView implements Serializable {
     @Autowired
     ItemAssembler itemAssembler;
 
-    @Autowired
-    CategoryService categoryService;
+    /*@Autowired
+    CategoryService categoryService;*/
 
-    @Getter
+    /*@Getter
     @Setter
-    private CategoryDto selectedCategory;
+    private CategoryDto selectedCategory;*/
 
     @Getter
     @Setter
     private ItemDto selectedItem;
 
-    @Getter
+    /*@Getter
     @Setter
-    private String categoryUrl;
+    private String categoryUrl;*/
 
     @Getter
     @Setter
@@ -84,6 +91,8 @@ public class ItemView implements Serializable {
     @Setter
     private List<ItemDto> promotedItems;
 
+    @Parameter
+    @Deferred
     @Getter
     @Setter
     private String itemUrl;
@@ -92,11 +101,11 @@ public class ItemView implements Serializable {
     @Setter
     private String selectedUser;
 
-    @Getter
+    /*@Getter
     @Setter
-    private String selectedCategoryImage;
+    private String selectedCategoryImage;*/
 
-    @URLAction(onPostback=false)
+    /*@URLAction
     public String loadCategory() throws IOException {
 
         if (categoryUrl != null) {
@@ -106,9 +115,11 @@ public class ItemView implements Serializable {
 
         // Add a message here, "The item {..} could not be found."
         return "";
-    }
+    }*/
 
-    @URLAction(onPostback=false)
+    @RequestAction
+    @Deferred
+    @IgnorePostback
     public String loadItem() throws IOException {
 
         if (itemUrl != null) {
@@ -123,28 +134,24 @@ public class ItemView implements Serializable {
     @PostConstruct
     public void init() {
 
-        if (itemUrl != null) {
-            this.selectedItem = itemService.getItemByUrl(itemUrl);
-        }
-
         items = itemService.getAllItems();
         promotedItems = itemService.getAllPromotedItems();
-        //selectedCategory = categoryAssembler.toDto(categoryDao.findById(1L));
+
     }
 
-    public String onImageDescriptionChange() {
+    /*public String onImageDescriptionChange() {
         selectedCategoryImage = categoryAssembler.toDto(categoryDao.findById(this.selectedCategory.getId())).getImageDescription();
         return selectedCategoryImage;
-    }
+    }*/
 
-    public List<ItemDto> allItemsByCategory() {
+    /*public List<ItemDto> allItemsByCategory() {
         return itemService.getItemsByCategory(this.selectedCategory);
-    }
+    }*/
 
-    public void onCategory(Category category) throws IOException {
+    /*public void onCategory(Category category) throws IOException {
         selectedCategory = categoryAssembler.toDto(categoryDao.findById(category.getId()));
         FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
-    }
+    }*/
 
     public void onItem(ItemDto itemDto) throws IOException {
         itemDto.setQuantity(1);

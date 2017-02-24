@@ -1,15 +1,12 @@
 package com.webinson.eurofood.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,12 +27,12 @@ public class ShoppingCart implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "shoppingCart")
     private Set<CartItem> cartItems;
 
     @Getter
     @Setter
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -49,5 +46,10 @@ public class ShoppingCart implements Serializable {
     @Column(name = "timestamp")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar timeStamp;
+
+    @Getter
+    @Setter
+    @Column(name = "order_address")
+    private String orderAddress;
 
 }

@@ -87,7 +87,7 @@
                     </h:outputLink>
                 </ui:fragment>
 
-                <ui:fragment rendered="#{shoppingCartView.counter > 0}">
+                <ui:fragment rendered="#{shoppingCartView.cartItemDtos.size() > 0}">
                     <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/checkoutCart"
                                   style="color:black !important;border-radius: 0px !important;">
                         Môj košík

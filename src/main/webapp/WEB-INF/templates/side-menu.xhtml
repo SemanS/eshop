@@ -39,7 +39,7 @@
             selection="#{categoryDashboardBean.selectedNode}" animate="true">
 
         <p:treeNode>
-            <h:commandLink action="#{itemView.onCategory(node)}">
+            <h:commandLink action="#{categoryView.onCategory(node)}">
                 <f:ajax execute="@form :submitCategory" render=":submitCategory"/>
                 <img class="ui image small"
                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>

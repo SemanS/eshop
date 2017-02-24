@@ -43,7 +43,7 @@
                 <p:inputText value="#{userWizard.facturationIco}"/>
             </h:panelGrid>
         </p:panel>
-        <p:commandButton value="Next" process="masterDetail"
+        <p:commandButton value="Next" process="masterDetail" actionListener="#{userWizard.level1Continue}"
                          style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
             <pe:selectDetailLevel step="1"/>
         </p:commandButton>
@@ -65,7 +65,7 @@
             </h:panelGrid>
         </p:panel>
         <p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
-                         process="@this" immediate="true">
+                         process="masterDetail" immediate="true">
             <pe:selectDetailLevel step="-1"/>
         </p:commandButton>
         <p:commandButton value="Next" process="masterDetail"

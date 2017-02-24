@@ -3,9 +3,14 @@ package com.webinson.eurofood;
 import org.ocpsoft.rewrite.annotation.RewriteConfiguration;
 import org.ocpsoft.rewrite.config.Configuration;
 import org.ocpsoft.rewrite.config.ConfigurationBuilder;
+import org.ocpsoft.rewrite.config.Invoke;
+import org.ocpsoft.rewrite.el.El;
+import org.ocpsoft.rewrite.faces.config.PhaseBinding;
+import org.ocpsoft.rewrite.faces.config.PhaseOperation;
 import org.ocpsoft.rewrite.servlet.config.HttpConfigurationProvider;
 import org.ocpsoft.rewrite.servlet.config.rule.Join;
 
+import javax.faces.event.PhaseId;
 import javax.servlet.ServletContext;
 
 /**
@@ -30,5 +35,20 @@ public class RewriteConfigApp extends HttpConfigurationProvider {
                 /*.addRule(Join.path("/store").to("/eshop.xhtml"))*/
                 .addRule(Join.path("/user-login").to("/userLogin.xhtml"))
                 .addRule(Join.path("/checkoutCart").to("/checkoutCart.xhtml"));
+
+                /*.addRule(Join.path("/store/{itemUrl}/").to("/itemDetail.xhtml"))
+                .where("itemUrl")
+                .bindsTo(PhaseBinding.to(El.property("languagesBean.language"))
+                        .after(PhaseId.RESTORE_VIEW));*/
+
+                /*.addRule(Join.path("/store/{itemUrl}/").to("/itemDetail.xhtml"))
+                .where("itemUrl").bindsTo(PhaseBinding.to(El.property("itemView.itemUrl")).after(PhaseId.RESTORE_VIEW))
+                .addRule(
+                        Join.path("/store/#{itemUrl}/").to("/itemDetail.xhtml")
+                ).perform(
+                        PhaseOperation.enqueue(
+                                Invoke.binding(El.retrievalMethod("itemView.loadItem"))
+                        ).after(PhaseId.RESTORE_VIEW)
+                );*/
     }
 }

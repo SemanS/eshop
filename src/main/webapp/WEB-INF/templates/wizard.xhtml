@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
     <!--<h:form styleClass="ui form">-->
@@ -34,93 +35,102 @@
                 <h:outputFormat rendered="#{registerBean.currentUserName() != 'anonymousUser'}" titleStyleClass="item"
                                 id="out" title="Možnosti pokladne">
 
-                    <h:form>
-                        <p:wizard id="wiz" nextLabel="Ďalej" backLabel="Späť"
-                                  flowListener="#{userWizard.onFlowProcess}">
-                            <div id="top-menu" class="ui attached stackable menu">
 
-                                <p:tab id="facturationId" title="Fakturačné údaje">
-                                    <ui:insert name="checkoutOptions">
-                                        <div class="ui grid segment">
-                                            <ui:include src="checkout/facturation-options.xhtml"/>
-                                        </div>
+                    <!--<p:wizard id="wiz" nextLabel="Ďalej" backLabel="Späť"
+                              flowListener="#{userWizard.onFlowProcess}">
+                        <div id="top-menu" class="ui attached stackable menu">
 
-                                    </ui:insert>
-                                </p:tab>
+                            <p:tab id="facturationId" title="Fakturačné údaje">
+                                <ui:insert name="checkoutOptions">
+                                    <div class="ui grid segment">
+                                        <ui:include src="checkout/facturation-options.xhtml"/>
+                                    </div>
 
-                                <p:tab id="contact" title="Podrobnosti o dodaní">
-                                    <ui:insert name="checkoutOptions">
-                                        <div class="ui grid segment">
-                                            <ui:include src="checkout/delivery-options.xhtml"/>
-                                        </div>
-                                    </ui:insert>
-                                    <!--<p:panel header="Contact Information">
-                                        <p:messages/>
-                                        <h:panelGrid columns="2" columnClasses="label, value">
-                                            <h:outputText value="Email: *"/>
-                                            <p:inputText value="#{userWizard.userDto.email}" required="true" label="Email"/>
+                                </ui:insert>
+                            </p:tab>
 
-                                            <h:outputText value="Phone: "/>
-                                            <p:inputText value="#{userWizard.userDto.phone}"/>
+                            <p:tab id="contact" title="Podrobnosti o dodaní">
+                                <ui:insert name="checkoutOptions">
+                                    <div class="ui grid segment">
+                                        <ui:include src="checkout/delivery-options.xhtml"/>
+                                    </div>
+                                </ui:insert>
 
-                                            <h:outputText value="Additional Info: "/>
-                                            <p:inputText value="#{userWizard.userDto.info}"/>
-                                        </h:panelGrid>
-                                    </p:panel>-->
-                                </p:tab>
+                            </p:tab>
 
-                                <p:tab id="confirm" title="Spôsob dodania">
-                                    <!-- <p:panel header="Confirmation">
-                                         <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
-                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                 <h:outputText value="Firstname: "/>
-                                                 <h:outputText value="#{userWizard.userDto.firstName}" styleClass="outputLabel"/>
+                            <p:tab id="confirm" title="Spôsob dodania">
 
-                                                 <h:outputText value="Lastname: "/>
-                                                 <h:outputText value="#{userWizard.userDto.lastName}" styleClass="outputLabel"/>
+                            </p:tab>
+                            <p:tab id="platba" title="Spôsob platby">
 
-                                             </h:panelGrid>
+                            </p:tab>
+                            <p:tab id="potvrdenie" title="Potvrdenie objednávky">
 
-                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                 <h:outputText value="Street: "/>
-                                                 <h:outputText value="#{userWizard.userDto.street}" styleClass="outputLabel"/>
+                            </p:tab>
+                        </div>
+                    </p:wizard>-->
 
-                                                 <h:outputText value="Postal: "/>
-                                                 <h:outputText value="#{userWizard.userDto.postalCode}"
-                                                               styleClass="outputLabel"/>
 
-                                                 <h:outputText value="City: "/>
-                                                 <h:outputText value="#{userWizard.userDto.city}" styleClass="outputLabel"/>
-                                             </h:panelGrid>
+                    <pe:masterDetail id="masterDetail" level="#{userWizard.currentLevel}" showBreadcrumb="false">
+                        <f:facet name="header">
+                            <p:messages showDetail="true"/>
+                            <h:panelGroup styleClass="ui ordered steps" layout="block" style="margin-top: 10px;">
+                                <h:panelGroup
+                                        styleClass="#{userWizard.currentLevel eq 1 ? 'active step' : userWizard.currentLevel lt 2 ? 'step' : userWizard.currentLevel gt 1 ? 'completed step' : ''}">
 
-                                             <h:panelGrid columns="2" columnClasses="label, value">
-                                                 <h:outputText value="Email: "/>
-                                                 <h:outputText value="#{userWizard.userDto.email}" styleClass="outputLabel"/>
+                                    <h:outputText value="Fakturačné údaje"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="
+                                  #{userWizard.currentLevel eq 2 ? 'active step' : userWizard.currentLevel lt 2 ? 'step' : userWizard.currentLevel gt 2 ? 'completed step' : ''}">
+                                    <h:outputText value="Podrobnosti o dodaní"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="
+                                  #{userWizard.currentLevel eq 3 ? 'active step' : 'completed step'}">
+                                    <h:outputText value="Contact"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="
+                                  #{userWizard.currentLevel eq 4 ? 'active step' : 'completed step'}">
+                                    <h:outputText value="Confirmation"/>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </f:facet>
 
-                                                 <h:outputText value="Phone "/>
-                                                 <h:outputText value="#{userWizard.userDto.phone}" styleClass="outputLabel"/>
+                        <pe:masterDetailLevel level="1">
 
-                                                 <h:outputText value="Info: "/>
-                                                 <h:outputText value="#{userWizard.userDto.info}" styleClass="outputLabel"/>
+                            <h:form id="level1">
+                                <div class="ui grid segment">
+                                    <ui:include src="checkout/facturation-options.xhtml"/>
+                                </div>
 
-                                                 <h:outputText/>
-                                                 <h:outputText/>
-                                             </h:panelGrid>
-                                         </h:panelGrid>
+                                <p:commandButton value="Ďalej" process="masterDetail"
+                                                 actionListener="#{userWizard.level1Continue}"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>
+                            </h:form>
+                        </pe:masterDetailLevel>
 
-                                         <p:commandButton value="Submit" actionListener="#{userWizard.save}" update="growl"
-                                                          styleClass="ui button" process="@this"/>
-                                     </p:panel>-->
-                                </p:tab>
-                                <p:tab id="platba" title="Spôsob platby">
+                        <pe:masterDetailLevel level="2">
 
-                                </p:tab>
-                                <p:tab id="potvrdenie" title="Potvrdenie objednávky">
-
-                                </p:tab>
+                            <div class="ui grid segment">
+                                <ui:include src="checkout/delivery-options.xhtml"/>
                             </div>
-                        </p:wizard>
-                    </h:form>
+
+                            <p:commandButton value="asd" actionListener="#{userWizard.checkout}"/>
+
+                            <p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                             process="@this" immediate="true">
+                                <pe:selectDetailLevel step="-1"/>
+                            </p:commandButton>
+                            <p:commandButton value="Next" process="masterDetail"
+                                             style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                <pe:selectDetailLevel step="1"/>
+                            </p:commandButton>
+                        </pe:masterDetailLevel>
+
+                    </pe:masterDetail>
+
+
                 </h:outputFormat>
 
             </div>

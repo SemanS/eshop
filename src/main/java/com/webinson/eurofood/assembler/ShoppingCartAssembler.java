@@ -23,17 +23,20 @@ public class ShoppingCartAssembler {
 
     public ShoppingCartDto convertToDto(ShoppingCart model, ShoppingCartDto dto) {
         dto.setId(model.getId());
+        dto.setOrderAddress(model.getOrderAddress());
         return dto;
     }
 
     public ShoppingCartDto toDto(ShoppingCart model) {
         ShoppingCartDto dto = new ShoppingCartDto();
         dto.setId(model.getId());
+        dto.setOrderAddress(model.getOrderAddress());
         return dto;
     }
 
     public ShoppingCart toModel(ShoppingCartDto shoppingCartDto) {
         ShoppingCart model = new ShoppingCart();
+        model.setOrderAddress(shoppingCartDto.getOrderAddress());
         return model;
     }
 

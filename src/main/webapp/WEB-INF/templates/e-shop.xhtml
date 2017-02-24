@@ -9,14 +9,14 @@
 <div class="ui container text">
     <h4 class="ui horizontal divider header">
         <!--<i class="tag icon"></i>-->
-        #{itemView.selectedCategory.name}
+        #{categoryView.selectedCategory.name}
     </h4>
 </div>
 <pre></pre>
 <div class="ui container">
     <h:form>
         <div class="ui grid four column stackable centered">
-            <ui:repeat value="#{itemView.allItemsByCategory()}" var="item">
+            <ui:repeat value="#{categoryView.allItemsByCategory()}" var="item">
                 <div class="column">
 
                     <div class="ui fluid card">

@@ -2,9 +2,12 @@ package com.webinson.eurofood.bean;
 
 import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.AddressDto;
+import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.entity.Address;
+import com.webinson.eurofood.entity.ShoppingCart;
 import com.webinson.eurofood.entity.User;
+import com.webinson.eurofood.service.ShoppingCartService;
 import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 
 /**
  * Created by Slavo on 12/8/2016.
@@ -28,6 +32,16 @@ import java.io.Serializable;
 @Component
 @ViewScoped
 public class UserWizard implements Serializable {
+
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
+    @Autowired
+    ShoppingCartView shoppingCartView;
+
+    @Getter
+    @Setter
+    private ShoppingCartDto shoppingCartDto;
 
     @Getter
     @Setter
@@ -76,6 +90,10 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
+    AddressDto selectedAddressNewDto = new AddressDto();
+
+    @Getter
+    @Setter
     private String userContinue = "Yes";
 
     @Getter
@@ -100,6 +118,7 @@ public class UserWizard implements Serializable {
     public void init() {
         radioValueFacturation = "Yes";
         radioValueDelivery = "Yes";
+        shoppingCartDto = new ShoppingCartDto();
     }
 
     public void save() {
@@ -141,5 +160,24 @@ public class UserWizard implements Serializable {
         }
         return event.getNewStep();
 
+    }
+
+    public void level1Continue() {
+        if (facturationFirstname != null && radioValueFacturation != "No") {
+            selectedAddressNewDto.setFirstName(facturationFirstname);
+            selectedAddressNewDto.setLastName(facturationLastname);
+            selectedAddressNewDto.setStreet(facturationStreet);
+            selectedAddressNewDto.setCity(facturationCity);
+            selectedAddressNewDto.setPostalCode(facturationPostalCode);
+        }
+    }
+
+    public String checkout() {
+        if (selectedAddressNewDto != null) {
+            shoppingCartDto.setOrderAddress(selectedAddressNewDto.toString());
+        }
+        shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
+        shoppingCartView.setCartItemDtos(new HashSet<>());
+        return "checkout.xhtml?faces-redirect=true";
     }
 }

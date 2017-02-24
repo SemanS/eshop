@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <h:form id="registerForm" styleClass="ui form">
+        <!--<h:form id="registerForm" styleClass="ui form">-->
             <!--<p:growl autoUpdate="true" showDetail="true"/>-->
             <p:messages autoUpdate="true"/>
             <div class="field">
@@ -26,13 +26,13 @@
                 <div class="two fields">
                     <div class="field">
                         <p:inputText id="firstNameId" styleClass="nonBorder"
-                                     value="#{registerBean.firstname}"
+                                     value="#{userWizard.facturationFirstname}"
                                      placeholder="Meno"
                                      type="text"/>
                         <p:message for="firstNameId"/>
                     </div>
                     <div class="field">
-                        <p:inputText id="lastNameId" styleClass="nonBorder" value="#{registerBean.lastname}"
+                        <p:inputText id="lastNameId" styleClass="nonBorder" value="#{userWizard.facturationLastname}"
                                      placeholder="Priezvisko"
                                      type="text"/>
                         <p:message for="lastNameId"/>
@@ -45,7 +45,7 @@
                 <div class="field">
                     <label>Spoločnosť:</label>
                     <div class="field">
-                        <p:inputText id="companyId" styleClass="nonBorder" value="#{registerBean.company}"
+                        <p:inputText id="companyId" styleClass="nonBorder" value="#{userWizard.facturationCompany}"
                                      placeholder="Názov spoločnosti"
                                      type="text"/>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="field">
                     <label>IČO:</label>
                     <div class="field">
-                        <p:inputText id="icoId" styleClass="nonBorder" value="#{registerBean.ico}"
+                        <p:inputText id="icoId" styleClass="nonBorder" value="#{userWizard.facturationIco}"
                                      placeholder="IČO"
                                      type="text"/>
                     </div>
@@ -61,7 +61,7 @@
                 <div class="field">
                     <label>DIČ/IČ DPH:</label>
                     <div class="field">
-                        <p:inputText id="dicId" styleClass="nonBorder" value="#{registerBean.dic}"
+                        <p:inputText id="dicId" styleClass="nonBorder" value="#{userWizard.facturationDic}"
                                      placeholder="DIČ/IČ DPH" type="text"/>
                     </div>
                 </div>
@@ -70,19 +70,19 @@
                 <label>Adresa:</label>
                 <div class="fields">
                     <div class="six wide field">
-                        <p:inputText id="streetId" value="#{registerBean.street}" styleClass="nonBorder"
+                        <p:inputText id="streetId" value="#{userWizard.facturationStreet}" styleClass="nonBorder"
                                      placeholder="Ulica"
                                      type="text"/>
                         <p:message for="streetId"/>
                     </div>
                     <div class="four wide field">
-                        <p:inputText id="pscId" value="#{registerBean.postalCode}" styleClass="nonBorder"
+                        <p:inputText id="pscId" value="#{userWizard.facturationPostalCode}" styleClass="nonBorder"
                                      placeholder="PSČ"
                                      type="text"/>
                         <p:message for="pscId"/>
                     </div>
                     <div class="six wide field">
-                        <p:inputText id="cityId" value="#{registerBean.city}" styleClass="nonBorder"
+                        <p:inputText id="cityId" value="#{userWizard.facturationCity}" styleClass="nonBorder"
                                      placeholder="Mesto"
                                      type="text"/>
                         <p:message for="cityId"/>
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-        </h:form>
+        <!--</h:form>-->
 
     </div>
 

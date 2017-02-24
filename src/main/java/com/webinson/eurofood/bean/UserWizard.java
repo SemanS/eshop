@@ -19,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.transaction.Transactional;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -30,15 +31,48 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
+    @Size(min = 3, max = 32, message = "Meno musí byť dlhšie ako 3 znaky a kratšie než 32 znakov!")
+    private String facturationFirstname;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 32, message = "Priezvisko musí byť dlhšie ako 3 znaky a kratšie než 32 znakov!")
+    private String facturationLastname;
+
+    @Getter
+    @Setter
+    private String facturationCompany;
+
+    @Getter
+    @Setter
+    private String facturationIco;
+
+    @Getter
+    @Setter
+    private String facturationDic;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 128, message = "Adresa musí byť dlhšia ako 3 znaky a kratšia než 128 znakov!")
+    private String facturationStreet;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 32, message = "Zadajte prosím PSČ v správnom tvare!")
+    private String facturationPostalCode;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 128, message = "Mesto musí byť dlhšie ako 3 znaky a kratšie než 128 znakov!")
+    private String facturationCity;
+
+    @Getter
+    @Setter
     private UserDto userDto = new UserDto();
 
     @Getter
     @Setter
     AddressDto selectedAddressDto;
-
-/*    @Getter
-    @Setter
-    private Address address;*/
 
     @Getter
     @Setter
@@ -97,6 +131,10 @@ public class UserWizard implements Serializable {
 
     public String onFlowProcess(FlowEvent event) {
 
+        if (facturationFirstname != null) {
+            System.out.println("daco");
+
+        }
         return event.getNewStep();
 
     }

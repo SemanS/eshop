@@ -41,13 +41,18 @@
 
                                 <p:tab id="facturationId" title="Fakturačné údaje">
                                     <ui:insert name="checkoutOptions">
-                                        <ui:include src="checkout/facturation-options.xhtml"/>
+                                        <div class="ui grid segment">
+                                            <ui:include src="checkout/facturation-options.xhtml"/>
+                                        </div>
+
                                     </ui:insert>
                                 </p:tab>
 
                                 <p:tab id="contact" title="Podrobnosti o dodaní">
                                     <ui:insert name="checkoutOptions">
-                                        <ui:include src="checkout/delivery-options.xhtml"/>
+                                        <div class="ui grid segment">
+                                            <ui:include src="checkout/delivery-options.xhtml"/>
+                                        </div>
                                     </ui:insert>
                                     <!--<p:panel header="Contact Information">
                                         <p:messages/>

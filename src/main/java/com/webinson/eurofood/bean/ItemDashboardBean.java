@@ -109,7 +109,7 @@ public class ItemDashboardBean {
             InputStream is = getClass().getResourceAsStream("/eurofood_logo_product.png");
             BufferedImage originalImage = ImageIO.read(file.getInputstream());
             BufferedImage watermarkImage = ImageIO.read(is);
-            Watermark filter = new Watermark(Positions.CENTER, watermarkImage, 0.5f);
+            Watermark filter = new Watermark(Positions.TOP_RIGHT, watermarkImage, 0.5f);
             BufferedImage watermarkedImage = filter.apply(originalImage);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -120,8 +120,9 @@ public class ItemDashboardBean {
         }
         selectedItem.setCategory(categoryDao.findByName(selectedCategory));
         itemDao.save(selectedItem);
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect(context.getRequestContextPath() + "pretty:dashboard");
+        /*ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath() + "pretty:dashboard");*/
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard-products.xhtml");
         return "dashboard-products?faces-redirect=true";
     }
 

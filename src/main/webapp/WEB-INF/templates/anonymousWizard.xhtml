@@ -23,16 +23,16 @@
 
                 <p:growl id="growl" sticky="true" showDetail="true"/>
 
-                <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
+               <!-- <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
                                 id="checkoutOptionsId" title="Možnosti pokladne">
 
                     <ui:insert name="checkoutOptions">
                         <ui:include src="checkout/checkout-options.xhtml"/>
                     </ui:insert>
 
-                </h:outputFormat>
+                </h:outputFormat>-->
 
-                <h:outputFormat rendered="#{registerBean.currentUserName() != 'anonymousUser'}" titleStyleClass="item"
+                <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
                                 id="out" title="Možnosti pokladne">
 
                     <pe:masterDetail id="masterDetail" level="#{userWizard.currentLevel}" showBreadcrumb="false">
@@ -64,7 +64,7 @@
 
                             <h:form id="level1">
                                 <div class="ui grid segment">
-                                    <ui:include src="checkout/facturation-options.xhtml"/>
+                                    <ui:include src="anonymous-checkout/facturation-options.xhtml"/>
                                 </div>
 
                                 <p:commandButton value="Ďalej" process="masterDetail"
@@ -78,7 +78,7 @@
                         <pe:masterDetailLevel level="2">
                             <h:form id="level2">
                                 <div class="ui grid segment">
-                                    <ui:include src="checkout/delivery-options.xhtml"/>
+                                    <ui:include src="anonymous-checkout/delivery-options.xhtml"/>
                                 </div>
                             </h:form>
                             <!--<p:commandButton value="asd" actionListener="#{userWizard.checkout}"/>-->

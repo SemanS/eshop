@@ -15,36 +15,38 @@
                 <!--<i class="tag icon"></i>-->
                 Nový zákazník
             </h4>
-            <div class="content">
-                <div class="field">
-                    <label>Možnosti pokladne:</label>
-                    <h:panelGrid columns="1" style="margin-bottom:10px" cellspacing="5"
-                                 cellpadding="20">
-                        <h:selectOneRadio id="userContinueId" value="#{userWizard.userContinue}"
-                                          layout="grid"
-                                          columns="1">
-                            <f:selectItem itemLabel="&#160;&#160;Registrácia účtu&#160;&#160;"
-                                          itemValue="Yes"/>
-                            <f:selectItem itemLabel="&#160;&#160;Nákup bez registrácie"
-                                          itemValue="No"/>
-                        </h:selectOneRadio>
-                    </h:panelGrid>
-                </div>
-                <div class="field">
-                    Založením účtu budete môcť nakupovať rýchlejšie, môžete byť informovaný(á) o stave objednávky a uložiť si predchádzajúce sledovanie zásielok.
-                </div>
+            <h:form>
+                <div class="content">
+                    <div class="field">
+                        <label>Možnosti pokladne:</label>
+                        <h:panelGrid columns="1" style="margin-bottom:10px" cellspacing="5"
+                                     cellpadding="20">
+                            <h:selectOneRadio id="userContinueId" value="#{userWizard.userContinue}"
+                                              layout="grid"
+                                              columns="1">
+                                <f:selectItem itemLabel="&#160;&#160;Registrácia účtu&#160;&#160;"
+                                              itemValue="Yes"/>
+                                <f:selectItem itemLabel="&#160;&#160;Nákup bez registrácie"
+                                              itemValue="No"/>
+                            </h:selectOneRadio>
+                        </h:panelGrid>
+                    </div>
+                    <div class="field">
+                        Založením účtu budete môcť nakupovať rýchlejšie, môžete byť informovaný(á) o stave objednávky a uložiť si predchádzajúce sledovanie zásielok.
+                    </div>
 
-                <div class="field" style="text-align: center">
-                    <h:form>
-                        <h:commandButton oncomplete="PF('wiz').loadStep('facturationId',false)"
-                                         class="ui positive button"
+                    <div class="field" style="text-align: center">
+
+                        <h:commandButton class="ui positive button"
                                          value="Pokračovať" action="#{userWizard.onContinue()}">
                             <!--<i class="checkmark icon"></i>-->
                         </h:commandButton>
-                    </h:form>
+
+                    </div>
                 </div>
-            </div>
+            </h:form>
         </div>
+
         <div class="ui eight wide column">
 
             <ui:insert name="userLogin">

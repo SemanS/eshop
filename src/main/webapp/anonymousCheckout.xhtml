@@ -32,7 +32,7 @@
         </div>
 
         <h:outputFormat rendered="#{shoppingCartView.counter == 0}" titleStyleClass="item"
-                        id="asfasd" title="Možnosti pokladne">
+                        id="asdsw" title="Možnosti pokladne">
             <div class="three wide column" style="" id="Sidebar">
                 <ui:insert name="sideMenu">
                     <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
@@ -47,10 +47,10 @@
         </h:outputFormat>
 
         <h:outputFormat rendered="#{shoppingCartView.counter != 0}" titleStyleClass="item"
-                        id="checkoutOptionsId" title="Možnosti pokladne">
+                        id="asfasd" title="Možnosti pokladne">
             <div class="sixteen wide column" id="itemDetail">
-                <ui:insert name="itemDetail">
-                    <ui:include src="WEB-INF/templates/anonymous-checkout.xhtml"/>
+                <ui:insert name="itemDetail22">
+                    <ui:include src="WEB-INF/templates/anonymousWizard.xhtml"/>
                 </ui:insert>
             </div>
         </h:outputFormat>

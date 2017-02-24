@@ -139,9 +139,9 @@ public class UserWizard implements Serializable {
 
     public String onContinue() {
         if (userContinue.equals("Yes")) {
-            return "register?faces-redirect=true";
+            return "register.xhtml?faces-redirect=true";
         } else {
-            return "anonymousCheckout?faces-redirect=true";
+            return "anonymousCheckout.xhtml?faces-redirect=true";
         }
     }
 

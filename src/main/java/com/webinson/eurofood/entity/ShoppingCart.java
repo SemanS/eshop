@@ -27,7 +27,7 @@ public class ShoppingCart implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "shoppingCart")
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST)
     private Set<CartItem> cartItems;
 
     @Getter
@@ -49,7 +49,12 @@ public class ShoppingCart implements Serializable {
 
     @Getter
     @Setter
-    @Column(name = "order_address")
-    private String orderAddress;
+    @Column(name = "facturation_address")
+    private String facturationAddress;
+
+    @Getter
+    @Setter
+    @Column(name = "delivery_address")
+    private String deliveryAddress;
 
 }

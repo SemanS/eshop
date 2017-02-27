@@ -1,12 +1,8 @@
 package com.webinson.eurofood.bean;
 
-import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.AddressDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.dto.UserDto;
-import com.webinson.eurofood.entity.Address;
-import com.webinson.eurofood.entity.ShoppingCart;
-import com.webinson.eurofood.entity.User;
 import com.webinson.eurofood.service.ShoppingCartService;
 import com.webinson.eurofood.service.UserService;
 import lombok.Getter;
@@ -21,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -80,6 +75,44 @@ public class UserWizard implements Serializable {
     @Size(min = 3, max = 128, message = "Mesto musí byť dlhšie ako 3 znaky a kratšie než 128 znakov!")
     private String facturationCity;
 
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 32, message = "Meno musí byť dlhšie ako 3 znaky a kratšie než 32 znakov!")
+    private String deliveryFirstname;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 32, message = "Priezvisko musí byť dlhšie ako 3 znaky a kratšie než 32 znakov!")
+    private String deliveryLastname;
+
+    @Getter
+    @Setter
+    private String deliveryCompany;
+
+    @Getter
+    @Setter
+    private String deliveryIco;
+
+    @Getter
+    @Setter
+    private String deliveryDic;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 128, message = "Adresa musí byť dlhšia ako 3 znaky a kratšia než 128 znakov!")
+    private String deliveryStreet;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 32, message = "Zadajte prosím PSČ v správnom tvare!")
+    private String deliveryPostalCode;
+
+    @Getter
+    @Setter
+    @Size(min = 3, max = 128, message = "Mesto musí byť dlhšie ako 3 znaky a kratšie než 128 znakov!")
+    private String deliveryCity;
+
     @Getter
     @Setter
     private UserDto userDto = new UserDto();
@@ -90,7 +123,11 @@ public class UserWizard implements Serializable {
 
     @Getter
     @Setter
-    AddressDto selectedAddressNewDto = new AddressDto();
+    AddressDto facturationAddressDto;
+
+    @Getter
+    @Setter
+    AddressDto deliveryAddressDto;
 
     @Getter
     @Setter
@@ -164,20 +201,37 @@ public class UserWizard implements Serializable {
 
     public void level1Continue() {
         if (facturationFirstname != null && radioValueFacturation != "No") {
-            selectedAddressNewDto.setFirstName(facturationFirstname);
-            selectedAddressNewDto.setLastName(facturationLastname);
-            selectedAddressNewDto.setStreet(facturationStreet);
-            selectedAddressNewDto.setCity(facturationCity);
-            selectedAddressNewDto.setPostalCode(facturationPostalCode);
+            facturationAddressDto = new AddressDto();
+            facturationAddressDto.setFirstName(facturationFirstname);
+            facturationAddressDto.setLastName(facturationLastname);
+            facturationAddressDto.setStreet(facturationStreet);
+            facturationAddressDto.setCity(facturationCity);
+            facturationAddressDto.setPostalCode(facturationPostalCode);
         }
     }
 
     public String checkout() {
-        if (selectedAddressNewDto != null) {
-            shoppingCartDto.setOrderAddress(selectedAddressNewDto.toString());
+        if (facturationAddressDto != null) {
+            shoppingCartDto.setFacturationAddress(facturationAddressDto.toString());
+        } else {
+            shoppingCartDto.setFacturationAddress(currentUserAddress());
         }
+        if (deliveryFirstname != null && radioValueDelivery != "No") {
+            deliveryAddressDto = new AddressDto();
+            deliveryAddressDto.setFirstName(deliveryFirstname);
+            deliveryAddressDto.setLastName(deliveryLastname);
+            deliveryAddressDto.setStreet(deliveryStreet);
+            deliveryAddressDto.setCity(deliveryCity);
+            deliveryAddressDto.setPostalCode(deliveryPostalCode);
+        }
+        if (deliveryAddressDto != null) {
+            shoppingCartDto.setDeliveryAddress(deliveryAddressDto.toString());
+        } else {
+            shoppingCartDto.setDeliveryAddress(currentUserAddress());
+        }
+
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
         shoppingCartView.setCartItemDtos(new HashSet<>());
-        return "checkout.xhtml?faces-redirect=true";
+        return "index.xhtml?faces-redirect=true";
     }
 }

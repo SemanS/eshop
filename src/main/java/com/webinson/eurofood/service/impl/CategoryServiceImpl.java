@@ -405,6 +405,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDao.removeById(category.getId());
     }
 
+    @Override
+    public List<CategoryDto> getCategoriesByCategory(CategoryDto categoryDto) {
+        return categoryAssembler.toDtos(categoryDao.findByParentId(categoryDto.getId()));
+    }
+
     public List<Category> findAllSorted() {
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;

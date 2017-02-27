@@ -13,6 +13,7 @@ public class ShoppingCartDto {
 
     private List<CartItemDto> cartItemDtos;
 
-    private String orderAddress;
+    private String facturationAddress;
 
+    private String deliveryAddress;
 }

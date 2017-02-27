@@ -1,9 +1,6 @@
 package com.webinson.eurofood.assembler;
 
-import com.webinson.eurofood.bean.ShoppingCartView;
-import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
-import com.webinson.eurofood.entity.CartItem;
 import com.webinson.eurofood.entity.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,20 +20,23 @@ public class ShoppingCartAssembler {
 
     public ShoppingCartDto convertToDto(ShoppingCart model, ShoppingCartDto dto) {
         dto.setId(model.getId());
-        dto.setOrderAddress(model.getOrderAddress());
+        dto.setFacturationAddress(model.getFacturationAddress());
+        dto.setDeliveryAddress(model.getDeliveryAddress());
         return dto;
     }
 
     public ShoppingCartDto toDto(ShoppingCart model) {
         ShoppingCartDto dto = new ShoppingCartDto();
         dto.setId(model.getId());
-        dto.setOrderAddress(model.getOrderAddress());
+        dto.setFacturationAddress(model.getFacturationAddress());
+        dto.setDeliveryAddress(model.getDeliveryAddress());
         return dto;
     }
 
     public ShoppingCart toModel(ShoppingCartDto shoppingCartDto) {
         ShoppingCart model = new ShoppingCart();
-        model.setOrderAddress(shoppingCartDto.getOrderAddress());
+        model.setFacturationAddress(shoppingCartDto.getFacturationAddress());
+        model.setDeliveryAddress(shoppingCartDto.getDeliveryAddress());
         return model;
     }
 

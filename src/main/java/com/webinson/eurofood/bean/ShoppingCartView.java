@@ -96,12 +96,12 @@ public class ShoppingCartView {
         cartItemDtos = new HashSet<>();
     }
 
-    public String onRestartCounter() {
+    public void onRestartCounter() {
         this.counter = 0;
         this.cartItemDtos = new HashSet<>();
         this.counterNetto = 0;
         this.counterBrutto = 0;
-        return "pretty:";
+        /*return "pretty:";*/
     }
 
     public void addItemToCart(ItemDto itemDto) throws IOException {
@@ -174,16 +174,24 @@ public class ShoppingCartView {
 
     public String checkout() {
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, this.cartItemDtos);
-        return "checkout.xhtml?faces-redirect=true";
+        return "index.xhtml?faces-redirect=true";
     }
 
-    public String onDeleteItem(CartItemDto cartItemDto) {
+    public void onDeleteItem(CartItemDto cartItemDto) throws IOException {
+        String redirectOption;
         for (CartItemDto cItemDto : cartItemDtos) {
             if (cartItemDto == cItemDto) {
                 cartItemDtos.remove(cItemDto);
             }
         }
-        return "pretty:checkoutCart";
+        if (cartItemDtos.size() == 0) {
+            redirectOption = "/index.xhtml";
+            onRestartCounter();
+
+        } else {
+            redirectOption = "/checkoutCart.xhtml";
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect(redirectOption);
     }
 
 }

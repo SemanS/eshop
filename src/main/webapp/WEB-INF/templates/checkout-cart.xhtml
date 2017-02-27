@@ -2,54 +2,66 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 
 <h:form id="checkoutCartForm">
     <pre></pre>
-    <p:dataTable var="cart"
+    <p:dataTable id="dataTableCheckoutCart" var="cart"
                  value="#{shoppingCartView.cartItemDtos}"
-                 dir="rtl">
+                 dir="ltr">
+
+        <p:column headerText="OBRÁZOK" width="12%" style="text-align: center">
+            <img class="ui image avatar" src="data:image/png;base64,#{cart.itemDto.image}"/>
+        </p:column>
+
+        <p:column headerText="NÁZOV PRODUKTU" style="text-align: center">
+            <h:outputText value="#{cart.itemDto.header}"/>
+        </p:column>
+
+        <p:column headerText="VÝROBCA" style="text-align: center">
+            <h:outputText value="#{cart.itemDto.producer.name}"/>
+        </p:column>
+
+        <p:column headerText="MNOŽSTVO" style="text-align: center">
+            <p:spinner id="ajaxSpinner" min="1" size="3" value="#{cart.quantity}">
+                <p:ajax process="@form" update="ajaxSpinnerValue"/>
+            </p:spinner>
+        </p:column>
+
+        <p:column headerText="JEDNOTKOVÁ CENA" style="text-align: center">
+            <h:outputText value="#{cart.itemDto.priceNetto}"/>
+        </p:column>
+
+        <p:column id="sumColumn" headerText="CELKOM S DPH" style="text-align: center">
+            <h:outputText id="ajaxSpinnerValue" value="#{cart.itemDto.priceNetto * cart.quantity}">
+                <f:convertNumber pattern="#0.00"/>
+            </h:outputText>
+        </p:column>
+
         <p:column headerText="VYMAZAŤ" width="12%" style="text-align: center">
             <h:commandLink class="remove circle icon"
                            style="border-radius: 0px !important; color: red;"
                            action="#{shoppingCartView.onDeleteItem(cart)}"
                            value="">
-                <!--<f:ajax render="@form"/>-->
                 <i class="remove circle icon"></i>
             </h:commandLink>
         </p:column>
 
-        <p:column headerText="CELKOM S DPH">
-            <h:outputText value="#{car.color}"/>
-        </p:column>
 
-        <p:column headerText="JEDNOTKOVÁ CENA">
-            <h:outputText value="#{car.color}"/>
-        </p:column>
-
-        <p:column headerText="MNOŽSTVO">
-            <p:spinner id="ajaxSpinner" min="1" size="3" value="#{cart.quantity}">
-                <p:ajax process="@form"/>
-            </p:spinner>
-        </p:column>
-
-        <p:column headerText="VÝROBCA">
-            <h:outputText value="#{cart.itemDto.producer.name}"/>
-        </p:column>
-
-        <p:column headerText="NÁZOV PRODUKTU">
-            <h:outputText value="#{cart.itemDto.header}"/>
-        </p:column>
-
-        <p:column headerText="OBRÁZOK" width="12%" style="text-align: center">
-            <img class="ui image avatar" src="data:image/png;base64,#{cart.itemDto.image}"/>
-        </p:column>
+        <p:columnGroup type="footer">
+            <p:row>
+                <p:column colspan="2" style="text-align:right" footerText="Celkom:"/>
+                <p:column footerText="€#{dtGroupView.lastYearTotal}"/>
+                <p:column footerText="€#{dtGroupView.thisYearTotal}"/>
+            </p:row>
+        </p:columnGroup>
     </p:dataTable>
 
     <h:link class="ui medium button right floated" outcome="/checkout.xhtml"
-                   style="border-radius: 0px !important; margin-top: 50px; color: green"
-                   value="Do pokladne">
+            style="border-radius: 0px !important; margin-top: 50px; color: green"
+            value="Do pokladne">
         <i class="right chevron icon"></i>
     </h:link>
 

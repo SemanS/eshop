@@ -357,3 +357,10 @@ body {
 .ui.card, .ui.cards > .card {
     border-radius: 0 !important;
 }
+
+/*
+.ui-state-hover, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: none !important;
+    background: none !important;
+    color: none !important;
+}*/

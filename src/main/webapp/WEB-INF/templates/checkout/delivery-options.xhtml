@@ -6,117 +6,114 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:form>
-    <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
-        <div class="ui two wide column"></div>
-        <div class="ui four wide column"></div>
-        <div class="four wide column"></div>
-    </ui:fragment>
-    <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
+<ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
+    <div class="ui two wide column"></div>
+    <div class="ui four wide column"></div>
+    <div class="four wide column"></div>
+</ui:fragment>
+<ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
 
-        <div class="ui six wide column"></div>
-        <div class="ui four wide column">
+    <div class="ui six wide column"></div>
+    <div class="ui four wide column">
 
-            <h:outputFormat style="margin-bottom:10px" cellspacing="5" cellpadding="20">
-                <h:selectOneRadio id="city" value="#{userWizard.radioValueDelivery}" layout="grid"
-                                  columns="1">
-                    <!--<p:ajax update="out2 " process="@form" event="blur" listener="#{userWizard.selectRadioItem}"/>-->
-                    <f:selectItem itemLabel="&#160;&#160;Chcem použiť existujúcu adresu" itemValue="Yes"/>
-                    <f:selectItem itemLabel="&#160;&#160;Chcem použiť novú adresu" itemValue="No"/>
-                    <f:ajax render="uawGroup"/>
+        <h:outputFormat style="margin-bottom:10px" cellspacing="5" cellpadding="20">
+            <h:selectOneRadio id="city" value="#{userWizard.radioValueDelivery}" layout="grid"
+                              columns="1">
+                <!--<p:ajax update="out2 " process="@form" event="blur" listener="#{userWizard.selectRadioItem}"/>-->
+                <f:selectItem itemLabel="&#160;&#160;Chcem použiť existujúcu adresu" itemValue="Yes"/>
+                <f:selectItem itemLabel="&#160;&#160;Chcem použiť novú adresu" itemValue="No"/>
+                <f:ajax render="uawGroup"/>
 
-                </h:selectOneRadio>
-            </h:outputFormat>
+            </h:selectOneRadio>
+        </h:outputFormat>
 
-        </div>
+    </div>
 
 
-        <div class="ui sixteen wide column">
-            <h:panelGroup id="uawGroup" layout="block">
-                <div class="eight wide column">
-                    <h:inputText value="#{userWizard.currentUserAddress()}"
-                                 rendered="#{userWizard.radioValueDelivery == 'Yes'}" disabled="true"/>
-                </div>
-                <h:outputFormat rendered="#{userWizard.radioValueDelivery == 'No'}">
-                    <div class="field">
-                        <label>Osobné údaje:</label>
-                        <div class="two fields">
-                            <div class="field">
-                                <p:inputText id="firstNameId" styleClass="nonBorder"
-                                             value="#{userWizard.facturationFirstname}"
-                                             placeholder="Meno"
-                                             type="text"/>
-                                <p:message for="firstNameId"/>
-                            </div>
-                            <div class="field">
-                                <p:inputText id="lastNameId" styleClass="nonBorder"
-                                             value="#{userWizard.facturationLastname}"
-                                             placeholder="Priezvisko"
-                                             type="text"/>
-                                <p:message for="lastNameId"/>
-                            </div>
-                        </div>
-
-                    </div>
-
+    <div class="ui sixteen wide column">
+        <h:panelGroup id="uawGroup" layout="block">
+            <div class="eight wide column">
+                <h:inputText value="#{userWizard.currentUserAddress()}"
+                             rendered="#{userWizard.radioValueDelivery == 'Yes'}" disabled="true"/>
+            </div>
+            <h:outputFormat rendered="#{userWizard.radioValueDelivery == 'No'}">
+                <div class="field">
+                    <label>Osobné údaje:</label>
                     <div class="two fields">
                         <div class="field">
-                            <label>Spoločnosť:</label>
-                            <div class="field">
-                                <p:inputText id="companyId" styleClass="nonBorder"
-                                             value="#{userWizard.facturationCompany}"
-                                             placeholder="Názov spoločnosti"
-                                             type="text"/>
-                            </div>
+                            <p:inputText id="firstNameId" styleClass="nonBorder"
+                                         value="#{userWizard.deliveryFirstname}"
+                                         placeholder="Meno"
+                                         type="text"/>
+                            <p:message for="firstNameId"/>
                         </div>
                         <div class="field">
-                            <label>IČO:</label>
-                            <div class="field">
-                                <p:inputText id="icoId" styleClass="nonBorder" value="#{userWizard.facturationIco}"
-                                             placeholder="IČO"
-                                             type="text"/>
-                            </div>
+                            <p:inputText id="lastNameId" styleClass="nonBorder"
+                                         value="#{userWizard.deliveryLastname}"
+                                         placeholder="Priezvisko"
+                                         type="text"/>
+                            <p:message for="lastNameId"/>
                         </div>
+                    </div>
+
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Spoločnosť:</label>
                         <div class="field">
-                            <label>DIČ/IČ DPH:</label>
-                            <div class="field">
-                                <p:inputText id="dicId" styleClass="nonBorder" value="#{userWizard.facturationDic}"
-                                             placeholder="DIČ/IČ DPH" type="text"/>
-                            </div>
+                            <p:inputText id="companyId" styleClass="nonBorder"
+                                         value="#{userWizard.deliveryCompany}"
+                                         placeholder="Názov spoločnosti"
+                                         type="text"/>
                         </div>
                     </div>
                     <div class="field">
-                        <label>Adresa:</label>
-                        <div class="fields">
-                            <div class="six wide field">
-                                <p:inputText id="streetId" value="#{userWizard.facturationStreet}"
-                                             styleClass="nonBorder"
-                                             placeholder="Ulica"
-                                             type="text"/>
-                                <p:message for="streetId"/>
-                            </div>
-                            <div class="four wide field">
-                                <p:inputText id="pscId" value="#{userWizard.facturationPostalCode}"
-                                             styleClass="nonBorder"
-                                             placeholder="PSČ"
-                                             type="text"/>
-                                <p:message for="pscId"/>
-                            </div>
-                            <div class="six wide field">
-                                <p:inputText id="cityId" value="#{userWizard.facturationCity}"
-                                             styleClass="nonBorder"
-                                             placeholder="Mesto"
-                                             type="text"/>
-                                <p:message for="cityId"/>
-                            </div>
+                        <label>IČO:</label>
+                        <div class="field">
+                            <p:inputText id="icoId" styleClass="nonBorder" value="#{userWizard.deliveryIco}"
+                                         placeholder="IČO"
+                                         type="text"/>
                         </div>
                     </div>
-                </h:outputFormat>
-            </h:panelGroup>
+                    <div class="field">
+                        <label>DIČ/IČ DPH:</label>
+                        <div class="field">
+                            <p:inputText id="dicId" styleClass="nonBorder" value="#{userWizard.deliveryDic}"
+                                         placeholder="DIČ/IČ DPH" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Adresa:</label>
+                    <div class="fields">
+                        <div class="six wide field">
+                            <p:inputText id="streetId" value="#{userWizard.deliveryStreet}"
+                                         styleClass="nonBorder"
+                                         placeholder="Ulica"
+                                         type="text"/>
+                            <p:message for="streetId"/>
+                        </div>
+                        <div class="four wide field">
+                            <p:inputText id="pscId" value="#{userWizard.deliveryPostalCode}"
+                                         styleClass="nonBorder"
+                                         placeholder="PSČ"
+                                         type="text"/>
+                            <p:message for="pscId"/>
+                        </div>
+                        <div class="six wide field">
+                            <p:inputText id="cityId" value="#{userWizard.deliveryCity}"
+                                         styleClass="nonBorder"
+                                         placeholder="Mesto"
+                                         type="text"/>
+                            <p:message for="cityId"/>
+                        </div>
+                    </div>
+                </div>
+            </h:outputFormat>
+        </h:panelGroup>
 
-        </div>
-    </ui:fragment>
-
-</h:form>
+    </div>
+</ui:fragment>
 
 </html>

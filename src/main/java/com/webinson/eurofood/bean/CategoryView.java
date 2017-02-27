@@ -29,7 +29,7 @@ import java.util.List;
 @Component
 @ELBeanName(value = "categoryView")
 @ViewScoped
-@Join(path = "/category/{categoryUrl}", to="/eshop.xhtml")
+@Join(path = "/category/{categoryUrl}", to = "/eshop.xhtml")
 public class CategoryView {
 
     @Autowired
@@ -76,9 +76,17 @@ public class CategoryView {
         return itemService.getItemsByCategory(this.selectedCategory);
     }
 
+    public List<CategoryDto> allCategoriesByCategory() {
+        return categoryService.getCategoriesByCategory(this.selectedCategory);
+    }
+
     public void onCategory(Category category) throws IOException {
         selectedCategory = categoryAssembler.toDto(categoryDao.findById(category.getId()));
         FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
+    }
+
+    public void onCategoryTree(CategoryDto categoryDto) throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + categoryDto.getUrl());
     }
 
     public String onImageDescriptionChange() {

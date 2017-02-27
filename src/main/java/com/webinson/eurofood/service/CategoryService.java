@@ -48,4 +48,6 @@ public interface CategoryService {
 
     void deleteCategory(Category category);
 
+    List<CategoryDto> getCategoriesByCategory(CategoryDto categoryDto);
+
 }

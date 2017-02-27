@@ -5,6 +5,8 @@ import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.event.NodeCollapseEvent;
+import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
 import org.primefaces.model.DefaultTreeNode;
@@ -39,6 +41,10 @@ public class CategoryTreeTableBean {
     @Getter
     @Setter
     private TreeNode selectedNode = new DefaultTreeNode();
+
+    @Getter
+    @Setter
+    private TreeNode expandedNodeTree = new DefaultTreeNode();
 
     @Autowired
     CategoryService categoryService;

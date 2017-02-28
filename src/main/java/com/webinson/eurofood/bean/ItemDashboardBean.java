@@ -33,6 +33,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Base64;
 import java.util.List;
 
@@ -105,8 +106,14 @@ public class ItemDashboardBean {
     public String onSaveItem() throws IOException {
         if (file.getSize() != 0) {
 
-            Resource resource = new ClassPathResource("/images/calculator.png");
+            //Resource resource = new ClassPathResource("/images/calculator.png");
             InputStream is = getClass().getResourceAsStream("/eurofood_logo_product.png");
+
+            //InputStream is = new URL("http://nasezlavy.sk/resources/images/eurofood_logo_product.png").openStream();
+
+            //final ClassLoader resourceLoader = Thread.currentThread().getContextClassLoader();
+            //final InputStream is = resourceLoader.getResourceAsStream("eurofood_logo_product.png");
+
             BufferedImage originalImage = ImageIO.read(file.getInputstream());
             BufferedImage watermarkImage = ImageIO.read(is);
             Watermark filter = new Watermark(Positions.TOP_RIGHT, watermarkImage, 0.5f);

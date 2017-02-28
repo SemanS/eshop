@@ -27,7 +27,7 @@ public class ShoppingCart implements Serializable {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private Set<CartItem> cartItems;
 
     @Getter

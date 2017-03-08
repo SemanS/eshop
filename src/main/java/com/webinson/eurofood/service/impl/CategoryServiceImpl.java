@@ -7,17 +7,22 @@ import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.QCategory;
 import com.webinson.eurofood.service.CategoryService;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.SerializationUtils;
 import org.omnifaces.model.tree.ListTreeModel;
 import org.omnifaces.model.tree.TreeModel;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -57,6 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
         QCategory category = QCategory.category;
         return query.from(category).where(category.parent.isNotNull()).fetch();
     }
+
 
     @Override
     public List<Category> getRootCategories() {
@@ -106,7 +112,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryNodeList;
     }
 
-    public TreeModel<CategoryDto> createModel() {
+   /* public TreeModel<CategoryDto> createModel() {
         TreeModel<CategoryDto> treeModel = new ListTreeModel<>();
         List<Category> categories = categoryDao.findAll();
         for (Category cat : categories) {
@@ -116,58 +122,82 @@ public class CategoryServiceImpl implements CategoryService {
         }
         buildTreeModel(treeModel, allCategories);
         return treeModel;
-    }
+    }*/
 
-    private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
+    /*private void buildTreeModel(TreeModel<CategoryDto> treeModel, List<CategoryDto> items) {
         for (CategoryDto item : items) {
-            /*buildTreeModel(treeModel.addChild(item), createSubNodes(item));*/
+            *//*buildTreeModel(treeModel.addChild(item), createSubNodes(item));*//*
             treeModel.addChild(item);
         }
-    }
+    }*/
 
+    /*@Setter
+    public TreeNode rootNode;
+
+    @Cacheable("rootNode")
+    public TreeNode getRootNode() {
+        rootNode = buildCategories();
+        return rootNode;
+    }*/
+
+    /*@Cacheable("rootNode1")*/
     @Override
     public TreeNode buildCategories() {
-        TreeNode rootNode = new DefaultTreeNode(new Category(), null);
+
+        Instant start = Instant.now();
+
+        TreeNode rootNode1 = new DefaultTreeNode(new Category(), null);
         List<Category> categoryRootNodeList = getCategoryRootNodeList();
 
         for (Category cat : categoryRootNodeList) {
-            TreeNode node = new DefaultTreeNode(cat, rootNode);
+            TreeNode node = new DefaultTreeNode(cat, rootNode1);
             createSubCategories(cat, node);
         }
 
-        return rootNode;
+        Instant end = Instant.now();
+        System.out.println("buildCategories" + Duration.between(start, end));
+        return rootNode1;
+
     }
 
+    @Cacheable("rootCategories")
     public List<Category> getCategoryRootNodeList() {
+        Instant start = Instant.now();
         List<Category> rootCategories = new ArrayList<Category>();
         for (Category cat : findAllSorted()) {
             if (cat.getParent() == null) {
                 rootCategories.add(cat);
             }
         }
+        Instant end = Instant.now();
+        System.out.println("getCategoryRootNodeList" + Duration.between(start, end));
         return rootCategories;
     }
 
     private List<Category> createSubCategories(Category category, TreeNode node) {
+        Instant start = Instant.now();
         List<Category> categoriesList = getSubCategories(category);
-        try {
-            for (Category cat : categoriesList) {
-                TreeNode subNode = new DefaultTreeNode(cat, node);
+
+        for (Category cat : categoriesList) {
+            TreeNode subNode = new DefaultTreeNode(cat, node);
                 /*createSubCategories(cat, subNode);*/
-            }
-            return categoriesList;
-        } finally {
-            return categoriesList;
         }
+        Instant end = Instant.now();
+        System.out.println("createSubCategories" + Duration.between(start, end));
+        return categoriesList;
+
     }
 
     private List<Category> getSubCategories(Category category) {
+        Instant start = Instant.now();
         List<Category> subCategoriesNodeList = new ArrayList<>();
         if (category.getChildren() != null) {
             for (Category cat : findAllSubSorted(category)) {
                 subCategoriesNodeList.add(cat);
             }
         }
+        Instant end = Instant.now();
+        System.out.println("getSubCategories" + Duration.between(start, end));
         return subCategoriesNodeList;
     }
 
@@ -410,16 +440,33 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryAssembler.toDtos(categoryDao.findByParentId(categoryDto.getId()));
     }
 
+    /*@Override
+    public TreeNode cachedTreeNode() {
+        rootNode = getRootNode();
+        return rootNode;
+    }*/
+
+    @Cacheable("newList")
     public List<Category> findAllSorted() {
+        Instant start = Instant.now();
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
-        return query.from(category).orderBy(category.position.asc()).fetch();
+        /*List<Category> newList = query.from(category).fetch();*/
+        List<Category> newList = query.from(category).orderBy(category.position.asc()).fetch();
+        Instant end = Instant.now();
+        System.out.println("findAllSorted" + Duration.between(start, end));
+        return newList;
     }
 
+    @Cacheable("newList")
     public List<Category> findAllSubSorted(Category cat) {
+        Instant start = Instant.now();
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
-        return query.from(category).orderBy(category.position.asc()).where(category.parent.id.eq(cat.getId())).fetch();
+        List<Category> newList = query.from(category).orderBy(category.position.asc()).where(category.parent.id.eq(cat.getId())).fetch();
+        Instant end = Instant.now();
+        System.out.println("findAllSubSorted" + Duration.between(start, end));
+        return newList;
     }
 
 

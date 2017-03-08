@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface CategoryService {
 
-    TreeModel createModel();
+    /*TreeModel createModel();*/
 
     void saveNewCategory(Category category);
 
@@ -50,4 +50,5 @@ public interface CategoryService {
 
     List<CategoryDto> getCategoriesByCategory(CategoryDto categoryDto);
 
+    /*TreeNode cachedTreeNode();*/
 }

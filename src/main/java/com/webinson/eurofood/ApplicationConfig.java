@@ -14,10 +14,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,6 +49,8 @@ import java.util.Map;
 @Import({SecurityConfig.class})
 @MultipartConfig(fileSizeThreshold=1024*1024,
         maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
+@EnableCaching
+@EnableScheduling
 public class ApplicationConfig extends SpringBootServletInitializer {
 
     @Value("${spring.datasource.driverClassName}")
@@ -144,6 +150,11 @@ public class ApplicationConfig extends SpringBootServletInitializer {
         ds.setPassword(databasePassword);
 
         return ds;
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("rootCategories");
     }
 
 }

@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Component
 @ELBeanName(value = "categoryView")
-@SessionScope
+@ViewScoped
 @Join(path = "/category/{categoryUrl}", to = "/eshop.xhtml")
 public class CategoryView implements Serializable {
 

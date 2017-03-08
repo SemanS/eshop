@@ -38,13 +38,13 @@
     .treeSideMenu .ui-state-hover, .treeSideMenu .ui-widget-content .treeSideMenu .ui-state-highlight, .treeSideMenu .ui-widget-header .ui-state-highlight {
         border: none !important;
         background: none !important;
-        color: none !important;
+        /*color: none !important;*/
     }
 
     .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
         border: none !important;
         background: none !important;
-        color: none !important;
+        /*color: none !important;*/
     }
 
 </style>
@@ -52,12 +52,13 @@
 <h:form id="treeMenuForm">
 
     <p:tree id="tree2" styleClass="treeSideMenu" value="#{categoryTreeTableBean.rootCategories}" var="node"
-            selectionMode="single" dir="rtl" dynamic="true" widgetVar="myTree"
+            selectionMode="single" dir="rtl" widgetVar="myTree"  dynamic="true" cache="true"
             selection="#{categoryDashboardBean.selectedNode}" animate="true">
+        <!--<p:ajax event="select" update=":treeMenuForm" listener="#{treeEventsView.onNodeSelect}" />-->
         <!---->
         <p:treeNode>
             <h:commandLink action="#{categoryView.onCategory(node)}">
-                <f:ajax execute="@form :submitCategory" render=":submitCategory"/>
+                <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
                 <img class="ui image small"
                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
             </h:commandLink>

@@ -1,7 +1,6 @@
 package com.webinson.eurofood;
 
 
-import com.webinson.eurofood.utils.Converter;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.primefaces.webapp.filter.FileUploadFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +28,7 @@ import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +43,8 @@ import java.util.Map;
 @EnableJpaRepositories(basePackages = "com.webinson.eurofood.dao")
 @EntityScan(basePackages = {"com.webinson.eurofood.entity"})
 @Import({SecurityConfig.class})
+@MultipartConfig(fileSizeThreshold=1024*1024,
+        maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class ApplicationConfig extends SpringBootServletInitializer {
 
     @Value("${spring.datasource.driverClassName}")

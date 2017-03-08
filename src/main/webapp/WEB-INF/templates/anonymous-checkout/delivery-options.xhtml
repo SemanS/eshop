@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:form>
+
     <!--<ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
         <div class="ui two wide column"></div>
         <div class="ui four wide column"></div>
@@ -45,14 +45,14 @@
                     <div class="two fields">
                         <div class="field">
                             <p:inputText id="firstNameId" styleClass="nonBorder"
-                                         value="#{userWizard.facturationFirstname}"
+                                         value="#{userWizard.deliveryFirstname}"
                                          placeholder="Meno"
                                          type="text"/>
                             <p:message for="firstNameId"/>
                         </div>
                         <div class="field">
                             <p:inputText id="lastNameId" styleClass="nonBorder"
-                                         value="#{userWizard.facturationLastname}"
+                                         value="#{userWizard.deliveryLastname}"
                                          placeholder="Priezvisko"
                                          type="text"/>
                             <p:message for="lastNameId"/>
@@ -66,7 +66,7 @@
                         <label>Spoločnosť:</label>
                         <div class="field">
                             <p:inputText id="companyId" styleClass="nonBorder"
-                                         value="#{userWizard.facturationCompany}"
+                                         value="#{userWizard.deliveryCompany}"
                                          placeholder="Názov spoločnosti"
                                          type="text"/>
                         </div>
@@ -74,7 +74,7 @@
                     <div class="field">
                         <label>IČO:</label>
                         <div class="field">
-                            <p:inputText id="icoId" styleClass="nonBorder" value="#{userWizard.facturationIco}"
+                            <p:inputText id="icoId" styleClass="nonBorder" value="#{userWizard.deliveryIco}"
                                          placeholder="IČO"
                                          type="text"/>
                         </div>
@@ -82,7 +82,7 @@
                     <div class="field">
                         <label>DIČ/IČ DPH:</label>
                         <div class="field">
-                            <p:inputText id="dicId" styleClass="nonBorder" value="#{userWizard.facturationDic}"
+                            <p:inputText id="dicId" styleClass="nonBorder" value="#{userWizard.deliveryDic}"
                                          placeholder="DIČ/IČ DPH" type="text"/>
                         </div>
                     </div>
@@ -91,21 +91,21 @@
                     <label>Adresa:</label>
                     <div class="fields">
                         <div class="six wide field">
-                            <p:inputText id="streetId" value="#{userWizard.facturationStreet}"
+                            <p:inputText id="streetId" value="#{userWizard.deliveryStreet}"
                                          styleClass="nonBorder"
                                          placeholder="Ulica"
                                          type="text"/>
                             <p:message for="streetId"/>
                         </div>
                         <div class="four wide field">
-                            <p:inputText id="pscId" value="#{userWizard.facturationPostalCode}"
+                            <p:inputText id="pscId" value="#{userWizard.deliveryPostalCode}"
                                          styleClass="nonBorder"
                                          placeholder="PSČ"
                                          type="text"/>
                             <p:message for="pscId"/>
                         </div>
                         <div class="six wide field">
-                            <p:inputText id="cityId" value="#{userWizard.facturationCity}"
+                            <p:inputText id="cityId" value="#{userWizard.deliveryCity}"
                                          styleClass="nonBorder"
                                          placeholder="Mesto"
                                          type="text"/>
@@ -120,6 +120,5 @@
         </div>
     </ui:fragment>
 
-</h:form>
 
 </html>

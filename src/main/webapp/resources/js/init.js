@@ -2,6 +2,16 @@
 
     $(function () {
 
+        $('.activating.element')
+            .popup()
+        ;
+
+        $('.span')
+            .popup({
+                inline: true
+            })
+        ;
+
         $('.ui.accordion')
             .accordion()
         ;

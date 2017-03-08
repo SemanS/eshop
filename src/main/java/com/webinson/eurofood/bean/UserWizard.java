@@ -141,15 +141,15 @@ public class UserWizard implements Serializable {
     @Setter
     private String radioValueDelivery = "Yes";
 
+    @Getter
+    @Setter
+    private int currentLevel = 1;
+
     @Autowired
     private UserService userService;
 
     @Autowired
     private RegisterBean registerBean;
-
-    @Getter
-    @Setter
-    private int currentLevel = 1;
 
     @PostConstruct
     public void init() {
@@ -232,6 +232,7 @@ public class UserWizard implements Serializable {
 
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
         shoppingCartView.setCartItemDtos(new HashSet<>());
+        shoppingCartView.onRestartCounter();
         return "index.xhtml?faces-redirect=true";
     }
 }

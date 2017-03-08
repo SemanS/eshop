@@ -23,14 +23,14 @@
 
                 <p:growl id="growl" sticky="true" showDetail="true"/>
 
-               <!-- <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
-                                id="checkoutOptionsId" title="Možnosti pokladne">
+                <!-- <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
+                                 id="checkoutOptionsId" title="Možnosti pokladne">
 
-                    <ui:insert name="checkoutOptions">
-                        <ui:include src="checkout/checkout-options.xhtml"/>
-                    </ui:insert>
+                     <ui:insert name="checkoutOptions">
+                         <ui:include src="checkout/checkout-options.xhtml"/>
+                     </ui:insert>
 
-                </h:outputFormat>-->
+                 </h:outputFormat>-->
 
                 <h:outputFormat rendered="#{registerBean.currentUserName() == 'anonymousUser'}" titleStyleClass="item"
                                 id="out" title="Možnosti pokladne">
@@ -80,17 +80,29 @@
                                 <div class="ui grid segment">
                                     <ui:include src="anonymous-checkout/delivery-options.xhtml"/>
                                 </div>
-                            </h:form>
-                            <!--<p:commandButton value="asd" actionListener="#{userWizard.checkout}"/>-->
 
-                            <p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
-                                             process="@this" immediate="true">
-                                <pe:selectDetailLevel step="-1"/>
-                            </p:commandButton>
-                            <p:commandButton value="Next" process="masterDetail"
-                                             style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
-                                <pe:selectDetailLevel step="1"/>
-                            </p:commandButton>
+                                <!--<p:commandButton value="asd" actionListener="#{userWizard.checkout}"/>-->
+
+                                <!--<p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                                 process="@this" immediate="true">
+                                    <pe:selectDetailLevel step="-1"/>
+                                </p:commandButton>
+                                <p:commandButton value="Next" process="masterDetail"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>-->
+
+
+                                <p:commandButton value="Späť" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                                 process="@this" immediate="true">
+                                    <pe:selectDetailLevel step="-1"/>
+                                </p:commandButton>
+                                <p:commandButton value="Ďalej" process="masterDetail"
+                                                 actionListener="#{userWizard.checkout}"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>
+                            </h:form>
                         </pe:masterDetailLevel>
 
                     </pe:masterDetail>

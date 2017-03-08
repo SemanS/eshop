@@ -17,10 +17,12 @@ import org.ocpsoft.rewrite.faces.annotation.Deferred;
 import org.ocpsoft.rewrite.faces.annotation.IgnorePostback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -28,9 +30,9 @@ import java.util.List;
  */
 @Component
 @ELBeanName(value = "categoryView")
-@ViewScoped
+@SessionScope
 @Join(path = "/category/{categoryUrl}", to = "/eshop.xhtml")
-public class CategoryView {
+public class CategoryView implements Serializable {
 
     @Autowired
     ItemService itemService;

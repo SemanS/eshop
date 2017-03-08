@@ -20,6 +20,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Base64;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Component
 @ViewScoped
-public class CategoryDashboardBean {
+public class CategoryDashboardBean implements Serializable {
 
     @Autowired
     private CategoryDao categoryDao;

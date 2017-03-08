@@ -18,9 +18,9 @@
     <ui:fragment rendered="#{categoryView.allItemsByCategory().size() == 0}">
         <h:form>
             <ui:repeat value="#{categoryView.allCategoriesByCategory()}" var="category">
-                <div class="ui small image centered" style="margin-top: -10px">
+                <div class="ui small image centered" style="margin-top: 5px">
                     <h:commandLink action="#{categoryView.onCategoryTree(category)}">
-                        <img src="data:image/png;base64,#{category.imageDescription}"/>
+                        <img src="data:image/png;base64,#{category.image}"/>
                     </h:commandLink>
                 </div>
             </ui:repeat>

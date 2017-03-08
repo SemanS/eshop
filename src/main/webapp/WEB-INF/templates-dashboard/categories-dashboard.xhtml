@@ -9,6 +9,14 @@
 <!--xmlns:h="http://java.sun.com/jsf/html"-->
 <pre></pre>
 
+<style>
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+        border: none !important;
+        background: none !important;
+        color: none !important;
+    }
+</style>
+
 <div class="ui stackable grid">
     <div class="one wide column"></div>
     <h:form id="treeForm">
@@ -116,12 +124,12 @@
                                            style="border-radius: 0px !important; color: green"
                                            action="#{categoryDashboardBean.onChangeRootCategory()}"
                                            value="Uložiť kategóriu"
-                                           update=":tab1">
+                                           update=":tabView:tab1">
                             </h:commandLink>
                             <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
                                            style="border-radius: 0px !important; margin-top: 10px; color: red"
                                            action="#{categoryDashboardBean.onDeleteCategory()}"
-                                           update=":tab1"
+                                           update=":tabView:tab1"
                                            value="Zmazať kategóriu&#160;&#160;">
                             </h:commandLink>
                         </div>

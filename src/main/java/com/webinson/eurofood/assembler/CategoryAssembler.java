@@ -24,10 +24,18 @@ public class CategoryAssembler {
     public CategoryDto convertToDto(Category model, CategoryDto dto) {
         dto.setId(model.getId());
         dto.setName(model.getName());
-        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        if (model.getImage() == null) {
+            dto.setImage("");
+        } else {
+            dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        }
         dto.setBase(model.isBase());
         dto.setUrl(model.getUrl());
-        dto.setImageDescription(Base64.getEncoder().encodeToString(model.getImageDescription()));
+        if (model.getImageDescription() == null) {
+            dto.setImageDescription("");
+        } else {
+            dto.setImageDescription(Base64.getEncoder().encodeToString(model.getImageDescription()));
+        }
         dto.setChildren(categoryAssembler.toDtos(model.getChildren()));
         return dto;
     }
@@ -36,10 +44,18 @@ public class CategoryAssembler {
         CategoryDto dto = new CategoryDto();
         dto.setId(model.getId());
         dto.setName(model.getName());
-        dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        if (model.getImage() == null) {
+            dto.setImage("");
+        } else {
+            dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        }
         dto.setBase(model.isBase());
         dto.setUrl(model.getUrl());
-        dto.setImageDescription(Base64.getEncoder().encodeToString(model.getImageDescription()));
+        if (model.getImageDescription() == null) {
+            dto.setImageDescription("");
+        } else {
+            dto.setImageDescription(Base64.getEncoder().encodeToString(model.getImageDescription()));
+        }
         return dto;
     }
 

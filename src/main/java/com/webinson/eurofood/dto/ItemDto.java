@@ -31,5 +31,6 @@ public class ItemDto {
     private boolean isDiscount;
     private int quantity;
     private String image;
+    private int counter;
 
 }

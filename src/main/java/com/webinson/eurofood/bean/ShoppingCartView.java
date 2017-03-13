@@ -39,10 +39,10 @@ public class ShoppingCartView {
     @Getter
     @Setter
     private int counter = 0;
-    @Getter
+
     @Setter
     private double counterNetto = 0.00;
-    @Getter
+
     @Setter
     private double counterBrutto = 0.00;
     @Getter
@@ -194,4 +194,11 @@ public class ShoppingCartView {
         FacesContext.getCurrentInstance().getExternalContext().redirect(redirectOption);
     }
 
+    public double getCounterBrutto() {
+        return (Math.ceil(counterBrutto*100))/100;
+    }
+
+    public double getCounterNetto() {
+        return (Math.ceil(counterNetto*100))/100;
+    }
 }

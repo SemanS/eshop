@@ -13,7 +13,7 @@
     .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
         border: none !important;
         background: none !important;
-        color: none !important;
+    / / color: none !important;
     }
 </style>
 
@@ -23,13 +23,14 @@
 
 
         <div class="four wide column">
-            <p:tree id="tree2" value="#{categoryTreeTableBean.rootCategories}" var="node" selectionMode="single"
+            <p:tree id="tree2" value="#{categoryDashboardTreeTableBean.rootCategories}" var="node"
+                    selectionMode="single"
                     selection="#{categoryDashboardBean.selectedNode}"
                     draggable="true" droppable="true" dragdropScope="demo">
-                <p:ajax event="dragdrop" listener="#{categoryTreeTableBean.onDragDrop}"
+                <p:ajax event="dragdrop" listener="#{categoryDashboardTreeTableBean.onDragDrop}"
                         update=":tabView:tab1"/>
                 <p:ajax event="select" update=":treeForm :tabView:tab1"
-                        listener="#{categoryDashboardBean.TreeNodeToCategory}"/>
+                        listener="#{categoryDashboardTreeTableBean.TreeNodeToCategory}"/>
                 <p:treeNode>
                     <h:outputText value="#{node.name}"/>
                 </p:treeNode>
@@ -92,7 +93,8 @@
                         <div class="two fields">
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
-                                <p:fileUpload id="fileUpload" value="#{categoryDashboardBean.file}" mode="simple"
+                                <p:fileUpload id="fileUpload" value="#{categoryDashboardBean.file}"
+                                              label="Vyberte obrázok" mode="simple"
                                               skinSimple="true"/>
 
                             </div>
@@ -107,7 +109,7 @@
                             <div class="field">
                                 <label>Vložiť pod obrázok kategórie</label>
                                 <p:fileUpload id="fileUpload2" value="#{categoryDashboardBean.imgDescription}"
-                                              mode="simple"
+                                              mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
 
                             </div>
@@ -164,13 +166,13 @@
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
                                 <p:fileUpload id="newFileUpload" value="#{categoryDashboardBean.newRootFile}"
-                                              mode="simple"
+                                              mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
                             </div>
                             <div class="field">
                                 <label>Vložiť pod obrázok kategórie</label>
                                 <p:fileUpload id="newFileUpload3" value="#{categoryDashboardBean.newImgDescription}"
-                                              mode="simple"
+                                              mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
                             </div>
                         </div>
@@ -205,12 +207,14 @@
                         <div class="two fields">
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
-                                <p:fileUpload id="newSubFile" value="#{categoryDashboardBean.newSideImg}" mode="simple"
+                                <p:fileUpload id="newSubFile" label="Vyberte obrázok"
+                                              value="#{categoryDashboardBean.newSideImg}" mode="simple"
                                               skinSimple="true"/>
                             </div>
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
-                                <p:fileUpload id="newSubFile2" value="#{categoryDashboardBean.newSideImgDescription}"
+                                <p:fileUpload id="newSubFile2" label="Vyberte obrázok"
+                                              value="#{categoryDashboardBean.newSideImgDescription}"
                                               mode="simple"
                                               skinSimple="true"/>
                             </div>

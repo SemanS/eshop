@@ -8,6 +8,15 @@
 
 <h:body>
     <h:form>
+        <style>
+
+            span, p {
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 0 0 0em;
+            }
+
+        </style>
         <pre></pre>
 
         <div class="ui divided items">
@@ -16,7 +25,16 @@
                 <div class="ui wide column sixteen widget">
                     <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17s,5g</h5>
                     <div class="meta">
-                        <span class="cinema">Kávy</span>
+                        <span class="cinema">
+
+                            <h:commandLink value="#{itemView.selectedItem.category.name}"
+                                           action="#{categoryView.onCategory(itemView.selectedItem.category)}">
+                    <!--<h:outputText value="#{category.name}"/>-->
+                                <!--<img class="ui image small inline"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>-->
+                </h:commandLink>
+
+                        </span>
                     </div>
                     <img class="ui centered small image"
                          src="data:image/png;base64,#{itemView.selectedItem.image}"/>
@@ -69,7 +87,7 @@
                             <h:outputText style="color: green"
                                           value="#{itemView.selectedItem.piecesInPalette}"/>
 
-                            <p:spinner styleClass="cleanSpinner2" style="margin-top: 40px"
+                            <p:spinner styleClass="cleanSpinner2" style="margin-top: 55px"
                                        id="ajaxSpinner" size="3"
                                        min="1"
                                        value="#{shoppingCartView.shoppingCartQuantity}">
@@ -94,8 +112,45 @@
 
             </div>
             <h3 style="color: green">Popis produktu:</h3>
-            <h:outputText value="#{itemView.selectedItem.text}"/>
+            <h:outputText style="display: inline" escape="false" value="#{itemView.selectedItem.text}"/>
         </div>
+        <pre></pre>
+        <h4 class="ui horizontal divider header">
+            <!--<i class="tag icon"></i>-->
+            Najpredávanejšie produkty
+        </h4>
+
+        <div class="ui four cards">
+            <ui:repeat value="#{categoryView.bestSellingProducts()}" var="bestSellingItem">
+
+                <div class="card">
+                    <div class="content centered" style="text-align: center">
+                        <div class="ui small image" style="margin-top: -10px">
+                            <h:commandLink
+                                    action="#{itemView.onItem(bestSellingItem)}">
+                                <img src="data:image/png;base64,#{bestSellingItem.image}"/>
+                            </h:commandLink>
+                        </div>
+                        <!--<div class="header">#{bestSellingItem.text}</div>-->
+                        <div class="description">
+                            <h5>#{bestSellingItem.header}</h5>
+                        </div>
+
+                    </div>
+                    <h:commandLink class="ui bottom attached button" icon="ui-icon-star"
+                                   style="border-radius: 0px !important; color: red"
+                                   actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
+                                   value="Vložiť do košíka&#160;&#160;">
+                        <!--<f:ajax onevent="handleDisableButton"/>-->
+
+                        <i class="left shop icon"></i>
+                        <!--<i class="add icon"></i>-->
+                    </h:commandLink>
+                </div>
+
+            </ui:repeat>
+        </div>
+
     </h:form>
 </h:body>
 </html>

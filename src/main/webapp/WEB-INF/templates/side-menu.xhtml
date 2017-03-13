@@ -42,29 +42,66 @@
     }
 
     .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-        border: none !important;
-        background: none !important;
+        /* border: none !important;
+         background: none !important;*/
         /*color: none !important;*/
     }
+
+    .ui.accordion .title:not(.ui) {
+        padding: .2em 0;
+    }
+
 
 </style>
 
 <h:form id="treeMenuForm">
 
-    <p:tree id="tree2" styleClass="treeSideMenu" value="#{categoryTreeTableBean.rootCategories}" var="node"
+    <!--<p:tree id="tree2" styleClass="treeSideMenu" value="#{categoryTreeTableBean.rootCategories}" var="node"
             selectionMode="single" dir="rtl" widgetVar="myTree"  dynamic="true" cache="true"
             selection="#{categoryDashboardBean.selectedNode}" animate="true">
-        <!--<p:ajax event="select" update=":treeMenuForm" listener="#{treeEventsView.onNodeSelect}" />-->
-        <!---->
+        &lt;!&ndash;<p:ajax event="select" update=":treeMenuForm" listener="#{treeEventsView.onNodeSelect}" />&ndash;&gt;
+        &lt;!&ndash;&ndash;&gt;
         <p:treeNode>
             <h:commandLink action="#{categoryView.onCategory(node)}">
-                <!--<f:ajax execute="@form :submitCategory" render=":submitCategory"/>-->
-                <img class="ui image small"
-                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
+                &lt;!&ndash;<f:ajax execute="@form :submitCategory" render=":submitCategory"/>&ndash;&gt;
+                <h:outputText value="#{node.name}"/>
+                &lt;!&ndash;<img class="ui image small"
+                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>&ndash;&gt;
             </h:commandLink>
 
         </p:treeNode>
-    </p:tree>
+    </p:tree>-->
+
+
+    <div class="ui accordion">
+        <ui:repeat value="#{categoryTreeTableBean.categories}" var="category">
+            <div class="title">
+
+
+                <h:commandLink action="#{categoryView.onCategory(category)}">
+                    <!--<h:outputText value="#{category.name}"/>-->
+                    <img class="ui image small inline"
+                         src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>
+                </h:commandLink>
+                <ui:fragment rendered="#{category.children.size() > 0}">
+                    <i class="plus icon"></i>
+                </ui:fragment>
+
+            </div>
+            <div class="content">
+                <ui:repeat value="#{categoryTreeTableBean.getChildrenOfCategory(category.id)}" var="node">
+                    <h:commandLink action="#{categoryView.onCategory(node)}">
+                        <!--<h:outputText value="#{node.name}"/>-->
+                        <img class="ui image small"
+                             src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
+                    </h:commandLink>
+                </ui:repeat>
+
+                <!--<p class="transition hidden">A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.</p>-->
+            </div>
+        </ui:repeat>
+    </div>
+
 
 </h:form>
 

@@ -364,3 +364,7 @@ body {
     background: none !important;
     color: none !important;
 }*/
+
+.ui-button-text-icon-left .ui-button-text {
+    padding: 1.2em 1em 0em 2.1em !important;
+}

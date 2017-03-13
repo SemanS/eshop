@@ -39,60 +39,33 @@ public class CategoryTreeTableBean {
 
     @Getter
     @Setter
-    private TreeNode cachedCategories = new DefaultTreeNode();
+    private List<Category> categories;
 
-    @Getter
-    @Setter
-    private TreeNode rootCategories;
-
-    @Getter
-    @Setter
-    private Category selectedCategory;
-
-    @Getter
+    /*@Getter
     @Setter
     private TreeNode selectedNode = new DefaultTreeNode();
 
     @Getter
     @Setter
-    private TreeNode expandedNodeTree = new DefaultTreeNode();
+    private TreeNode expandedNodeTree = new DefaultTreeNode();*/
 
-    /*@Cacheable("rootCategories")
-    *//*@Scheduled(fixedDelay = 1000)*//*
-    public TreeNode getRootCategories() {
-        rootCategories = categoryService.buildCategories();
-        cachedCategories.equals(rootCategories);
-        System.out.println("uz idem");
-        return rootCategories;
-    }*/
 
     @Autowired
     CategoryService categoryService;
 
-    @Autowired
-    CategoryDao categoryDao;
-
     @PostConstruct
     public void init() {
-        rootCategories = categoryService.buildCategories();
-        /*cachedCategories.equals(rootCategories);*/
-        /*getCachedCategories();*/
+
+        categories = categoryService.getRootCategories();
     }
 
-    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
-        selectedCategory = (Category) nodeSelectEvent.getTreeNode().getData();
+    public List<Category> getChildrenOfCategory(Long id) {
+        List<Category> categoriesList;
+        categoriesList = categoryService.findChildrenOfCategory(id);
+        return categoriesList;
     }
 
-    public void onDragDrop(TreeDragDropEvent event) throws IOException {
-        TreeNode dragNode = event.getDragNode();
-        TreeNode dropNode = event.getDropNode();
-        int dropIndex = event.getDropIndex();
-        categoryService.saveSelectedTreeNode(dragNode, dropNode, dropIndex);
 
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dragged " + dragNode.getData(), "Dropped on " + dropNode.getData() + " at " + dropIndex);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard-categories.xhtml");
-    }
 
 
 }

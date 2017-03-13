@@ -94,6 +94,13 @@
                     </h:outputLink>
                 </ui:fragment>
 
+                <ui:fragment rendered="#{registerBean.currentRole() == true}">
+                    <h:outputLink class="ui button itemSideMenu"
+                                  style="color:black !important;border-radius: 0px !important;"
+                                  value="${pageContext.request.contextPath}/dashboard">Dashboard
+                    </h:outputLink>
+                </ui:fragment>
+
                 <!--<p:autoComplete id="acMinLength" placeholder="Zadajte názov produktu:" minQueryLength="2"
                                 value="#{mapView.selectedCitySubmit}"
                                 style="margin-right:10px; margin-top: 5px!important; line-height: 200% !important;"

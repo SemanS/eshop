@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:form id="calculatorId">
     <div class="ui grid">
@@ -13,11 +14,15 @@
 
                 <h:inputText value="#{doubleToString.doubleToString(shoppingCartView.counterBrutto)}" disabled="true"
                              style="text-align: right;direction:ltr; margin-top:35px!important; margin-right:30px!important; width:205px!important;
-                             background-color:#7dbede;border: none!important;"/>
+                             background-color:#7dbede;border: none!important;">
+                    <f:convertNumber pattern="#0.00"/>
+                </h:inputText>
 
                 <h:inputText value="#{doubleToString.doubleToString(shoppingCartView.counterNetto)}" disabled="true"
                              style="text-align: right;direction:ltr;margin-top:25px!important; margin-right:10px!important; width:205px!important;
-                             background-color:#7dbede;border: none!important;"/>
+                             background-color:#7dbede;border: none!important;">
+                    <f:convertNumber pattern="#0.00"/>
+                </h:inputText>
 
                 <h:commandButton action="#{shoppingCartView.onRestartCounter()}" styleClass="transparentButton"
                                  style="margin-top:25px!important; margin-right:50px!important;"/>

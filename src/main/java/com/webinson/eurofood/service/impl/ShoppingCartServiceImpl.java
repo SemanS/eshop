@@ -3,12 +3,15 @@ package com.webinson.eurofood.service.impl;
 import com.webinson.eurofood.assembler.CartItemAssembler;
 import com.webinson.eurofood.assembler.ShoppingCartAssembler;
 import com.webinson.eurofood.bean.RegisterBean;
+import com.webinson.eurofood.dao.ItemCounterDao;
+import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dao.ShoppingCartDao;
 import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.entity.CartItem;
 import com.webinson.eurofood.entity.Item;
+import com.webinson.eurofood.entity.ItemCounter;
 import com.webinson.eurofood.entity.ShoppingCart;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ShoppingCartService;
@@ -45,6 +48,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     CartItemAssembler cartItemAssembler;
 
+    @Autowired
+    ItemCounterDao itemCounterDao;
+
+    @Autowired
+    ItemDao itemDao;
+
     @Override
     @Transactional
     public void saveShoppingCart(ShoppingCartDto shoppingCartDto, Set<CartItemDto> cartItemDtos) {
@@ -66,6 +75,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             CartItem cartItem = new CartItem();
             cartItem = cartItemAssembler.toModel(cartItemDto);
             cartItem.setShoppingCart(shoppingCart);
+            ItemCounter itemCounter = new ItemCounter();
+            if (itemCounterDao.findByItemId(cartItem.getItemId()) != null) {
+                itemCounter = itemCounterDao.findByItemId(cartItem.getItemId());
+                itemCounter.setCounter(itemCounter.getCounter() + cartItem.getQuantity());
+            } else {
+                itemCounter.setItem(itemDao.findById(cartItem.getItemId()));
+                itemCounter.setCounter(cartItem.getQuantity());
+            }
+
+            itemCounterDao.save(itemCounter);
             cartItems.add(cartItem);
         }
         shoppingCart.setCartItems(cartItems);

@@ -1,6 +1,5 @@
 package com.webinson.eurofood.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,24 +8,29 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by Slavo on 12/1/2016.
+ * Created by Slavo on 3/9/2017.
  */
 @Entity
-@Table(name = "language", schema = "eshop")
+@Table(name = "itemcounter", schema = "eshop")
 @NoArgsConstructor
-public class Language implements Serializable {
+public class ItemCounter implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Getter
+    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private long id;
+    private Long id;
 
-    @Column(name = "name")
+    @OneToOne
     @Getter
     @Setter
-    private String name;
+    private Item item;
+
+    @Column(name = "counter")
+    @Getter
+    @Setter
+    private int counter;
 
 }

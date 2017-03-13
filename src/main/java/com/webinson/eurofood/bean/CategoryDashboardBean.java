@@ -122,10 +122,6 @@ public class CategoryDashboardBean implements Serializable {
         initSubCategory();
     }
 
-    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
-        inputSelectedRootCategory = (Category) nodeSelectEvent.getTreeNode().getData();
-    }
-
     public Category initRootCategory() {
         if (rootCategories.size() == 0) {
             return inputSelectedRootCategory = new Category();

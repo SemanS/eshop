@@ -51,4 +51,8 @@ public interface CategoryService {
     List<CategoryDto> getCategoriesByCategory(CategoryDto categoryDto);
 
     /*TreeNode cachedTreeNode();*/
+
+    List<Category> initCategories();
+
+    List<Category> findChildrenOfCategory(Long id );
 }

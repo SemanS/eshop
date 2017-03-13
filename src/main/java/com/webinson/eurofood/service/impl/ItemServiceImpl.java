@@ -5,9 +5,7 @@ import com.webinson.eurofood.assembler.ItemAssembler;
 import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
-import com.webinson.eurofood.entity.Category;
-import com.webinson.eurofood.entity.Item;
-import com.webinson.eurofood.entity.QItem;
+import com.webinson.eurofood.entity.*;
 import com.webinson.eurofood.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -118,6 +116,14 @@ public class ItemServiceImpl implements ItemService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<ItemDto> getBestFiveSellingProducts() {
+        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
+        QItemCounter itemCounter = QItemCounter.itemCounter.itemCounter;
+        List<Item> item1 = query.from(itemCounter).select(itemCounter.item).orderBy(itemCounter.counter.asc()).limit(5).fetch();
+        return itemAssembler.toDtos(item1);
     }
 
     @Override

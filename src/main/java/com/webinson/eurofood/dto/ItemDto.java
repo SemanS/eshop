@@ -1,7 +1,6 @@
 package com.webinson.eurofood.dto;
 
 import com.webinson.eurofood.entity.Category;
-import com.webinson.eurofood.entity.Language;
 import com.webinson.eurofood.entity.Producer;
 import lombok.Data;
 
@@ -31,6 +30,4 @@ public class ItemDto {
     private boolean isDiscount;
     private int quantity;
     private String image;
-    private int counter;
-
 }

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -115,5 +117,19 @@ public class RegisterBean {
     public String currentUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
+    }
+
+    public boolean currentRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = false;
+        for (GrantedAuthority ga : authentication.getAuthorities()) {
+            SimpleGrantedAuthority sga = new SimpleGrantedAuthority("ROLE_ADMIN");
+            if (ga.getAuthority().equals(sga.getAuthority())) {
+                isAdmin = true;
+            } else {
+                isAdmin = false;
+            }
+        }
+        return isAdmin;
     }
 }

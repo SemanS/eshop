@@ -54,16 +54,19 @@
     </h:form>
 
     <!--<div class="headerDivider" style=" margin-top: 10px"></div>-->
+    <div class="ui six wide column">
 
-    <h:form id="productDetailId" styleClass="ui form six wide column" enctype="multipart/form-data">
-        <p:tabView>
-            <p:tab title="Detail produktu">
-                <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                               style="border-radius: 0px !important; margin-top: -50px; margin-bottom: 30px; color: blue"
-                               action="#{itemDashboardBean.onNewItem()}" update=":productDetailId"
-                               value="Pridať nový produkt&#160;&#160;">
-                </p:commandLink>
-                <div class="field">
+        <h:form id="productDetailId" styleClass="ui form" enctype="multipart/form-data">
+
+            <p:tabView>
+
+                <p:tab title="Detail produktu">
+                    <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
+                                   style="border-radius: 0px !important; color: blue"
+                                   action="#{itemDashboardBean.onNewItem()}" update=":productDetailId"
+                                   value="Pridať nový produkt&#160;&#160;">
+                    </p:commandLink>
+
                     <label>Názov:</label>
                     <div class="field">
                         <p:inputText id="nameId" styleClass="nonBorder"
@@ -71,13 +74,40 @@
                                      placeholder="Meno"
                                      type="text"/>
                     </div>
-                    <label>Popis:</label>
-                    <div class="field">
-                        <p:inputText id="textId" styleClass="nonBorder"
-                                     value="#{itemDashboardBean.selectedItem.text}"
-                                     placeholder="Zadajte popis produktu"
-                                     type="text"/>
-                    </div>
+
+
+                    <p:textEditor widgetVar="editor2" value="#{itemDashboardBean.selectedItem.text}" height="300"
+                                  style="margin-bottom:10px" placeholder="Enter your content">
+                        <!--<f:facet name="toolbar">
+             <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+                            <span class="ql-formats">
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+            </span>
+                        </f:facet>-->
+                    </p:textEditor>
+
+                    <!--<p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk"/>-->
+                    <!--<p:commandButton value="Clear" type="button" onclick="PF('editor2').clear();" icon="ui-icon-close"/>-->
+
+                    <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                        <p:outputPanel id="display">
+                            <h3 style="margin-top:0">Basic</h3>
+                            <h:outputText value="#{itemDashboardBean.selectedItem.text}" escape="false"/>
+
+                            <h3>Custom</h3>
+                            <h:outputText value="#{itemDashboardBean.selectedItem.text}" escape="false"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+
+                </p:tab>
+                <p:tab title="Podrobnosti">
                     <label>EAN - SEO názov</label>
                     <div class="two fields">
                         <div class="field">
@@ -110,11 +140,10 @@
                         </div>
                     </div>
 
-                    
                     <div class="two fields">
                         <div class="field">
                             <label>Vložiť obrázok produktu</label>
-                            <p:fileUpload id="newSubFile" value="#{itemDashboardBean.file}" mode="simple"
+                            <p:fileUpload id="newSubFile" label="Vyberte obrázok" value="#{itemDashboardBean.file}" mode="simple"
                                           skinSimple="true"/>
                         </div>
                         <div class="field">
@@ -131,23 +160,25 @@
                                            itemValue="#{c.name}" itemLabel="#{c.name}"/>
                         </h:selectOneMenu>
                     </div>
-                    <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
-                                   style="border-radius: 0px !important; margin-top: 10px; color: green"
-                                   actionListener="#{itemDashboardBean.onSaveItem()}"
-                                   update=":itemsFormId :productDetailId"
-                                   value="Uložiť produkt&#160;&#160;">
-                        <!--<f:ajax onevent="handleDisableButton"/>-->
-                    </h:commandLink>
-                    <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
-                                   style="border-radius: 0px !important; margin-top: 10px; color: red"
-                                   action="#{itemDashboardBean.onDeleteItem()}"
-                                   update=":itemsFormId :productDetailId"
-                                   value="Zmazať produkt&#160;&#160;">
-                    </h:commandLink>
-                </div>
 
-            </p:tab>
-        </p:tabView>
-    </h:form>
+                </p:tab>
+            </p:tabView>
+
+            <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                           style="border-radius: 0px !important; margin-top: 10px; color: green"
+                           actionListener="#{itemDashboardBean.onSaveItem()}"
+                           update=":itemsFormId :productDetailId display"
+                           value="Uložiť produkt&#160;&#160;">
+                <!--<f:ajax onevent="handleDisableButton"/>-->
+            </h:commandLink>
+            <h:commandLink class="medium ui button right floated" icon="ui-icon-star"
+                           style="border-radius: 0px !important; margin-top: 10px; color: red"
+                           action="#{itemDashboardBean.onDeleteItem()}"
+                           update=":itemsFormId :productDetailId"
+                           value="Zmazať produkt&#160;&#160;">
+            </h:commandLink>
+
+        </h:form>
+    </div>
 </div>
 </html>

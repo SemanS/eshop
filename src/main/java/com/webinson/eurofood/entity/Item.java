@@ -105,9 +105,4 @@ public class Item implements Serializable {
     @Setter
     private byte[] image;
 
-    @Column(name = "counter")
-    @Getter
-    @Setter
-    private int counter;
-
 }

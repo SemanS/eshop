@@ -41,20 +41,7 @@ import java.util.Set;
 @ELBeanName(value = "itemView")
 @ViewScoped
 @Join(path = "/store/{itemUrl}", to="/itemDetail.xhtml")
-/*@URLMappings(mappings = {
-        @URLMapping(
-                id = "detailItem",
-                pattern = "/store/#{itemUrl: itemView.itemUrl}",
-                viewId = "/itemDetail.xhtml"),
-        @URLMapping(
-                id = "detailCategory",
-                pattern = "/category/#{ categoryUrl: itemView.categoryUrl}",
-                viewId = "/eshop.xhtml"),
-})*/
 public class ItemView implements Serializable {
-
-    /*@Autowired
-    CategoryDao categoryDao;*/
 
     @Autowired
     ItemDao itemDao;
@@ -68,20 +55,9 @@ public class ItemView implements Serializable {
     @Autowired
     ItemAssembler itemAssembler;
 
-    /*@Autowired
-    CategoryService categoryService;*/
-
-    /*@Getter
-    @Setter
-    private CategoryDto selectedCategory;*/
-
     @Getter
     @Setter
     private ItemDto selectedItem;
-
-    /*@Getter
-    @Setter
-    private String categoryUrl;*/
 
     @Getter
     @Setter
@@ -100,22 +76,6 @@ public class ItemView implements Serializable {
     @Getter
     @Setter
     private String selectedUser;
-
-    /*@Getter
-    @Setter
-    private String selectedCategoryImage;*/
-
-    /*@URLAction
-    public String loadCategory() throws IOException {
-
-        if (categoryUrl != null) {
-            this.selectedCategory = categoryService.getCategoryByUrl(categoryUrl);
-            return selectedCategory.getUrl();
-        }
-
-        // Add a message here, "The item {..} could not be found."
-        return "";
-    }*/
 
     @RequestAction
     @Deferred
@@ -138,20 +98,6 @@ public class ItemView implements Serializable {
         promotedItems = itemService.getAllPromotedItems();
 
     }
-
-    /*public String onImageDescriptionChange() {
-        selectedCategoryImage = categoryAssembler.toDto(categoryDao.findById(this.selectedCategory.getId())).getImageDescription();
-        return selectedCategoryImage;
-    }*/
-
-    /*public List<ItemDto> allItemsByCategory() {
-        return itemService.getItemsByCategory(this.selectedCategory);
-    }*/
-
-    /*public void onCategory(Category category) throws IOException {
-        selectedCategory = categoryAssembler.toDto(categoryDao.findById(category.getId()));
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
-    }*/
 
     public void onItem(ItemDto itemDto) throws IOException {
         itemDto.setQuantity(1);

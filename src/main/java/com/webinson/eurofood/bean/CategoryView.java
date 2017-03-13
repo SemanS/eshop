@@ -96,4 +96,8 @@ public class CategoryView implements Serializable {
         return selectedCategoryImage;
     }
 
+    public List<ItemDto> bestSellingProducts() {
+        return itemService.getBestFiveSellingProducts();
+    }
+
 }

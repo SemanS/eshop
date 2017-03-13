@@ -440,6 +440,18 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryAssembler.toDtos(categoryDao.findByParentId(categoryDto.getId()));
     }
 
+    @Override
+    public List<Category> initCategories() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findChildrenOfCategory(Long id) {
+        List<Category> categoriesList;
+        categoriesList = categoryDao.findById(id).getChildren();
+        return categoriesList;
+    }
+
     /*@Override
     public TreeNode cachedTreeNode() {
         rootNode = getRootNode();

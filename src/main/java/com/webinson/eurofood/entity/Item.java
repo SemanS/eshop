@@ -59,12 +59,22 @@ public class Item implements Serializable {
     @Setter
     private int internalNumber;
 
-    @Column(name = "price_netto")
+    @Column(name = "price_netto", columnDefinition="Decimal(10,2) default '0.00'")
     @Getter
     @Setter
     private double priceNetto;
 
-    @Column(name = "price_brutto")
+    @Column(name = "price_netto_discount", columnDefinition="Decimal(10,2) default '0.00'")
+    @Getter
+    @Setter
+    private double priceNettoDiscount;
+
+    @Column(name = "price_brutto_discount", columnDefinition="Decimal(10,2) default '0.00'")
+    @Getter
+    @Setter
+    private double priceBruttoDiscount;
+
+    @Column(name = "price_brutto", columnDefinition="Decimal(10,2) default '0.00'")
     @Getter
     @Setter
     private double priceBrutto;

@@ -33,6 +33,8 @@ public class ItemAssembler {
         dto.setPiecesInPalette(model.getPiecesInPalette());
         dto.setDiscount(model.isDiscount());
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
+        dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
         return dto;
     }
 
@@ -54,6 +56,8 @@ public class ItemAssembler {
         dto.setPiecesInPalette(model.getPiecesInPalette());
         dto.setDiscount(model.isDiscount());
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
+        dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
+        dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
         return dto;
     }
 
@@ -74,6 +78,8 @@ public class ItemAssembler {
         model.setPiecesInPalette(dto.getPiecesInPalette());
         model.setDiscount(dto.isDiscount());
         model.setImage(Base64.getDecoder().decode(dto.getImage()));
+        model.setPriceBruttoDiscount(dto.getPriceBruttoDiscount());
+        model.setPriceNettoDiscount(dto.getPriceNettoDiscount());
         return model;
     }
 

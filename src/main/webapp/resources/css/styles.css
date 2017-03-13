@@ -221,7 +221,8 @@
 
 @font-face {
     font-family: "Orbitron";
-    src: url("../../resources/css/fonts/digital-7.regular.ttf");
+    /*src: url("../../resources/css/fonts/digital-7.regular.ttf");*/
+
     /*    src: url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.eot?#iefix") format("embedded-opentype"),
         url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff2") format("woff2"),
         url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.woff") format("woff"),
@@ -229,8 +230,18 @@
         url("//db.onlinewebfonts.com/t/b47cf1c379e95cf17ee45b63d6442400.svg#Calculator Digits") format("svg");*/
 }
 
+@font-face {font-family: "OPTICalculator";
+    src: url("../../resources/css/fonts/OptiCalculator.ttf");
+    /*src: url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.eot");
+    src: url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/a4e40941cd04772dbe49aa5790ad5905.svg#OPTICalculator") format("svg");*/
+}
+
 .customfont {
-    font-family: "Orbitron" !important;
+    font-family: "OPTICalculator" !important;
     font-size: large;
 }
 

@@ -50,7 +50,7 @@
         <div class="thirteen wide column widget" id="MainContent">
             <div class="ui grid four column stackable centered">
 
-                <!--<ui:repeat value="#{itemView.promotedItems}" var="item">
+                <ui:repeat value="#{itemView.promotedItems}" var="item">
                     <div class="column">
                         <div class="ui fluid card">
                             <div class="content">
@@ -65,23 +65,43 @@
                                     <img src="data:image/png;base64,#{item.image}"/>
                                 </h:commandLink>
                             </div>
-                            <div class="content">
-                                <div class="description ui green">
-                                </div>
-                                <div class="description" style="text-align: center">
-                                    <div class="left floated centered">
-                                        <h3 class="">
-                                            #{item.priceBrutto} EUR</h3> s DPH
+                            <div class="content ui">
+                                <!--<div class="description ui green">
+                                </div>-->
+                                <div class="description">
+
+                                    <div class="left floated">
+                                    <span class="ui disabled header"
+                                          style="text-decoration: line-through;">7.58
+                                    </span>
+                                        <sub>Eur s DPH</sub>
+                                        <pre></pre>
+                                        <span class="ui header">
+                                        6.12 EUR
+                                        <span class="sub header">s DPH</span>
+                                    </span>
                                     </div>
+
                                     <div class="right floated centered">
-                                        <h4 class="">
+                                        <span class="ui red label">Akcia!</span>
+                                        <h4 style="text-align: right">
                                             #{item.priceNetto} EUR</h4> bez DPH
                                     </div>
+
+
+                                    <!-- <span style="font-size: 12px; text-decoration: line-through;">#{item.priceBrutto} EUR s DPH</span>
+                                     <h3 class="ui header">
+                                         #{item.priceBrutto} EUR</h3> s DPH-->
+
+                                    <!--<div class="right floated centered">
+                                        <h4 class="">
+                                            #{item.priceNetto} EUR</h4> bez DPH
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </ui:repeat>-->
+                </ui:repeat>
             </div>
         </div>
 

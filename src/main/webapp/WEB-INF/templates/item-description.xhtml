@@ -8,7 +8,7 @@
 
 <h:body>
     <h:form>
-        <style>
+        <!--<style>
 
             span, p {
                 overflow: hidden;
@@ -16,7 +16,7 @@
                 margin: 0 0 0em;
             }
 
-        </style>
+        </style>-->
         <pre></pre>
 
         <div class="ui divided items">
@@ -29,7 +29,10 @@
 
                             <h:commandLink value="#{itemView.selectedItem.category.name}"
                                            action="#{categoryView.onCategory(itemView.selectedItem.category)}">
-                    <!--<h:outputText value="#{category.name}"/>-->
+                                <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
+                                    <span style="margin-left: 250px" class="ui red label">Akcia!</span>
+                                </ui:fragment>
+                                <!--<h:outputText value="#{category.name}"/>-->
                                 <!--<img class="ui image small inline"
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>-->
                 </h:commandLink>
@@ -38,23 +41,52 @@
                     </div>
                     <img class="ui centered small image"
                          src="data:image/png;base64,#{itemView.selectedItem.image}"/>
-                    <div class="ui grid" style="margin-top: 10px">
-                        <div class="eight wide column right aligned">
-                            <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
+                    <ui:fragment rendered="#{itemView.selectedItem.discount != true}">
+                        <div class="ui grid" style="margin-top: 10px">
+                            <div class="eight wide column right aligned">
+                                <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px; color:red; font-size: large"></h:outputText></h4>
-                        </div>
+                            </div>
 
-                        <div class="eight wide column left aligned">
-                            <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
+                            <div class="eight wide column left aligned">
+                                <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px;"></h:outputText></h4>
+                            </div>
+                            <div class="eight wide column right aligned" style="margin-top: -20px;">
+                                <h:outputText value="cena netto"/>
+                            </div>
+                            <div class="eight wide column left aligned" style="margin-top: -20px">
+                                <h:outputText value="cena brutto"/>
+                            </div>
                         </div>
-                        <div class="eight wide column right aligned" style="margin-top: -20px;">
-                            <h:outputText value="cena netto"/>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
+
+                        <span class="ui disabled header"
+                              style="margin-left:70px;text-decoration: line-through;">#{itemView.selectedItem.priceBruttoDiscount} EUR
+                                    </span><sub>Eur s DPH</sub>
+
+                        <div class="ui grid" style="margin-top: 10px">
+
+                            <div class="eight wide column right aligned">
+                                <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
+    border-width: 1px;  padding: 6px 15px; color:red; font-size: large"></h:outputText></h4>
+                            </div>
+
+                            <div class="eight wide column left aligned">
+                                <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
+    border-width: 1px;  padding: 6px 15px;"></h:outputText></h4>
+                            </div>
+                            <div class="eight wide column right aligned" style="margin-top: -20px;">
+                                <h:outputText value="cena netto"/>
+                            </div>
+                            <div class="eight wide column left aligned" style="margin-top: -20px">
+                                <h:outputText value="cena brutto"/>
+                            </div>
                         </div>
-                        <div class="eight wide column left aligned" style="margin-top: -20px">
-                            <h:outputText value="cena brutto"/>
-                        </div>
-                    </div>
+                    </ui:fragment>
+
                 </div>
                 <div class="headerDivider" style="margin-left: 0px"></div>
                 <div class="content" style="margin-left: 20px">
@@ -100,7 +132,7 @@
                                            style="border-radius: 0px !important; margin-top: 50px; color: red"
                                            actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
                                            value="Vložiť do košíka&#160;&#160;">
-                                <f:ajax onevent="handleDisableButton"/>
+                                <!--<f:ajax onevent="handleDisableButton"/>-->
 
                                 <i class="left shop icon"></i>
                             </h:commandLink>

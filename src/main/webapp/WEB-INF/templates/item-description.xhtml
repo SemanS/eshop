@@ -29,13 +29,13 @@
 
                             <h:commandLink value="#{itemView.selectedItem.category.name}"
                                            action="#{categoryView.onCategory(itemView.selectedItem.category)}">
-                                <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
-                                    <span style="margin-left: 250px" class="ui red label">Akcia!</span>
-                                </ui:fragment>
                                 <!--<h:outputText value="#{category.name}"/>-->
                                 <!--<img class="ui image small inline"
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>-->
                 </h:commandLink>
+                            <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
+                                    <span style="margin-left: 250px" class="ui red label">Akcia!</span>
+                                </ui:fragment>
 
                         </span>
                     </div>

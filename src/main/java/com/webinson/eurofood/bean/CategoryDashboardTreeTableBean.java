@@ -30,17 +30,11 @@ public class CategoryDashboardTreeTableBean {
     @Autowired
     CategoryService categoryService;
 
-    @Getter
-    @Setter
-    private Category selectedCategory;
+
 
     @PostConstruct
     public void init() {
         rootCategories = categoryService.buildCategories();
-    }
-
-    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
-        selectedCategory = (Category) nodeSelectEvent.getTreeNode().getData();
     }
 
     public void onDragDrop(TreeDragDropEvent event) throws IOException {

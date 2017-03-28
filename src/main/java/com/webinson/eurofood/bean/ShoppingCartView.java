@@ -54,15 +54,18 @@ public class ShoppingCartView {
     @Getter
     @Setter
     private ShoppingCartDto shoppingCartDto;
-    @Getter
+    /*@Getter
     @Setter
-    private float total;
+    private float total;*/
     @Getter
     @Setter
     private String itemUrl;
     @Getter
     @Setter
     ItemDto itemDto;
+    @Getter
+    @Setter
+    private double totalPriceBrutto;
 
     @Autowired
     ItemService itemService;
@@ -177,10 +180,35 @@ public class ShoppingCartView {
         return "index.xhtml?faces-redirect=true";
     }
 
+    public double countTotalPriceNetto(CartItemDto cartItemDto) {
+
+        counterNetto = 0.0;
+        for (CartItemDto cItemDto : cartItemDtos) {
+            if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()){
+                counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cartItemDto.getQuantity();
+            } else {
+                counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cItemDto.getQuantity();
+            }
+
+        }
+        return counterNetto;
+    }
+
+    public double countTotalPriceBrutto() {
+
+
+        for (CartItemDto cItemDto : cartItemDtos) {
+            totalPriceBrutto = cItemDto.getItemDto().getPriceBrutto() * cItemDto.getQuantity();
+        }
+        return totalPriceBrutto;
+    }
+
+
+
     public void onDeleteItem(CartItemDto cartItemDto) throws IOException {
         String redirectOption;
         for (CartItemDto cItemDto : cartItemDtos) {
-            if (cartItemDto == cItemDto) {
+            if (cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()) {
                 cartItemDtos.remove(cItemDto);
             }
         }
@@ -195,10 +223,10 @@ public class ShoppingCartView {
     }
 
     public double getCounterBrutto() {
-        return (Math.ceil(counterBrutto*100))/100;
+        return (Math.ceil(counterBrutto * 100)) / 100;
     }
 
     public double getCounterNetto() {
-        return (Math.ceil(counterNetto*100))/100;
+        return (Math.ceil(counterNetto * 100)) / 100;
     }
 }

@@ -3,6 +3,7 @@ package com.webinson.eurofood.service.impl;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.webinson.eurofood.assembler.ItemAssembler;
 import com.webinson.eurofood.dao.ItemDao;
+import com.webinson.eurofood.dao.ProducerDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.entity.*;
@@ -31,6 +32,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     ItemDao itemDao;
+
+    @Autowired
+    ProducerDao producerDao;
 
     @Autowired
     ItemAssembler itemAssembler;
@@ -124,6 +128,26 @@ public class ItemServiceImpl implements ItemService {
         QItemCounter itemCounter = QItemCounter.itemCounter.itemCounter;
         List<Item> item1 = query.from(itemCounter).select(itemCounter.item).orderBy(itemCounter.counter.asc()).limit(5).fetch();
         return itemAssembler.toDtos(item1);
+    }
+
+    @Override
+    public List<Producer> getAllProducers() {
+        List<Producer> allProducers = producerDao.findAll();
+        List<String> allStringProducers = new ArrayList<String>();
+        for (Producer producer : allProducers) {
+            allStringProducers.add(producer.getName());
+        }
+        return allProducers;
+    }
+
+    @Override
+    public List<String> getAllStringProducers() {
+        List<Producer> allProducers = producerDao.findAll();
+        List<String> allStringProducers = new ArrayList<String>();
+        for (Producer producer : allProducers) {
+            allStringProducers.add(producer.getName());
+        }
+        return allStringProducers;
     }
 
     @Override

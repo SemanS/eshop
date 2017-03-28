@@ -3,6 +3,7 @@ package com.webinson.eurofood.service;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.entity.Item;
+import com.webinson.eurofood.entity.Producer;
 import com.webinson.eurofood.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,4 +39,8 @@ public interface ItemService {
     boolean itemExist(String name);
 
     List<ItemDto> getBestFiveSellingProducts();
+
+    List<Producer> getAllProducers();
+
+    List<String> getAllStringProducers();
 }

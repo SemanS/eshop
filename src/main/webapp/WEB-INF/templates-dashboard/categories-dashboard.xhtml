@@ -30,7 +30,7 @@
                 <p:ajax event="dragdrop" listener="#{categoryDashboardTreeTableBean.onDragDrop}"
                         update=":tabView:tab1"/>
                 <p:ajax event="select" update=":treeForm :tabView:tab1"
-                        listener="#{categoryDashboardTreeTableBean.TreeNodeToCategory}"/>
+                        listener="#{categoryDashboardBean.TreeNodeToCategory}"/>
                 <p:treeNode>
                     <h:outputText value="#{node.name}"/>
                 </p:treeNode>
@@ -77,13 +77,13 @@
                         <div class="two fields">
                             <div class="field">
                                 <p:inputText styleClass="nonBorder"
-                                             value="#{categoryDashboardBean.inputSelectedRootCategory.name}"
+                                             value="#{categoryDashboardBean.selectedCategory.name}"
                                              placeholder="Zadajte názov hlavnej kategórie"
                                              type="text"/>
                             </div>
                             <div class="field">
                                 <p:inputText styleClass="nonBorder"
-                                             value="#{categoryDashboardBean.inputSelectedRootCategory.url}"
+                                             value="#{categoryDashboardBean.selectedCategory.url}"
                                              placeholder="Zadajte url hlavnej kategórie"
                                              type="text"/>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="field">
                                 <label>Obrázok kategórie</label>
                                 <img class="ui image"
-                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(categoryDashboardBean.selectedCategory)}"/>
                             </div>
                         </div>
 
@@ -116,7 +116,7 @@
                             <div class="field">
                                 <label>Obrázok kategórie</label>
                                 <img class="ui image"
-                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImageDescription(categoryDashboardBean.inputSelectedRootCategory)}"/>
+                                     src="data:image/png;base64,#{categoryDashboardBean.getBaseImageDescription(categoryDashboardBean.selectedCategory)}"/>
                             </div>
                         </div>
                         <pre></pre>

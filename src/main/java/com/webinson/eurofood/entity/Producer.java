@@ -22,7 +22,7 @@ public class Producer implements Serializable {
     @Getter
     @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     @Getter

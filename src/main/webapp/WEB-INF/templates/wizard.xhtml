@@ -87,7 +87,6 @@
                                     <pe:selectDetailLevel step="-1"/>
                                 </p:commandButton>
                                 <p:commandButton value="Ďalej" process="masterDetail"
-                                                 actionListener="#{userWizard.checkout}"
                                                  style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
                                     <pe:selectDetailLevel step="1"/>
                                 </p:commandButton>
@@ -99,7 +98,6 @@
                                 <div class="ui grid segment">
                                     <ui:include src="checkout/confirmation-options.xhtml"/>
                                 </div>
-                                
                                 <p:commandButton value="Späť" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
                                                  process="@this" immediate="true">
                                     <pe:selectDetailLevel step="-1"/>
@@ -109,6 +107,16 @@
                                                  style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
                                     <pe:selectDetailLevel step="1"/>
                                 </p:commandButton>
+
+                                <!--<p:commandButton value="Späť" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                                 process="@this" immediate="true">
+                                    <pe:selectDetailLevel step="-1"/>
+                                </p:commandButton>
+                                <p:commandButton value="Ďalej" process="masterDetail"
+                                                 actionListener="#{userWizard.checkout}"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>-->
                             </h:form>
                         </pe:masterDetailLevel>
 

@@ -43,6 +43,18 @@
                 </f:facet>
                 <h:outputText value="#{item.category.name}"/>
             </p:column>
+
+            <p:column headerText="Výrobca" filterBy="#{item.producer.name}" sortBy="#{item.producer.name}"
+                      filterMatchMode="exact">
+                <f:facet name="filter">
+                    <h:selectOneMenu onchange="PF('itemsTable').filter()" style="width:100px;">
+                        <f:selectItem itemLabel="Vyberte kategóriu" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{itemDashboardBean.producersString}"/>
+                    </h:selectOneMenu>
+                </f:facet>
+                <h:outputText value="#{item.producer.name}"/>
+            </p:column>
+
             <p:column headerText="Cena netto" sortBy="#{item.priceBrutto}" filterBy="#{item.priceBrutto}">
                 <h:outputText value="#{item.priceBrutto}"/>
             </p:column>
@@ -58,7 +70,7 @@
 
         <h:form id="productDetailId" styleClass="ui form" enctype="multipart/form-data">
 
-            <p:tabView>
+            <p:tabView id="producten">
 
                 <p:tab title="Detail produktu">
                     <p:commandLink class="medium ui button right floated" icon="ui-icon-star"
@@ -107,7 +119,7 @@
 
 
                 </p:tab>
-                <p:tab title="Podrobnosti">
+                <p:tab id="podrobnosti" title="Podrobnosti">
                     <label>EAN - SEO názov</label>
                     <div class="two fields">
                         <div class="field">
@@ -140,10 +152,44 @@
                         </div>
                     </div>
 
+                    <h:selectOneRadio style="margin-bottom: 10px;" value="#{itemDashboardBean.selectedItem.discount}">
+                        <f:selectItem itemValue="false" itemLabel="&#160;&#160;Bez zľavy&#160;&#160;"/>
+                        <f:selectItem itemValue="true" itemLabel="&#160;&#160;So zľavou&#160;&#160;"/>
+                        <f:ajax render="foo"/>
+                    </h:selectOneRadio>
+
+
+                    <h:panelGroup id="foo">
+                        <h:panelGroup layout="block" id="theDiv" rendered="#{itemDashboardBean.selectedItem.discount}">
+                            <!--<ui:fragment id="discountCheckbox" rendered="#{itemDashboardBean.discountCheckbox == true}">-->
+                            <label>Cena brutto - netto:</label>
+                            <div class="two fields">
+                                <div class="field">
+                                    <p:inputText id="asd2s" styleClass="nonBorder"
+                                                 value="#{itemDashboardBean.selectedItem.priceBruttoDiscount}"
+                                                 placeholder="Zadajte cenu brutto"
+                                                 type="text"/>
+                                </div>
+                                <div class="field">
+                                    <p:inputText id="asds2as" styleClass="nonBorder"
+                                                 value="#{itemDashboardBean.selectedItem.priceNettoDiscount}"
+                                                 placeholder="Zadajte cenu netto"
+                                                 type="text"/>
+                                </div>
+                            </div>
+                            <!-- </ui:fragment>-->
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <!--<h:outputText value="Ajax: " />
+                    <p:selectBooleanCheckbox value="#{selectBooleanView.value2}">
+                        <p:ajax update="" listener="#{selectBooleanView.addMessage}" />
+                    </p:selectBooleanCheckbox>-->
+
                     <div class="two fields">
                         <div class="field">
                             <label>Vložiť obrázok produktu</label>
-                            <p:fileUpload id="newSubFile" label="Vyberte obrázok" value="#{itemDashboardBean.file}" mode="simple"
+                            <p:fileUpload id="newSubFile" label="Vyberte obrázok" value="#{itemDashboardBean.file}"
+                                          mode="simple"
                                           skinSimple="true"/>
                         </div>
                         <div class="field">
@@ -157,6 +203,14 @@
                     <div class="field">
                         <h:selectOneMenu value="#{itemDashboardBean.selectedCategory}">
                             <f:selectItems value="#{itemDashboardBean.categories}" var="c"
+                                           itemValue="#{c.name}" itemLabel="#{c.name}"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <label>Producent:</label>
+                    <div class="field">
+                        <h:selectOneMenu value="#{itemDashboardBean.selectedProducer}">
+                            <f:selectItems value="#{itemDashboardBean.producers}" var="c"
                                            itemValue="#{c.name}" itemLabel="#{c.name}"/>
                         </h:selectOneMenu>
                     </div>

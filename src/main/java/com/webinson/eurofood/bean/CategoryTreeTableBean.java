@@ -65,7 +65,4 @@ public class CategoryTreeTableBean {
         return categoriesList;
     }
 
-
-
-
 }

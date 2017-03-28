@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:of="http://omnifaces.org/functions">
+
+<pre></pre>
+<div class="ui stackable grid">
+
+    <div class="one wide column"></div>
+    <h:form id="producerId" styleClass="eight wide column">
+        <p:dataTable var="producer" value="#{producerDashboardBean.producerLazyDataModel}"
+                     emptyMessage="No records found."
+                     paginator="true" rows="10" sortMode="multiple"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15" selectionMode="single" id="userTable" lazy="true"
+                     reflow="true" selection="#{producerDashboardBean.selectedProducer}">
+            <p:ajax event="rowSelect" listener="#{producerDashboardBean.onRowSelect}"
+                    update=":tabView:tab1"/>
+            <p:ajax event="rowUnselect" listener="#{producerDashboardBean.onRowUnselect}"
+                    update=":tabView:tab1"/>
+            <!--<p:column headerText="Id" sortBy="#{shoppingCart.id}" filterBy="#{shoppingCart.id}">
+                <h:outputText value="#{shoppingCart.id}"/>
+            </p:column>-->
+            <!--<p:column headerText="Dátum objednávky" sortBy="#{shoppingCart.timeStamp}">
+                <h:outputText value="#{of:formatDate(shoppingCart.timeStamp.time, 'dd.MM.yyyy HH:mm')}"/>
+            </p:column>-->
+            <p:column headerText="Používateľ" sortBy="#{producer.name}"
+                      filterBy="#{producer.name}">
+                <h:outputText value="#{producer.name}"/>
+            </p:column>
+            <!--<p:column headerText="Počet položiek">
+                <h:outputText value="#{shoppingCart.cartItems.size()}"/>
+            </p:column>
+            <p:column headerText="Vyexpedované" style="text-align: center" sortBy="#{shoppingCart.processed}">
+                <ui:fragment rendered="#{shoppingCart.processed}">
+                    <i class="check green circle icon"></i>
+                </ui:fragment>
+                <ui:fragment rendered="#{not shoppingCart.processed}">
+                    <i class="remove red circle icon"></i>
+                </ui:fragment>
+            </p:column>-->
+        </p:dataTable>
+    </h:form>
+
+    <div id="producerDetailId" class="ui form six wide column">
+        <p:tabView id="tabView">
+            <p:tab title="Detail výrobcu">
+                <h:form id="tab1">
+                    <h4 class="ui horizontal divider header" style="margin-top: 20px">
+                        Detail Výrobcu
+                    </h4>
+                    <div class="field">
+                        <label>Zoznam výrobcov:</label>
+
+                    </div>
+
+
+                    <div class="field">
+                        <p:inputText styleClass="nonBorder"
+                                     value="#{producerDashboardBean.selectedProducer.name}"
+                                     placeholder="Zadajte názov hlavnej kategórie"
+                                     type="text"/>
+                    </div>
+
+                    <div class="field">
+                        <h:commandLink id="commandLink1"
+                                       class="medium ui button" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: green"
+                                       action="#{producerDashboardBean.onChangeProducer()}"
+                                       value="Uložiť kategóriu"
+                                       update=":tabView:tab1">
+                        </h:commandLink>
+                    </div>
+
+
+                    <div class="field">
+                        <!--<ui:fragment rendered="#{shoppingCartDashboardBean.selectedShoppingCart.processed}">
+                            <h:outputText style="" value="Vyexpedované"/>
+                        </ui:fragment>
+                        <ui:fragment
+                                rendered="#{not shoppingCartDashboardBean.selectedShoppingCart.processed and shoppingCartDashboardBean.selectedShoppingCart != null}">
+                            <p:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                           style="border-radius: 0px !important; color: red"
+                                           action="#{shoppingCartDashboardBean.onExpedite()}"
+                                           update=":producerId :orderDetailId"
+                                           value="Expedovať&#160;&#160;">
+                            </p:commandLink>
+                        </ui:fragment>-->
+                    </div>
+                </h:form>
+            </p:tab>
+
+            <p:tab title="Pridať výrobcu">
+                <h:form id="tab2" enctype="multipart/form-data">
+                    <h4 class="ui horizontal divider header" style="margin-top: 20px">
+                        <!--<i class="tag icon"></i>-->
+                        Pridať výrobcu
+                    </h4>
+
+                    <div class="field">
+                        <p:inputText styleClass="nonBorder"
+                                     value="#{producerDashboardBean.newProducer.name}"
+                                     placeholder="Zadajte názov hlavnej kategórie"
+                                     type="text"/>
+                    </div>
+
+                    <h:commandLink class="medium ui button" icon="ui-icon-star"
+                                   style="border-radius: 0px !important; color: blue"
+                                   actionListener="#{producerDashboardBean.onSaveProducer()}"
+                                   update=":producerId"
+                                   value="Pridať hlavnú kategóriu">
+                    </h:commandLink>
+
+                </h:form>
+            </p:tab>
+
+        </p:tabView>
+    </div>
+</div>
+
+</html>

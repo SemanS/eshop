@@ -210,7 +210,7 @@ public class UserWizard implements Serializable {
         }
     }
 
-    public String checkout() {
+    public void checkout() {
         if (facturationAddressDto != null) {
             shoppingCartDto.setFacturationAddress(facturationAddressDto.toString());
         } else {
@@ -233,6 +233,6 @@ public class UserWizard implements Serializable {
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
         shoppingCartView.setCartItemDtos(new HashSet<>());
         shoppingCartView.onRestartCounter();
-        return "index.xhtml?faces-redirect=true";
+        /*return "index.xhtml?faces-redirect=true";*/
     }
 }

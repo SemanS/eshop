@@ -26,7 +26,8 @@
 
         <p:column headerText="MNOŽSTVO" style="text-align: center">
             <p:spinner id="ajaxSpinner" min="1" size="3" value="#{cart.quantity}">
-                <p:ajax process="@form" update="ajaxSpinnerValue"/>
+                <p:ajax process="@form" listener="#{shoppingCartView.countTotalPriceNetto(cart)}"
+                        update="ajaxSpinnerValue :checkoutCartForm"/>
             </p:spinner>
         </p:column>
 
@@ -49,11 +50,10 @@
             </h:commandLink>
         </p:column>
 
-
-        <p:columnGroup type="footer">
-            <p:row>
+        <p:columnGroup id="pokus" type="footer">
+            <p:row id="row">
                 <p:column colspan="2" style="text-align:right" footerText="Celkom:"/>
-                <p:column footerText="€#{dtGroupView.lastYearTotal}"/>
+                <p:column id="totalSum" footerText="€#{shoppingCartView.counterNetto}"/>
                 <p:column footerText="€#{dtGroupView.thisYearTotal}"/>
             </p:row>
         </p:columnGroup>

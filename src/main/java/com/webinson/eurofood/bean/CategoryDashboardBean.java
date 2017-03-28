@@ -112,6 +112,14 @@ public class CategoryDashboardBean implements Serializable {
     @Setter
     private TreeNode selectedNode = new DefaultTreeNode();
 
+    @Getter
+    @Setter
+    private Category selectedCategory;
+
+    public void TreeNodeToCategory(NodeSelectEvent nodeSelectEvent) {
+        selectedCategory = (Category) nodeSelectEvent.getTreeNode().getData();
+    }
+
     @PostConstruct
     private void init() {
         rootCategories = categoryService.getRootCategories();
@@ -124,9 +132,9 @@ public class CategoryDashboardBean implements Serializable {
 
     public Category initRootCategory() {
         if (rootCategories.size() == 0) {
-            return inputSelectedRootCategory = new Category();
+            return selectedCategory = new Category();
         } else {
-            return inputSelectedRootCategory = rootCategories.get(0);
+            return selectedCategory = rootCategories.get(0);
         }
     }
 
@@ -141,9 +149,9 @@ public class CategoryDashboardBean implements Serializable {
     /*Change root category*/
     public String onChangeRootCategory() throws IOException {
         Category category;
-        category = categoryDao.findById(inputSelectedRootCategory.getId());
-        category.setName(inputSelectedRootCategory.getName());
-        category.setUrl(inputSelectedRootCategory.getUrl());
+        category = categoryDao.findById(selectedCategory.getId());
+        category.setName(selectedCategory.getName());
+        category.setUrl(selectedCategory.getUrl());
         if (file.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(file.getInputstream()));
         }

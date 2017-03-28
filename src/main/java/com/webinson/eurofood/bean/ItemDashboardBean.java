@@ -3,9 +3,11 @@ package com.webinson.eurofood.bean;
 import com.webinson.eurofood.assembler.ItemAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
 import com.webinson.eurofood.dao.ItemDao;
+import com.webinson.eurofood.dao.ProducerDao;
 import com.webinson.eurofood.dto.ItemDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.Item;
+import com.webinson.eurofood.entity.Producer;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ItemService;
 import com.webinson.eurofood.service.UserService;
@@ -54,6 +56,9 @@ public class ItemDashboardBean {
     private CategoryDao categoryDao;
 
     @Autowired
+    private ProducerDao producerDao;
+
+    @Autowired
     private CategoryService categoryService;
 
     @Getter
@@ -68,6 +73,10 @@ public class ItemDashboardBean {
     @Setter
     private List<String> categoriesString;
 
+    @Getter
+    @Setter
+    private List<String> producersString;
+
     private ItemLazyDataModel items;
 
     @Getter
@@ -80,14 +89,29 @@ public class ItemDashboardBean {
 
     @Getter
     @Setter
+    private String selectedProducer;
+
+    @Getter
+    @Setter
+    private List<Producer> producers;
+
+    @Getter
+    @Setter
     private List<String> rootCategoriesString;
 
     @Getter
     @Setter
     private UploadedFile file;
 
+
+    @Getter
+    @Setter
+    private boolean discountCheckbox;
+
     @PostConstruct
     private void init() {
+        producers = itemService.getAllProducers();
+        producersString = itemService.getAllStringProducers();
         categories = categoryService.getNonRootCategories();
         categoriesString = categoryService.getStringCategories();
         this.items = new ItemLazyDataModel(itemService);
@@ -101,6 +125,7 @@ public class ItemDashboardBean {
     public void onRowSelect(SelectEvent event) {
         selectedItem = itemDao.findById(((Item) event.getObject()).getId());
         selectedCategory = selectedItem.getCategory().getName();
+        selectedProducer = selectedItem.getProducer().getName();
     }
 
     public String onSaveItem() throws IOException {
@@ -125,7 +150,9 @@ public class ItemDashboardBean {
 
             selectedItem.setImage(bytes);
         }
+
         selectedItem.setCategory(categoryDao.findByName(selectedCategory));
+        selectedItem.setProducer(producerDao.findByName(selectedProducer));
         itemDao.save(selectedItem);
         /*ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath() + "pretty:dashboard");*/

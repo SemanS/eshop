@@ -103,7 +103,6 @@ public class ItemDashboardBean {
     @Setter
     private UploadedFile file;
 
-
     @Getter
     @Setter
     private boolean discountCheckbox;

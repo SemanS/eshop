@@ -152,11 +152,22 @@
                         </div>
                     </div>
 
-                    <h:selectOneRadio style="margin-bottom: 10px;" value="#{itemDashboardBean.selectedItem.discount}">
-                        <f:selectItem itemValue="false" itemLabel="&#160;&#160;Bez zľavy&#160;&#160;"/>
-                        <f:selectItem itemValue="true" itemLabel="&#160;&#160;So zľavou&#160;&#160;"/>
-                        <f:ajax render="foo"/>
-                    </h:selectOneRadio>
+                    <div class="two fields">
+                        <div class="field">
+                            <h:selectOneRadio style="margin-bottom: 10px;" value="#{itemDashboardBean.selectedItem.discount}">
+                                <f:selectItem itemValue="false" itemLabel="&#160;&#160;Bez zľavy&#160;&#160;"/>
+                                <f:selectItem itemValue="true" itemLabel="&#160;&#160;So zľavou&#160;&#160;"/>
+                                <f:ajax render="foo"/>
+                            </h:selectOneRadio>
+                        </div>
+                        <div class="field">
+                            <h:selectOneRadio style="margin-bottom: 10px;" value="#{itemDashboardBean.selectedItem.kg}">
+                                <f:selectItem itemValue="false" itemLabel="&#160;&#160;Ks&#160;&#160;"/>
+                                <f:selectItem itemValue="true" itemLabel="&#160;&#160;Kg&#160;&#160;"/>
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+
 
 
                     <h:panelGroup id="foo">

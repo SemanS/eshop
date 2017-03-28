@@ -34,7 +34,7 @@
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>-->
                 </h:commandLink>
                             <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
-                                    <span style="margin-left: 250px" class="ui red label">Akcia!</span>
+                                    <span style="margin-left: 180px" class="ui red label">Akcia!</span>
                                 </ui:fragment>
 
                         </span>
@@ -89,11 +89,12 @@
 
                 </div>
                 <div class="headerDivider" style="margin-left: 0px"></div>
-                <div class="content" style="margin-left: 20px">
+                <div class="content" style="margin-left: 30px">
 
                     <pre></pre>
                     <pre></pre>
                     <div class="description">
+
                         <p:panelGrid columns="2" styleClass="cleanSpinner">
 
                             <h:outputText value="číslo produktu:"/>
@@ -118,25 +119,38 @@
                             <h:outputText value="počet kusov na palete:"/>
                             <h:outputText style="color: green"
                                           value="#{itemView.selectedItem.piecesInPalette}"/>
-
-                            <p:spinner styleClass="cleanSpinner2" style="margin-top: 55px"
-                                       id="ajaxSpinner" size="3"
-                                       min="1"
-                                       value="#{shoppingCartView.shoppingCartQuantity}">
-                                <p:ajax update="calculatorId" process="@form"/>
-                            </p:spinner>
-
-                            <pre></pre>
-
-                            <h:commandLink class="medium ui button" icon="ui-icon-star"
-                                           style="border-radius: 0px !important; margin-top: 50px; color: red"
-                                           actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
-                                           value="Vložiť do košíka&#160;&#160;">
-                                <!--<f:ajax onevent="handleDisableButton"/>-->
-
-                                <i class="left shop icon"></i>
-                            </h:commandLink>
                         </p:panelGrid>
+
+                        <div class="ui relaxed grid" style="margin-top: 80px">
+
+                            <div class="row">
+                                <p:spinner
+                                        id="ajaxSpinner" size="3"
+                                        min="1" title="asdw" label="wer"
+                                        value="#{shoppingCartView.shoppingCartQuantity}">
+                                    <p:ajax update="calculatorId" process="@form"/>
+                                </p:spinner>
+
+                                <ui:fragment rendered="#{itemView.selectedItem.isKg() == true}">
+                                    <h:outputText value="kg" style="margin-top: 10px; margin-left: 10px;"/>
+                                </ui:fragment>
+
+                                <ui:fragment rendered="#{itemView.selectedItem.isKg() == false}">
+                                    <h:outputText value="ks" style="margin-top: 10px; margin-left: 10px;"/>
+                                </ui:fragment>
+
+                                <h:commandLink class="medium ui button" icon="ui-icon-star"
+                                               style="border-radius: 0px !important; color: red; margin-left: 40px"
+                                               actionListener="#{shoppingCartView.addItemToCart(itemView.selectedItem)}"
+                                               value="Vložiť do košíka&#160;&#160;">
+                                    <!--<f:ajax onevent="handleDisableButton"/>-->
+
+                                    <i class="left shop icon"></i>
+                                </h:commandLink>
+                            </div>
+
+                        </div>
+
                         <!--<div class="ui label">IMAX</div>
                         <div class="ui label"><i class="globe icon"></i> Additional Languages</div>-->
                     </div>

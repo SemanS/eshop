@@ -110,6 +110,11 @@ public class Item implements Serializable {
     @Setter
     private boolean isDiscount;
 
+    @Column(name = "is_kg")
+    @Getter
+    @Setter
+    private boolean isKg;
+
     @Column(name = "image")
     @Getter
     @Setter

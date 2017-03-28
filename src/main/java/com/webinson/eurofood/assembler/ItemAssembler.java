@@ -35,6 +35,7 @@ public class ItemAssembler {
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
         dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
+        dto.setKg(model.isKg());
         return dto;
     }
 
@@ -58,6 +59,7 @@ public class ItemAssembler {
         dto.setImage(Base64.getEncoder().encodeToString(model.getImage()));
         dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
         dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
+        dto.setKg(model.isKg());
         return dto;
     }
 
@@ -80,6 +82,7 @@ public class ItemAssembler {
         model.setImage(Base64.getDecoder().decode(dto.getImage()));
         model.setPriceBruttoDiscount(dto.getPriceBruttoDiscount());
         model.setPriceNettoDiscount(dto.getPriceNettoDiscount());
+        model.setKg(dto.isKg());
         return model;
     }
 

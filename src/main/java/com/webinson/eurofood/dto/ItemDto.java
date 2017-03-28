@@ -32,4 +32,5 @@ public class ItemDto {
     private String image;
     private double priceNettoDiscount;
     private double priceBruttoDiscount;
+    private boolean isKg;
 }

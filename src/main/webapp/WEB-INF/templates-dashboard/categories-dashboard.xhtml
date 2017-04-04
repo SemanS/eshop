@@ -119,6 +119,21 @@
                                      src="data:image/png;base64,#{categoryDashboardBean.getBaseImageDescription(categoryDashboardBean.selectedCategory)}"/>
                             </div>
                         </div>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Vložiť obrázok kategórie ako podkategórie</label>
+                                <p:fileUpload id="fileUpload3" value="#{categoryDashboardBean.categoryAsSubcategoryImage}"
+                                              mode="simple" label="Vyberte obrázok"
+                                              skinSimple="true"/>
+
+                            </div>
+                            <div class="field">
+                                <label>Obrázok kategórie ako podkategórie</label>
+                                <img class="ui image"
+                                     src="data:image/png;base64,#{categoryDashboardBean.getImageAsSubcategory(categoryDashboardBean.selectedCategory)}"/>
+                            </div>
+                        </div>
                         <pre></pre>
                         <div class="field">
                             <h:commandLink id="commandLink1"
@@ -212,10 +227,16 @@
                                               skinSimple="true"/>
                             </div>
                             <div class="field">
-                                <label>Vložiť obrázok kategórie</label>
+                                <label>Vložiť podobrázok kategórie</label>
                                 <p:fileUpload id="newSubFile2" label="Vyberte obrázok"
                                               value="#{categoryDashboardBean.newSideImgDescription}"
                                               mode="simple"
+                                              skinSimple="true"/>
+                            </div>
+                            <div class="field">
+                                <label>Vložiť obrázok kategórie ako subkategórie</label>
+                                <p:fileUpload id="newSubFile3" label="Vyberte obrázok"
+                                              value="#{categoryDashboardBean.newCategoryAsSubcategoryImage}" mode="simple"
                                               skinSimple="true"/>
                             </div>
                         </div>

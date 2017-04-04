@@ -23,7 +23,7 @@
 
             <div class="item">
                 <div class="ui wide column sixteen widget">
-                    <h5>NESCAFÉ 3in1 CLASSIC CREMA 10x17s,5g</h5>
+                    <h5>#{itemView.selectedItem.header}</h5>
                     <div class="meta">
                         <span class="cinema">
 
@@ -64,18 +64,18 @@
                     <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
 
                         <span class="ui disabled header"
-                              style="margin-left:70px;text-decoration: line-through;">#{itemView.selectedItem.priceBruttoDiscount} EUR
+                              style="margin-left:70px;text-decoration: line-through;">#{itemView.selectedItem.priceBrutto} EUR
                                     </span><sub>Eur s DPH</sub>
 
                         <div class="ui grid" style="margin-top: 10px">
 
                             <div class="eight wide column right aligned">
-                                <h4><h:outputText value="#{itemView.selectedItem.priceNetto} EUR" style="border-style: solid;
+                                <h4><h:outputText value="#{itemView.selectedItem.priceNettoDiscount} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px; color:red; font-size: large"></h:outputText></h4>
                             </div>
 
                             <div class="eight wide column left aligned">
-                                <h4><h:outputText value="#{itemView.selectedItem.priceBrutto} EUR" style="border-style: solid;
+                                <h4><h:outputText value="#{itemView.selectedItem.priceBruttoDiscount} EUR" style="border-style: solid;
     border-width: 1px;  padding: 6px 15px;"></h:outputText></h4>
                             </div>
                             <div class="eight wide column right aligned" style="margin-top: -20px;">
@@ -99,7 +99,7 @@
 
                             <h:outputText value="číslo produktu:"/>
                             <h:outputText style="color: green"
-                                          value="#{itemView.selectedItem.internalNumber}"/>
+                                          value="#{itemView.selectedItem.numberOfProduct}"/>
 
                             <h:outputText value="názov produktu:"/>
                             <h:outputText style="color: red" value="#{itemView.selectedItem.header}"/>

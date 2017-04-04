@@ -155,6 +155,7 @@
     border-style: solid !important;
     border-width: thin !important;
     border-color: #000000 !important;
+    border-radius: 0.4rem !important;
 }
 
 .ui-inputfield {

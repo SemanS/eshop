@@ -15,8 +15,4 @@ public class AddressDto {
     private String lastName;
     private Long userDtoId;
 
-    public String toString() {
-        return firstName + " " + lastName + " " + street + " " + postalCode + " " + city;
-    }
-
 }

@@ -20,7 +20,7 @@
             <ui:repeat value="#{categoryView.allCategoriesByCategory()}" var="category">
                 <div class="ui small image centered" style="margin-top: 5px">
                     <h:commandLink action="#{categoryView.onCategoryTree(category)}">
-                        <img src="data:image/png;base64,#{category.image}"/>
+                        <img src="data:image/png;base64,#{categoryDashboardBean.getImageAsSubcategory(categoryDashboardBean.selectedCategory)}"/>
                     </h:commandLink>
                 </div>
             </ui:repeat>

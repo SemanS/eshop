@@ -60,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
-        return query.from(category).where(category.parent.isNotNull()).fetch();
+        return query.from(category).where(category.parent.isNotNull().or(category.parent.isNull().and(category.base.eq(false)))).fetch();
     }
 
 
@@ -68,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getRootCategories() {
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
-        return query.from(category).where(category.parent.isNull()).fetch();
+        return query.from(category).where(category.parent.isNull()).orderBy(category.position.asc()).fetch();
     }
 
     @Override
@@ -155,7 +155,6 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         Instant end = Instant.now();
-        System.out.println("buildCategories" + Duration.between(start, end));
         return rootNode1;
 
     }
@@ -170,7 +169,6 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         Instant end = Instant.now();
-        System.out.println("getCategoryRootNodeList" + Duration.between(start, end));
         return rootCategories;
     }
 
@@ -183,7 +181,6 @@ public class CategoryServiceImpl implements CategoryService {
                 /*createSubCategories(cat, subNode);*/
         }
         Instant end = Instant.now();
-        System.out.println("createSubCategories" + Duration.between(start, end));
         return categoriesList;
 
     }
@@ -197,7 +194,6 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         Instant end = Instant.now();
-        System.out.println("getSubCategories" + Duration.between(start, end));
         return subCategoriesNodeList;
     }
 
@@ -255,6 +251,7 @@ public class CategoryServiceImpl implements CategoryService {
 
                 droppedCategory.getChildren().add(draggedCategory);
                 draggedCategory.setParent(droppedCategory);
+                draggedCategory.setBase(false);
                 categoryDao.save(droppedCategory);
                 categoryDao.save(draggedCategory);
 
@@ -327,6 +324,7 @@ public class CategoryServiceImpl implements CategoryService {
                 }
             }
             draggedCategory.setParent(null);
+            draggedCategory.setBase(true);
             categoryDao.save(draggedCategory);
         }
 
@@ -348,6 +346,7 @@ public class CategoryServiceImpl implements CategoryService {
             }
             droppedCategory.getChildren().add(draggedCategory);
             draggedCategory.setParent(droppedCategory);
+            draggedCategory.setBase(false);
             categoryDao.save(draggedCategory);
         }
     }
@@ -466,7 +465,6 @@ public class CategoryServiceImpl implements CategoryService {
         /*List<Category> newList = query.from(category).fetch();*/
         List<Category> newList = query.from(category).orderBy(category.position.asc()).fetch();
         Instant end = Instant.now();
-        System.out.println("findAllSorted" + Duration.between(start, end));
         return newList;
     }
 
@@ -477,7 +475,6 @@ public class CategoryServiceImpl implements CategoryService {
         QCategory category = QCategory.category;
         List<Category> newList = query.from(category).orderBy(category.position.asc()).where(category.parent.id.eq(cat.getId())).fetch();
         Instant end = Instant.now();
-        System.out.println("findAllSubSorted" + Duration.between(start, end));
         return newList;
     }
 

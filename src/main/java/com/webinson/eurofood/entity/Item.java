@@ -120,4 +120,9 @@ public class Item implements Serializable {
     @Setter
     private byte[] image;
 
+    @Column(name = "number_of_product")
+    @Getter
+    @Setter
+    private int numberOfProduct;
+
 }

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
@@ -29,6 +30,13 @@
                 <p:ajax process="@form" listener="#{shoppingCartView.countTotalPriceNetto(cart)}"
                         update="ajaxSpinnerValue :checkoutCartForm"/>
             </p:spinner>
+            <ui:fragment rendered="#{cart.itemDto.isKg() == true}">
+                <h:outputText value="kg" style="margin-top: 10px; margin-left: 10px;"/>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{cart.itemDto.isKg() == false}">
+                <h:outputText value="ks" style="margin-top: 10px; margin-left: 10px;"/>
+            </ui:fragment>
         </p:column>
 
         <p:column headerText="JEDNOTKOVÁ CENA" style="text-align: center">

@@ -3,6 +3,8 @@ package com.webinson.eurofood.dto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.entity.Producer;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -33,4 +35,5 @@ public class ItemDto {
     private double priceNettoDiscount;
     private double priceBruttoDiscount;
     private boolean isKg;
+    private int numberOfProduct;
 }

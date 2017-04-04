@@ -67,4 +67,10 @@ public class Category implements Serializable {
     @Getter
     @Setter
     private int position;
+
+    @Column(name = "img_as_subcategory")
+    @Getter
+    @Setter
+    private byte[] imageAsSubcategory;
+
 }

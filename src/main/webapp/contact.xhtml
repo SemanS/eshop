@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <!--<link rel="stylesheet" type="text/css" href="css/icon.min.css"/>-->
+    <!-- Site Properties -->
+    <title>Eurofood</title>
+    <h:outputStylesheet name="css/styles.css"/>
+    <h:outputStylesheet name="css/semantic.min.css"/>
+</h:head>
+
+<h:body>
+    <h:outputScript name="js/semantic.min.js"/>
+    <h:outputScript name="js/init.js"/>
+
+    <!-- Page Contents -->
+    <div class="ui stackable grid container">
+
+        <div class="sixteen wide column" id="Top">
+            <ui:insert name="date">
+                <ui:include src="WEB-INF/templates/stackable-menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="three wide column" style="" id="Sidebar">
+            <ui:insert name="sideMenu">
+                <ui:include src="WEB-INF/templates/side-menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="thirteen wide column">
+
+
+            <h:outputText style="display: inline" escape="false" value="#{contentDashboardBean.kontakt}"/>
+
+
+        </div>
+
+    </div>
+    <ui:insert name="footer">
+        <ui:include src="WEB-INF/templates/footer.xhtml"/>
+    </ui:insert>
+
+</h:body>
+
+</html>

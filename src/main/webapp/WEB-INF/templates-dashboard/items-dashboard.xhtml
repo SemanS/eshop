@@ -168,8 +168,6 @@
                         </div>
                     </div>
 
-
-
                     <h:panelGroup id="foo">
                         <h:panelGroup layout="block" id="theDiv" rendered="#{itemDashboardBean.selectedItem.discount}">
                             <!--<ui:fragment id="discountCheckbox" rendered="#{itemDashboardBean.discountCheckbox == true}">-->
@@ -209,6 +207,37 @@
                                  src="data:image/png;base64,#{itemDashboardBean.getBaseImage(itemDashboardBean.selectedItem)}"/>
                         </div>
                     </div>
+                    <label>Vložiť číslo produktu</label>
+                    <div class="field">
+                        <p:inputText id="cisloProduktu" styleClass="nonBorder"
+                                     value="#{itemDashboardBean.selectedItem.numberOfProduct}"
+                                     placeholder="Zadajte číslo produktu"
+                                     type="text"/>
+                    </div>
+
+
+                    <label>Kusov v kartóne --------------- Kartónov na palete ----------- Kusov na palete</label>
+                    <div class="fields">
+                    <div class="field">
+                        <p:inputText styleClass="nonBorder"
+                                     value="#{itemDashboardBean.selectedItem.piecesInCarton}"
+                                     placeholder="Zadajte číslo produktu"
+                                     type="text"/>
+                    </div>
+                    <div class="field">
+                        <p:inputText styleClass="nonBorder"
+                                     value="#{itemDashboardBean.selectedItem.cartonInPalette}"
+                                     placeholder="Zadajte číslo produktu"
+                                     type="text"/>
+                    </div>
+                    <div class="field">
+                        <p:inputText styleClass="nonBorder"
+                                     value="#{itemDashboardBean.selectedItem.piecesInPalette}"
+                                     placeholder="Zadajte číslo produktu"
+                                     type="text"/>
+                    </div>
+                    </div>
+
 
                     <label>Kategória produktu:</label>
                     <div class="field">

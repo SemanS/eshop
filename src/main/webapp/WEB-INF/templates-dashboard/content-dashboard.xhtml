@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!--xmlns:h="http://java.sun.com/jsf/html"-->
+<pre></pre>
+
+
+<div class="ui stackable grid">
+    <div class="one wide column"></div>
+
+    <div id="categoryDetailId" class="ui form eight wide column">
+
+        <p:tabView id="tabView">
+
+
+                <p:tab title="O nás">
+                    <h:form id="tab1" enctype="multipart/form-data">
+
+                        <p:textEditor widgetVar="editor1" value="#{contentDashboardBean.ONas}" height="300"
+                                      style="margin-bottom:10px" placeholder="Napíšte niečo o nás">
+                        </p:textEditor>
+                        <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: blue"
+                                       action="#{contentDashboardBean.onSaveONas()}"
+                                       value="Uložiť o nás">
+                        </h:commandLink>
+                    </h:form>
+                </p:tab>
+
+
+                <p:tab title="Rozvoz">
+                    <h:form id="tab2" enctype="multipart/form-data">
+
+                        <p:textEditor widgetVar="editor2" value="#{contentDashboardBean.rozvoz}" height="300"
+                                      style="margin-bottom:10px" placeholder="Napíšte niečo o rozvoze">
+                        </p:textEditor>
+
+
+                        <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: blue"
+                                       action="#{contentDashboardBean.onSaveRozvoz()}"
+                                       value="Uložiť rozvoz">
+                        </h:commandLink>
+                    </h:form>
+                </p:tab>
+
+
+                <p:tab title="Kontakt">
+                    <h:form id="tab3" enctype="multipart/form-data">
+                        <p:textEditor widgetVar="editor3" value="#{contentDashboardBean.kontakt}" height="300"
+                                      style="margin-bottom:10px" placeholder="Napíšte niečo o kontakte">
+                        </p:textEditor>
+
+                        <h:commandLink class="medium ui button left floated" icon="ui-icon-star"
+                                       style="border-radius: 0px !important; color: blue"
+                                       action="#{contentDashboardBean.onSaveKontakt()}"
+                                       value="Uložiť kontakt">
+                        </h:commandLink>
+                    </h:form>
+                </p:tab>
+
+
+
+
+        </p:tabView>
+
+
+        <div class="one wide column"></div>
+    </div>
+</div>
+
+</html>

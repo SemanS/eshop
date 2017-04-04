@@ -34,7 +34,11 @@ public class RewriteConfigApp extends HttpConfigurationProvider {
                 .addRule(Join.path("/checkout").to("/checkout.xhtml"))
                 /*.addRule(Join.path("/store").to("/eshop.xhtml"))*/
                 .addRule(Join.path("/user-login").to("/userLogin.xhtml"))
-                .addRule(Join.path("/checkoutCart").to("/checkoutCart.xhtml"));
+                .addRule(Join.path("/checkoutCart").to("/checkoutCart.xhtml"))
+                .addRule(Join.path("/o-nas").to("/aboutUs.xhtml"))
+                .addRule(Join.path("/rozvoz").to("/rozvoz.xhtml"))
+                .addRule(Join.path("/kontakt").to("/contact.xhtml"))
+                .addRule(Join.path("/nase-akcie").to("/ourDiscounts.xhtml"));
 
                 /*.addRule(Join.path("/store/{itemUrl}/").to("/itemDetail.xhtml"))
                 .where("itemUrl")

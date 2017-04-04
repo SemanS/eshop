@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!-- Site Properties -->
+    <title>Dashboard</title>
+
+    <h:outputStylesheet name="css/semantic.min.css"/>
+    <h:outputStylesheet name="css/styles.css"/>
+
+</h:head>
+
+<h:body>
+
+    <h:outputScript name="js/init.js"/>
+    <h:outputScript name="js/semantic.min.js"/>
+
+
+    <ui:insert name="attachedMenu">
+        <ui:include src="WEB-INF/templates-dashboard/attached-menu-dashboard.xhtml"/>
+    </ui:insert>
+
+    <ui:insert name="attachedMenu">
+        <ui:include src="WEB-INF/templates-dashboard/content-dashboard.xhtml"/>
+    </ui:insert>
+
+
+</h:body>
+
+</html>

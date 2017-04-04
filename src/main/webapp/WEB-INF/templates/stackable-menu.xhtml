@@ -46,34 +46,34 @@
         <div class="ui thirteen wide column">
             <img class="ui fluid image" style=" z-index: -1;" src="#{resource['images/header.jpg']}"/>
             <div style="margin-top: -80px">
-                <h:outputLink class="ui button itemSideMenu"
-                              style="color:black !important;border-radius: 0px !important;">
+                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/o-nas"
+                              style="color:black !important;">
                     O spoločnosti
                 </h:outputLink>
-                <h:outputLink class="ui button itemSideMenu"
-                              style="color:black !important;border-radius: 0px !important;">
-                    Pre dodávateľa
+                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/rozvoz"
+                              style="color:black !important;">
+                    Rozvoz
                 </h:outputLink>
                 <h:outputLink class="ui button itemSideMenu"
-                              style="color:red !important;border-radius: 0px !important;">
+                              style="color:red !important;">
                     E-Shop
                 </h:outputLink>
-                <h:outputLink class="ui button itemSideMenu"
-                              style="color:black !important;border-radius: 0px !important;">
+                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/nase-akcie"
+                              style="color:black !important;">
                     Naše akcie
                 </h:outputLink>
-                <h:outputLink class="ui button itemSideMenu"
-                              style="color:black !important;border-radius: 0px !important;">
+                <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/kontakt"
+                              style="color:black !important;">
                     Kontakt
                 </h:outputLink>
 
                 <ui:fragment rendered="#{registerBean.currentUserName() == 'anonymousUser'}">
                     <h:outputLink value="#{request.contextPath}/registration" class="ui button itemSideMenu"
-                                  style="color:black !important;border-radius: 0px !important;">
+                                  style="color:black !important;">
                         Registrácia
                     </h:outputLink>
                     <h:outputLink value="#{request.contextPath}/user-login" class="ui button itemSideMenu"
-                                  style="color:black !important;border-radius: 0px !important;">
+                                  style="color:black !important;">
                         Prihlásenie
                     </h:outputLink>
 
@@ -81,7 +81,7 @@
 
                 <ui:fragment rendered="#{registerBean.currentUserName() != 'anonymousUser'}">
                     <h:outputLink class="ui button itemSideMenu"
-                                  style="color:black !important;border-radius: 0px !important;"
+                                  style="color:black !important;"
                                   value="${pageContext.request.contextPath}/logout">Odhlásiť:
                         <h:outputText value="#{registerBean.currentUserName()}"/>
                     </h:outputLink>
@@ -89,14 +89,14 @@
 
                 <ui:fragment rendered="#{shoppingCartView.cartItemDtos.size() > 0}">
                     <h:outputLink class="ui button itemSideMenu" value="${pageContext.request.contextPath}/checkoutCart"
-                                  style="color:black !important;border-radius: 0px !important;">
+                                  style="color:black !important;">
                         Môj košík
                     </h:outputLink>
                 </ui:fragment>
 
                 <ui:fragment rendered="#{registerBean.currentRole() == true}">
                     <h:outputLink class="ui button itemSideMenu"
-                                  style="color:black !important;border-radius: 0px !important;"
+                                  style="color:black !important;"
                                   value="${pageContext.request.contextPath}/dashboard">Dashboard
                     </h:outputLink>
                 </ui:fragment>

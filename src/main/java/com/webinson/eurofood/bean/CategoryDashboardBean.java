@@ -110,6 +110,14 @@ public class CategoryDashboardBean implements Serializable {
 
     @Getter
     @Setter
+    private UploadedFile categoryAsSubcategoryImage;
+
+    @Getter
+    @Setter
+    private UploadedFile newCategoryAsSubcategoryImage;
+
+    @Getter
+    @Setter
     private TreeNode selectedNode = new DefaultTreeNode();
 
     @Getter
@@ -169,6 +177,7 @@ public class CategoryDashboardBean implements Serializable {
         Category category = new Category();
         category.setName(inputRootCategory.getName());
         category.setUrl(inputRootCategory.getUrl());
+        category.setBase(true);
         if (newRootFile.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(newRootFile.getInputstream()));
         }
@@ -187,6 +196,7 @@ public class CategoryDashboardBean implements Serializable {
         Category category = new Category();
         category.setName(inputSubCategory.getName());
         category.setUrl(inputSubCategory.getUrl());
+        category.setBase(false);
         if (newSideImg.getSize() != 0) {
             category.setImage(IOUtils.toByteArray(newSideImg.getInputstream()));
         }
@@ -217,6 +227,15 @@ public class CategoryDashboardBean implements Serializable {
         }
         String newImage = "";
         newImage = Base64.getEncoder().encodeToString(category.getImageDescription());
+        return newImage;
+    }
+
+    public String getImageAsSubcategory(Category category) {
+        if (category.getImageAsSubcategory() == null) {
+            return "";
+        }
+        String newImage = "";
+        newImage = Base64.getEncoder().encodeToString(category.getImageAsSubcategory());
         return newImage;
     }
 

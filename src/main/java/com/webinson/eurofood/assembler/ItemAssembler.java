@@ -36,6 +36,7 @@ public class ItemAssembler {
         dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
         dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
         dto.setKg(model.isKg());
+        dto.setNumberOfProduct(model.getNumberOfProduct());
         return dto;
     }
 
@@ -60,6 +61,7 @@ public class ItemAssembler {
         dto.setPriceBruttoDiscount(model.getPriceBruttoDiscount());
         dto.setPriceNettoDiscount(model.getPriceNettoDiscount());
         dto.setKg(model.isKg());
+        dto.setNumberOfProduct(model.getNumberOfProduct());
         return dto;
     }
 
@@ -83,6 +85,7 @@ public class ItemAssembler {
         model.setPriceBruttoDiscount(dto.getPriceBruttoDiscount());
         model.setPriceNettoDiscount(dto.getPriceNettoDiscount());
         model.setKg(dto.isKg());
+        model.setNumberOfProduct(dto.getNumberOfProduct());
         return model;
     }
 

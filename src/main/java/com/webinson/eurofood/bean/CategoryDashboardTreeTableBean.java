@@ -30,8 +30,6 @@ public class CategoryDashboardTreeTableBean {
     @Autowired
     CategoryService categoryService;
 
-
-
     @PostConstruct
     public void init() {
         rootCategories = categoryService.buildCategories();
@@ -41,7 +39,15 @@ public class CategoryDashboardTreeTableBean {
         TreeNode dragNode = event.getDragNode();
         TreeNode dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
-        categoryService.saveSelectedTreeNode(dragNode, dropNode, dropIndex);
+
+        Category droppedCategory = (Category) dragNode.getData();
+
+        if (droppedCategory.getParent() == null) {
+            categoryService.saveSelectedTreeNode(dragNode, dropNode, dropIndex);
+        }
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful", "Your message: "));
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dragged " + dragNode.getData(), "Dropped on " + dropNode.getData() + " at " + dropIndex);
         FacesContext.getCurrentInstance().addMessage(null, message);

@@ -1,3 +1,6 @@
+div.inline { float:left; }
+.clearBoth { clear:both; }
+
 .center-image {
     display: block !important;
     margin: 0 auto !important;
@@ -141,7 +144,8 @@
 }
 
 .landing-image {
-    background-image: url('../../resources/images/header.png') !important;
+    /*background-image: url('../../resources/images/header.png') !important;*/
+    background-image: url("#{resource['images:header.png']}") !important;
     background-size: cover !important;
 }
 
@@ -155,7 +159,7 @@
     border-style: solid !important;
     border-width: thin !important;
     border-color: #000000 !important;
-    border-radius: 0.4rem !important;
+    border-radius: 0.1rem !important;
 }
 
 .ui-inputfield {
@@ -249,18 +253,14 @@
 .calculator {
     height: 108px;
     width: 493px;
-    background-image: url(../../resources/images/calculator_new.png) !important;
+    /*background-image: url(../../resources/images/calculator_new.png) !important;*/
+    background-image: url("#{resource['images:calculator_new.png']}") !important;
     background-repeat: no-repeat !important;
 }
 
 div.inline {
     float: left;
 }
-
-/*
-body {
-    font-family: 'Calculator Script MT Regular' !important;
-}*/
 
 .centeredColumn {
     /*margin: 50px auto;*/
@@ -270,6 +270,14 @@ body {
     bottom: 72px !important;
     float: right;
 
+}
+
+html {
+    /*background-image: url("../../resources/images/background.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
 }
 
 .leftColumn {
@@ -313,12 +321,15 @@ body {
 
 .menuImage {
     height: 225px;
-    background-image: url(../../resources/images/header.jpg) !important;
+    /*background-image: url(../../resources/images/header.jpg) !important;*/
+    background-image: url("#{resource['images:header.jpg']}") !important;
     background-repeat: no-repeat !important;
 }
 
 .logoEurofood {
-    background-image: url(../../resources/images/logo_eurofood.jpg) !important;
+    /*background-image: url(../../resources/images/logo_eurofood.jpg) !important;*/
+    background-image: url("#{resource['images:logo_eurofood.jpg']}") !important;
+
 }
 
 .column1centered, .column2centered {

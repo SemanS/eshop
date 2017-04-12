@@ -1,6 +1,7 @@
 package com.webinson.eurofood;
 
 
+import it.ozimov.springboot.mail.configuration.EnableEmailTools;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.primefaces.webapp.filter.FileUploadFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ import java.util.Map;
         maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 @EnableCaching
 @EnableScheduling
+@EnableEmailTools
 public class ApplicationConfig extends SpringBootServletInitializer {
 
     @Value("${spring.datasource.driverClassName}")

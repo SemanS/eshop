@@ -11,4 +11,8 @@ public interface StaticContentService {
 
     String getKontaktContent();
 
+    String getCarousel1();
+
+    String getCarousel2();
+
 }

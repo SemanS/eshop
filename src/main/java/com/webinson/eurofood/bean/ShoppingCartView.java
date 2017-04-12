@@ -121,8 +121,16 @@ public class ShoppingCartView {
                 cartItemDto.setQuantity(shoppingCartQuantity);
                 cartItemDto.setItemDto(itemDto);
                 counter = counter + shoppingCartQuantity;
-                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
-                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+
+                if (itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNettoDiscount();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBruttoDiscount();
+                }
+                if (!itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                }
+
                 this.cartItemDtos.add(cartItemDto);
             } else {
                 for (CartItemDto cartI : cartItemDtos) {
@@ -138,15 +146,27 @@ public class ShoppingCartView {
                         cartI.setQuantity(counterOfProduct);
                     }
                 }
-                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
-                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                if (itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNettoDiscount();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBruttoDiscount();
+                }
+                if (!itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                }
                 counter = counter + shoppingCartQuantity;
 
 
             } else if (cartItemDtos.size() != 1) {
                 counter = counter + shoppingCartQuantity;
-                counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
-                counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                if (itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNettoDiscount();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBruttoDiscount();
+                }
+                if (!itemDto.isDiscount()) {
+                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                }
                 cartItemDto.setItemId(itemDto.getId());
                 cartItemDto.setItemDto(itemDto);
                 cartItemDto.setQuantity(0);
@@ -163,8 +183,14 @@ public class ShoppingCartView {
                     cartItemDto.setItemId(itemDto.getId());
                     cartItemDto.setItemDto(itemDto);
                     cartItemDto.setQuantity(shoppingCartQuantity);
-                    counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
-                    counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                    if (itemDto.isDiscount()) {
+                        counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNettoDiscount();
+                        counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBruttoDiscount();
+                    }
+                    if (!itemDto.isDiscount()) {
+                        counterNetto = counterNetto + shoppingCartQuantity * itemDto.getPriceNetto();
+                        counterBrutto = counterBrutto + shoppingCartQuantity * itemDto.getPriceBrutto();
+                    }
                     this.cartItemDtos.add(cartItemDto);
                     counter = counter + shoppingCartQuantity;
                 }
@@ -184,7 +210,7 @@ public class ShoppingCartView {
 
         counterNetto = 0.0;
         for (CartItemDto cItemDto : cartItemDtos) {
-            if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()){
+            if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()) {
                 counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cartItemDto.getQuantity();
             } else {
                 counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cItemDto.getQuantity();
@@ -204,11 +230,10 @@ public class ShoppingCartView {
     }
 
 
-
     public void onDeleteItem(CartItemDto cartItemDto) throws IOException {
         String redirectOption;
         for (CartItemDto cItemDto : cartItemDtos) {
-            if (cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()) {
+            if (cartItemDto.getItemDto().getHeader().equals(cItemDto.getItemDto().getHeader())) {
                 cartItemDtos.remove(cItemDto);
             }
         }

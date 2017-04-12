@@ -18,4 +18,5 @@ public class CategoryDto {
     private boolean base;
     private String url;
     private String imageDescription;
+    private String subcategoryImageDescription;
 }

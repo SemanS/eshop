@@ -1,6 +1,7 @@
 package com.webinson.eurofood.bean;
 
 import com.webinson.eurofood.dao.CategoryDao;
+import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
 import com.webinson.eurofood.service.CategoryService;
 import lombok.Getter;
@@ -47,14 +48,6 @@ public class CategoryDashboardBean implements Serializable {
     @Setter
     private List<Category> categories;
 
-    /*@Getter
-    @Setter
-    private String selectedRootCategory;*/
-
-    /*@Getter
-    @Setter
-    private String selectedSubCategory;*/
-
     @Getter
     @Setter
     private Category inputRootCategory;
@@ -88,6 +81,11 @@ public class CategoryDashboardBean implements Serializable {
     @Setter
     private UploadedFile imgDescription;
 
+    /*Third image*/
+    @Getter
+    @Setter
+    private UploadedFile imgCategoryAsSubcategoryImage;
+
     /*Main image of new root category*/
     @Getter
     @Setter
@@ -115,6 +113,10 @@ public class CategoryDashboardBean implements Serializable {
     @Getter
     @Setter
     private UploadedFile newCategoryAsSubcategoryImage;
+
+    @Getter
+    @Setter
+    private UploadedFile newSideCategoryAsSubcategoryImage;
 
     @Getter
     @Setter
@@ -166,6 +168,10 @@ public class CategoryDashboardBean implements Serializable {
         if (imgDescription.getSize() != 0) {
             category.setImageDescription(IOUtils.toByteArray(imgDescription.getInputstream()));
         }
+        if (imgCategoryAsSubcategoryImage.getSize() != 0) {
+            category.setImageAsSubcategory(IOUtils.toByteArray(imgCategoryAsSubcategoryImage.getInputstream()));
+        }
+
         categoryDao.save(category);
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         context.redirect(context.getRequestContextPath());
@@ -182,7 +188,10 @@ public class CategoryDashboardBean implements Serializable {
             category.setImage(IOUtils.toByteArray(newRootFile.getInputstream()));
         }
         if (newImgDescription.getSize() != 0) {
-            category.setImage(IOUtils.toByteArray(newImgDescription.getInputstream()));
+            category.setImageDescription(IOUtils.toByteArray(newImgDescription.getInputstream()));
+        }
+        if (newCategoryAsSubcategoryImage.getSize() != 0) {
+            category.setImageAsSubcategory(IOUtils.toByteArray(newCategoryAsSubcategoryImage.getInputstream()));
         }
         category.setPosition(categoryService.findLastRootPosition());
         categoryService.saveRootCategory(category);
@@ -201,7 +210,10 @@ public class CategoryDashboardBean implements Serializable {
             category.setImage(IOUtils.toByteArray(newSideImg.getInputstream()));
         }
         if (newSideImgDescription.getSize() != 0) {
-            category.setImage(IOUtils.toByteArray(newSideImgDescription.getInputstream()));
+            category.setImageDescription(IOUtils.toByteArray(newSideImgDescription.getInputstream()));
+        }
+        if (newSideCategoryAsSubcategoryImage.getSize() != 0) {
+            category.setImageAsSubcategory(IOUtils.toByteArray(newSideCategoryAsSubcategoryImage.getInputstream()));
         }
         category.setParent(categoryDao.findByName(selectedRootCategoryAdd));
         category.setPosition(categoryService.findLastPositionByCategoryForBean(categoryDao.findByName(selectedRootCategoryAdd)));
@@ -240,7 +252,9 @@ public class CategoryDashboardBean implements Serializable {
     }
 
     public void onDeleteCategory() throws IOException {
-        categoryService.deleteCategory(inputSelectedRootCategory);
+        if (selectedCategory != null) {
+            categoryService.deleteCategory(selectedCategory);
+        }
         FacesContext.getCurrentInstance().getExternalContext().redirect("/dashboard-categories.xhtml");
     }
 

@@ -15,7 +15,11 @@
         border: none !important;
     }
 </style>
-<h:body>
+<h:body style="background: url('#{resource['images:background.jpg']}') center center no-repeat fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;">
 
     <div class="ui grid">
         <div class="sixteen wide column">
@@ -27,13 +31,13 @@
                         <!--<p:graphicImage name="resources/images/slide1.PNG"/>-->
 
                         <img class="ui fluid image"
-                             src="resources/images/slide1.jpg"/>
+                             src="data:image/png;base64,#{contentDashboardBean.carousel1Content}"/>
                     </h:panelGrid>
                 </p:tab>
                 <p:tab title="Godfather Part II">
                     <h:panelGrid columns="2" cellpadding="10">
                         <img class="ui fluid image"
-                             src="resources/images/slide2.jpg"/>
+                             src="data:image/png;base64,#{contentDashboardBean.carousel2Content}"/>
                     </h:panelGrid>
                 </p:tab>
             </p:carousel>

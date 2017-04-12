@@ -21,14 +21,15 @@
     <div class="one wide column"></div>
     <h:form id="treeForm">
 
-
         <div class="four wide column">
+            <p:growl id="growl" showDetail="true" sticky="true" />
+            <p:outputLabel for="tree2" value="Message:" />
             <p:tree id="tree2" value="#{categoryDashboardTreeTableBean.rootCategories}" var="node"
                     selectionMode="single"
                     selection="#{categoryDashboardBean.selectedNode}"
                     draggable="true" droppable="true" dragdropScope="demo">
                 <p:ajax event="dragdrop" listener="#{categoryDashboardTreeTableBean.onDragDrop}"
-                        update=":tabView:tab1"/>
+                        update=":tabView:tab1 treeForm:growl"/>
                 <p:ajax event="select" update=":treeForm :tabView:tab1"
                         listener="#{categoryDashboardBean.TreeNodeToCategory}"/>
                 <p:treeNode>
@@ -111,7 +112,6 @@
                                 <p:fileUpload id="fileUpload2" value="#{categoryDashboardBean.imgDescription}"
                                               mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
-
                             </div>
                             <div class="field">
                                 <label>Obrázok kategórie</label>
@@ -123,10 +123,9 @@
                         <div class="two fields">
                             <div class="field">
                                 <label>Vložiť obrázok kategórie ako podkategórie</label>
-                                <p:fileUpload id="fileUpload3" value="#{categoryDashboardBean.categoryAsSubcategoryImage}"
+                                <p:fileUpload id="fileUpload3" value="#{categoryDashboardBean.imgCategoryAsSubcategoryImage}"
                                               mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
-
                             </div>
                             <div class="field">
                                 <label>Obrázok kategórie ako podkategórie</label>
@@ -177,7 +176,7 @@
                                              type="text"/>
                             </div>
                         </div>
-                        <div class="two fields">
+                        <div class="three fields">
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
                                 <p:fileUpload id="newFileUpload" value="#{categoryDashboardBean.newRootFile}"
@@ -187,6 +186,12 @@
                             <div class="field">
                                 <label>Vložiť pod obrázok kategórie</label>
                                 <p:fileUpload id="newFileUpload3" value="#{categoryDashboardBean.newImgDescription}"
+                                              mode="simple" label="Vyberte obrázok"
+                                              skinSimple="true"/>
+                            </div>
+                            <div class="field">
+                                <label>Vložiť pod obrázok kategórie</label>
+                                <p:fileUpload id="newFileUpload4" value="#{categoryDashboardBean.newCategoryAsSubcategoryImage}"
                                               mode="simple" label="Vyberte obrázok"
                                               skinSimple="true"/>
                             </div>
@@ -219,7 +224,7 @@
                             </div>
                         </div>
 
-                        <div class="two fields">
+                        <div class="three fields">
                             <div class="field">
                                 <label>Vložiť obrázok kategórie</label>
                                 <p:fileUpload id="newSubFile" label="Vyberte obrázok"
@@ -236,7 +241,7 @@
                             <div class="field">
                                 <label>Vložiť obrázok kategórie ako subkategórie</label>
                                 <p:fileUpload id="newSubFile3" label="Vyberte obrázok"
-                                              value="#{categoryDashboardBean.newCategoryAsSubcategoryImage}" mode="simple"
+                                              value="#{categoryDashboardBean.newSideCategoryAsSubcategoryImage}" mode="simple"
                                               skinSimple="true"/>
                             </div>
                         </div>

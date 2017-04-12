@@ -64,8 +64,39 @@
                     </h:form>
                 </p:tab>
 
+            <p:tab title="Carousel">
+                <h:form id="tab4" enctype="multipart/form-data">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Vložiť pod obrázok kategórie</label>
+                            <p:fileUpload id="fileUpload1" value="#{contentDashboardBean.carousel1}"
+                                          mode="simple" label="Vyberte obrázok"
+                                          skinSimple="true"/>
 
+                        </div>
+                        <div class="field">
+                            <label>Obrázok kategórie</label>
+                            <img class="ui image"
+                                 src="data:image/png;base64,#{contentDashboardBean.carousel1Content}"/>
+                        </div>
+                    </div>
 
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Vložiť pod obrázok kategórie</label>
+                            <p:fileUpload id="fileUpload2" value="#{categoryDashboardBean.carouse2}"
+                                          mode="simple" label="Vyberte obrázok"
+                                          skinSimple="true"/>
+
+                        </div>
+                        <div class="field">
+                            <label>Obrázok kategórie</label>
+                            <img class="ui image"
+                                 src="data:image/png;base64,#{contentDashboardBean.carousel2Content}"/>
+                        </div>
+                    </div>
+                </h:form>
+            </p:tab>
 
         </p:tabView>
 

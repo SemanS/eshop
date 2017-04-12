@@ -41,15 +41,6 @@ public class CategoryTreeTableBean {
     @Setter
     private List<Category> categories;
 
-    /*@Getter
-    @Setter
-    private TreeNode selectedNode = new DefaultTreeNode();
-
-    @Getter
-    @Setter
-    private TreeNode expandedNodeTree = new DefaultTreeNode();*/
-
-
     @Autowired
     CategoryService categoryService;
 

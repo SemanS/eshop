@@ -3,9 +3,12 @@ package com.webinson.eurofood.service.impl;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.webinson.eurofood.assembler.CategoryAssembler;
 import com.webinson.eurofood.dao.CategoryDao;
+import com.webinson.eurofood.dao.ItemDao;
 import com.webinson.eurofood.dto.CategoryDto;
 import com.webinson.eurofood.entity.Category;
+import com.webinson.eurofood.entity.Item;
 import com.webinson.eurofood.entity.QCategory;
+import com.webinson.eurofood.entity.QItem;
 import com.webinson.eurofood.service.CategoryService;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +36,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     CategoryDao categoryDao;
+
+    @Autowired
+    ItemDao itemDao;
 
     @Autowired
     CategoryAssembler categoryAssembler;
@@ -432,6 +438,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         categoryDao.removeById(category.getId());
+
+        final JPAQuery<Item> query = new JPAQuery<>(entityManager);
+        QItem item = QItem.item;
+        List<Item> items = query.from(item).select(item).where(item.category.id.eq(category.getId())).fetch();
+        itemDao.delete(items);
     }
 
     @Override
@@ -446,35 +457,28 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findChildrenOfCategory(Long id) {
-        List<Category> categoriesList;
-        categoriesList = categoryDao.findById(id).getChildren();
+
+        //List<Category> categoriesList1 = categoryDao.findById(id).getChildren();
+        final JPAQuery<Category> query = new JPAQuery<>(entityManager);
+        QCategory category = QCategory.category;
+        List<Category> categoriesList = query.from(category).where(category.parent.id.eq(id)).orderBy(category.position.asc()).fetch();
         return categoriesList;
     }
 
-    /*@Override
-    public TreeNode cachedTreeNode() {
-        rootNode = getRootNode();
-        return rootNode;
-    }*/
-
     @Cacheable("newList")
     public List<Category> findAllSorted() {
-        Instant start = Instant.now();
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
         /*List<Category> newList = query.from(category).fetch();*/
         List<Category> newList = query.from(category).orderBy(category.position.asc()).fetch();
-        Instant end = Instant.now();
         return newList;
     }
 
     @Cacheable("newList")
     public List<Category> findAllSubSorted(Category cat) {
-        Instant start = Instant.now();
         final JPAQuery<Category> query = new JPAQuery<>(entityManager);
         QCategory category = QCategory.category;
         List<Category> newList = query.from(category).orderBy(category.position.asc()).where(category.parent.id.eq(cat.getId())).fetch();
-        Instant end = Instant.now();
         return newList;
     }
 

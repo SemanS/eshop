@@ -36,6 +36,11 @@ public class CategoryAssembler {
         } else {
             dto.setImageDescription(Base64.getEncoder().encodeToString(model.getImageDescription()));
         }
+        if (model.getImageAsSubcategory() == null) {
+            dto.setSubcategoryImageDescription("");
+        } else {
+            dto.setSubcategoryImageDescription(Base64.getEncoder().encodeToString(model.getImageAsSubcategory()));
+        }
         dto.setChildren(categoryAssembler.toDtos(model.getChildren()));
         return dto;
     }

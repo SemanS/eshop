@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:form id="calculatorId">
@@ -29,7 +30,20 @@
             </div>
 
         </div>
+        <div class="four wide column ui fluid image">
+            <ui:fragment rendered="#{shoppingCartView.cartItemDtos.size() > 0}">
 
+                <div class="ui small image centered" style="margin-left: -60px; height: 100px; width:100px">
+                    <h:outputLink value="${pageContext.request.contextPath}/checkoutCart"
+                                  action="#{itemView.onItem(item)}">
+
+                        <img src="../../resources/images/kosik.png"/>
+                        <!--src="url('#{resource['images:kosik.png']}') !important;"-->
+                    </h:outputLink>
+                </div>
+
+            </ui:fragment>
+        </div>
     </div>
 
 </h:form>

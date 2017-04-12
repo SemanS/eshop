@@ -7,6 +7,7 @@ import com.webinson.eurofood.service.StaticContentService;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
+import java.util.Base64;
 
 /**
  * Created by Slavo on 4/4/2017.
@@ -42,9 +44,27 @@ public class ContentDashboardBean {
     @Setter
     private String kontakt;
 
+    @Getter
+    @Setter
+    private String carousel1Content;
+
+    @Getter
+    @Setter
+    private String carousel2Content;
+
+    @Getter
+    @Setter
+    private UploadedFile carousel1;
+
+    @Getter
+    @Setter
+    private UploadedFile carousel2;
+
     @PostConstruct
     public void init() {
 
+        carousel1Content = contentService.getCarousel1();
+        carousel2Content = contentService.getCarousel2();
         oNas = contentService.getONasContent();
         rozvoz = contentService.getRozvozContent();
         kontakt = contentService.getKontaktContent();

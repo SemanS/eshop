@@ -73,26 +73,26 @@
     </p:tree>-->
 
 
-    <div class="ui accordion">
+    <div class="ui accordion" dir="rtl">
+
         <ui:repeat value="#{categoryTreeTableBean.categories}" var="category">
-            <div class="title">
+            <span class="title inline" style="display:inline">
 
-
-                <h:commandLink action="#{categoryView.onCategory(category)}">
+                <h:commandLink action="#{categoryView.onCategory(category)}" styleClass="inline">
                     <!--<h:outputText value="#{category.name}"/>-->
-                    <img class="ui image small inline"
+                    <img class="ui image small inline" style="margin-bottom: 3px;"
                          src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(category)}"/>
                 </h:commandLink>
                 <ui:fragment rendered="#{category.children.size() > 0}">
                     <i class="plus icon"></i>
                 </ui:fragment>
 
-            </div>
+            </span>
             <div class="content">
                 <ui:repeat value="#{categoryTreeTableBean.getChildrenOfCategory(category.id)}" var="node">
                     <h:commandLink action="#{categoryView.onCategory(node)}">
                         <!--<h:outputText value="#{node.name}"/>-->
-                        <img class="ui image small"
+                        <img class="ui image small" style="margin-bottom: 3px;"
                              src="data:image/png;base64,#{categoryDashboardBean.getBaseImage(node)}"/>
                     </h:commandLink>
                 </ui:repeat>

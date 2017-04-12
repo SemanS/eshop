@@ -1,8 +1,14 @@
 package com.webinson.eurofood.bean;
 
+import com.google.common.collect.Lists;
 import com.webinson.eurofood.dto.AddressDto;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.service.UserService;
+
+
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +19,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.mail.internet.InternetAddress;
 import javax.validation.constraints.*;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -88,9 +97,12 @@ public class RegisterBean {
     private String subscribed = "Yes";
 
     @Autowired
+    public EmailService emailService;
+
+    @Autowired
     private UserService userService;
 
-    public String updateData() {
+    public String updateData() throws UnsupportedEncodingException {
         UserDto userDto = new UserDto();
         AddressDto addressDto = new AddressDto();
         Set<AddressDto> addressDtos = new HashSet<AddressDto>();
@@ -109,6 +121,14 @@ public class RegisterBean {
         userDto.setCompany(company);
         userDto.setPhoneNumber(phoneNumber);
         userDto.setAddressDtos(addressDtos);
+
+        final Email email = DefaultEmail.builder()
+                .from(new InternetAddress("ceo@webinson.com", "Správa od eurofood.sk"))
+                .to(Lists.newArrayList(new InternetAddress(userDto.getEmail(), "Správa od eurofood.sk")))
+                .subject("Správa od eurofood.sk" + "pre" + userDto.getEmail())
+                .body("Boli ste zaregistrovaný v systéme eurofood.sk. Prajeme príjemné nakupovanie.")
+                .encoding("UTF-8").build();
+        emailService.send(email);
 
         userService.registerNewUserAccount(userDto);
         return "confirmation?faces-redirect=true";

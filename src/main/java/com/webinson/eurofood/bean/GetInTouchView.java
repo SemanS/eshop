@@ -1,9 +1,9 @@
 package com.webinson.eurofood.bean;
 
 import com.google.common.collect.Lists;
-import it.ozimov.springboot.templating.mail.model.Email;
+/*import it.ozimov.springboot.templating.mail.model.Email;
 import it.ozimov.springboot.templating.mail.model.impl.EmailImpl;
-import it.ozimov.springboot.templating.mail.service.EmailService;
+import it.ozimov.springboot.templating.mail.service.EmailService;*/
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ import java.nio.charset.Charset;
 @ViewScoped
 public class GetInTouchView {
 
-    @Autowired
-    public EmailService emailService;
+   /* @Autowired
+    public EmailService emailService;*/
 
     @Getter
     @Setter
@@ -37,7 +37,7 @@ public class GetInTouchView {
     @Setter
     private String email;
 
-    public String updateData() throws UnsupportedEncodingException {
+    /*public String updateData() throws UnsupportedEncodingException {
         final Email email = EmailImpl.builder()
                 .from(new InternetAddress("ceo@webinson.com", "Message from webinson"))
                 .to(Lists.newArrayList(new InternetAddress(getEmail(), "asd")))
@@ -47,6 +47,6 @@ public class GetInTouchView {
 
         emailService.send(email);
         return "confirmation?faces-redirect=true";
-    }
+    }*/
 
 }

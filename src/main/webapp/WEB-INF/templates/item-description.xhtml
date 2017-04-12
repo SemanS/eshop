@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:body>
+<h:body >
     <h:form>
         <!--<style>
 
@@ -64,8 +64,8 @@
                     <ui:fragment rendered="#{itemView.selectedItem.discount == true}">
 
                         <span class="ui disabled header"
-                              style="margin-left:70px;text-decoration: line-through;">#{itemView.selectedItem.priceBrutto} EUR
-                                    </span><sub>Eur s DPH</sub>
+                              style="margin-left:70px;text-decoration: line-through;">#{itemView.selectedItem.priceNetto} EUR
+                                    </span><sub>Eur bez DPH</sub>
 
                         <div class="ui grid" style="margin-top: 10px">
 

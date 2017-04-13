@@ -40,11 +40,10 @@ public class CategoryDashboardTreeTableBean {
         TreeNode dropNode = event.getDropNode();
         int dropIndex = event.getDropIndex();
 
-        Category droppedCategory = (Category) dragNode.getData();
+        Category draggedCategory = (Category) dragNode.getData();
+        Category droppedCategory = (Category) dropNode.getData();
 
-        if (droppedCategory.getParent() == null) {
             categoryService.saveSelectedTreeNode(dragNode, dropNode, dropIndex);
-        }
 
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Successful", "Your message: "));

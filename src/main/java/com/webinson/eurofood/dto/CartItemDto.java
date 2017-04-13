@@ -14,4 +14,16 @@ public class CartItemDto {
     private int quantity;
     private Long shoppingCartId;
 
+    public boolean equals(Object o) {
+        if (!(o instanceof CartItemDto)) {
+            return false;
+        }
+        CartItemDto other = (CartItemDto) o;
+        return itemDto.getHeader().equals(other.itemDto.getHeader()) && id.equals(other.id);
+    }
+
+    public int hashCode() {
+        return itemDto.getHeader().hashCode();
+    }
+
 }

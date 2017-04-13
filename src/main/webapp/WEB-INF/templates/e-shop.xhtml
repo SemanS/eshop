@@ -34,40 +34,88 @@ background-size: cover;">
         <ui:fragment rendered="#{categoryView.allItemsByCategory().size() > 0}">
             <h:form>
                 <div class="ui grid four column stackable centered">
-                    <ui:repeat value="#{categoryView.allItemsByCategory()}" var="item">
-                        <div class="column">
 
-                            <div class="ui fluid card">
-                                <div class="content">
-                                    <h:commandLink
-                                            action="#{itemView.onItem(item)}">
-                                        <h4 style="text-align: center">#{item.header}</h4>
-                                    </h:commandLink>
-                                </div>
-                                <div class="ui small image centered" style="margin-top: -10px">
-                                    <h:commandLink
-                                            action="#{itemView.onItem(item)}">
-                                        <img src="data:image/png;base64,#{item.image}"/>
-                                    </h:commandLink>
-                                </div>
-                                <div class="content">
-                                    <div class="description ui green">
+                    <ui:repeat value="#{categoryView.allItemsByCategory()}" var="item">
+                        <ui:fragment rendered="#{item.discount == false}">
+                            <div class="column">
+
+                                <div class="ui fluid card">
+                                    <div class="content">
+                                        <h:commandLink
+                                                action="#{itemView.onItem(item)}">
+                                            <h4 style="text-align: center">#{item.header}</h4>
+                                        </h:commandLink>
                                     </div>
-                                    <div class="description" style="text-align: center">
-                                        <div class="left floated centered">
-                                            <h3 class="">
-                                                #{item.priceBrutto} EUR</h3> s DPH
+                                    <div class="ui small image centered" style="margin-top: -10px">
+                                        <h:commandLink
+                                                action="#{itemView.onItem(item)}">
+                                            <img src="data:image/png;base64,#{item.image}"/>
+                                        </h:commandLink>
+                                    </div>
+                                    <div class="content">
+                                        <div class="description ui green">
                                         </div>
-                                        <div class="right floated centered">
-                                            <h4 class="">
-                                                #{item.priceNetto} EUR</h4> bez DPH
+                                        <div class="description" style="text-align: center">
+                                            <div class="left floated centered">
+                                                <h3 class="">
+                                                    #{item.priceBrutto} EUR</h3> s DPH
+                                            </div>
+                                            <div class="right floated centered">
+                                                <h4 class="">
+                                                    #{item.priceNetto} EUR</h4> bez DPH
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </ui:fragment>
+                        <ui:fragment rendered="#{item.discount == true}">
+                            <div class="column">
+                                <div class="ui fluid card">
+                                    <div class="content">
+                                        <h:commandLink
+                                                action="#{itemView.onItem(item)}">
+                                            <h4 style="text-align: center">#{item.header}</h4>
+                                        </h:commandLink>
+                                    </div>
+                                    <div class="ui small image centered" style="margin-top: -10px">
+                                        <h:commandLink
+                                                action="#{itemView.onItem(item)}">
+                                            <img src="data:image/png;base64,#{item.image}"/>
+                                        </h:commandLink>
+                                    </div>
+                                    <div class="content ui">
+
+                                        <div class="description">
+
+                                            <div class="left floated">
+                                    <span class="ui disabled header"
+                                          style="text-decoration: line-through;">
+                                        #{item.priceBruttoDiscount}
+                                    </span>
+                                                <sub>Eur s DPH</sub>
+                                                <pre></pre>
+                                                <span class="ui header">
+                                        6.12 EUR
+                                        <span class="sub header">s DPH</span>
+                                    </span>
+                                            </div>
+
+                                            <div class="right floated centered">
+                                                <span class="ui red label">Akcia!</span>
+                                                <h4 style="text-align: right">
+                                                    #{item.priceNetto} EUR</h4> bez DPH
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
+                        </ui:fragment>
                     </ui:repeat>
+
+
                 </div>
             </h:form>
         </ui:fragment>

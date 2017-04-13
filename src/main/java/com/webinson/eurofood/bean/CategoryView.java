@@ -97,7 +97,7 @@ public class CategoryView implements Serializable {
     }
 
     public List<ItemDto> bestSellingProducts() {
-        return itemService.getBestFiveSellingProducts();
+        return itemService.getBestTwelveSellingProducts();
     }
 
 }

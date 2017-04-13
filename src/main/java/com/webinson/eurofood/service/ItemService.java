@@ -38,7 +38,7 @@ public interface ItemService {
 
     boolean itemExist(String name);
 
-    List<ItemDto> getBestFiveSellingProducts();
+    List<ItemDto> getBestTwelveSellingProducts();
 
     List<Producer> getAllProducers();
 

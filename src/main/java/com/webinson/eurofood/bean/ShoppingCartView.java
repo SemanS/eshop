@@ -210,10 +210,10 @@ public class ShoppingCartView {
 
         counterNetto = 0.0;
         for (CartItemDto cItemDto : cartItemDtos) {
-            if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader()) {
+            if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader() && !cItemDto.getItemDto().isDiscount()) {
                 counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cartItemDto.getQuantity();
             } else {
-                counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cItemDto.getQuantity();
+                counterNetto = counterNetto + cItemDto.getItemDto().getPriceNettoDiscount() * cItemDto.getQuantity();
             }
 
         }

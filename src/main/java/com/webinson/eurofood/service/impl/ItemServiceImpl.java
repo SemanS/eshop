@@ -123,10 +123,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getBestFiveSellingProducts() {
+    public List<ItemDto> getBestTwelveSellingProducts() {
         final JPAQuery<Item> query = new JPAQuery<>(entityManager);
         QItemCounter itemCounter = QItemCounter.itemCounter.itemCounter;
-        List<Item> item1 = query.from(itemCounter).select(itemCounter.item).orderBy(itemCounter.counter.asc()).limit(5).fetch();
+        List<Item> item1 = query.from(itemCounter).select(itemCounter.item).orderBy(itemCounter.counter.asc()).limit(12).fetch();
         return itemAssembler.toDtos(item1);
     }
 

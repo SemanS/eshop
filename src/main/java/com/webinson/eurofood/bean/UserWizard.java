@@ -1,10 +1,15 @@
 package com.webinson.eurofood.bean;
 
+import com.google.common.collect.Lists;
 import com.webinson.eurofood.dto.AddressDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
 import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.service.ShoppingCartService;
 import com.webinson.eurofood.service.UserService;
+import it.ozimov.springboot.mail.model.Email;
+import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
+import it.ozimov.springboot.mail.service.EmailService;
+import it.ozimov.springboot.mail.service.exception.CannotSendEmailException;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FlowEvent;
@@ -17,9 +22,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.internet.InternetAddress;
 import javax.validation.constraints.Size;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by Slavo on 12/8/2016.
@@ -90,6 +100,11 @@ public class UserWizard implements Serializable {
     @Setter
     private String deliveryCompany;
 
+    @com.webinson.eurofood.utils.Email(message = "Prosím, zadajte emailovú adresu v správnom tvare!")
+    @Getter
+    @Setter
+    private String email;
+
     @Getter
     @Setter
     private String deliveryIco;
@@ -151,6 +166,9 @@ public class UserWizard implements Serializable {
     @Autowired
     private RegisterBean registerBean;
 
+    @Autowired
+    public EmailService emailService;
+
     @PostConstruct
     public void init() {
         radioValueFacturation = "Yes";
@@ -210,7 +228,7 @@ public class UserWizard implements Serializable {
         }
     }
 
-    public void checkout() {
+    public void checkout() throws IOException, CannotSendEmailException {
         if (facturationAddressDto != null) {
             shoppingCartDto.setFacturationAddress(facturationAddressDto.toString());
         } else {
@@ -233,6 +251,34 @@ public class UserWizard implements Serializable {
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
         shoppingCartView.setCartItemDtos(new HashSet<>());
         shoppingCartView.onRestartCounter();
+        sendOrderApprovalEmail();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+        //FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
         /*return "index.xhtml?faces-redirect=true";*/
     }
+
+    public void sendOrderApprovalEmail() throws UnsupportedEncodingException, CannotSendEmailException {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail;
+        if (authentication.getName() == null) {
+            userEmail = authentication.getName();
+        } else {
+            userEmail = this.email;
+        }
+
+        final Email email = DefaultEmail.builder()
+                .from(new InternetAddress("ceo@webinson.com", "Správa od eurofood.sk"))
+                .to(Lists.newArrayList(new InternetAddress(userEmail, "Správa od eurofood.sk")))
+                .subject("Správa od eurofood.sk" + "pre")
+                .body("Boli ste zaregistrovaný v systéme eurofood.sk. Prajeme príjemné nakupovanie.")
+                .encoding("UTF-8").build();
+
+        final Map<String, Object> modelObject = new HashMap<>();
+        modelObject.put("tyrannicida", "ahoj");
+
+        emailService.send(email, "order_mail.ftl", modelObject);
+
+    }
+
 }

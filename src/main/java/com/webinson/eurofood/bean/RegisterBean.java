@@ -6,9 +6,11 @@ import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.service.UserService;
 
 
+import freemarker.cache.WebappTemplateLoader;
 import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
 import it.ozimov.springboot.mail.service.EmailService;
+import it.ozimov.springboot.mail.service.exception.CannotSendEmailException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +20,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.mail.internet.InternetAddress;
+import javax.servlet.ServletContext;
 import javax.validation.constraints.*;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Slavo on 12/7/2016.
@@ -97,10 +94,29 @@ public class RegisterBean {
     private String subscribed = "Yes";
 
     @Autowired
+    ServletContext context;
+
+    @Autowired
     public EmailService emailService;
 
     @Autowired
     private UserService userService;
+
+    /*public String sendTemplateEmail() throws UnsupportedEncodingException, CannotSendEmailException {
+        final Email email = DefaultEmail.builder()
+                .from(new InternetAddress("ceo@webinson.com", "Správa od eurofood.sk"))
+                .to(Lists.newArrayList(new InternetAddress("Slavosmn@gmail.com", "Správa od eurofood.sk")))
+                .subject("Správa od eurofood.sk" + "pre")
+                .body("Boli ste zaregistrovaný v systéme eurofood.sk. Prajeme príjemné nakupovanie.")
+                .encoding("UTF-8").build();
+
+        final Map<String, Object> modelObject = new HashMap<>();
+        modelObject.put("tyrannicida", "ahoj");
+
+        emailService.send(email, "order_mail.ftl", modelObject);
+
+        return "confirmation?faces-redirect=true";
+    }*/
 
     public String updateData() throws UnsupportedEncodingException {
         UserDto userDto = new UserDto();
@@ -133,6 +149,7 @@ public class RegisterBean {
         userService.registerNewUserAccount(userDto);
         return "confirmation?faces-redirect=true";
     }
+
 
     public String currentUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

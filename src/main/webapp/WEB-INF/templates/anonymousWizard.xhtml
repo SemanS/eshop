@@ -98,12 +98,39 @@
                                     <pe:selectDetailLevel step="-1"/>
                                 </p:commandButton>
                                 <p:commandButton value="Ďalej" process="masterDetail"
-                                                 actionListener="#{userWizard.checkout}"
                                                  style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
                                     <pe:selectDetailLevel step="1"/>
                                 </p:commandButton>
                             </h:form>
                         </pe:masterDetailLevel>
+
+                        <pe:masterDetailLevel level="3">
+                            <h:form id="level3">
+                                <div class="ui grid segment">
+                                    <ui:include src="anonymous-checkout/confirmation-options.xhtml"/>
+                                </div>
+                                <p:commandButton value="Späť" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                                 process="@this" immediate="true">
+                                    <pe:selectDetailLevel step="-1"/>
+                                </p:commandButton>
+                                <p:commandButton value="Potvrdiť" process="masterDetail"
+                                                 actionListener="#{userWizard.checkout}"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>
+
+                                <!--<p:commandButton value="Späť" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w"
+                                                 process="@this" immediate="true">
+                                    <pe:selectDetailLevel step="-1"/>
+                                </p:commandButton>
+                                <p:commandButton value="Ďalej" process="masterDetail"
+                                                 actionListener="#{userWizard.checkout}"
+                                                 style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+                                    <pe:selectDetailLevel step="1"/>
+                                </p:commandButton>-->
+                            </h:form>
+                        </pe:masterDetailLevel>
+
 
                     </pe:masterDetail>
 

@@ -53,6 +53,8 @@ background-size: cover;">
         <ui:include src="WEB-INF/templates/footer.xhtml"/>
     </ui:insert>
 
+    <p:commandButton value="testEmail" actionListener="#{registerBean.sendTemplateEmail}"></p:commandButton>
+
 </h:body>
 
 </html>

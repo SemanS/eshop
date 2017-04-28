@@ -96,7 +96,7 @@ public class ContentDashboardBean {
     public String onSaveKontakt() throws IOException {
 
         StaticContent sc = contentDao.getOne(1L);
-        sc.setONas(kontakt);
+        sc.setKontakt(kontakt);
         contentDao.save(sc);
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();

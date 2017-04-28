@@ -1,5 +1,6 @@
 package com.webinson.eurofood.service.impl;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import com.webinson.eurofood.assembler.CartItemAssembler;
 import com.webinson.eurofood.assembler.ShoppingCartAssembler;
 import com.webinson.eurofood.bean.RegisterBean;
@@ -9,10 +10,7 @@ import com.webinson.eurofood.dao.ShoppingCartDao;
 import com.webinson.eurofood.dao.UserDao;
 import com.webinson.eurofood.dto.CartItemDto;
 import com.webinson.eurofood.dto.ShoppingCartDto;
-import com.webinson.eurofood.entity.CartItem;
-import com.webinson.eurofood.entity.Item;
-import com.webinson.eurofood.entity.ItemCounter;
-import com.webinson.eurofood.entity.ShoppingCart;
+import com.webinson.eurofood.entity.*;
 import com.webinson.eurofood.service.CategoryService;
 import com.webinson.eurofood.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +52,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     ItemDao itemDao;
 
+    @PersistenceContext
+    EntityManager entityManager;
+
     @Override
     @Transactional
     public void saveShoppingCart(ShoppingCartDto shoppingCartDto, Set<CartItemDto> cartItemDtos) {
@@ -94,6 +95,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public Page<ShoppingCart> findByFilter(Map<String, String> filters, Pageable pageable) {
         return shoppingCartDao.findAll(getFilterSpecification(filters), pageable);
+    }
+
+    @Override
+    public int getLastId() {
+        final JPAQuery<ShoppingCart> query = new JPAQuery<>(entityManager);
+        QShoppingCart shoppingCart = QShoppingCart.shoppingCart;
+        return  query.from(shoppingCart).select(shoppingCart.id.max()).fetchOne().intValue();
     }
 
     private Specification<ShoppingCart> getFilterSpecification(Map<String, String> filterValues) {

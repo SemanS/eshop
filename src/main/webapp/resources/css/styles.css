@@ -254,7 +254,7 @@ div.inline { float:left; }
     height: 108px;
     width: 493px;
     /*background-image: url(../../resources/images/calculator_new.png) !important;*/
-    background-image: url("#{resource['images:calculator_new.png']}") !important;
+    background-image: url("#{resource['images:calculator2.png']}") !important;
     background-repeat: no-repeat !important;
 }
 

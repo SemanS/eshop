@@ -32,7 +32,7 @@ import java.util.*;
 /**
  * Created by Slavo on 1/6/2017.
  */
-@Scope("session")
+@SessionScope
 @Component
 public class ShoppingCartView {
 
@@ -209,11 +209,14 @@ public class ShoppingCartView {
     public double countTotalPriceNetto(CartItemDto cartItemDto) {
 
         counterNetto = 0.0;
+        counterBrutto = 0.0;
         for (CartItemDto cItemDto : cartItemDtos) {
             if (cartItemDto != null && cartItemDto.getItemDto().getHeader() == cItemDto.getItemDto().getHeader() && !cItemDto.getItemDto().isDiscount()) {
                 counterNetto = counterNetto + cItemDto.getItemDto().getPriceNetto() * cartItemDto.getQuantity();
+                counterBrutto = counterBrutto + cItemDto.getItemDto().getPriceBrutto() * cartItemDto.getQuantity();
             } else {
                 counterNetto = counterNetto + cItemDto.getItemDto().getPriceNettoDiscount() * cItemDto.getQuantity();
+                counterBrutto = counterBrutto + cItemDto.getItemDto().getPriceBruttoDiscount() * cartItemDto.getQuantity();
             }
 
         }

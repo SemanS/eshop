@@ -249,19 +249,18 @@ public class UserWizard implements Serializable {
         }
 
         shoppingCartService.saveShoppingCart(this.shoppingCartDto, shoppingCartView.getCartItemDtos());
+        sendOrderApprovalEmail();
         shoppingCartView.setCartItemDtos(new HashSet<>());
         shoppingCartView.onRestartCounter();
-        sendOrderApprovalEmail();
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-        //FacesContext.getCurrentInstance().getExternalContext().redirect("/category/" + category.getUrl());
-        /*return "index.xhtml?faces-redirect=true";*/
+
     }
 
     public void sendOrderApprovalEmail() throws UnsupportedEncodingException, CannotSendEmailException {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail;
-        if (authentication.getName() == null) {
+        if (authentication.getName() != "anonymousUser") {
             userEmail = authentication.getName();
         } else {
             userEmail = this.email;
@@ -270,12 +269,18 @@ public class UserWizard implements Serializable {
         final Email email = DefaultEmail.builder()
                 .from(new InternetAddress("ceo@webinson.com", "Správa od eurofood.sk"))
                 .to(Lists.newArrayList(new InternetAddress(userEmail, "Správa od eurofood.sk")))
-                .subject("Správa od eurofood.sk" + "pre")
+                .subject("Správa od eurofood.sk")
                 .body("Boli ste zaregistrovaný v systéme eurofood.sk. Prajeme príjemné nakupovanie.")
                 .encoding("UTF-8").build();
 
         final Map<String, Object> modelObject = new HashMap<>();
         modelObject.put("tyrannicida", "ahoj");
+        modelObject.put("cartItems", shoppingCartView.getCartItemDtos());
+        modelObject.put("shoppingCartView", shoppingCartView);
+        modelObject.put("orderId", shoppingCartService.getLastId());
+        modelObject.put("facturationAddress", shoppingCartDto.getFacturationAddress());
+        modelObject.put("deliveryAddress", shoppingCartDto.getDeliveryAddress());
+
 
         emailService.send(email, "order_mail.ftl", modelObject);
 

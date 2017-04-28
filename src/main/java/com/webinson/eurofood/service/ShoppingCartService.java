@@ -19,4 +19,6 @@ public interface ShoppingCartService {
 
     Page<ShoppingCart> findByFilter(Map<String, String> filters, Pageable pageable);
 
+    public int getLastId();
+
 }

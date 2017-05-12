@@ -19,6 +19,9 @@
                 }
             })
         ;
+        $('.cookie.nag')
+          .nag('clear')
+        ;
 
         /*$('.special.cards .image').dimmer({
          on: 'hover'

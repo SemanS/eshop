@@ -27,8 +27,15 @@ background-size: cover;">
     <h:outputScript name="js/semantic.min.js"/>
     <h:outputScript name="js/init.js"/>
 
+    <div class="ui inline cookie nag">
+  <span class="title">
+    Používame súbory cookies, ktoré nám umožňujú poskytovať lepšie služby.
+  </span>
+        <i class="close icon"></i>
+    </div>
+
     <!-- Page Contents -->
-    <div class="ui stackable grid container" >
+    <div class="ui stackable grid container">
 
         <div class="sixteen wide column" id="Top">
             <ui:insert name="date">
@@ -53,7 +60,7 @@ background-size: cover;">
         <ui:include src="WEB-INF/templates/footer.xhtml"/>
     </ui:insert>
 
-    <p:commandButton value="testEmail" actionListener="#{registerBean.sendTemplateEmail}"></p:commandButton>
+    <!--<p:commandButton value="testEmail" actionListener="#{registerBean.sendTemplateEmail}"></p:commandButton>-->
 
 </h:body>
 

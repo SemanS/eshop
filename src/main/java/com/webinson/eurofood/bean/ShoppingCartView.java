@@ -107,7 +107,7 @@ public class ShoppingCartView {
         /*return "pretty:";*/
     }
 
-    public void addItemToCart(ItemDto itemDto) throws IOException {
+    public String addItemToCart(ItemDto itemDto) throws IOException {
 
         if (shoppingCartQuantity >= 1) {
 
@@ -197,8 +197,9 @@ public class ShoppingCartView {
             }
             shoppingCartQuantity = 1;
         }
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        context.redirect(context.getRequestContextPath());
+        /*ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        context.redirect(context.getRequestContextPath());*/
+        return "pretty:";
     }
 
     public String checkout() {

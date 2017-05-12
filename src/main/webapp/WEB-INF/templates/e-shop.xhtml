@@ -21,13 +21,17 @@ background-size: cover;">
 
         <ui:fragment rendered="#{categoryView.allItemsByCategory().size() == 0}">
             <h:form>
-                <ui:repeat value="#{categoryView.allCategoriesByCategory()}" var="category">
-                    <div class="ui small image centered" style="margin-top: 5px">
-                        <h:commandLink action="#{categoryView.onCategoryTree(category)}">
-                            <img src="data:image/png;base64,#{category.subcategoryImageDescription}"/>
-                        </h:commandLink>
-                    </div>
-                </ui:repeat>
+                <div class="ui grid six column stackable">
+                    <ui:repeat value="#{categoryView.allCategoriesByCategory()}" var="category">
+                        <div class="column floated left">
+                            <div class="ui image centered" style="margin-top: 5px;">
+                                <h:commandLink action="#{categoryView.onCategoryTree(category)}">
+                                    <img src="data:image/png;base64,#{category.subcategoryImageDescription}"/>
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
             </h:form>
         </ui:fragment>
 

@@ -6,7 +6,7 @@ import com.webinson.eurofood.dto.UserDto;
 import com.webinson.eurofood.service.UserService;
 
 
-import freemarker.cache.WebappTemplateLoader;
+/*import freemarker.cache.WebappTemplateLoader;*/
 import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
 import it.ozimov.springboot.mail.service.EmailService;
